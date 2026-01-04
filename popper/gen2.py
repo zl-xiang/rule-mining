@@ -62,8 +62,10 @@ class Generator:
         encoding.append(f'head_vars({head_arity}, {tuple(range(head_arity))}).')
         arities = set(a for p, a in self.settings.body_preds)
         arities.add(head_arity)
+        # print('----------', settings.max_vars, arities)
         for arity in arities:
             for xs in permutations(range(settings.max_vars), arity):
+                # print(xs)
                 encoding.append(f'vars({arity}, {tuple(xs)}).')
                 for i, x in enumerate(xs):
                     encoding.append(f'var_pos({x}, {tuple(xs)}, {i}).')
@@ -123,19 +125,40 @@ class Generator:
         # print('\n'.join(order_cons))
         encoding.extend(order_cons)
 
-
+        # print('========', self.settings.body_types)
         type_encoding = set()
         if self.settings.head_types:
-            types = tuple(self.settings.head_types)
-            str_types = str(types).replace("'","")
-            for i, x in enumerate(self.settings.head_types):
-                type_encoding.add(f'type_pos({str_types}, {i}, {x}).')
+            #### Origin code below ####
+            # types = tuple(self.settings.head_types)
+            # str_types = str(types).replace("'","")
+            # type_encoding = set()
+            # if self.settings.head_types:
+            #     types = tuple(self.settings.head_types)
+            #     str_types = str(types).replace("'","")
+            #     for i, x in enumerate(self.settings.head_types):
+            #         type_encoding.add(f'type_pos({str_types}, {i}, {x}).')
 
-            for pred, types in self.settings.body_types.items():
-                types = tuple(types)
-                str_types = str(types).replace("'","")
-                for i, x in enumerate(types):
+            #     for pred, types in self.settings.body_types.items():
+            #         types = tuple(types)
+            #         str_types = str(types).replace("'","")
+            #         for i, x in enumerate(types):
+            #             type_encoding.add(f'type_pos({str_types}, {i}, {x}).')
+            #     encoding.extend(type_encoding)
+            h_types = self.settings.head_types
+            for t in h_types:
+                h_type = tuple(t)
+                str_types = str(h_type).replace("'","")
+                for i, x in enumerate(h_type):
+                    print(f'type_pos({str_types}, {i}, {x}).')
                     type_encoding.add(f'type_pos({str_types}, {i}, {x}).')
+
+            for pred, b_types in self.settings.body_types.items():
+                for b_type in b_types:
+                    b_type = tuple(b_type)
+                    str_types = str(b_type).replace("'","")
+                    for i, x in enumerate(b_type):
+                        print(f'type_pos({str_types}, {i}, {x}).')
+                        type_encoding.add(f'type_pos({str_types}, {i}, {x}).')
             encoding.extend(type_encoding)
 
         for pred, xs in self.settings.directions.items():
@@ -166,6 +189,7 @@ class Generator:
             solver = clingo.Control(['--heuristic=Domain','-Wnone'])
 
         solver.configuration.solve.models = 0
+        print(encoding)
         solver.add('base', [], encoding)
         solver.ground([('base', [])])
         self.solver = solver
@@ -247,7 +271,8 @@ class Generator:
         if len(self.settings.body_types) == 0:
             _, body = remap_variables((None, body))
 
-        assignments = self.find_deep_bindings4(body)
+        # assignments = self.find_deep_bindings4(body)
+        assignments = self.find_deep_bindings42(body)
         for assignment in assignments:
             rule = []
             for pred, args in body:
@@ -305,11 +330,12 @@ class Generator:
             return
 
         # if there are types, only find type-safe permutations
+        ## lookup for 0,1 are set here
         var_type_lookup = {i:head_type for i, head_type in enumerate(head_types)}
 
         head_vars = set(range(len(self.settings.head_literal.arguments)))
         body_vars = set()
-
+        
         for pred, args in body:
             for i, x in enumerate(args):
                 body_vars.add(x)
@@ -320,6 +346,7 @@ class Generator:
 
         # prohibit bad type matchings
         bad_type_matching = set()
+        # Leon: body vars matching with head vars to keep types of vars occur in both head and body consistent
         for x in body_vars:
             if x not in var_type_lookup:
                 continue
@@ -330,13 +357,76 @@ class Generator:
                     continue
                 k = (x, y)
                 bad_type_matching.add(k)
-
+        
         lookup = {x:i for i, x in enumerate(body_vars)}
-
+        # len(lookup) number of variables in actual
         for xs in permutations(range(self.settings.max_vars), len(lookup)):
             assignment = {}
             bad = False
             for x in body_vars:
+                # xs is a len(lookup)-array vector
+                # checking a position on the permutated vector xs 
+                # if the pair is identified already as bad type matching
+                v = xs[lookup[x]]
+                if (x, v) in bad_type_matching:
+                    bad = True
+                    break
+                assignment[x] = v
+            if bad:
+                continue
+            yield assignment
+            
+    def find_deep_bindings42(self, body):
+        head_types = self.settings.head_types
+        body_types = self.settings.body_types
+
+        # if no types, find all permutations of variables
+        if len(body_types) == 0 or head_types is None:
+            num_vars = len({var for atom in body for var in atom.arguments})
+            for xs in permutations(range(self.settings.max_vars), num_vars):
+                x = {i:xs[i] for i in range(num_vars)}
+                yield x
+            return
+
+        # if there are types, only find type-safe permutations
+        ## lookup for 0,1 are set here
+        var_type_lookup = {i:head_type for i, head_type in enumerate(head_types)}
+
+        head_vars = set(range(len(self.settings.head_literal.arguments)))
+        body_vars = set()
+        
+        for pred, args in body:
+            for i, x in enumerate(args):
+                body_vars.add(x)
+                if x in head_vars:
+                    continue
+                if pred in body_types:
+                    for bt in body_types[pred]:
+                        var_type_lookup[x] = [bt[i]] if x not in var_type_lookup else var_type_lookup[x] + [bt[i]]
+
+        # prohibit bad type matchings
+        bad_type_matching = set()
+        # Leon: body vars matching with head vars to keep types of vars occur in both head and body consistent
+        for x in body_vars:
+            if x not in var_type_lookup:
+                continue
+            for y in head_vars:
+                if y not in var_type_lookup:
+                    continue
+                if set(var_type_lookup[x]) == set(var_type_lookup[y]):
+                    continue
+                k = (x, y)
+                bad_type_matching.add(k)
+        
+        lookup = {x:i for i, x in enumerate(body_vars)}
+        # len(lookup) number of variables in actual
+        for xs in permutations(range(self.settings.max_vars), len(lookup)):
+            assignment = {}
+            bad = False
+            for x in body_vars:
+                # xs is a len(lookup)-array vector
+                # checking a position on the permutated vector xs 
+                # if the pair is identified already as bad type matching
                 v = xs[lookup[x]]
                 if (x, v) in bad_type_matching:
                     bad = True

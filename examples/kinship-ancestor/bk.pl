@@ -10,3 +10,4 @@ father(prince_philip,prince_charles).
 father(prince_charles,prince_william).
 father(prince_charles,prince_harry).
 father(prince_william,prince_george).
+

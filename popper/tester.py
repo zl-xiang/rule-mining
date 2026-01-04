@@ -33,7 +33,7 @@ class Tester():
             if os.name == 'nt': # if on Windows, SWI requires escaped directory separators
                 x = x.replace('\\', '\\\\')
             consult(x)
-
+        ## Leon: load_examples into test.lp
         query_once('load_examples')
 
         neg_literal = Literal('neg_fact', tuple(range(len(self.settings.head_literal.arguments))))
@@ -114,9 +114,11 @@ class Tester():
     def test_prog(self, prog):
 
         if self.settings.recursion_enabled or self.settings.pi_enabled:
-
+            
             if len(prog) == 1:
+
                 atom_str, body_str = self.parse_single_rule(prog)
+
                 q = f'findall(_ID, (pos_index(_ID, {atom_str}), ({body_str} ->  true)), S)'
                 pos_covered = query_once(q)['S']
                 inconsistent = False
@@ -124,6 +126,7 @@ class Tester():
                     q = f'neg_index(_ID, {atom_str}), {body_str}'
                     inconsistent = bool_query(q)
             else:
+                
                 with self.using(prog):
                     pos_covered = query_once('pos_covered(S)')['S']
                     inconsistent = False
@@ -134,23 +137,31 @@ class Tester():
             pos_covered_bits[pos_covered] = 1
             pos_covered = frozenbitarray(pos_covered_bits)
         else:
+            ### Leon: without recursion in the setting, test runs here
+            # Leon: parsing generated rule to prolog program
             atom_str, body_str = self.parse_single_rule(prog)
+            # print(atom_str,body_str)
+            # Leon: collect all positive example IDs as list S provided there exists a rule body proving it is true
             q = f'findall(_ID, (pos_index(_ID, {atom_str}),({body_str}->  true)), S)'
             pos_covered = query_once(q)['S']
+            # one-hot encoding of example covered or not
             pos_covered_bits = bitarray(self.num_pos)
             pos_covered_bits[pos_covered] = 1
             pos_covered = frozenbitarray(pos_covered_bits)
-
             inconsistent = False
             if self.num_neg == 0:
                 inconsistent = False
+            # at least one element is 1
             elif pos_covered.any():
+                # by default false
                 if self.settings.has_directions:
                     q = f'neg_index(_ID, {atom_str}), {body_str}'
                 else:
                     head, body = next(iter(prog))
+                    # | is a union operator
                     head, ordered_body = self.settings.order_rule((None, body | self.neg_literal_set))
                     q = ','.join(format_literal_janus(literal) for literal in ordered_body)
+                    print(q)
                 inconsistent = bool_query(q)
 
         self.cached_pos_covered[hash(prog)] = pos_covered

@@ -464,8 +464,10 @@ class Settings:
                 self.max_rules = max_rules
             else:
                 self.max_rules = 1
-
-        self.head_types, self.body_types = load_types(self)
+        ## Leon: original
+        # self.head_types, self.body_types = load_types(self)
+        ## modified to allow multiple types for each predicate
+        self.head_types, self.body_types = load_types_er(self)
 
 
         if len(self.body_types) > 0 or not self.head_types is None:
@@ -638,12 +640,49 @@ def load_types(settings):
     body_types = {}
     for x in solver.symbolic_atoms.by_signature('type', arity=2):
         pred = x.symbol.arguments[0].name
-        # xs = (str(t) for t in )
-        xs = [y.name for y in x.symbol.arguments[1].arguments]
+        # [bug] Leon: for predicate with arity 1, arguments[1] is already the type, hence arguments[1].arguments is empty
+        # e.g. for print(pred, x.symbol)
+        # dblp type(dblp,dtid)
+        # acm type(acm,atid)
+        # dblp_id type(dblp_id,(dtid,did))
+        # acm_id type(acm_id,(atid,aid))
+        x_types = x.symbol.arguments[1].arguments
+        xs = [y.name for y in x_types] if len(x_types) > 0 else [x.symbol.arguments[1].name]
         if pred == head_pred:
             head_types = xs
         else:
             body_types[pred] = xs
+    return head_types, body_types
+
+## Leon: added to support multiple types for each predicate
+def load_types_er(settings):
+    enc = """
+#defined clause/1.
+#defined clause_var/2.
+#defined var_type/3."""
+    # solver = clingo.Control()
+    solver = clingo.Control(['-Wnone'])
+    with open(settings.bias_file) as f:
+        solver.add('bias', [], f.read())
+    solver.add('bias', [], enc)
+    solver.ground([('bias', [])])
+
+    for x in solver.symbolic_atoms.by_signature('head_pred', arity=2):
+        head_pred = x.symbol.arguments[0].name
+        head_arity = x.symbol.arguments[1].number
+
+    head_types = []
+    body_types = {}
+    for x in solver.symbolic_atoms.by_signature('type', arity=2):
+        pred = x.symbol.arguments[0].name
+        # [bug] Leon: for predicate with arity 1, arguments[1] is already the type, hence arguments[1].arguments is empty
+        x_types = x.symbol.arguments[1].arguments
+        xs = [y.name for y in x_types] if len(x_types) > 0 else [x.symbol.arguments[1].name]
+        if pred == head_pred:
+            # [bug?] Leon: only allows a single head predicate declaration?
+            head_types.append(xs)
+        else:
+            body_types[pred] = [xs] if pred not in body_types.keys() else body_types[pred] + [xs]
 
     return head_types, body_types
 

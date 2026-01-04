@@ -8,6 +8,7 @@
 
 #show body_literal/4.
 
+% variable that only occur once
 singleton(V):-
     var(V),
     not head_var(_, V),
@@ -41,7 +42,7 @@ head_literal(0,P,A,Vars):-
     not type_mismatch(P,Vars).
 
 type_mismatch(P,Vars):-
-    var_pos(Var,Vars,Pos),
+    var_pos(Var,Vars,Pos), % Leon: facts added in generator __init__
     type(P,Types),
     pred_arg_type(P,Pos,T1),
     fixed_var_type(Var,T2),
@@ -125,37 +126,10 @@ valid_var(Rule,Var):-
     body_var(Rule,Var).
 
 %% MUST BE CONNECTED
-%%%%%%%%%% Leon ER rule connectivity %%%%%%%%%%%%
-% A tuple variable Tid is connected if it occurs in head
-% The rule says a tuple variable Tid is connected in rule R
-% if for a variable Var occurs in head of some object rule,
-% and Var also occurs the in associated attribute body literal of Tid in the rule R
-% For object
+% objects
 t_connected(R,Tid):-
     head_var(R,Var), head_literal(R,eqo,_,Hvars),
-    var_member(Var,Hvars), body_literal(R,att,_,Bvars),  var_pos(Var, Bvars, 2), var_pos(Tid, Bvars, 0).
-
-% For value
-t_connected(R,Tid):-
-    head_var(R,Tid), head_literal(R,eqv,_,Hvars), var_member(Tid,Hvars), 
-    body_literal(R,att,_,Bvars), var_pos(Tid, Bvars, 0).
-
-% Similarity join
-t_connected(R,Tid):-
-    body_literal(R,att,_,Bvars), var_pos(Var, Bvars, 2),
-    var_pos(Tid, Bvars, 0), t_connected(R,Tid1), 
-    body_literal(R,sim,_,Svars), var_member(Var,Svars), var_member(Var1,Svars), 
-    body_literal(R,att,_,Bvars1), var_pos(Tid1, Bvars1, 0), var_pos(Var1, Bvars1, 2).
-
-% Equality join
-t_connected(R,Tid):-
-    body_literal(R,att,_,Bvars), var_pos(Var, Bvars, 2),
-    var_pos(Tid, Bvars, 0), t_connected(R,Tid1), 
-    body_literal(R,att,_,Bvars1), var_pos(Tid1, Bvars1, 0), var_pos(Var, Bvars1, 2), Tid != Tid1.
-
-:- body_literal(R,att,_,Bvars), var_pos(Tid,Bvars,0), not t_connected(R,Tid).
-
-%%%%%%%%%% ER rule mining connectivity %%%%%%%%%%%%
+    var_member(Var,Hvars), body_literal(R,_,_,Bvars), var_member(Var,BVars), var_pos(Tid, BVars, 0).
 
 head_connected(C,Var):-
     head_var(C,Var).
@@ -184,6 +158,10 @@ pred_arg_type(P, Pos, Type):-
     type(P, Types),
     type_pos(Types, Pos, Type).
 
+% Leon: type handling here
+% a Var on clause C has a type Type 
+% if a body literal of C with predicate P and arguments Vars
+% coincides with a type Type defined on the Pos-th argument of P
 var_type(C, Var, Type):-
     body_literal(C,P,_,Vars),
     var_pos(Var,Vars,Pos),
@@ -195,14 +173,9 @@ var_type(C, Var, Type):-
     var_pos(Var,Vars,Pos),
     type(P,Types),
     type_pos(Types, Pos, Type).
-
-
-%%% Leon: original code below, commented to allow multiple types for each pred %%%
-%%% Could potentially look through bias file and get a maximal number of var types allowed? %%%
-%%% e.g. :- clause_var(C,Var), #count{Type : var_type(C,Var,Type)} > {max_type_num}.
-%:-
- %   clause_var(C,Var),
-  %  #count{Type : var_type(C,Var,Type)} > 1.
+:-
+    clause_var(C,Var),
+    #count{Type : var_type(C,Var,Type)} > 1.
 
 deffo_safe(Rule, Var):-
     head_literal(Rule,P,_,Vars),

@@ -26,6 +26,11 @@ TIDY_OUTPUT = """
 #defined clause/1.
 """
 
+"""
+Generate background constraints
+can be shown during searching with the option --showcons on
+"""
+
 # def get_bias_preds(settings):
 #     solver = clingo.Control(['-Wnone'])
 #     with open(settings.bias_file) as f:
@@ -668,14 +673,23 @@ def deduce_bk_cons(settings, tester):
 
     # type_encoding = set()
     if settings.head_types:
-        types = tuple(settings.head_types)
-        prog.append(f'type({settings.head_literal[0]},{types}).')
+        ### Leon: original code below ###
+        # types = tuple(settings.head_types)
+        # prog.append(f'type({settings.head_literal[0]},{types}).')
 
-        for pred, types in settings.body_types.items():
-            types = tuple(types)
-            prog.append(f'type({pred},{types}).')
+        # for pred, types in settings.body_types.items():
+        #     types = tuple(types)
+        #     prog.append(f'type({pred},{types}).')
         # encoding.extend(type_encoding)
-
+        # types = tuple(settings.head_types)
+        for h_type in settings.head_types:
+            h_type = tuple(h_type)
+            prog.append(f'type({settings.head_literal[0]},{h_type}).')
+        
+        for pred, b_types in settings.body_types.items():
+            for b_type in b_types:
+                b_type = tuple(b_type)
+                prog.append(f'type({pred},{b_type}).')
     prog = '\n'.join(prog)
 
     with open(settings.bk_file) as f:
@@ -734,6 +748,7 @@ def deduce_bk_cons(settings, tester):
                 if atom.name == 'prop':
                     out.add(str(atom))
     xs = [x + '.' for x in out]
+    # [print(x) for x in new_cons]
     return xs + new_cons
 
 
@@ -788,10 +803,12 @@ def deduce_recalls(settings):
     all_recalls = {}
     for pred, arity in settings.body_preds:
         d1 = counts[pred]
+        # (0,)*arity Create a tuple of length arity where every element is 0.
         all_recalls[(pred, (0,)*arity)] = counts_all[pred]
         for args, d2 in d1.items():
+            # print(pred, args, d2)
             recall = max(len(xs) for xs in d2.values())
-            # print(pred, args, recall)
+            
             all_recalls[(pred, args)] = recall
 
     # settings.recall = all_recalls
@@ -846,15 +863,23 @@ def deduce_type_cons(settings):
     solver = clingo.Control(['-Wnone'])
     solver.add('base', [], bk)
     solver.ground([('base', [])])
-
     for pred, arity in settings.body_preds:
         for atom in solver.symbolic_atoms.by_signature(pred, arity=arity):
             args = []
+    # [Leon] uniary predicates cannot load their types
+            ## Leon: original code below ##
+            # for i in range(arity):
+            #     arg = atom.symbol.arguments[i]
+            #     x = str(arg)
+                
+            #     arg_type = body_types[pred][i]
+            #     type_objects[arg_type].add(x)
             for i in range(arity):
                 arg = atom.symbol.arguments[i]
                 x = str(arg)
-                arg_type = body_types[pred][i]
-                type_objects[arg_type].add(x)
+                for b_type in body_types[pred]:
+                    arg_type = b_type[i]
+                    type_objects[arg_type].add(x)
 
     for k, vs in type_objects.items():
         n = len(vs)
@@ -964,13 +989,21 @@ def deduce_non_singletons(settings):
 
         if a > 1:
             encoding.append(f'pred({p},{a}).')
-
+        ## Leon: original code below ## 
+        # types = settings.body_types[p]
+        # for i, t in enumerate(types):
+        #     rule = f'domain({t},X):- holds({p},{i},X).'
+        #     encoding.append(rule)
+        #     rule = f'type({p},{i},{t}).'
+        #     encoding.append(rule)
+        
         types = settings.body_types[p]
-        for i, t in enumerate(types):
-            rule = f'domain({t},X):- holds({p},{i},X).'
-            encoding.append(rule)
-            rule = f'type({p},{i},{t}).'
-            encoding.append(rule)
+        for bt in types:
+            for i, t in enumerate(bt):
+                rule = f'domain({t},X):- holds({p},{i},X).'
+                encoding.append(rule)
+                rule = f'type({p},{i},{t}).'
+                encoding.append(rule)
 
         args = [f'V{i}' for i in range(a)]
         arg_str = ','.join(args)

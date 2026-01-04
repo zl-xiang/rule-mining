@@ -1,4 +1,15 @@
 # code originally written by Andreas Niskanen (andreas.niskanen@helsinki.fi)
+
+## Implement the ideas of the paper: 
+# Learning Logic Programs by Combining Programs https://arxiv.org/pdf/2206.01614
+
+# Def: A program h is separable when (i) it has at least two rules,
+# and (ii) no predicate symbol in the head of a rule in h also appears
+# in the body of a rule in h. 
+
+#  The key idea is to first learn small non-separable programs that cover some of the
+# examples and then search for a combination (a union) of these programs that covers all the examples.
+
 from . util import calc_prog_size, reduce_prog, prog_is_recursive, prog_has_invention, calc_rule_size, rule_is_recursive, format_prog
 from collections import defaultdict
 from . import maxsat
@@ -22,7 +33,7 @@ class Combiner:
 
     def add_inconsistent(self, prog_hash):
         self.inconsistent.add(prog_hash)
-
+    # TODO: to understand this
     def find_combination(self, timeout):
         encoding = []
 
@@ -284,9 +295,9 @@ class Combiner:
             timeout = self.settings.maxsat_timeout
 
         self.saved_progs.update(new_progs)
-
+        # print(self.saved_progs)
         new_solution, cost = self.find_combination(timeout)
-
+        print(new_solution)
         if len(new_solution) == 0:
             return None
 

@@ -1,0 +1,1035 @@
+:- body_literal(Rule,sim,_,(_,_)), #count{V0,V1: body_literal(Rule,sim,_,(V0,V1))} > 1.
+:- body_literal(Rule,sim,_,(_,V1)), #count{V0: body_literal(Rule,sim,_,(V0,V1))} > 1.
+:- body_literal(Rule,sim,_,(V0,_)), #count{V1: body_literal(Rule,sim,_,(V0,V1))} > 1.
+:- body_literal(Rule,acm,_,(_,_,_,_,_)), #count{V0,V1,V2,V3,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 2.
+:- body_literal(Rule,acm,_,(_,_,_,_,V4)), #count{V0,V1,V2,V3: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,_,_,V3,_)), #count{V0,V1,V2,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,_,_,V3,V4)), #count{V0,V1,V2: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,_,V2,_,_)), #count{V0,V1,V3,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,_,V2,_,V4)), #count{V0,V1,V3: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,_,V2,V3,_)), #count{V0,V1,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,_,V2,V3,V4)), #count{V0,V1: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,V1,_,_,_)), #count{V0,V2,V3,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,V1,_,_,V4)), #count{V0,V2,V3: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,V1,_,V3,_)), #count{V0,V2,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,V1,_,V3,V4)), #count{V0,V2: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,V1,V2,_,_)), #count{V0,V3,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,V1,V2,_,V4)), #count{V0,V3: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,V1,V2,V3,_)), #count{V0,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(_,V1,V2,V3,V4)), #count{V0: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,_,_,_,_)), #count{V1,V2,V3,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,_,_,_,V4)), #count{V1,V2,V3: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,_,_,V3,_)), #count{V1,V2,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,_,_,V3,V4)), #count{V1,V2: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,_,V2,_,_)), #count{V1,V3,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,_,V2,_,V4)), #count{V1,V3: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,_,V2,V3,_)), #count{V1,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,_,V2,V3,V4)), #count{V1: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,V1,_,_,_)), #count{V2,V3,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,V1,_,_,V4)), #count{V2,V3: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,V1,_,V3,_)), #count{V2,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,V1,_,V3,V4)), #count{V2: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,V1,V2,_,_)), #count{V3,V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,V1,V2,_,V4)), #count{V3: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,acm,_,(V0,V1,V2,V3,_)), #count{V4: body_literal(Rule,acm,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,_,_,_,_)), #count{V0,V1,V2,V3,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 2.
+:- body_literal(Rule,dblp,_,(_,_,_,_,V4)), #count{V0,V1,V2,V3: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,_,_,V3,_)), #count{V0,V1,V2,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,_,_,V3,V4)), #count{V0,V1,V2: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,_,V2,_,_)), #count{V0,V1,V3,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,_,V2,_,V4)), #count{V0,V1,V3: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,_,V2,V3,_)), #count{V0,V1,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,_,V2,V3,V4)), #count{V0,V1: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,V1,_,_,_)), #count{V0,V2,V3,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,V1,_,_,V4)), #count{V0,V2,V3: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,V1,_,V3,_)), #count{V0,V2,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,V1,_,V3,V4)), #count{V0,V2: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,V1,V2,_,_)), #count{V0,V3,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,V1,V2,_,V4)), #count{V0,V3: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,V1,V2,V3,_)), #count{V0,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(_,V1,V2,V3,V4)), #count{V0: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,_,_,_,_)), #count{V1,V2,V3,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,_,_,_,V4)), #count{V1,V2,V3: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,_,_,V3,_)), #count{V1,V2,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,_,_,V3,V4)), #count{V1,V2: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,_,V2,_,_)), #count{V1,V3,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,_,V2,_,V4)), #count{V1,V3: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,_,V2,V3,_)), #count{V1,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,_,V2,V3,V4)), #count{V1: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,V1,_,_,_)), #count{V2,V3,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,V1,_,_,V4)), #count{V2,V3: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,V1,_,V3,_)), #count{V2,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,V1,_,V3,V4)), #count{V2: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,V1,V2,_,_)), #count{V3,V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,V1,V2,_,V4)), #count{V3: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(Rule,dblp,_,(V0,V1,V2,V3,_)), #count{V4: body_literal(Rule,dblp,_,(V0,V1,V2,V3,V4))} > 1.
+:- body_literal(_, acm, _, (V0,V1,V2,V3,V4)), singleton(V1),singleton(V2),singleton(V3),singleton(V4).
+:- body_literal(_, dblp, _, (V0,V1,V2,V3,V4)), singleton(V1),singleton(V2),singleton(V3),singleton(V4).
+:- clause(C), #count{V : var_type(C, V,title)} > 4.
+:- clause(C), #count{V : var_type(C, V,acm_id)} > 2.
+:- clause(C), #count{V : var_type(C, V,author)} > 3.
+:- clause(C), #count{V : var_type(C, V,venue)} > 4.
+:- clause(C), #count{V : var_type(C, V,year)} > 4.
+:- clause(C), #count{V : var_type(C, V,dblp_id)} > 2.
+prop(not_ab_ca,(sim,sim)).
+prop(not_abcde_bf,(acm,sim)).
+prop(not_abcde_fbcde,(dblp,acm)).
+prop(not_abcde_fbcde,(acm,dblp)).
+prop(not_abcde_fb,(dblp,sim)).
+prop(not_ab_ba,(sim,sim)).
+prop(not_ab_bc,(sim,sim)).
+
+
+
+
+:- prop(not_abcde_bcdfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,D,_,E)).
+:- prop(not_abcde_fbcad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,C,A,D)).
+:- prop(not_abcde_cebdf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,B,D,_)).
+:- prop(not_abcde_dbcaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,C,A,_)).
+:- prop(not_abcde_bedfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,D,_,A)).
+:- prop(not_abcde_cafde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,_,D,E)).
+:- prop(not_abcde_fcdeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,D,E,B)).
+:- prop(not_abcde_ebcaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,C,A,_)).
+:- prop(not_abcde_bcafd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,A,_,D)).
+:- prop(not_abcde_dbefa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,E,_,A)).
+:- prop(not_abcde_edabf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,A,B,_)).
+:- prop(not_abcde_aecbf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,C,B,_)).
+:- prop(not_abcde_daefb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,E,_,B)).
+:- prop(not_abcde_cdfba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,_,B,A)).
+:- prop(not_abcde_bfeac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,E,A,C)).
+:- prop(not_abcde_bdfce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,_,C,E)).
+:- prop(not_abcde_afebd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,E,B,D)).
+:- prop(not_abcde_bacdf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,C,D,_)).
+:- prop(not_abcde_fcdab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,D,A,B)).
+:- prop(not_abcde_acedf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,E,D,_)).
+:- prop(not_abcde_af,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_)).
+:- prop(not_abcde_ebcad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,C,A,D)).
+:- prop(abcde_ebcad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,C,A,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_facde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,C,D,E)).
+:- prop(not_abcde_efcdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,C,D,B)).
+:- prop(not_abcde_acbed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,B,E,D)).
+:- prop(abcde_acbed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,B,E,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cdbfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,B,_,A)).
+:- prop(not_abcde_ebdfc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,D,_,C)).
+:- prop(not_abcde_ecbfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,B,_,A)).
+:- prop(not_abcde_bdaef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,A,E,_)).
+:- prop(not_abcde_bcfea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,_,E,A)).
+:- prop(not_abcde_dcaeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,A,E,B)).
+:- prop(abcde_dcaeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,A,E,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dfabe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,A,B,E)).
+:- prop(not_abcde_dafec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,_,E,C)).
+:- prop(not_abcde_fcbea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,B,E,A)).
+:- prop(not_abcde_abfec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,_,E,C)).
+:- prop(not_abcde_cbdfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,D,_,A)).
+:- prop(not_abcde_bdcea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,C,E,A)).
+:- prop(abcde_bdcea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,C,E,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_fcadb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,A,D,B)).
+:- prop(not_abcde_dbaec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,A,E,C)).
+:- prop(abcde_dbaec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,A,E,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dceba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,E,B,A)).
+:- prop(abcde_dceba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,E,B,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dcbfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,B,_,E)).
+:- prop(not_abcde_abedc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,E,D,C)).
+:- prop(abcde_abedc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,E,D,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B)).
+:- prop(abcde_cb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B)), valid_var(Rule,C),valid_var(Rule,B).
+:- prop(not_abcde_cdefb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,E,_,B)).
+:- prop(not_abcde_debac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,B,A,C)).
+:- prop(abcde_debac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,B,A,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_abdfc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,D,_,C)).
+:- prop(not_abcde_acebd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,E,B,D)).
+:- prop(abcde_acebd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,E,B,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_bafde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,_,D,E)).
+:- prop(not_abcde_bf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_)).
+:- prop(not_abcde_beafc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,A,_,C)).
+:- prop(not_abcde_fbaec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,A,E,C)).
+:- prop(not_abcde_badfc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,D,_,C)).
+:- prop(not_abcde_beafd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,A,_,D)).
+:- prop(not_abcde_afdbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,D,B,C)).
+:- prop(not_abcde_ac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C)).
+:- prop(abcde_ac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C)), valid_var(Rule,C),valid_var(Rule,A).
+:- prop(not_abcde_dbcef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,C,E,_)).
+:- prop(not_abcde_cfbed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,B,E,D)).
+:- prop(not_abcde_fdcae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,C,A,E)).
+:- prop(not_abcde_fcedb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,E,D,B)).
+:- prop(not_abcde_ecafd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,A,_,D)).
+:- prop(not_abcde_bd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D)).
+:- prop(abcde_bd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D)), valid_var(Rule,D),valid_var(Rule,B).
+:- prop(not_abcde_bafcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,_,C,D)).
+:- prop(not_abcde_beadf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,A,D,_)).
+:- prop(not_abcde_dcbae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,B,A,E)).
+:- prop(abcde_dcbae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,B,A,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cefad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,_,A,D)).
+:- prop(not_abcde_fedab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,D,A,B)).
+:- prop(not_abcde_dcfba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,_,B,A)).
+:- prop(not_abcde_ecfba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,_,B,A)).
+:- prop(not_abcde_fadeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,D,E,B)).
+:- prop(not_abcde_ebfad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,_,A,D)).
+:- prop(not_abcde_dbafc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,A,_,C)).
+:- prop(not_abcde_ecbda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,B,D,A)).
+:- prop(abcde_ecbda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,B,D,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cdafe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,A,_,E)).
+:- prop(not_abcde_efacd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,A,C,D)).
+:- prop(not_abcde_dabec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,B,E,C)).
+:- prop(abcde_dabec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,B,E,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_feadb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,A,D,B)).
+:- prop(not_abcde_afcbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,C,B,D)).
+:- prop(not_abcde_aedcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,D,C,B)).
+:- prop(abcde_aedcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,D,C,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_fdcbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,C,B,E)).
+:- prop(not_abcde_cdbef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,B,E,_)).
+:- prop(not_abcde_cfdeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,D,E,B)).
+:- prop(not_abcde_dafcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,_,C,B)).
+:- prop(not_abcde_dcefa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,E,_,A)).
+:- prop(not_abcde_bfdea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,D,E,A)).
+:- prop(not_abcde_dcfae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,_,A,E)).
+:- prop(not_abcde_aedbf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,D,B,_)).
+:- prop(not_abcde_acefb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,E,_,B)).
+:- prop(not_abcde_dfebc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,E,B,C)).
+:- prop(not_abcde_ecdfb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,D,_,B)).
+:- prop(not_abcde_bfcda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,C,D,A)).
+:- prop(not_abcde_efbca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,B,C,A)).
+:- prop(not_abcde_ecadf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,A,D,_)).
+:- prop(not_abcde_ed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D)).
+:- prop(abcde_ed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D)), valid_var(Rule,E),valid_var(Rule,D).
+:- prop(not_abcde_beadc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,A,D,C)).
+:- prop(abcde_beadc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,A,D,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_bcdae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,D,A,E)).
+:- prop(abcde_bcdae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,D,A,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_bfecd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,E,C,D)).
+:- prop(not_abcde_dacfb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,C,_,B)).
+:- prop(not_abcde_efdba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,D,B,A)).
+:- prop(not_abcde_dafbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,_,B,E)).
+:- prop(not_abcde_befca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,_,C,A)).
+:- prop(not_abcde_dbace,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,A,C,E)).
+:- prop(abcde_dbace,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,A,C,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dbfca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,_,C,A)).
+:- prop(not_abcde_acbef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,B,E,_)).
+:- prop(not_abcde_daceb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,C,E,B)).
+:- prop(abcde_daceb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,C,E,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cfeda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,E,D,A)).
+:- prop(not_abcde_dfabc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,A,B,C)).
+:- prop(not_abcde_cbefa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,E,_,A)).
+:- prop(not_abcde_afbed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,B,E,D)).
+:- prop(not_abcde_deacf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,A,C,_)).
+:- prop(not_abcde_ecdab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,D,A,B)).
+:- prop(abcde_ecdab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,D,A,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cfeba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,E,B,A)).
+:- prop(not_abcde_fbace,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,A,C,E)).
+:- prop(not_abcde_fdabc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,A,B,C)).
+:- prop(not_abcde_debfc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,B,_,C)).
+:- prop(not_abcde_da,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A)).
+:- prop(abcde_da,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A)), valid_var(Rule,D),valid_var(Rule,A).
+:- prop(not_abcde_eadcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,D,C,B)).
+:- prop(abcde_eadcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,D,C,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_faecb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,E,C,B)).
+:- prop(not_abcde_bafdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,_,D,C)).
+:- prop(not_abcde_fc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C)).
+:- prop(not_ab_bc,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,_)).
+:- prop(not_abcde_cadef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,D,E,_)).
+:- prop(not_abcde_fcdae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,D,A,E)).
+:- prop(not_abcde_abcef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,C,E,_)).
+:- prop(not_abcde_fbeda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,E,D,A)).
+:- prop(not_abcde_ebacf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,A,C,_)).
+:- prop(not_abcde_bafed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,_,E,D)).
+:- prop(not_abcde_edabc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,A,B,C)).
+:- prop(abcde_edabc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,A,B,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_edbfc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,B,_,C)).
+:- prop(not_abcde_faebd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,E,B,D)).
+:- prop(not_abcde_dabce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,B,C,E)).
+:- prop(abcde_dabce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,B,C,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_bfeda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,E,D,A)).
+:- prop(not_abcde_fdeab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,E,A,B)).
+:- prop(not_abcde_cdbaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,B,A,_)).
+:- prop(not_abcde_cedfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,D,_,A)).
+:- prop(not_abcde_bfdca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,D,C,A)).
+:- prop(not_abcde_fdbca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,B,C,A)).
+:- prop(not_abcde_fdeca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,E,C,A)).
+:- prop(not_abcde_caefd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,E,_,D)).
+:- prop(not_abcde_ceabd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,A,B,D)).
+:- prop(abcde_ceabd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,A,B,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dcbef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,B,E,_)).
+:- prop(not_abcde_fcade,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,A,D,E)).
+:- prop(not_abcde_bfaed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,A,E,D)).
+:- prop(not_ab_ba,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)).
+:- prop(ab_ba,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)), valid_var(Rule,B),valid_var(Rule,A).
+:- prop(not_abcde_daecf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,E,C,_)).
+:- prop(not_abcde_efcab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,C,A,B)).
+:- prop(not_abcde_dcafb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,A,_,B)).
+:- prop(not_abcde_efdab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,D,A,B)).
+:- prop(not_abcde_dc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C)).
+:- prop(abcde_dc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C)), valid_var(Rule,D),valid_var(Rule,C).
+:- prop(not_abcde_afced,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,C,E,D)).
+:- prop(not_abcde_eabcf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,B,C,_)).
+:- prop(not_abcde_edcba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,C,B,A)).
+:- prop(abcde_edcba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,C,B,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_fdbae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,B,A,E)).
+:- prop(not_abcde_adfeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,_,E,B)).
+:- prop(not_abcde_adceb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,C,E,B)).
+:- prop(abcde_adceb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,C,E,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_afcde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,C,D,E)).
+:- prop(not_abcde_baedf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,E,D,_)).
+:- prop(not_abcde_edfca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,_,C,A)).
+:- prop(not_abcde_fbdce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,D,C,E)).
+:- prop(not_abcde_adecf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,E,C,_)).
+:- prop(not_abcde_dbeaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,E,A,_)).
+:- prop(not_abcde_cebfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,B,_,A)).
+:- prop(not_abcde_caedf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,E,D,_)).
+:- prop(not_abcde_fbacd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,A,C,D)).
+:- prop(not_abcde_dcefb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,E,_,B)).
+:- prop(not_abcde_adfbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,_,B,E)).
+:- prop(not_abcde_ebadf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,A,D,_)).
+:- prop(not_abcde_acebf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,E,B,_)).
+:- prop(not_abcde_fbdec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,D,E,C)).
+:- prop(not_abcde_fbcda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,C,D,A)).
+:- prop(not_abcde_dfeba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,E,B,A)).
+:- prop(not_abcde_cbafe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,A,_,E)).
+:- prop(not_abcde_bcade,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,A,D,E)).
+:- prop(abcde_bcade,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,A,D,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dfbca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,B,C,A)).
+:- prop(not_abcde_eadfc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,D,_,C)).
+:- prop(not_abcde_efbda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,B,D,A)).
+:- prop(not_abcde_ceafb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,A,_,B)).
+:- prop(not_abcde_dabfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,B,_,E)).
+:- prop(not_abcde_fdace,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,A,C,E)).
+:- prop(not_abcde_cbead,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,E,A,D)).
+:- prop(abcde_cbead,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,E,A,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_ebfdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,_,D,C)).
+:- prop(not_abcde_faceb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,C,E,B)).
+:- prop(not_abcde_cfedb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,E,D,B)).
+:- prop(not_abcde_defba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,_,B,A)).
+:- prop(not_abcde_aebfd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,B,_,D)).
+:- prop(not_abcde_aedbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,D,B,C)).
+:- prop(abcde_aedbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,D,B,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_)).
+:- prop(not_abcde_dceab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,E,A,B)).
+:- prop(abcde_dceab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,E,A,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_febdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,B,D,C)).
+:- prop(not_abcde_dfceb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,C,E,B)).
+:- prop(not_abcde_bdfae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,_,A,E)).
+:- prop(not_abcde_acdfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,D,_,E)).
+:- prop(not_abcde_adebc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,E,B,C)).
+:- prop(abcde_adebc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,E,B,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_aefcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,_,C,B)).
+:- prop(not_abcde_eabdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,B,D,C)).
+:- prop(abcde_eabdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,B,D,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dbeac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,E,A,C)).
+:- prop(abcde_dbeac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,E,A,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cfaed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,A,E,D)).
+:- prop(not_abcde_bfcea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,C,E,A)).
+:- prop(not_abcde_fbced,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,C,E,D)).
+:- prop(not_abcde_debfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,B,_,A)).
+:- prop(not_abcde_abcfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,C,_,E)).
+:- prop(not_abcde_cdfbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,_,B,E)).
+:- prop(not_abcde_fabec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,B,E,C)).
+:- prop(not_abcde_dfaec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,A,E,C)).
+:- prop(not_abcde_faedb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,E,D,B)).
+:- prop(not_abcde_edafb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,A,_,B)).
+:- prop(not_abcde_aecfb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,C,_,B)).
+:- prop(not_abcde_ebdac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,D,A,C)).
+:- prop(abcde_ebdac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,D,A,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_fbdea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,D,E,A)).
+:- prop(not_abcde_fbeac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,E,A,C)).
+:- prop(not_abcde_cebda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,B,D,A)).
+:- prop(abcde_cebda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,B,D,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_aefbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,_,B,D)).
+:- prop(not_abcde_afdce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,D,C,E)).
+:- prop(not_abcde_bc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C)).
+:- prop(abcde_bc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C)), valid_var(Rule,B),valid_var(Rule,C).
+:- prop(not_ab_ab,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)).
+:- prop(ab_ab,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)), valid_var(Rule,B),valid_var(Rule,A).
+:- prop(not_abcde_bcadf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,A,D,_)).
+:- prop(not_abcde_fecad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,C,A,D)).
+:- prop(not_abcde_cbade,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,A,D,E)).
+:- prop(abcde_cbade,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,A,D,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cfbde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,B,D,E)).
+:- prop(not_abcde_ecfab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,_,A,B)).
+:- prop(not_abcde_edbfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,B,_,A)).
+:- prop(not_abcde_cbdfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,D,_,E)).
+:- prop(not_abcde_eadbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,D,B,C)).
+:- prop(abcde_eadbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,D,B,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_faebc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,E,B,C)).
+:- prop(not_abcde_adfcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,_,C,B)).
+:- prop(not_abcde_ceadb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,A,D,B)).
+:- prop(abcde_ceadb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,A,D,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_feacd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,A,C,D)).
+:- prop(not_abcde_fcebd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,E,B,D)).
+:- prop(not_abcde_eafcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,_,C,B)).
+:- prop(not_abcde_debca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,B,C,A)).
+:- prop(abcde_debca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,B,C,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_ebfac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,_,A,C)).
+:- prop(not_abcde_cefbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,_,B,D)).
+:- prop(not_abcde_dbacf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,A,C,_)).
+:- prop(not_abcde_edcab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,C,A,B)).
+:- prop(abcde_edcab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,C,A,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_ecabf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,A,B,_)).
+:- prop(not_abcde_cdaeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,A,E,B)).
+:- prop(abcde_cdaeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,A,E,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_ebacd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,A,C,D)).
+:- prop(abcde_ebacd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,A,C,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_fdecb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,E,C,B)).
+:- prop(not_abcde_fadbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,D,B,E)).
+:- prop(not_abcde_cbfae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,_,A,E)).
+:- prop(not_abcde_fcdba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,D,B,A)).
+:- prop(not_abcde_cdeba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,E,B,A)).
+:- prop(abcde_cdeba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,E,B,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_fecbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,C,B,D)).
+:- prop(not_abcde_cdfea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,_,E,A)).
+:- prop(not_abcde_ecabd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,A,B,D)).
+:- prop(abcde_ecabd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,A,B,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_feabd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,A,B,D)).
+:- prop(not_abcde_cedab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,D,A,B)).
+:- prop(abcde_cedab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,D,A,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_eafbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,_,B,D)).
+:- prop(not_abcde_cfbea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,B,E,A)).
+:- prop(not_abcde_fcbda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,B,D,A)).
+:- prop(not_abcde_cafed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,_,E,D)).
+:- prop(not_abcde_ebdca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,D,C,A)).
+:- prop(abcde_ebdca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,D,C,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_aedfc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,D,_,C)).
+:- prop(not_abcde_ba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A)).
+:- prop(abcde_ba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A)), valid_var(Rule,B),valid_var(Rule,A).
+:- prop(not_abcde_ecdaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,D,A,_)).
+:- prop(not_abcde_fcbae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,B,A,E)).
+:- prop(not_abcde_adbef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,B,E,_)).
+:- prop(not_abcde_edfcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,_,C,B)).
+:- prop(not_abcde_dafbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,_,B,C)).
+:- prop(not_abcde_cbeaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,E,A,_)).
+:- prop(not_abcde_cfeab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,E,A,B)).
+:- prop(not_abcde_dfcae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,C,A,E)).
+:- prop(not_abcde_cedbf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,D,B,_)).
+:- prop(not_abcde_dface,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,A,C,E)).
+:- prop(not_abcde_badec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,D,E,C)).
+:- prop(abcde_badec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,D,E,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dcaef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,A,E,_)).
+:- prop(not_abcde_afecd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,E,C,D)).
+:- prop(not_abcde_dabcf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,B,C,_)).
+:- prop(not_abcde_bcdfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,D,_,A)).
+:- prop(not_abcde_abfdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,_,D,C)).
+:- prop(not_abcde_bcfae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,_,A,E)).
+:- prop(not_abcde_afedc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,E,D,C)).
+:- prop(not_abcde_defac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,_,A,C)).
+:- prop(not_abcde_baedc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,E,D,C)).
+:- prop(abcde_baedc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,E,D,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cebaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,B,A,_)).
+:- prop(not_abcde_eabcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,B,C,D)).
+:- prop(abcde_eabcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,B,C,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_acbde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,B,D,E)).
+:- prop(abcde_acbde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,B,D,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_bdeaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,E,A,_)).
+:- prop(not_abcde_bdcae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,C,A,E)).
+:- prop(abcde_bdcae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,C,A,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_ecdbf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,D,B,_)).
+:- prop(not_abcde_fabde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,B,D,E)).
+:- prop(not_abcde_defca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,_,C,A)).
+:- prop(not_abcde_afebc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,E,B,C)).
+:- prop(not_abcde_ea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A)).
+:- prop(abcde_ea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A)), valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_fedba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,D,B,A)).
+:- prop(not_abcde_dfcbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,C,B,E)).
+:- prop(not_abcde_cbedf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,E,D,_)).
+:- prop(not_abcde_dbfea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,_,E,A)).
+:- prop(not_abcde_bafec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,_,E,C)).
+:- prop(not_abcde_dbfce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,_,C,E)).
+:- prop(not_abcde_dbecf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,E,C,_)).
+:- prop(not_abcde_cadbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,D,B,E)).
+:- prop(abcde_cadbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,D,B,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cbaef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,A,E,_)).
+:- prop(not_abcde_decfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,C,_,A)).
+:- prop(not_abcde_ebadc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,A,D,C)).
+:- prop(abcde_ebadc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,A,D,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_edbcf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,B,C,_)).
+:- prop(not_abcde_cebad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,B,A,D)).
+:- prop(abcde_cebad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,B,A,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_febda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,B,D,A)).
+:- prop(not_abcde_adcfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,C,_,E)).
+:- prop(not_abcde_cdeaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,E,A,_)).
+:- prop(not_abcde_acbfd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,B,_,D)).
+:- prop(not_abcde_dafeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,_,E,B)).
+:- prop(not_abcde_cd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D)).
+:- prop(abcde_cd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D)), valid_var(Rule,D),valid_var(Rule,C).
+:- prop(not_abcde_bcefa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,E,_,A)).
+:- prop(not_abcde_becdf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,C,D,_)).
+:- prop(not_abcde_cfdbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,D,B,E)).
+:- prop(not_abcde_cedfb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,D,_,B)).
+:- prop(not_abcde_fa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A)).
+:- prop(not_abcde_bdcfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,C,_,A)).
+:- prop(not_abcde_ecbdf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,B,D,_)).
+:- prop(not_abcde_acfeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,_,E,B)).
+:- prop(not_abcde_cbfda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,_,D,A)).
+:- prop(not_abcde_dfbec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,B,E,C)).
+:- prop(not_abcde_bcdef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,D,E,_)).
+:- prop(not_abcde_bfdae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,D,A,E)).
+:- prop(not_abcde_afbcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,B,C,D)).
+:- prop(not_abcde_fceab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,E,A,B)).
+:- prop(not_abcde_fcbad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,B,A,D)).
+:- prop(not_abcde_ab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B)).
+:- prop(abcde_ab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B)), valid_var(Rule,B),valid_var(Rule,A).
+:- prop(not_abcde_efcba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,C,B,A)).
+:- prop(not_abcde_ec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C)).
+:- prop(abcde_ec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C)), valid_var(Rule,E),valid_var(Rule,C).
+:- prop(not_abcde_acbdf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,B,D,_)).
+:- prop(not_abcde_cbafd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,A,_,D)).
+:- prop(not_abcde_febcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,B,C,D)).
+:- prop(not_abcde_bacef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,C,E,_)).
+:- prop(not_abcde_cbfed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,_,E,D)).
+:- prop(not_abcde_cadbf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,D,B,_)).
+:- prop(not_abcde_bcfad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,_,A,D)).
+:- prop(not_abcde_efacb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,A,C,B)).
+:- prop(not_abcde_eadcf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,D,C,_)).
+:- prop(not_abcde_edacf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,A,C,_)).
+:- prop(not_abcde_afbec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,B,E,C)).
+:- prop(not_abcde_bdecf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,E,C,_)).
+:- prop(not_abcde_cadfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,D,_,E)).
+:- prop(not_abcde_abfcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,_,C,D)).
+:- prop(not_abcde_dbcea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,C,E,A)).
+:- prop(abcde_dbcea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,C,E,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_eafdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,_,D,C)).
+:- prop(not_abcde_bceda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,E,D,A)).
+:- prop(abcde_bceda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,E,D,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_baced,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,C,E,D)).
+:- prop(abcde_baced,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,C,E,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_bcfda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,_,D,A)).
+:- prop(not_abcde_befcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,_,C,D)).
+:- prop(not_abcde_dabfc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,B,_,C)).
+:- prop(not_abcde_ecfda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,_,D,A)).
+:- prop(not_abcde_dcfbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,_,B,E)).
+:- prop(not_abcde_befdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,_,D,C)).
+:- prop(not_abcde_abcfd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,C,_,D)).
+:- prop(not_abcde_acdeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,D,E,B)).
+:- prop(abcde_acdeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,D,E,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_aecdf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,C,D,_)).
+:- prop(not_abcde_cdabf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,A,B,_)).
+:- prop(not_abcde_eacbf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,C,B,_)).
+:- prop(not_abcde_cbadf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,A,D,_)).
+:- prop(not_abcde_bdfac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,_,A,C)).
+:- prop(not_abcde_bdcef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,C,E,_)).
+:- prop(not_abcde_bfeca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,E,C,A)).
+:- prop(not_abcde_bdefc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,E,_,C)).
+:- prop(not_abcde_defcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,_,C,B)).
+:- prop(not_abcde_ebdfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,D,_,A)).
+:- prop(not_abcde_cdfab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,_,A,B)).
+:- prop(not_abcde_dfbce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,B,C,E)).
+:- prop(not_abcde_fadcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,D,C,B)).
+:- prop(not_abcde_bcfed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,_,E,D)).
+:- prop(not_abcde_fcbed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,B,E,D)).
+:- prop(not_abcde_dbcfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,C,_,A)).
+:- prop(not_abcde_decfb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,C,_,B)).
+:- prop(not_abcde_becfd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,C,_,D)).
+:- prop(not_abcde_acfdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,_,D,B)).
+:- prop(not_abcde_ce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E)).
+:- prop(abcde_ce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E)), valid_var(Rule,E),valid_var(Rule,C).
+:- prop(not_abcde_dcbfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,B,_,A)).
+:- prop(not_abcde_ecbfd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,B,_,D)).
+:- prop(not_abcde_bdaec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,A,E,C)).
+:- prop(abcde_bdaec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,A,E,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_fb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B)).
+:- prop(not_abcde_decba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,C,B,A)).
+:- prop(abcde_decba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,C,B,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_bfaec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,A,E,C)).
+:- prop(not_abcde_cbfad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,_,A,D)).
+:- prop(not_abcde_eafcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,_,C,D)).
+:- prop(not_abcde_fbcea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,C,E,A)).
+:- prop(not_abcde_afbce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,B,C,E)).
+:- prop(not_abcde_aebdf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,B,D,_)).
+:- prop(not_abcde_deacb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,A,C,B)).
+:- prop(abcde_deacb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,A,C,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cdabe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,A,B,E)).
+:- prop(abcde_cdabe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,A,B,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_deabf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,A,B,_)).
+:- prop(not_abcde_bdfec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,_,E,C)).
+:- prop(not_abcde_aedcf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,D,C,_)).
+:- prop(not_abcde_afbde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,B,D,E)).
+:- prop(not_abcde_fdaec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,A,E,C)).
+:- prop(not_abcde_efcad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,C,A,D)).
+:- prop(not_abcde_fdebc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,E,B,C)).
+:- prop(not_abcde_cfadb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,A,D,B)).
+:- prop(not_abcde_dcfab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,_,A,B)).
+:- prop(not_abcde_cdfeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,_,E,B)).
+:- prop(not_abcde_efdca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,D,C,A)).
+:- prop(not_abcde_dafce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,_,C,E)).
+:- prop(not_abcde_facbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,C,B,E)).
+:- prop(not_abcde_dbfae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,_,A,E)).
+:- prop(not_abcde_fdcba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,C,B,A)).
+:- prop(not_abcde_aedfb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,D,_,B)).
+:- prop(not_abcde_db,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B)).
+:- prop(abcde_db,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B)), valid_var(Rule,D),valid_var(Rule,B).
+:- prop(not_abcde_dacfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,C,_,E)).
+:- prop(not_abcde_aebfc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,B,_,C)).
+:- prop(not_abcde_bfdec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,D,E,C)).
+:- prop(not_abcde_cfdab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,D,A,B)).
+:- prop(not_abcde_abdef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,D,E,_)).
+:- prop(not_abcde_abefd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,E,_,D)).
+:- prop(not_abcde_dbafe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,A,_,E)).
+:- prop(not_abcde_bcfde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,_,D,E)).
+:- prop(not_abcde_abfce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,_,C,E)).
+:- prop(not_abcde_bedca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,D,C,A)).
+:- prop(abcde_bedca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,D,C,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_bdace,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,A,C,E)).
+:- prop(abcde_bdace,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,A,C,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cfebd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,E,B,D)).
+:- prop(not_abcde_bface,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,A,C,E)).
+:- prop(not_abcde_ceafd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,A,_,D)).
+:- prop(not_abcde_becaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,C,A,_)).
+:- prop(not_abcde_fbcde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,C,D,E)).
+:- prop(not_abcde_abecf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,E,C,_)).
+:- prop(not_abcde_fdcea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,C,E,A)).
+:- prop(not_abcde_bfacd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,A,C,D)).
+:- prop(not_abcde_dcabe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,A,B,E)).
+:- prop(abcde_dcabe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,A,B,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_beacf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,A,C,_)).
+:- prop(not_abcde_eacdf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,C,D,_)).
+:- prop(not_abcde_bfead,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,E,A,D)).
+:- prop(not_abcde_eadfb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,D,_,B)).
+:- prop(not_abcde_aefbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,_,B,C)).
+:- prop(not_abcde_faecd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,E,C,D)).
+:- prop(not_abcde_ceadf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,A,D,_)).
+:- prop(not_abcde_aebcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,B,C,D)).
+:- prop(abcde_aebcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,B,C,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cdbfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,B,_,E)).
+:- prop(not_abcde_cbaed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,A,E,D)).
+:- prop(abcde_cbaed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,A,E,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_becad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,C,A,D)).
+:- prop(abcde_becad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,C,A,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_edcfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,C,_,A)).
+:- prop(not_abcde_abecd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,E,C,D)).
+:- prop(abcde_abecd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,E,C,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_edbaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,B,A,_)).
+:- prop(not_abcde_abedf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,E,D,_)).
+:- prop(not_abcde_cedba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,D,B,A)).
+:- prop(abcde_cedba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,D,B,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_edcaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,C,A,_)).
+:- prop(not_abcde_fbecd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,E,C,D)).
+:- prop(not_abcde_beacd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,A,C,D)).
+:- prop(abcde_beacd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,A,C,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_afdec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,D,E,C)).
+:- prop(not_abcde_aefdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,_,D,C)).
+:- prop(not_abcde_cdaef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,A,E,_)).
+:- prop(not_abcde_dfeac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,E,A,C)).
+:- prop(not_abcde_fdbac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,B,A,C)).
+:- prop(not_abcde_eacbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,C,B,D)).
+:- prop(abcde_eacbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,C,B,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_efadc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,A,D,C)).
+:- prop(not_abcde_cafbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,_,B,D)).
+:- prop(not_abcde_deafc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,A,_,C)).
+:- prop(not_abcde_adbcf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,B,C,_)).
+:- prop(not_abcde_bdcaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,C,A,_)).
+:- prop(not_abcde_dfaeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,A,E,B)).
+:- prop(not_abcde_acbfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,B,_,E)).
+:- prop(not_abcde_bdacf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,A,C,_)).
+:- prop(not_abcde_fbaed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,A,E,D)).
+:- prop(not_abcde_bfdac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,D,A,C)).
+:- prop(not_abcde_edcbf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,C,B,_)).
+:- prop(not_abcde_fcead,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,E,A,D)).
+:- prop(not_abcde_cbdae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,D,A,E)).
+:- prop(abcde_cbdae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,D,A,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_feabc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,A,B,C)).
+:- prop(not_abcde_eafbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,_,B,C)).
+:- prop(not_abcde_edbac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,B,A,C)).
+:- prop(abcde_edbac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,B,A,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dacef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,C,E,_)).
+:- prop(not_abcde_acefd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,E,_,D)).
+:- prop(not_abcde_fdcab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,C,A,B)).
+:- prop(not_abcde_dfbea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,B,E,A)).
+:- prop(not_abcde_ebcfd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,C,_,D)).
+:- prop(not_abcde_fcaeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,A,E,B)).
+:- prop(not_abcde_bdafe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,A,_,E)).
+:- prop(not_abcde_baecf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,E,C,_)).
+:- prop(not_abcde_cadeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,D,E,B)).
+:- prop(abcde_cadeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,D,E,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_adefc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,E,_,C)).
+:- prop(not_abcde_ebafd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,A,_,D)).
+:- prop(not_abcde_dfecb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,E,C,B)).
+:- prop(not_abcde_cefba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,_,B,A)).
+:- prop(not_abcde_fedca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,D,C,A)).
+:- prop(not_abcde_bfcad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,C,A,D)).
+:- prop(not_abcde_cdafb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,A,_,B)).
+:- prop(not_abcde_dcebf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,E,B,_)).
+:- prop(not_abcde_eacfb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,C,_,B)).
+:- prop(not_abcde_edfac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,_,A,C)).
+:- prop(not_abcde_baecd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,E,C,D)).
+:- prop(abcde_baecd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,E,C,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cabfd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,B,_,D)).
+:- prop(not_abcde_efdcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,D,C,B)).
+:- prop(not_abcde_ebfca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,_,C,A)).
+:- prop(not_abcde_bedaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,D,A,_)).
+:- prop(not_abcde_cfabe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,A,B,E)).
+:- prop(not_abcde_bfcde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,C,D,E)).
+:- prop(not_abcde_fdbec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,B,E,C)).
+:- prop(not_abcde_cfead,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,E,A,D)).
+:- prop(not_abcde_daefc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,E,_,C)).
+:- prop(not_abcde_ebcdf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,C,D,_)).
+:- prop(not_abcde_cfabd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,A,B,D)).
+:- prop(not_abcde_efabd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,A,B,D)).
+:- prop(not_abcde_fabdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,B,D,C)).
+:- prop(not_abcde_baefd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,E,_,D)).
+:- prop(not_abcde_befad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,_,A,D)).
+:- prop(not_abcde_acdbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,D,B,E)).
+:- prop(abcde_acdbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,D,B,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cbdaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,D,A,_)).
+:- prop(not_abcde_efbcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,B,C,D)).
+:- prop(not_abcde_ecfdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,_,D,B)).
+:- prop(not_abcde_adbec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,B,E,C)).
+:- prop(abcde_adbec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,B,E,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cdbea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,B,E,A)).
+:- prop(abcde_cdbea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,B,E,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_ebfda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,_,D,A)).
+:- prop(not_abcde_daecb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,E,C,B)).
+:- prop(abcde_daecb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,E,C,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_edfbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,_,B,C)).
+:- prop(not_abcde_befda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,_,D,A)).
+:- prop(not_abcde_eabfd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,B,_,D)).
+:- prop(not_abcde_ecbaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,B,A,_)).
+:- prop(not_abcde_edcfb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,C,_,B)).
+:- prop(not_abcde_cabdf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,B,D,_)).
+:- prop(not_abcde_de,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E)).
+:- prop(abcde_de,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E)), valid_var(Rule,D),valid_var(Rule,E).
+:- prop(not_abcde_bfade,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,A,D,E)).
+:- prop(not_abcde_badcf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,D,C,_)).
+:- prop(not_abcde_decab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,C,A,B)).
+:- prop(abcde_decab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,C,A,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_aefcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,_,C,D)).
+:- prop(not_abcde_afedb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,E,D,B)).
+:- prop(not_abcde_defab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,_,A,B)).
+:- prop(not_abcde_defbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,_,B,C)).
+:- prop(not_abcde_fbade,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,A,D,E)).
+:- prop(not_abcde_abdec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,D,E,C)).
+:- prop(abcde_abdec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,D,E,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_debaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,B,A,_)).
+:- prop(not_abcde_fcdea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,D,E,A)).
+:- prop(not_abcde_fadbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,D,B,C)).
+:- prop(not_abcde_bdeca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,E,C,A)).
+:- prop(abcde_bdeca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,E,C,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_ecbad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,B,A,D)).
+:- prop(abcde_ecbad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,B,A,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_afdcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,D,C,B)).
+:- prop(not_abcde_acfbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,_,B,D)).
+:- prop(not_abcde_caedb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,E,D,B)).
+:- prop(abcde_caedb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,E,D,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_debcf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,B,C,_)).
+:- prop(not_abcde_adcef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,C,E,_)).
+:- prop(not_abcde_bdafc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,A,_,C)).
+:- prop(not_abcde_cfbda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,B,D,A)).
+:- prop(not_abcde_dbcfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,C,_,E)).
+:- prop(not_abcde_febac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,B,A,C)).
+:- prop(not_abcde_fedac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,D,A,C)).
+:- prop(not_abcde_febad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,B,A,D)).
+:- prop(not_abcde_abfed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,_,E,D)).
+:- prop(not_abcde_ad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D)).
+:- prop(abcde_ad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D)), valid_var(Rule,D),valid_var(Rule,A).
+:- prop(not_abcde_fdabe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,A,B,E)).
+:- prop(not_abcde_bfdce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,D,C,E)).
+:- prop(not_abcde_becfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,C,_,A)).
+:- prop(not_abcde_facbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,C,B,D)).
+:- prop(not_abcde_abdfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,D,_,E)).
+:- prop(not_abcde_bcedf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,E,D,_)).
+:- prop(not_abcde_cbdef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,D,E,_)).
+:- prop(not_abcde_cefab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,_,A,B)).
+:- prop(not_abcde_fadec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,D,E,C)).
+:- prop(not_abcde_fbdca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,D,C,A)).
+:- prop(not_abcde_afbdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,B,D,C)).
+:- prop(not_abcde_df,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_)).
+:- prop(not_abcde_feadc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,A,D,C)).
+:- prop(not_abcde_fcabe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,A,B,E)).
+:- prop(not_abcde_fe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E)).
+:- prop(not_abcde_dbcae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,C,A,E)).
+:- prop(abcde_dbcae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,C,A,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_adfbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,_,B,C)).
+:- prop(not_abcde_bfcae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,C,A,E)).
+:- prop(not_abcde_cbeda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,E,D,A)).
+:- prop(abcde_cbeda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,E,D,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_fecab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,C,A,B)).
+:- prop(not_abcde_bdfea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,_,E,A)).
+:- prop(not_abcde_dceaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,E,A,_)).
+:- prop(not_abcde_dcabf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,A,B,_)).
+:- prop(not_abcde_cefdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,_,D,B)).
+:- prop(not_abcde_cafdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,_,D,B)).
+:- prop(not_abcde_dcafe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,A,_,E)).
+:- prop(not_abcde_aebcf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,B,C,_)).
+:- prop(not_abcde_fdeba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,E,B,A)).
+:- prop(not_abcde_cfbae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,B,A,E)).
+:- prop(not_abcde_fbdae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,D,A,E)).
+:- prop(not_abcde_daebf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,E,B,_)).
+:- prop(not_abcde_dcbea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,B,E,A)).
+:- prop(abcde_dcbea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,B,E,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_faced,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,C,E,D)).
+:- prop(not_abcde_afcdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,C,D,B)).
+:- prop(not_abcde_eb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B)).
+:- prop(abcde_eb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B)), valid_var(Rule,E),valid_var(Rule,B).
+:- prop(not_abcde_abdce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,D,C,E)).
+:- prop(abcde_abdce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,D,C,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cfbad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,B,A,D)).
+:- prop(not_abcde_fedcb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,D,C,B)).
+:- prop(not_abcde_cbefd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,E,_,D)).
+:- prop(not_abcde_bedfc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,D,_,C)).
+:- prop(not_abcde_facdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,C,D,B)).
+:- prop(not_abcde_bdfca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,_,C,A)).
+:- prop(not_abcde_cfade,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,A,D,E)).
+:- prop(not_abcde_fecdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,C,D,B)).
+:- prop(not_abcde_dbefc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,E,_,C)).
+:- prop(not_abcde_becda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,C,D,A)).
+:- prop(abcde_becda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,C,D,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_eafdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,_,D,B)).
+:- prop(not_abcde_fecda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,C,D,A)).
+:- prop(not_abcde_efabc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,A,B,C)).
+:- prop(not_abcde_bacfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,C,_,E)).
+:- prop(not_abcde_adebf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,E,B,_)).
+:- prop(not_abcde_adcbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,C,B,E)).
+:- prop(abcde_adcbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,C,B,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dcfea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,_,E,A)).
+:- prop(not_abcde_aecfd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,C,_,D)).
+:- prop(not_abcde_befac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,_,A,C)).
+:- prop(not_ab_ca,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(_,A)).
+:- prop(not_abcde_dfcba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,C,B,A)).
+:- prop(not_abcde_ecdfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,D,_,A)).
+:- prop(not_abcde_bacfd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,C,_,D)).
+:- prop(not_abcde_bedac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,D,A,C)).
+:- prop(abcde_bedac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,D,A,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_bdeac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,E,A,C)).
+:- prop(abcde_bdeac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,E,A,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_ecfad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,_,A,D)).
+:- prop(not_abcde_acdfb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,D,_,B)).
+:- prop(not_abcde_fdeac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,E,A,C)).
+:- prop(not_abcde_adbfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,B,_,E)).
+:- prop(not_abcde_bdefa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,E,_,A)).
+:- prop(not_abcde_eadbf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,D,B,_)).
+:- prop(not_abcde_bcefd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,E,_,D)).
+:- prop(not_abcde_badce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,D,C,E)).
+:- prop(abcde_badce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,D,C,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_caebf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,E,B,_)).
+:- prop(not_abcde_cafbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,_,B,E)).
+:- prop(not_abcde_dfcea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,C,E,A)).
+:- prop(not_abcde_fd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D)).
+:- prop(not_abcde_acedb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,E,D,B)).
+:- prop(abcde_acedb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,E,D,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dfeca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,E,C,A)).
+:- prop(not_abcde_cfdba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,D,B,A)).
+:- prop(not_abcde_ecfbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,_,B,D)).
+:- prop(not_abcde_abdcf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,D,C,_)).
+:- prop(not_abcde_fdbce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,B,C,E)).
+:- prop(not_abcde_caefb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,E,_,B)).
+:- prop(not_abcde_fceda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,E,D,A)).
+:- prop(not_abcde_aecbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,C,B,D)).
+:- prop(abcde_aecbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,C,B,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cefda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,_,D,A)).
+:- prop(not_abcde_dacbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,C,B,E)).
+:- prop(abcde_dacbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,C,B,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_efdac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,D,A,C)).
+:- prop(not_abcde_acfed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,_,E,D)).
+:- prop(not_abcde_badfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,D,_,E)).
+:- prop(not_abcde_efbad,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,B,A,D)).
+:- prop(not_abcde_ae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E)).
+:- prop(abcde_ae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E)), valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_afdbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,D,B,E)).
+:- prop(not_abcde_adfce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,_,C,E)).
+:- prop(not_abcde_adbce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,B,C,E)).
+:- prop(abcde_adbce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,B,C,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_adfec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,_,E,C)).
+:- prop(not_abcde_dbfac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,_,A,C)).
+:- prop(not_abcde_adefb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,E,_,B)).
+:- prop(not_abcde_ecafb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,A,_,B)).
+:- prop(not_abcde_fcdbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,D,B,E)).
+:- prop(not_abcde_adcbf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,C,B,_)).
+:- prop(not_abcde_eacfd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,C,_,D)).
+:- prop(not_abcde_abefc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,E,_,C)).
+:- prop(not_abcde_fecba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,C,B,A)).
+:- prop(not_abcde_cfdea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,D,E,A)).
+:- prop(not_abcde_caebd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,E,B,D)).
+:- prop(abcde_caebd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,E,B,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_fdaeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,A,E,B)).
+:- prop(not_abcde_be,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E)).
+:- prop(abcde_be,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E)), valid_var(Rule,E),valid_var(Rule,B).
+:- prop(not_abcde_efcbd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,C,B,D)).
+:- prop(not_abcde_ebcfa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,C,_,A)).
+:- prop(not_abcde_fdceb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,C,E,B)).
+:- prop(not_abcde_cabfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,B,_,E)).
+:- prop(not_abcde_efdbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,D,B,C)).
+:- prop(not_abcde_dfbae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,B,A,E)).
+:- prop(not_abcde_decaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,C,A,_)).
+:- prop(not_abcde_dfacb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,A,C,B)).
+:- prop(not_abcde_fdbea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,B,E,A)).
+:- prop(not_abcde_eabdf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,B,D,_)).
+:- prop(not_abcde_bfced,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,C,E,D)).
+:- prop(not_abcde_adbfc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,B,_,C)).
+:- prop(not_abcde_dbaef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,A,E,_)).
+:- prop(not_abcde_fdacb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,D,A,C,B)).
+:- prop(not_abcde_bfadc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,A,D,C)).
+:- prop(not_abcde_daebc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,E,B,C)).
+:- prop(abcde_daebc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,E,B,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cdfae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,_,A,E)).
+:- prop(not_abcde_efcda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,C,D,A)).
+:- prop(not_abcde_fbadc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,A,D,C)).
+:- prop(not_abcde_cabef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,B,E,_)).
+:- prop(not_abcde_cdebf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,E,B,_)).
+:- prop(not_abcde_dcfeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,_,E,B)).
+:- prop(not_abcde_edfba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,_,B,A)).
+:- prop(not_abcde_fadce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,D,C,E)).
+:- prop(not_abcde_faedc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,E,D,C)).
+:- prop(not_abcde_ecadb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,A,D,B)).
+:- prop(abcde_ecadb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,A,D,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_adecb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,E,C,B)).
+:- prop(abcde_adecb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,E,C,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_bceaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,E,A,_)).
+:- prop(not_abcde_ebdaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,D,A,_)).
+:- prop(not_abcde_decbf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,C,B,_)).
+:- prop(not_abcde_edafc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,A,_,C)).
+:- prop(not_abcde_dacbf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,C,B,_)).
+:- prop(not_ab_cb,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(_,B)).
+:- prop(not_abcde_fbcae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,C,A,E)).
+:- prop(not_abcde_dbfec,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,_,E,C)).
+:- prop(not_abcde_bcafe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,A,_,E)).
+:- prop(not_abcde_fbedc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,E,D,C)).
+:- prop(not_abcde_acfde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,_,D,E)).
+:- prop(not_abcde_ebdcf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,D,C,_)).
+:- prop(not_abcde_edacb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,A,C,B)).
+:- prop(abcde_edacb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,A,C,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cedaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,D,A,_)).
+:- prop(not_abcde_cabed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,B,E,D)).
+:- prop(abcde_cabed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,B,E,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_ab_ac,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,_)).
+:- prop(not_abcde_adcfb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,D,C,_,B)).
+:- prop(not_abcde_ca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A)).
+:- prop(abcde_ca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A)), valid_var(Rule,C),valid_var(Rule,A).
+:- prop(not_abcde_ecdba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,D,B,A)).
+:- prop(abcde_ecdba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,C,D,B,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_acdbf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,D,B,_)).
+:- prop(not_abcde_cdefa,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,E,_,A)).
+:- prop(not_abcde_abcdf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,C,D,_)).
+:- prop(not_abcde_bcead,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,E,A,D)).
+:- prop(abcde_bcead,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,E,A,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_acfbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,_,B,E)).
+:- prop(not_abcde_bfedc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,_,E,D,C)).
+:- prop(not_abcde_ebcda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,C,D,A)).
+:- prop(abcde_ebcda,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,C,D,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cfaeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,A,E,B)).
+:- prop(not_abcde_cabde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,B,D,E)).
+:- prop(abcde_cabde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,B,D,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dcbaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,C,B,A,_)).
+:- prop(not_abcde_fbead,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,E,A,D)).
+:- prop(not_abcde_fcabd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,A,B,D)).
+:- prop(not_abcde_abfde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,_,D,E)).
+:- prop(not_abcde_dbeca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,E,C,A)).
+:- prop(abcde_dbeca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,B,E,C,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_afdeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,D,E,B)).
+:- prop(not_abcde_aefdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,_,D,B)).
+:- prop(not_abcde_cdeab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,E,A,B)).
+:- prop(abcde_cdeab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,E,A,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_aecdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,C,D,B)).
+:- prop(abcde_aecdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,C,D,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dfeab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,E,A,B)).
+:- prop(not_abcde_edbca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,B,C,A)).
+:- prop(abcde_edbca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,B,C,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_ebafc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,A,_,C)).
+:- prop(not_abcde_fbeca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,E,C,A)).
+:- prop(not_abcde_bcaef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,A,E,_)).
+:- prop(not_abcde_dabef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,A,B,E,_)).
+:- prop(not_abcde_fabed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,B,E,D)).
+:- prop(not_abcde_efadb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,A,D,B)).
+:- prop(not_abcde_bdcfe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,D,C,_,E)).
+:- prop(not_abcde_ceabf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,A,B,_)).
+:- prop(not_abcde_deafb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,A,_,B)).
+:- prop(not_abcde_fceba,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,E,B,A)).
+:- prop(not_abcde_cbfde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,_,D,E)).
+:- prop(not_abcde_ef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_)).
+:- prop(not_abcde_eacdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,C,D,B)).
+:- prop(abcde_eacdb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,C,D,B)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_acdef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,C,D,E,_)).
+:- prop(not_abcde_feacb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,A,C,B)).
+:- prop(not_abcde_bcaed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,A,E,D)).
+:- prop(abcde_bcaed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,A,E,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_dfbac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,B,A,C)).
+:- prop(not_abcde_aebdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,B,D,C)).
+:- prop(abcde_aebdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,E,B,D,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_fabce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,B,C,E)).
+:- prop(not_abcde_cebfd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,E,B,_,D)).
+:- prop(not_abcde_bcdaf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,D,A,_)).
+:- prop(not_abcde_bacde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,C,D,E)).
+:- prop(abcde_bacde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,C,D,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_efbac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,B,A,C)).
+:- prop(not_abcde_fbdac,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,B,D,A,C)).
+:- prop(not_abcde_fcaed,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,A,E,D)).
+:- prop(not_abcde_deabc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,A,B,C)).
+:- prop(abcde_deabc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,E,A,B,C)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_fabcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,A,B,C,D)).
+:- prop(not_abcde_cafeb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,_,E,B)).
+:- prop(not_abcde_fcbde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,C,B,D,E)).
+:- prop(not_abcde_baefc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,E,_,C)).
+:- prop(not_abcde_bedcf,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,E,D,C,_)).
+:- prop(not_abcde_badef,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,D,E,_)).
+:- prop(not_abcde_abced,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,C,E,D)).
+:- prop(abcde_abced,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,C,E,D)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_bafce,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,A,_,C,E)).
+:- prop(not_abcde_cdbae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,B,A,E)).
+:- prop(abcde_cdbae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,D,B,A,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_bcdea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,D,E,A)).
+:- prop(abcde_bcdea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(B,C,D,E,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_febca,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,B,C,A)).
+:- prop(not_abcde_afceb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,C,E,B)).
+:- prop(not_abcde_abcde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,C,D,E)).
+:- prop(abcde_abcde,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,B,C,D,E)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_ebfcd,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,B,_,C,D)).
+:- prop(not_abcde_cbfea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,_,E,A)).
+:- prop(not_abcde_cfdae,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,_,D,A,E)).
+:- prop(not_abcde_dfcab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(D,_,C,A,B)).
+:- prop(not_abcde_eabfc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,A,B,_,C)).
+:- prop(not_abcde_fedbc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(_,E,D,B,C)).
+:- prop(not_abcde_afecb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,E,C,B)).
+:- prop(not_abcde_cbdea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,D,E,A)).
+:- prop(abcde_cbdea,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,B,D,E,A)), valid_var(Rule,B),valid_var(Rule,D),valid_var(Rule,C),valid_var(Rule,E),valid_var(Rule,A).
+:- prop(not_abcde_cadfb,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(C,A,D,_,B)).
+:- prop(not_abcde_efbdc,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,_,B,D,C)).
+:- prop(not_abcde_edfab,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(E,D,_,A,B)).
+:- prop(not_abcde_afcbe,(P,Q)), body_literal(Rule,P,_,(A,B,C,D,E)), body_literal(Rule,Q,_,(A,_,C,B,E)).
+:- prop(not_ab_bc_cd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(C,D)).
+:- prop(not_ab_cb_ac,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(A,C)).
+:- prop(ab_cb_ac,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(A,C)), valid_var(Rule,C),valid_var(Rule,A).
+:- prop(not_ab_ab_cb,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)), body_literal(Rule,R,_,(C,B)).
+:- prop(not_ab_ac_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(B,C)).
+:- prop(ab_ac_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(B,C)), valid_var(Rule,B),valid_var(Rule,C).
+:- prop(not_ab_ba_ac,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)), body_literal(Rule,R,_,(A,C)).
+:- prop(not_ab_ca_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(B,A)).
+:- prop(ab_ca_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(B,A)), valid_var(Rule,B),valid_var(Rule,A).
+:- prop(not_ab_ca_dc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(D,C)).
+:- prop(not_ab_ca_bd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(B,D)).
+:- prop(not_ab_ab_ca,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)), body_literal(Rule,R,_,(C,A)).
+:- prop(not_ab_ca_da,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(D,A)).
+:- prop(not_ab_bc_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(B,C)).
+:- prop(ab_bc_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(B,C)), valid_var(Rule,B),valid_var(Rule,C).
+:- prop(not_ab_ba_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)), body_literal(Rule,R,_,(B,A)).
+:- prop(ab_ba_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)), body_literal(Rule,R,_,(B,A)), valid_var(Rule,B),valid_var(Rule,A).
+:- prop(not_ab_ca_cd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(C,D)).
+:- prop(not_ab_ac_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(A,B)).
+:- prop(ab_ac_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(A,B)), valid_var(Rule,B),valid_var(Rule,A).
+:- prop(not_ab_cb_dc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(D,C)).
+:- prop(not_ab_cb_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,A)).
+:- prop(ab_cb_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,A)), valid_var(Rule,B),valid_var(Rule,A).
+:- prop(not_ab_cb_bd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,D)).
+:- prop(not_ab_cb_da,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(D,A)).
+:- prop(not_ab_ac_ad,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(A,D)).
+:- prop(not_ab_cb_cd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(C,D)).
+:- prop(not_ab_ac_db,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(D,B)).
+:- prop(not_ab_bc_ad,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(A,D)).
+:- prop(not_ab_ca_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(B,C)).
+:- prop(ab_ca_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(B,C)), valid_var(Rule,B),valid_var(Rule,C).
+:- prop(not_ab_ba_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)), body_literal(Rule,R,_,(B,C)).
+:- prop(not_ab_bc_dc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(D,C)).
+:- prop(not_ab_bc_db,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(D,B)).
+:- prop(not_ab_ac_ca,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(C,A)).
+:- prop(ab_ac_ca,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(C,A)), valid_var(Rule,C),valid_var(Rule,A).
+:- prop(not_ab_cb_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,C)).
+:- prop(ab_cb_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,C)), valid_var(Rule,B),valid_var(Rule,C).
+:- prop(not_ab_ca_ad,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(A,D)).
+:- prop(not_ab_ca_db,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(D,B)).
+:- prop(not_ab_ac_da,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(D,A)).
+:- prop(not_ab_ca_cb,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(C,B)).
+:- prop(ab_ca_cb,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(C,B)), valid_var(Rule,C),valid_var(Rule,B).
+:- prop(not_ab_cb_ad,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(A,D)).
+:- prop(not_ab_ac_dc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(D,C)).
+:- prop(not_ab_ac_bd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(B,D)).
+:- prop(not_ab_cb_db,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(D,B)).
+:- prop(not_ab_ac_cd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(C,D)).
+:- prop(not_ab_bc_da,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(D,A)).
+:- prop(not_ab_ab_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)), body_literal(Rule,R,_,(A,B)).
+:- prop(ab_ab_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)), body_literal(Rule,R,_,(A,B)), valid_var(Rule,B),valid_var(Rule,A).
+:- prop(not_ab_bc_bd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(B,D)).
+

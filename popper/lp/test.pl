@@ -10,6 +10,14 @@ get_pos(S):-
     findall(K, pos_index(K, _Atom), S).
 
 load_pos:-
+% current_predicate/1 (built-in)
+% True if a predicate with that name and arity is currently defined.
+
+% findall/3 built-in
+% e.g. findall(X, pos(X), Pos)
+% Collects all X from pos(X) into a list Pos.
+
+% ! states if failed executes the next clause without checking through the conditions
     current_predicate(pos/1),!,
     findall(X, pos(X), Pos),
     assert_pos_aux(Pos,0).
