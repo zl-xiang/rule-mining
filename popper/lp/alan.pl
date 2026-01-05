@@ -40,6 +40,8 @@ head_literal(0,P,A,Vars):-
     not bad_body(P,Vars),
     not type_mismatch(P,Vars).
 
+%% Leon may need to check this as well
+% TODO: look into the problem here after allowing constants
 type_mismatch(P,Vars):-
     var_pos(Var,Vars,Pos),
     type(P,Types),
@@ -86,8 +88,9 @@ head_var(C,Var):-
 
 %% BODY VAR
 body_var(C,Var):-
-    body_literal(C,_,_,Vars),
-    var_member(Var,Vars).
+    body_literal(C,P,A,Vars),
+    % var_member(Var,Vars), 
+    var_pos(Var,Vars,Pos), not const(A,Pos).
 
 %% VAR IN A TUPLE OF VARS
 var_member(Var,Vars):-
@@ -97,6 +100,7 @@ var_member(Var,Vars):-
 %% BIAS CONSTRAINTS
 %% ##################################################
 %% DATALOG
+%% violated %%
 :-
     not non_datalog,
     head_var(Rule,Var),
@@ -167,12 +171,15 @@ head_connected(C,Var1):-
     var_member(Var1,Vars),
     var_member(Var2,Vars),
     Var1 != Var2.
+
+%% violated %%
 :-
     head_literal(C,_,A,_),
     Var >= A,
     body_var(C,Var),
     not head_connected(C,Var).
 
+% fixing type of variable Var to Type when it occurs on head
 fixed_var_type(Var, Type):-
     head_literal(_, P, _A, Vars),
     var_pos(Var, Vars, Pos),

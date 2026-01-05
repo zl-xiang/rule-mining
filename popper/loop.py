@@ -101,7 +101,8 @@ class Popper():
         # AC: all very hacky until the refactoring is complete
         with settings.stats.duration('init'):
             if settings.single_solve:
-                from . gen2 import Generator
+                # from . gen2 import Generator
+                from . gen22 import Generator
             elif settings.max_rules == 2 and not settings.pi_enabled:
                 from . gen3 import Generator
             else:

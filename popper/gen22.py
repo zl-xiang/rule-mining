@@ -59,17 +59,56 @@ class Generator:
 
         # ADD VARS, DIRECTIONS, AND TYPES
         head_arity = len(settings.head_literal.arguments)
-        encoding.append(f'head_vars({head_arity}, {tuple(range(head_arity))}).')
+        # encoding.append(f'head_vars({head_arity}, {tuple(range(head_arity))}).')
+        print(tuple(range(head_arity)))
+        h_args_str = ','.join(map(str, range(head_arity)))
+        encoding.append(f'head_vars({head_arity}, ({h_args_str})).')
         arities = set(a for p, a in self.settings.body_preds)
         arities.add(head_arity)
+        vars_list = []
         # print('----------', settings.max_vars, arities)
         for arity in arities:
             for xs in permutations(range(settings.max_vars), arity):
-                encoding.append(f'vars({arity}, {tuple(xs)}).')
+                vars_list.append((arity, tuple(xs)))
+                xs_str = ', '.join(str(x) for x in xs)
+                encoding.append(f'vars({arity}, ({xs_str})).')
                 for i, x in enumerate(xs):
-                    encoding.append(f'var_pos({x}, {tuple(xs)}, {i}).')
-                encoding.append(f'ordered_vars({tuple(xs)},{tuple(sorted(xs))}).')
-
+                    encoding.append(f'var_pos({x}, ({xs_str}), {i}).')
+                sorted_xs_str = ', '.join(str(x) for x in tuple(sorted(xs)))
+                encoding.append(f'ordered_vars(({xs_str}), ({sorted_xs_str})).')
+                # encoding.append(f'ordered_vars({tuple(xs)},{tuple(sorted(xs))}).')
+                
+        ## Leon: added to create vars with fixed-position constants from attrbute atoms from a schema in bias file
+        # to update
+        # - find const-facts, get predicate and its position that is constant
+        # - get arity of the predicate
+        # - iterate through vars_list to find vars with same arity
+        # - for each vars with same arity, replace the variable at the constant position with a constant of attribute name
+        schema_attr_patt = re.compile(
+            r"attr\s*\(\s*"       
+            r"([^,\s]+)\s*,\s*"   # attr_name
+            r"([^,\s]+)\s*,\s*"   # rel_name
+            r"([^,\s]+)\s*,\s*"   # position
+            r"([^,\s]+)\s*"       # attr_type
+            r"\)\s*\."
+        )
+        schema_attr_tups = []
+        for match in schema_attr_patt.finditer(bias_text):
+            schema_attr_tups.append(match.groups())        
+        for arity, xs in vars_list:
+            for att_tup in schema_attr_tups:
+                 # if the attribute is not a tid
+                if arity == 3 and att_tup[-1]!= 0:
+                        xs_vars = sorted((xs[0],xs[2]))
+                        xs = list(xs)
+                        xs[1] = att_tup[0]
+                        xs_str = ', '.join(str(x) for x in xs)
+                        encoding.append(f'vars({arity}, ({xs_str})).')
+                        for i, x in enumerate(xs):
+                            if i!=1:
+                                encoding.append(f'var_pos({x}, ({xs_str}), {i}).')
+                        ordered_xs_str = ', '.join(str(x) for x in tuple((xs_vars[0],xs[1],xs_vars[1])))
+                        encoding.append(f'ordered_vars(({xs_str}),({ordered_xs_str})).')
         # ORDERING THINGY
         # %% appears((0,0,V0)):- body_literal(_, _, _, (V0,)), not head_var(_,V0).
         # appears((0,V0,V1)):- body_literal(_, _, _, (A,B)), ordered_vars((A,B), (V0,V1)).
@@ -112,9 +151,10 @@ class Generator:
             v0 = f'V{k}'
             v1 = f'V{k+1}'
             order_cons.append(f'seen_lower(Vars1, V):- V={v1}-1, Vars1 = ({xs1}), {v0} < V < {v1}, lower(Vars1, Vars2), var_tuple(Vars1), appears(Vars2), var_member(V, Vars2), not head_var(_,V).')
+            # Leon: TODO suspecting issue after allowing constants, where when V is grounded with non-integer constant, the operation V1-1 fails
             order_cons.append(f'gap_(({xs1}),{v1}-1):- var_tuple(({xs1})), {v0} < V < {v1}, var(V).')
 
-
+        
         order_cons.append(f'gap(({xs1}),V):- gap_(({xs1}), _), #max' + '{X :gap_((' + xs1 + '), X)} == V.')
 
         order_cons.append(f':- appears(({xs1})), gap(({xs1}), V), not seen_lower(({xs1}),V), not head_var(_,V).')
@@ -144,18 +184,20 @@ class Generator:
             h_types = self.settings.head_types
             for t in h_types:
                 h_type = tuple(t)
-                str_types = str(h_type).replace("'","")
+                # Leon: [bug] str(tuple) results to a string (t1,), leads to mismatch of types of unary predicate if declared as type(pred,(t1))
+                #str_types = str(h_type).replace("'","")
+                str_types = ','.join(str(x) for x in h_type)
+                # print(str_types)
                 for i, x in enumerate(h_type):
-                    print(f'type_pos({str_types}, {i}, {x}).')
-                    type_encoding.add(f'type_pos({str_types}, {i}, {x}).')
+                    type_encoding.add(f'type_pos(({str_types}), {i}, {x}).')
 
             for pred, b_types in self.settings.body_types.items():
                 for b_type in b_types:
                     b_type = tuple(b_type)
-                    str_types = str(b_type).replace("'","")
+                    #str_types = str(b_type).replace("'","")
+                    str_types = ','.join(str(x) for x in b_type)
                     for i, x in enumerate(b_type):
-                        print(f'type_pos({str_types}, {i}, {x}).')
-                        type_encoding.add(f'type_pos({str_types}, {i}, {x}).')
+                        type_encoding.add(f'type_pos(({str_types}), {i}, {x}).')
             encoding.extend(type_encoding)
 
         for pred, xs in self.settings.directions.items():
