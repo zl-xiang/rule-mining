@@ -666,24 +666,35 @@ def load_types_er(settings):
         solver.add('bias', [], f.read())
     solver.add('bias', [], enc)
     solver.ground([('bias', [])])
-
+    
     for x in solver.symbolic_atoms.by_signature('head_pred', arity=2):
         head_pred = x.symbol.arguments[0].name
         head_arity = x.symbol.arguments[1].number
-
     head_types = []
     body_types = {}
-    for x in solver.symbolic_atoms.by_signature('type', arity=2):
-        pred = x.symbol.arguments[0].name
-        # [bug] Leon: for predicate with arity 1, arguments[1] is already the type, hence arguments[1].arguments is empty
-        x_types = x.symbol.arguments[1].arguments
-        xs = [y.name for y in x_types] if len(x_types) > 0 else [x.symbol.arguments[1].name]
-        if pred == head_pred:
-            # [bug?] Leon: only allows a single head predicate declaration?
-            head_types.append(xs)
-        else:
-            body_types[pred] = [xs] if pred not in body_types.keys() else body_types[pred] + [xs]
-
+    with  solver.solve(yield_=True) as solution_iterator:
+        for model in solution_iterator:
+            for a in model.symbols(atoms=True):
+                if a.name == 'type' and len(a.arguments) == 2:
+                    pred = a.arguments[0].name
+                    # [bug] Leon: for predicate with arity 1, arguments[1] is already the type, hence arguments[1].arguments is empty
+                    x_types = a.arguments[1].arguments
+                    xs = [y.name for y in x_types] if len(x_types) > 0 else [a.arguments[1].name]
+                    if pred == head_pred:
+                        # [bug?] Leon: only allows a single head predicate declaration?
+                        head_types.append(xs)
+                    else:
+                        body_types[pred] = [xs] if pred not in body_types.keys() else body_types[pred] + [xs]
+    # for x in solver.symbolic_atoms.by_signature('type', arity=2):
+    #     pred = x.symbol.arguments[0].name
+    #     # [bug] Leon: for predicate with arity 1, arguments[1] is already the type, hence arguments[1].arguments is empty
+    #     x_types = x.symbol.arguments[1].arguments
+    #     xs = [y.name for y in x_types] if len(x_types) > 0 else [x.symbol.arguments[1].name]
+    #     if pred == head_pred:
+    #         # [bug?] Leon: only allows a single head predicate declaration?
+    #         head_types.append(xs)
+    #     else:
+    #         body_types[pred] = [xs] if pred not in body_types.keys() else body_types[pred] + [xs]
     return head_types, body_types
 
 # def bias_order(settings, max_size):
@@ -845,3 +856,10 @@ def remap_variables(rule):
 
 def format_prog(prog):
     return '\n'.join(format_rule(rule) for rule in prog)
+
+def is_int(s):
+    try:
+        int(s)
+        return True
+    except (TypeError, ValueError):
+        return False

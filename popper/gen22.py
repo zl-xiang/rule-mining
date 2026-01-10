@@ -4,7 +4,7 @@ import clingo
 import numbers
 import clingo.script
 import pkg_resources
-from . util import Constraint, Literal
+from . util import Constraint, Literal, is_int
 from clingo import Function, Number, Tuple_
 from itertools import permutations
 
@@ -85,13 +85,13 @@ class Generator:
         # - iterate through vars_list to find vars with same arity
         # - for each vars with same arity, replace the variable at the constant position with a constant of attribute name
         schema_attr_patt = re.compile(
-            r"attr\s*\(\s*"       
-            r"([^,\s]+)\s*,\s*"   # attr_name
-            r"([^,\s]+)\s*,\s*"   # rel_name
-            r"([^,\s]+)\s*,\s*"   # position
-            r"([^,\s]+)\s*"       # attr_type
-            r"\)\s*\."
+            r"^\s*attr\s*\(\s*"
+            r"([a-z0-9_]+)\s*,\s*"   # arg1
+            r"([0-9]+)\s*"
+            r"\)\s*\.\s*$",
+            re.MULTILINE
         )
+
         schema_attr_tups = []
         for match in schema_attr_patt.finditer(bias_text):
             schema_attr_tups.append(match.groups())        
@@ -105,8 +105,10 @@ class Generator:
                         xs_str = ', '.join(str(x) for x in xs)
                         encoding.append(f'vars({arity}, ({xs_str})).')
                         for i, x in enumerate(xs):
-                            if i!=1:
+                            if is_int(x):
                                 encoding.append(f'var_pos({x}, ({xs_str}), {i}).')
+                            else:
+                                encoding.append(f'const_pos({x}, ({xs_str}), {i}).')
                         ordered_xs_str = ', '.join(str(x) for x in tuple((xs_vars[0],xs[1],xs_vars[1])))
                         encoding.append(f'ordered_vars(({xs_str}),({ordered_xs_str})).')
         # ORDERING THINGY

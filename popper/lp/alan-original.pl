@@ -30,67 +30,24 @@ size(N):-
 :- not size(_).
 
 %% ********** BASE CASE (RULE 0) **********
-head_literal(0,eqo,A,Vars):-
-    head_pred(eqo,A),
-    head_vars(A,Vars). % only one head_vars-fact head_vars(eqo,(0,1)).
+head_literal(0,P,A,Vars):-
+    head_pred(P,A),
+    head_vars(A,Vars).
 
-% to generate only those relevant to head
-%% Picking body literals
-% Base case, always starts with the relations that bound the head variables
-{body_literal(0,att,3,Vars):var_pos(Var,Vars,2),
-    const_pos(Attr,Vars,1),
-    type_pos(Types, 2, Attr),
-    type(att,Types),
-    fixed_var_type(Var,Attr)}=2.
-
-% Generate whatever
-% Similarity joins
-{body_literal(0,sim,2,Vars)}:-
-    var_pos(Svar1, Vars, 0),
-    var_pos(Svar2, Vars, 1),
-    body_literal(0,att,3,Bvars1),
-    body_literal(0,att,3,Bvars2),
-    const_pos(Attr1, Bvars1, 1), 
-    const_pos(Attr2, Bvars, 1),
-    compatible_attr(Attr1,Attr2),
-    var_pos(Svar1, Bvars1, 2),
-    var_pos(Svar2, Bvars2, 2), Svar1 != Svar2.
-
-% Joins
-% same tuple but different attributes
-{body_literal(0,att,3,Bvars)}:-
-    body_literal(0,att,3,Bvars1),
-    const_pos(Attr1, Bvars1, 1), const_pos(Attr2, Bvars, 1),
-    var_pos(Tid1, Bvars1, 0), var_pos(Tid2, Bvars, 0), compatible_attr(Attr1,Attr2), Attr1!=Attr2,
-    var_pos(Var, Bvars, 2), var_pos(Var, Bvars1, 2).
-
-{body_literal(0,att,3,Bvars)}:-
-    body_literal(0,att,3,Bvars1),
-    const_pos(Attr1, Bvars1, 1), const_pos(Attr2, Bvars, 1),
-    var_pos(Tid1, Bvars1, 0), var_pos(Tid2, Bvars, 0), Tid1!= Tid2, compatible_attr(Attr1,Attr2),
-    var_pos(Var, Bvars, 2), var_pos(Var, Bvars1, 2).
-
+{body_literal(0,P,A,Vars)}:-
+    body_pred(P,A),
+    vars(A,Vars),
+    not bad_body(P,Vars),
+    not type_mismatch(P,Vars).
 
 %% Leon may need to check this as well
 % TODO: look into the problem here after allowing constants
-%% Leon: Original code below %%
-
-% head_literal(0,P,A,Vars):-
-%     head_pred(P,A),
-%     head_vars(A,Vars).
-
-% {body_literal(0,P,A,Vars)}:-
-%     body_pred(P,A),
-%     vars(A,Vars),
-%     not bad_body(P,Vars),
-%     not type_mismatch(P,Vars).
-
-% type_mismatch(P,Vars):-
-%     var_pos(Var,Vars,Pos),
-%     type(P,Types),
-%     pred_arg_type(P,Pos,T1),
-%     fixed_var_type(Var,T2),
-%     T1 != T2.
+type_mismatch(P,Vars):-
+    var_pos(Var,Vars,Pos),
+    type(P,Types),
+    pred_arg_type(P,Pos,T1),
+    fixed_var_type(Var,T2),
+    T1 != T2.
 
 %% THERE IS A CLAUSE IF THERE IS A HEAD LITERAL
 clause(C):-
@@ -177,75 +134,62 @@ valid_var(Rule,Var):-
 % The rule says a tuple variable Tid is connected in rule R
 % if for a variable Var occurs in head of some object rule,
 % and Var also occurs the in associated attribute body literal of Tid in the rule R
+% For object
+t_connected(R,Tid):-
+    head_var(R,Var), head_literal(R,eqo,_,Hvars),
+    var_member(Var,Hvars), body_literal(R,att,_,Bvars),  var_pos(Var, Bvars, 2), var_pos(Tid, Bvars, 0).
+
+% For value
+t_connected(R,Tid):-
+    head_var(R,Tid), head_literal(R,eqv,_,Hvars), var_member(Tid,Hvars), 
+    body_literal(R,att,_,Bvars), var_pos(Tid, Bvars, 0).
 
 % Similarity join
-connected(R,Tid,Tid1):-
-    body_literal(R,att,_,Bvars),
-    var_pos(Tid, Bvars, 0), 
-    var_pos(Var, Bvars, 2),
-    body_literal(R,att,_,Bvars1),
-    var_pos(Tid1, Bvars1, 0), var_pos(Var1, Bvars1, 2),
-    body_literal(R,sim,_,Svars), var_member(Var,Svars), var_member(Var1,Svars).
-
+t_connected(R,Tid):-
+    body_literal(R,att,_,Bvars), var_pos(Var, Bvars, 2),
+    var_pos(Tid, Bvars, 0), t_connected(R,Tid1), 
+    body_literal(R,sim,_,Svars), var_member(Var,Svars), var_member(Var1,Svars), 
+    body_literal(R,att,_,Bvars1), var_pos(Tid1, Bvars1, 0), var_pos(Var1, Bvars1, 2).
 
 % Equality join
-connected(R,Tid,Tid1):-
+t_connected(R,Tid):-
     body_literal(R,att,_,Bvars), var_pos(Var, Bvars, 2),
-    var_pos(Tid, Bvars, 0),
-    body_literal(R,att,_,Bvars1), var_pos(Tid1, Bvars1, 0), var_pos(Var, Bvars1, 2).
+    var_pos(Tid, Bvars, 0), t_connected(R,Tid1), 
+    body_literal(R,att,_,Bvars1), var_pos(Tid1, Bvars1, 0), var_pos(Var, Bvars1, 2), Tid != Tid1.
 
-connected(R,Tid,Tid1) :- connected(R,Tid,Tid2), connected(R,Tid2,Tid1).
-
-
-%% TODO: check why the following do not generate connected rule
-% connected(0,0,0) body_literal(0,att,3,(0,dtitle,2)) body_literal(0,att,3,(1,atitle,3)) 
-% body_literal(0,sim,2,(2,3)) body_literal(0,att,3,(0,did,1)) body_literal(0,att,3,(1,aid,0)) 
-% fixed_var_type(1,did,dblp) fixed_var_type(0,aid,acm)
-:- not connected(R,Tid, Tid1), body_literal(R,att,_,Bvars),
-    var_pos(Tid, Bvars, 0), body_literal(R,att,_,Bvars1),var_pos(Tid1, Bvars1, 0) .
-
-:- body_literal(C,att,3,Vars1), body_literal(C,att,3,Vars2),  
-        var_pos(Tid,Vars1,0),  var_pos(Tid,Vars2,0), const_pos(Attr1,Vars1,1), const_pos(Attr2,Vars2,1), #count{R:has_sort(R,Attr1),has_sort(R,Attr2)}<1.
-
-% % any two body literals with the same tuple id var and the same attribute cannot bind to different variables
-:- body_literal(C,att,3,Vars1), body_literal(C,att,3,Vars2),  
-        var_pos(Tid,Vars1,0),  var_pos(Tid,Vars2,0), const_pos(Attr,Vars1,1), const_pos(Attr,Vars2,1), Vars1!=Vars2.
+:- body_literal(R,att,_,Bvars), var_pos(Tid,Bvars,0), not t_connected(R,Tid).
 
 %%%%%%%%%% ER rule mining connectivity %%%%%%%%%%%%
 
-% head_connected(C,Var):-
-%     head_var(C,Var).
-% head_connected(C,Var1):-
-%     head_literal(C,_,A,_),
-%     Var1 >= A,
-%     head_connected(C,Var2),
-%     body_literal(C,_,_,Vars),
-%     var_member(Var1,Vars),
-%     var_member(Var2,Vars),
-%     Var1 != Var2.
+head_connected(C,Var):-
+    head_var(C,Var).
+head_connected(C,Var1):-
+    head_literal(C,_,A,_),
+    Var1 >= A,
+    head_connected(C,Var2),
+    body_literal(C,_,_,Vars),
+    var_member(Var1,Vars),
+    var_member(Var2,Vars),
+    Var1 != Var2.
 
 %% violated %%
-% :-
-%     head_literal(C,_,A,_),
-%     Var >= A,
-%     body_var(C,Var),
-%     not head_connected(C,Var).
-
- fixed_var_type(Var, Type) :- type(eqo, Types),
-        type_pos(Types, Pos, Type), target(R,Type,Pos), var_pos(Var, Vars, Pos), head_literal(_, eqo, _, Vars).
+:-
+    head_literal(C,_,A,_),
+    Var >= A,
+    body_var(C,Var),
+    not head_connected(C,Var).
 
 % fixing type of variable Var to Type when it occurs on head
-%%%% Leon Original code below %%%%
-% fixed_var_type(Var, Type):-
-%     head_literal(_, P, _A, Vars),
-%     var_pos(Var, Vars, Pos),
-%     type(P, Types),
-%     %% head_vars(A, Vars),
-%     type_pos(Types, Pos, Type).
+fixed_var_type(Var, Type):-
+    head_literal(_, P, _A, Vars),
+    var_pos(Var, Vars, Pos),
+    type(P, Types),
+    %% head_vars(A, Vars),
+    type_pos(Types, Pos, Type).
 
-% pred_arg_type(P, Pos, Type):-
-%     type(P, Types),
-%     type_pos(Types, Pos, Type).
+pred_arg_type(P, Pos, Type):-
+    type(P, Types),
+    type_pos(Types, Pos, Type).
 
 var_type(C, Var, Type):-
     body_literal(C,P,_,Vars),
@@ -538,106 +482,106 @@ bad_body(P, Vars):- prop(abcdef_fedcba,(P,P)), vars(_, Vars), Vars=(A,B,C,D,E,F)
 
 %% TRY TO REDUCE THE NUMBER OF RULES WITH REDUNDANT LITERALS
 
-% :-
-%     body_literal(_,P,_,(A,B)),
-%     body_literal(_,P,_,(A,C)),
-%     B!=C,
-%     singleton(B).
+:-
+    body_literal(_,P,_,(A,B)),
+    body_literal(_,P,_,(A,C)),
+    B!=C,
+    singleton(B).
 
-% :-
-%     body_literal(_,P,_,(B,A)),
-%     body_literal(_,P,_,(C,A)),
-%     B!=C,
-%     singleton(B).
+:-
+    body_literal(_,P,_,(B,A)),
+    body_literal(_,P,_,(C,A)),
+    B!=C,
+    singleton(B).
 
-% :-
-%     body_literal(_,P,_,(A,B,X)),
-%     body_literal(_,P,_,(A,B,Y)),
-%     X!=Y,
-%     singleton(X).
+:-
+    body_literal(_,P,_,(A,B,X)),
+    body_literal(_,P,_,(A,B,Y)),
+    X!=Y,
+    singleton(X).
 
-% :-
-%     body_literal(_,P,_,(A,X,B)),
-%     body_literal(_,P,_,(A,Y,B)),
-%     X!=Y,
-%     singleton(X).
+:-
+    body_literal(_,P,_,(A,X,B)),
+    body_literal(_,P,_,(A,Y,B)),
+    X!=Y,
+    singleton(X).
 
-% :-
-%     body_literal(_,P,_,(A,B,C)),
-%     body_literal(_,P,_,(A,X,Y)),
-%     B!=X,
-%     C!=Y,
-%     singleton(X),
-%     singleton(Y).
+:-
+    body_literal(_,P,_,(A,B,C)),
+    body_literal(_,P,_,(A,X,Y)),
+    B!=X,
+    C!=Y,
+    singleton(X),
+    singleton(Y).
 
-% :-
-%     body_literal(_,P,_,(B,A,C)),
-%     body_literal(_,P,_,(X,A,Y)),
-%     B!=X,
-%     C!=Y,
-%     singleton(X).
+:-
+    body_literal(_,P,_,(B,A,C)),
+    body_literal(_,P,_,(X,A,Y)),
+    B!=X,
+    C!=Y,
+    singleton(X).
 
-% :-
-%     body_literal(_,P,_,(B,C,A)),
-%     body_literal(_,P,_,(X,Y,A)),
-%     B!=X,
-%     C!=Y,
-%     singleton(X).
+:-
+    body_literal(_,P,_,(B,C,A)),
+    body_literal(_,P,_,(X,Y,A)),
+    B!=X,
+    C!=Y,
+    singleton(X).
 
-% :-
-%     body_literal(_,P,_,(X,V0,V1)),
-%     body_literal(_,P,_,(Y,V0,V1)),
-%     X!=Y,
-%     singleton(X).
+:-
+    body_literal(_,P,_,(X,V0,V1)),
+    body_literal(_,P,_,(Y,V0,V1)),
+    X!=Y,
+    singleton(X).
 
-% :-
-%     body_literal(_,P,_,(V0,V4,V3,V5)),
-%     body_literal(_,P,_,(V0,V2,V3,V1)),
-%     V4!=V2,
-%     V5!=V1,
-%     singleton(V2),
-%     singleton(V1).
+:-
+    body_literal(_,P,_,(V0,V4,V3,V5)),
+    body_literal(_,P,_,(V0,V2,V3,V1)),
+    V4!=V2,
+    V5!=V1,
+    singleton(V2),
+    singleton(V1).
 
-% :-
-%     body_literal(_,P,_,(V0,V1,V2,X)),
-%     body_literal(_,P,_,(V0,V1,V2,Y)),
-%     X!=Y,
-%     singleton(Y).
+:-
+    body_literal(_,P,_,(V0,V1,V2,X)),
+    body_literal(_,P,_,(V0,V1,V2,Y)),
+    X!=Y,
+    singleton(Y).
 
-% :-
-%     body_literal(_,P,_,(V0,V3,V4,V1)),
-%     body_literal(_,P,_,(V0,V2,V4,V1)),
-%     V3!=V2,
-%     singleton(V3).
+:-
+    body_literal(_,P,_,(V0,V3,V4,V1)),
+    body_literal(_,P,_,(V0,V2,V4,V1)),
+    V3!=V2,
+    singleton(V3).
 
-% :-
-%     body_literal(_,P,_,(V0,V4,V3,V1)),
-%     body_literal(_,P,_,(V0,V4,V2,V1)),
-%     V3!=V2,
-%     singleton(V3).
+:-
+    body_literal(_,P,_,(V0,V4,V3,V1)),
+    body_literal(_,P,_,(V0,V4,V2,V1)),
+    V3!=V2,
+    singleton(V3).
 
-% :-
-%     body_literal(_,P,_,(V0,V2,V3,V1)),
-%     body_literal(_,P,_,(V0,V5,V4,V1)),
-%     V2!=V5,
-%     V3!=V4,
-%     singleton(V5),
-%     singleton(V4).
+:-
+    body_literal(_,P,_,(V0,V2,V3,V1)),
+    body_literal(_,P,_,(V0,V5,V4,V1)),
+    V2!=V5,
+    V3!=V4,
+    singleton(V5),
+    singleton(V4).
 
-% :-
-%     body_literal(_,P,_,(V0,V3,V5,V2)),
-%     body_literal(_,P,_,(V0,V3,V4,V1)),
-%     V5!=V3,
-%     V2!=V1,
-%     singleton(V4),
-%     singleton(V1).
+:-
+    body_literal(_,P,_,(V0,V3,V5,V2)),
+    body_literal(_,P,_,(V0,V3,V4,V1)),
+    V5!=V3,
+    V2!=V1,
+    singleton(V4),
+    singleton(V1).
 
-% :-
-%     body_literal(_,P,_,(V0,V4,V3,V2)),
-%     body_literal(_,P,_,(V0,V5,V6,V1)),
-%     V4!=V5,
-%     V3!=V6,
-%     V2!=V1,
-%     singleton(V5),
-%     singleton(V6),
-%     singleton(V1).
+:-
+    body_literal(_,P,_,(V0,V4,V3,V2)),
+    body_literal(_,P,_,(V0,V5,V6,V1)),
+    V4!=V5,
+    V3!=V6,
+    V2!=V1,
+    singleton(V5),
+    singleton(V6),
+    singleton(V1).
