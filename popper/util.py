@@ -154,7 +154,13 @@ class Stats:
 
 def format_literal(literal):
     pred, args = literal
-    args = ','.join(f'V{i}' for i in args)
+    args_formated = []
+    for i in args:
+        if is_int(i):
+            args_formated.append(f'V{i}')
+        else:
+            args_formated.append(i)
+    args = ','.join(args_formated)
     return f'{pred}({args})'
 
 def format_rule(rule):
@@ -414,13 +420,27 @@ class Settings:
         # TODO: EVENTUALLY
 
         # print(directions)
-
+        # Leon: tuple of arguments (int) indexed by tuple of numbers of symbol object
+        # Leon: TODO: to add arguments of constant to cached_atom_args
+        # TODO: Think of do we actually need vars facts with number (variable) as the second argument 
+        # for 3-ary predicate, since att/3 is the only rule body predicates we have, and the second pos is a fixed constant
         self.cached_atom_args = {}
+        
         for i in range(1, self.max_arity+1):
             for args in permutations(range(0, self.max_vars), i):
                 k = tuple(clingo.Number(x) for x in args)
                 self.cached_atom_args[k] = args
-
+        
+        cached_atom_copy = self.cached_atom_args.copy()
+        # Leon: added arguments with att_name constants        
+        for x in solver.symbolic_atoms.by_signature('attr', arity=2):
+            for k, args in cached_atom_copy.items():
+                if len(k) == 3:
+                    att_const = x.symbol.arguments[0]
+                    args_sym_index = (k[0],att_const,k[2])
+                    att_tuple = (args[0], att_const.name, args[2])
+                    self.cached_atom_args[args_sym_index] = att_tuple
+        
         self.cached_literals = {}
         self.literal_inputs = {}
         self.literal_outputs = {}
@@ -433,7 +453,7 @@ class Settings:
                 head_outputs = frozenset(arg for i, arg in enumerate(head_args) if directions[head_pred][i] == '-')
                 self.literal_inputs[(head_pred, head_args)] = head_inputs
                 self.literal_outputs[(head_pred, head_args)] = head_outputs
-
+        # Leon body pred loaded from the bias file
         for pred, arity in self.body_preds:
             for k, args in self.cached_atom_args.items():
                 if len(args) != arity:
@@ -834,7 +854,6 @@ def prog_hash(prog):
 
 def remap_variables(rule):
     head, body = rule
-
     head_vars = frozenset(head.arguments) if head else frozenset()
 
 
@@ -845,9 +864,19 @@ def remap_variables(rule):
     for pred, args in body:
         new_args = []
         for var in args:
-            if var not in lookup:
-                lookup[var] = next_var
-                next_var+=1
+            if var not in lookup :
+            ## Leon Original code below comment
+            # if var not in lookup:
+            #     lookup[var] = next_var
+            #     next_var+=1
+            
+            ## added to cope with constant position
+                if is_int(var):
+                    lookup[var] = next_var
+                    next_var+=1
+                else:
+                    lookup[var] = var
+            
             new_args.append(lookup[var])
         new_atom = Literal(pred, tuple(new_args))
         new_body.append(new_atom)

@@ -34,15 +34,15 @@ head_literal(0,eqo,A,Vars):-
     head_pred(eqo,A),
     head_vars(A,Vars). % only one head_vars-fact head_vars(eqo,(0,1)).
 
+
+% Base case, always starts with the relations that bound the head variables
 % to generate only those relevant to head
 %% Picking body literals
-% Base case, always starts with the relations that bound the head variables
 {body_literal(0,att,3,Vars):var_pos(Var,Vars,2),
     const_pos(Attr,Vars,1),
     type_pos(Types, 2, Attr),
     type(att,Types),
     fixed_var_type(Var,Attr)}=2.
-
 
 % Generate whatever
 % Similarity joins
@@ -57,12 +57,12 @@ head_literal(0,eqo,A,Vars):-
     var_pos(Svar1, Bvars1, 2),
     var_pos(Svar2, Bvars2, 2), Svar1 != Svar2.
 
-%%% Leon this is very expensive [TO be OPTIMISED] %%% 
+
 % expand a body literal of a different attribute on the same tuple 
 {body_literal(0,att,3,Bvars)}:-
     body_literal(0,att,3,Bvars1),
     const_pos(Attr1, Bvars1, 1), const_pos(Attr2, Bvars, 1),
-    var_pos(Tid, Bvars1, 0), var_pos(Tid, Bvars, 0), Attr1!=Attr2. % TODO: require the expanded variable to be a new variable or add a constraint to prevent join on incompatible attributes
+    var_pos(Tid, Bvars1, 0), var_pos(Tid, Bvars, 0), Attr1!=Attr2.
 
 
 % Joins
@@ -205,27 +205,12 @@ connected(R,Tid,Tid1):-
 
 connected(R,Tid,Tid1) :- connected(R,Tid,Tid2), connected(R,Tid2,Tid1).
 
-% A variable on similarity predicate is bound in rule C if it occurs in any attribute atom (for efficiency)
-bound(C,Var) :- body_literal(C,sim,2,Vars), var_member(Var,Vars), body_literal(C,att,3,Bvars), var_pos(Var,Bvars,2).
 
-
-same_tuple_var(C,Vars1,Vars2):- body_literal(C,att,3,Vars1), body_literal(C,att,3,Vars2),  
-        var_pos(Tid,Vars1,0),  var_pos(Tid,Vars2,0).
-
-unsafe_tid_range(C,Vars1,Vars2) :- same_tuple_var(C,Vars1,Vars2), const_pos(Attr1,Vars1,1), const_pos(Attr2,Vars2,1), has_sort(R1,Attr1),has_sort(R2,Attr2), R1!=R2.
-
-
-%% TODO: check why the following do not generate connected rule
-% connected(0,0,0) body_literal(0,att,3,(0,dtitle,2)) body_literal(0,att,3,(1,atitle,3)) 
-% body_literal(0,sim,2,(2,3)) body_literal(0,att,3,(0,did,1)) body_literal(0,att,3,(1,aid,0)) 
-% fixed_var_type(1,did,dblp) fixed_var_type(0,aid,acm)
 :- not connected(R,Tid, Tid1), body_literal(R,att,_,Bvars),
     var_pos(Tid, Bvars, 0), body_literal(R,att,_,Bvars1),var_pos(Tid1, Bvars1, 0) .
 
-%:- body_literal(C,att,3,Vars1), body_literal(C,att,3,Vars2),  
- %       var_pos(Tid,Vars1,0),  var_pos(Tid,Vars2,0), const_pos(Attr1,Vars1,1), const_pos(Attr2,Vars2,1), #count{R:has_sort(R,Attr1),has_sort(R,Attr2)}<1.
 :- body_literal(C,att,3,Vars1), body_literal(C,att,3,Vars2),  
-        unsafe_tid_range(C,Vars1,Vars2).
+        var_pos(Tid,Vars1,0),  var_pos(Tid,Vars2,0), const_pos(Attr1,Vars1,1), const_pos(Attr2,Vars2,1), #count{R:has_sort(R,Attr1),has_sort(R,Attr2)}<1.
 
 % % any two body literals with the same tuple id var and the same attribute cannot bind to different variables
 :- body_literal(C,att,3,Vars1), body_literal(C,att,3,Vars2),  
@@ -235,14 +220,10 @@ unsafe_tid_range(C,Vars1,Vars2) :- same_tuple_var(C,Vars1,Vars2), const_pos(Attr
 :- body_literal(C,P,A,Vars), var_pos(Var,Vars,N), N>=A.
 
 % no occurrence of unbound sim atoms
-:- body_literal(C,sim,2,Vars), var_member(Var,Vars), not bound(C,Var).
+:- body_literal(C,sim,2,Vars), var_member(Var,Vars), #count{Bvars:body_literal(C,att,3,Bvars), var_pos(Var,Bvars,2)}<1.
 
 % no body literals join on tid and attribute values
 :- body_literal(C,att,3,Vars), var_pos(Var,Vars,0), body_literal(C,att,3,Vars1), var_pos(Var,Vars1,2).
-
-% no joins on incompatible attributes
-:- body_literal(C,att,3,Vars), var_pos(Var,Vars,2), body_literal(C,att,3,Vars1), var_pos(Var,Vars1,2), 
-        const_pos(Attr1, Vars, 1), const_pos(Attr2, Vars1, 1), not compatible_attr(Attr1,Attr2).
 
 :- body_literal(C,att,3,Vars), var_pos(Var,Vars,0), body_literal(C,sim,2,Vars1), var_member(Var,Vars1).
 
@@ -678,6 +659,3 @@ bad_body(P, Vars):- prop(abcdef_fedcba,(P,P)), vars(_, Vars), Vars=(A,B,C,D,E,F)
 %     singleton(V5),
 %     singleton(V6),
 %     singleton(V1).
-
-
-%%% to think about heuristics for generating rule body literals

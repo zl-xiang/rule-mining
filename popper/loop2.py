@@ -3,7 +3,7 @@ from collections import defaultdict
 from bitarray.util import subset, any_and, ones
 from functools import cache
 from itertools import chain, combinations, permutations
-from . util import timeout, format_rule, rule_is_recursive, prog_is_recursive, prog_has_invention, calc_prog_size, format_literal, Constraint, mdl_score, suppress_stdout_stderr, get_raw_prog, Literal, remap_variables, format_prog, is_int
+from . util import timeout, format_rule, rule_is_recursive, prog_is_recursive, prog_has_invention, calc_prog_size, format_literal, Constraint, mdl_score, suppress_stdout_stderr, get_raw_prog, Literal, remap_variables, format_prog
 from . tester import Tester
 from . bkcons import deduce_bk_cons, deduce_recalls, deduce_type_cons, deduce_non_singletons
 from . combine import Combiner
@@ -170,10 +170,9 @@ class Popper():
                 # generate a program
                 with settings.stats.duration('generate'):
                     prog = generator.get_prog()
-                    
+                    # print(prog)
                     if prog is None:
                         break
-                # print(prog)
                 settings.logger.debug(f'*** Generation finished')
                 # Leon: The function size(H) returns the **total number of literals** in the hypothesis H
                 prog_size = calc_prog_size(prog)
@@ -202,7 +201,7 @@ class Popper():
                         pos_covered, inconsistent = tester.test_prog(prog)
                         # @CH: can you explain these?
                         skipped, skip_early_neg = False, False
-                        # print(pos_covered)
+                        print(pos_covered)
                 # 
                 tp = pos_covered.count(1)
                 fn = num_pos-tp
@@ -266,8 +265,6 @@ class Popper():
                 # success_sets is set later after testing
                 # success_sets: a dictionary indexes sizes of programs that covers positive examples
                 # print(format_prog(prog), tp, success_sets, settings.noisy)
-                # tp > 0 
-                settings.logger.debug(f'success sets:{success_sets}, pos_covered: {pos_covered}')
                 if tp > 0 and success_sets and (not settings.noisy or (settings.noisy and fp==0)):
                     # print('check subsumption')
                     with settings.stats.duration('check subsumed and covers_too_few'):
@@ -299,9 +296,6 @@ class Popper():
                     # only applies to non-recursive and non-PI programs
                     subsumed_progs = []
                     with settings.stats.duration('find most general subsumed/covers_too_few'):
-                        # is it kinda of searching for rules that are equivalent to r_curr but with better size here
-                        # I guess not neccessarily, could be that a rule found here corresponds to different collection in success set?
-                        # but is there aniti-monontonicity? lesser literals in rule body derive more atoms if strictly proceeds, 
                         subsumed_progs = self.subsumed_or_covers_too_few(prog, seen=set())
                     pruned_more_general = len(subsumed_progs) > 0
                     # Leon If no generalisation are found
@@ -1248,7 +1242,6 @@ class Popper():
             # Leon: check this new generalisation is subsumed by any successed program
             subsumed = sub_prog_pos_covered in success_sets or any(subset(sub_prog_pos_covered, xs) for xs in success_sets)
             subsumed_by_two = not subsumed and self.check_subsumed_by_two(sub_prog_pos_covered, new_prog_size)
-            # very hacky checking here
             covers_too_few = not subsumed and not subsumed_by_two and self.check_covers_too_few(new_prog_size, sub_prog_pos_covered)
             
             if not (subsumed or subsumed_by_two or covers_too_few):
@@ -1278,24 +1271,13 @@ class Popper():
         head, body = rule
         _head_pred, head_args = head
         head_arity = len(head_args)
-        body_vars = frozenset(x for literal in body for x in literal.arguments if  is_int(x) and x >= head_arity)
+        body_vars = frozenset(x for literal in body for x in literal.arguments if x >= head_arity)
         subset = range(head_arity, self.settings.max_vars)
         for xs in permutations(subset, len(body_vars)):
             xs = head_args + xs
             new_body = []
             for pred, args in body:
-                # new_args = tuple(xs[arg] for arg in args)
-                # new_literal = (pred, new_args)
-                # new_body.append(new_literal)
-                new_args = list()
-                # first head_arity of variables of xs are head variables if body_literal is the range of head vars
-                # so here only the variables that are above head_arity is changed
-                for arg in args:
-                    if is_int(arg):
-                        new_args.append(xs[arg]) 
-                    else:
-                        new_args.append(arg)
-                new_args = tuple(new_args)
+                new_args = tuple(xs[arg] for arg in args)
                 new_literal = (pred, new_args)
                 new_body.append(new_literal)
             yield frozenset(new_body)
@@ -1623,7 +1605,7 @@ def get_bk_cons(settings, tester):
 
 
         type_cons = tuple(deduce_type_cons(settings))
-        # print(type_cons)
+        print(type_cons)
         if settings.showcons:
             for x in type_cons:
                 print('type_con', x)
@@ -1757,16 +1739,6 @@ def rule_subsumes(r1, r2):
     if h1 != None and h2 == None:
         return False
     return b1.issubset(b2)
-
-def atoms_subsume(c1:set,c2:set)-> bool:
-    # get variables of c1 and c2
-    # create mapping dict from var(c1) to var(c2)
-    # replace variables of c1 to c2
-    # check set containment first
-    # otherwise, check attribute joins containment
-    # check similarity containment
-    # check on the same pair of tuples attribute join implications on similarity
-    pass
 
 # P1 subsumes P2 if for every rule R2 in P2 there is a rule R1 in P1 such that R1 subsumes R2
 def theory_subsumes(prog1, prog2):

@@ -4,14 +4,21 @@ import pkg_resources
 from janus_swi import query_once, consult
 from functools import cache
 from contextlib import contextmanager
-from . util import order_prog, prog_is_recursive, rule_is_recursive, calc_rule_size, calc_prog_size, prog_hash, format_rule, format_literal, Literal
+from . util import order_prog, prog_is_recursive, rule_is_recursive, calc_rule_size, calc_prog_size, prog_hash, format_rule, format_literal, Literal, is_int
 from bitarray import bitarray, frozenbitarray
 from bitarray.util import ones
 from collections import defaultdict
 from itertools import product
 
 def format_literal_janus(literal):
-    args = ','.join(f'_V{i}' for i in literal.arguments)
+    args = []
+    for i in literal.arguments:
+        if is_int(i):
+            args.append(f'_V{i}')
+        else:
+            args.append(i)
+    # args = ','.join(f'_V{i}' for i in literal.arguments)
+    args = ','.join(args)
     return f'{literal.predicate}({args})'
 
 def bool_query(query):
@@ -66,7 +73,8 @@ class Tester():
 
     def janus_clear_cache(self):
         return query_once('retractall(janus:py_call_cache(_String,_Input,_TV,_M,_Goal,_Dict,_Truth,_OutVars))')
-
+    
+    # Leon: parsing a clingo symbol object rule to string in a normal program syntax
     def parse_single_rule(self, prog):
         rule = next(iter(prog))
         head, ordered_body = self.settings.order_rule(rule)
@@ -118,7 +126,6 @@ class Tester():
             if len(prog) == 1:
 
                 atom_str, body_str = self.parse_single_rule(prog)
-
                 q = f'findall(_ID, (pos_index(_ID, {atom_str}), ({body_str} ->  true)), S)'
                 pos_covered = query_once(q)['S']
                 inconsistent = False
@@ -140,7 +147,6 @@ class Tester():
             ### Leon: without recursion in the setting, test runs here
             # Leon: parsing generated rule to prolog program
             atom_str, body_str = self.parse_single_rule(prog)
-            # print(atom_str,body_str)
             # Leon: collect all positive example IDs as list S provided there exists a rule body proving it is true
             q = f'findall(_ID, (pos_index(_ID, {atom_str}),({body_str}->  true)), S)'
             pos_covered = query_once(q)['S']
@@ -161,7 +167,7 @@ class Tester():
                     # | is a union operator
                     head, ordered_body = self.settings.order_rule((None, body | self.neg_literal_set))
                     q = ','.join(format_literal_janus(literal) for literal in ordered_body)
-                    print(q)
+                    # print(q)
                 inconsistent = bool_query(q)
 
         self.cached_pos_covered[hash(prog)] = pos_covered

@@ -60,7 +60,6 @@ class Generator:
         # ADD VARS, DIRECTIONS, AND TYPES
         head_arity = len(settings.head_literal.arguments)
         # encoding.append(f'head_vars({head_arity}, {tuple(range(head_arity))}).')
-        print(tuple(range(head_arity)))
         h_args_str = ','.join(map(str, range(head_arity)))
         encoding.append(f'head_vars({head_arity}, ({h_args_str})).')
         arities = set(a for p, a in self.settings.body_preds)
@@ -71,11 +70,13 @@ class Generator:
             for xs in permutations(range(settings.max_vars), arity):
                 vars_list.append((arity, tuple(xs)))
                 xs_str = ', '.join(str(x) for x in xs)
-                encoding.append(f'vars({arity}, ({xs_str})).')
-                for i, x in enumerate(xs):
-                    encoding.append(f'var_pos({x}, ({xs_str}), {i}).')
-                sorted_xs_str = ', '.join(str(x) for x in tuple(sorted(xs)))
-                encoding.append(f'ordered_vars(({xs_str}), ({sorted_xs_str})).')
+                # !! Leon too restricted?
+                if arity!=3:
+                    encoding.append(f'vars({arity}, ({xs_str})).')
+                    for i, x in enumerate(xs):
+                        encoding.append(f'var_pos({x}, ({xs_str}), {i}).')
+                    sorted_xs_str = ', '.join(str(x) for x in tuple(sorted(xs)))
+                    encoding.append(f'ordered_vars(({xs_str}), ({sorted_xs_str})).')
                 # encoding.append(f'ordered_vars({tuple(xs)},{tuple(sorted(xs))}).')
                 
         ## Leon: added to create vars with fixed-position constants from attrbute atoms from a schema in bias file
@@ -98,7 +99,7 @@ class Generator:
         for arity, xs in vars_list:
             for att_tup in schema_attr_tups:
                  # if the attribute is not a tid
-                if arity == 3 and att_tup[-1]!= 0:
+                if arity == 3 and int(att_tup[-1])!= 0:
                         xs_vars = sorted((xs[0],xs[2]))
                         xs = list(xs)
                         xs[1] = att_tup[0]
@@ -158,7 +159,7 @@ class Generator:
 
         
         order_cons.append(f'gap(({xs1}),V):- gap_(({xs1}), _), #max' + '{X :gap_((' + xs1 + '), X)} == V.')
-
+        
         order_cons.append(f':- appears(({xs1})), gap(({xs1}), V), not seen_lower(({xs1}),V), not head_var(_,V).')
 
         # print('\n'.join(order_cons))
@@ -230,6 +231,7 @@ class Generator:
             solver = clingo.Control(['--heuristic=Domain','-Wnone'])
 
         solver.configuration.solve.models = 0
+        # TO REMOVE
         print(encoding)
         solver.add('base', [], encoding)
         solver.ground([('base', [])])
@@ -242,6 +244,8 @@ class Generator:
     def get_prog(self):
         if self.handle is None:
             self.handle = iter(self.solver.solve(yield_ = True))
+        # TO REMOVE
+        print('*** get next model')
         self.model = next(self.handle, None)
         if self.model is None:
             return None
@@ -249,12 +253,16 @@ class Generator:
         return self.parse_model_single_rule(self.model.symbols(shown = True))
 
     def parse_model_single_rule(self, model):
+        # TO REMOVE
+        print('*** parse_model_single_rule')
         settings = self.settings
         head = settings.head_literal
         body = set()
         cached_literals = settings.cached_literals
+        # Leon: Fixed atoms of body_literals on vars position may contain constants failed to parse
         for atom in model:
             args = atom.arguments
+            # pred: arg[1], tuple: vars
             body.add(cached_literals[args[1].name, tuple(args[3].arguments)])
         rule = head, frozenset(body)
         return frozenset({rule})
@@ -268,7 +276,7 @@ class Generator:
 
     def constrain(self, tmp_new_cons):
         new_ground_cons = set()
-
+        # new_ground_cons_typed = {}
         for xs in tmp_new_cons:
             con_type = xs[0]
             con_prog = xs[1]
@@ -280,16 +288,32 @@ class Generator:
                 # print('gen', con_type)
                 ground_rules2 = tuple(self.build_generalisation_constraint3(con_prog, con_size))
                 new_ground_cons.update(ground_rules2)
+                # if int(con_type) in new_ground_cons_typed:
+                #     new_ground_cons_typed[int(con_type)].update(ground_rules2)
+                # else:
+                #    new_ground_cons_typed[int(con_type)] =  set()
+                #    new_ground_cons_typed[int(con_type)].update(ground_rules2)
             elif con_type == Constraint.SPECIALISATION:
                 con_size = None
                 if self.settings.noisy and len(xs)>2:
                     con_size = xs[2]
                 ground_rules2 = tuple(self.build_specialisation_constraint3(con_prog, con_size))
+                # if int(con_type) in new_ground_cons_typed:
+                #     new_ground_cons_typed[int(con_type)].update(ground_rules2)
+                # else:
+                #    new_ground_cons_typed[int(con_type)] =  set()
+                #    new_ground_cons_typed[int(con_type)].update(ground_rules2)              
                 new_ground_cons.update(ground_rules2)
             elif con_type == Constraint.UNSAT:
                 cons_ = self.unsat_constraint2(con_prog)
+                # if int(con_type) in new_ground_cons_typed:
+                #     new_ground_cons_typed[int(con_type)].update(cons_)
+                # else:
+                #    new_ground_cons_typed[int(con_type)] =  set()
+                #    new_ground_cons_typed[int(con_type)].update(cons_)            
                 new_ground_cons.update(cons_)
-
+        # TO REMOVE        
+        # [print(i,c) for i,c in new_ground_cons_typed.items()]
         tmp = self.model.context.add_nogood
         cached_clingo_atoms = self.cached_clingo_atoms
 
@@ -311,13 +335,18 @@ class Generator:
         # if no types, remap variables
         if len(self.settings.body_types) == 0:
             _, body = remap_variables((None, body))
-
+       
         # assignments = self.find_deep_bindings4(body)
         assignments = self.find_deep_bindings42(body)
+        # [print(a) for a in assignments] 
         for assignment in assignments:
             rule = []
             for pred, args in body:
-                args2 = tuple(assignment[x] for x in args)
+                
+                if len(args) == 3 and str(pred) == 'att':
+                    args2 = (assignment[args[0]],args[1],assignment[args[2]])
+                else:
+                    args2 = tuple(assignment[x] for x in args)
                 rule.append((True, 'body_literal', (0, pred, len(args), args2)))
 
             yield frozenset(rule)
@@ -334,6 +363,7 @@ class Generator:
     def build_specialisation_constraint3(self, prog, size=None):
         rule = tuple(prog)[0]
         if not size:
+            # print('22222')
             yield from self.find_variants(rule)
             return
 
@@ -341,19 +371,30 @@ class Generator:
             body = list(body)
             body.append((True, 'program_size_at_least', (size,)))
             yield frozenset(body)
-
+    # Leon: find isomorphic rules
     def find_variants(self, rule, max_rule_vars=False):
         head, body = rule
-        body_vars = frozenset(x for literal in body for x in literal.arguments if x >= len(head.arguments))
+        ## Leon: conditions added, if x is int
+        body_vars = frozenset(x for literal in body for x in literal.arguments if is_int(x) and x >= len(head.arguments))
         if max_rule_vars:
             subset = range(len(head.arguments), len(body_vars | set(head.arguments)))
         else:
             subset = range(len(head.arguments), self.settings.max_vars)
-        for xs in permutations(subset, len(body_vars)):
-            xs = head.arguments + xs
+        # subset = rang(2,max_vars)
+        for xs in permutations(subset, len(body_vars)): # range from the number greater than head arity (the numbers to be taken as body vars)
+            xs = head.arguments + xs # 
             new_body = []
             for pred, args in body:
-                new_args = tuple(xs[arg] for arg in args)
+                # if pred == 'att':
+                new_args = list()
+                # first head_arity of variables of xs are head variables if body_literal is the range of head vars
+                # so here only the variables that are above head_arity is changed
+                for arg in args:
+                    if is_int(arg):
+                        new_args.append(xs[arg]) 
+                    else:
+                        new_args.append(arg)
+                new_args = tuple(new_args)
                 new_literal = (True, 'body_literal', (0, pred, len(new_args), new_args))
                 new_body.append(new_literal)
             yield frozenset(new_body)
@@ -438,13 +479,14 @@ class Generator:
         
         for pred, args in body:
             for i, x in enumerate(args):
-                body_vars.add(x)
+                if is_int(str(x)):
+                    body_vars.add(x)
                 if x in head_vars:
                     continue
                 if pred in body_types:
                     for bt in body_types[pred]:
                         var_type_lookup[x] = [bt[i]] if x not in var_type_lookup else var_type_lookup[x] + [bt[i]]
-
+        var_type_lookup = {k:set(v) for k,v in var_type_lookup.items()}
         # prohibit bad type matchings
         bad_type_matching = set()
         # Leon: body vars matching with head vars to keep types of vars occur in both head and body consistent
@@ -492,8 +534,13 @@ def remap_variables(rule):
         new_args = []
         for var in args:
             if var not in lookup:
-                lookup[var] = next_var
-                next_var+=1
+                if is_int(var):
+                    lookup[var] = next_var
+                    next_var+=1
+                else:
+                    lookup[var] = var
+                # lookup[var] = next_var
+                # next_var+=1
             new_args.append(lookup[var])
         new_atom = Literal(pred, tuple(new_args))
         new_body.add(new_atom)

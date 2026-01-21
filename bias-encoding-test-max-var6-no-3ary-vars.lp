@@ -1,3 +1,4 @@
+(':- clause(C), #count{V : var_type(C, V,tid)} > 4.', ':- clause(C), #count{V : var_type(C, V,attr)} > 4.')
 %% ##################################################
 %% THIS FILE CONTAINS THE ASP PROGRAM GENERATOR, CALLED ALAN
 %% ##################################################
@@ -6,9 +7,7 @@
 #defined type/2.
 #defined non_datalog/0.
 
-%#show body_literal/4.
-#show gap/2.
-#show gap_/2.
+#show body_literal/4.
 
 singleton(V):-
     var(V),
@@ -45,7 +44,6 @@ head_literal(0,eqo,A,Vars):-
     type(att,Types),
     fixed_var_type(Var,Attr)}=2.
 
-
 % Generate whatever
 % Similarity joins
 {body_literal(0,sim,2,Vars)}:-
@@ -59,12 +57,12 @@ head_literal(0,eqo,A,Vars):-
     var_pos(Svar1, Bvars1, 2),
     var_pos(Svar2, Bvars2, 2), Svar1 != Svar2.
 
-%%% Leon this is very expensive [TO be OPTIMISED] %%% 
+
 % expand a body literal of a different attribute on the same tuple 
 {body_literal(0,att,3,Bvars)}:-
     body_literal(0,att,3,Bvars1),
     const_pos(Attr1, Bvars1, 1), const_pos(Attr2, Bvars, 1),
-    var_pos(Tid, Bvars1, 0), var_pos(Tid, Bvars, 0), Attr1!=Attr2. % TODO: require the expanded variable to be a new variable or add a constraint to prevent join on incompatible attributes
+    var_pos(Tid, Bvars1, 0), var_pos(Tid, Bvars, 0), Attr1!=Attr2.
 
 
 % Joins
@@ -207,15 +205,6 @@ connected(R,Tid,Tid1):-
 
 connected(R,Tid,Tid1) :- connected(R,Tid,Tid2), connected(R,Tid2,Tid1).
 
-% A variable on similarity predicate is bound in rule C if it occurs in any attribute atom (for efficiency)
-bound(C,Var) :- body_literal(C,sim,2,Vars), var_member(Var,Vars), body_literal(C,att,3,Bvars), var_pos(Var,Bvars,2).
-
-
-same_tuple_var(C,Vars1,Vars2):- body_literal(C,att,3,Vars1), body_literal(C,att,3,Vars2),  
-        var_pos(Tid,Vars1,0),  var_pos(Tid,Vars2,0).
-
-unsafe_tid_range(C,Vars1,Vars2) :- same_tuple_var(C,Vars1,Vars2), const_pos(Attr1,Vars1,1), const_pos(Attr2,Vars2,1), has_sort(R1,Attr1),has_sort(R2,Attr2), R1!=R2.
-
 
 %% TODO: check why the following do not generate connected rule
 % connected(0,0,0) body_literal(0,att,3,(0,dtitle,2)) body_literal(0,att,3,(1,atitle,3)) 
@@ -224,10 +213,8 @@ unsafe_tid_range(C,Vars1,Vars2) :- same_tuple_var(C,Vars1,Vars2), const_pos(Attr
 :- not connected(R,Tid, Tid1), body_literal(R,att,_,Bvars),
     var_pos(Tid, Bvars, 0), body_literal(R,att,_,Bvars1),var_pos(Tid1, Bvars1, 0) .
 
-%:- body_literal(C,att,3,Vars1), body_literal(C,att,3,Vars2),  
- %       var_pos(Tid,Vars1,0),  var_pos(Tid,Vars2,0), const_pos(Attr1,Vars1,1), const_pos(Attr2,Vars2,1), #count{R:has_sort(R,Attr1),has_sort(R,Attr2)}<1.
 :- body_literal(C,att,3,Vars1), body_literal(C,att,3,Vars2),  
-        unsafe_tid_range(C,Vars1,Vars2).
+        var_pos(Tid,Vars1,0),  var_pos(Tid,Vars2,0), const_pos(Attr1,Vars1,1), const_pos(Attr2,Vars2,1), #count{R:has_sort(R,Attr1),has_sort(R,Attr2)}<1.
 
 % % any two body literals with the same tuple id var and the same attribute cannot bind to different variables
 :- body_literal(C,att,3,Vars1), body_literal(C,att,3,Vars2),  
@@ -237,14 +224,10 @@ unsafe_tid_range(C,Vars1,Vars2) :- same_tuple_var(C,Vars1,Vars2), const_pos(Attr
 :- body_literal(C,P,A,Vars), var_pos(Var,Vars,N), N>=A.
 
 % no occurrence of unbound sim atoms
-:- body_literal(C,sim,2,Vars), var_member(Var,Vars), not bound(C,Var).
+:- body_literal(C,sim,2,Vars), var_member(Var,Vars), #count{Bvars:body_literal(C,att,3,Bvars), var_pos(Var,Bvars,2)}<1.
 
 % no body literals join on tid and attribute values
 :- body_literal(C,att,3,Vars), var_pos(Var,Vars,0), body_literal(C,att,3,Vars1), var_pos(Var,Vars1,2).
-
-% no joins on incompatible attributes
-:- body_literal(C,att,3,Vars), var_pos(Var,Vars,2), body_literal(C,att,3,Vars1), var_pos(Var,Vars1,2), 
-        const_pos(Attr1, Vars, 1), const_pos(Attr2, Vars1, 1), not compatible_attr(Attr1,Attr2).
 
 :- body_literal(C,att,3,Vars), var_pos(Var,Vars,0), body_literal(C,sim,2,Vars1), var_member(Var,Vars1).
 
@@ -680,9 +663,6 @@ bad_body(P, Vars):- prop(abcdef_fedcba,(P,P)), vars(_, Vars), Vars=(A,B,C,D,E,F)
 %     singleton(V5),
 %     singleton(V6),
 %     singleton(V1).
-
-
-%%% to think about heuristics for generating rule body literals
 % schema info
 schema(dblp_acm).
 
@@ -715,7 +695,7 @@ compatible_attr(X,X) :- compatible_attr(X,_).
 r(dblp_acm,dblp,6).
 r(dblp_acm,acm,6).
 
-
+%has_sort(dblp,tid).
 has_sort(dblp,did).
 has_sort(dblp,dtitle).
 has_sort(dblp,dauthors).
@@ -723,7 +703,7 @@ has_sort(dblp,dvenue).
 has_sort(dblp,dyear).  
 
 
-
+%has_sort(acm,tid).
 has_sort(acm,aid).
 has_sort(acm,atitle).
 has_sort(acm,aauthors).
@@ -750,16 +730,26 @@ const(att,2).
 % type(sim,(dtitle,atitle)).
 
 {type(eqo,(Aname1,Aname2));type(sim,(Aname1,Aname2))}=2 :- compatible_attr(Aname1,Aname2).
+% :- compatible_attr(Aname1,Aname2).
 
+% type(att,(d_tid,attr,did)).
+% type(att,(a_tid,attr,aid)).
+% type(att,(d_tid,attr,dtitle)).
+% type(att,(a_tid,attr,atitle)).
 
 % shall tid be a unified attribute?
 type(att,(tid,attr,Aname)):- attr(Aname,_), Aname!= tid.
+% type(R,(tid)) :- r(_,R,_).
 type(range,(tid,relation)).
+
+
+% type(dblp,(d_tid)).
+% type(acm,(a_tid)).
 
 target(dblp,did,0).
 target(acm,aid,1).
 
-% 
+
 
 
 
@@ -887,6 +877,11 @@ vars(2, (5, 4)).
 var_pos(5, (5, 4), 0).
 var_pos(4, (5, 4), 1).
 ordered_vars((5, 4), (4, 5)).
+vars(3, (0, tid, 2)).
+var_pos(0, (0, tid, 2), 0).
+const_pos(tid, (0, tid, 2), 1).
+var_pos(2, (0, tid, 2), 2).
+ordered_vars((0, tid, 2),(0, tid, 2)).
 vars(3, (0, did, 2)).
 var_pos(0, (0, did, 2), 0).
 const_pos(did, (0, did, 2), 1).
@@ -937,6 +932,11 @@ var_pos(0, (0, ayear, 2), 0).
 const_pos(ayear, (0, ayear, 2), 1).
 var_pos(2, (0, ayear, 2), 2).
 ordered_vars((0, ayear, 2),(0, ayear, 2)).
+vars(3, (0, tid, 3)).
+var_pos(0, (0, tid, 3), 0).
+const_pos(tid, (0, tid, 3), 1).
+var_pos(3, (0, tid, 3), 2).
+ordered_vars((0, tid, 3),(0, tid, 3)).
 vars(3, (0, did, 3)).
 var_pos(0, (0, did, 3), 0).
 const_pos(did, (0, did, 3), 1).
@@ -987,6 +987,11 @@ var_pos(0, (0, ayear, 3), 0).
 const_pos(ayear, (0, ayear, 3), 1).
 var_pos(3, (0, ayear, 3), 2).
 ordered_vars((0, ayear, 3),(0, ayear, 3)).
+vars(3, (0, tid, 4)).
+var_pos(0, (0, tid, 4), 0).
+const_pos(tid, (0, tid, 4), 1).
+var_pos(4, (0, tid, 4), 2).
+ordered_vars((0, tid, 4),(0, tid, 4)).
 vars(3, (0, did, 4)).
 var_pos(0, (0, did, 4), 0).
 const_pos(did, (0, did, 4), 1).
@@ -1037,6 +1042,11 @@ var_pos(0, (0, ayear, 4), 0).
 const_pos(ayear, (0, ayear, 4), 1).
 var_pos(4, (0, ayear, 4), 2).
 ordered_vars((0, ayear, 4),(0, ayear, 4)).
+vars(3, (0, tid, 5)).
+var_pos(0, (0, tid, 5), 0).
+const_pos(tid, (0, tid, 5), 1).
+var_pos(5, (0, tid, 5), 2).
+ordered_vars((0, tid, 5),(0, tid, 5)).
 vars(3, (0, did, 5)).
 var_pos(0, (0, did, 5), 0).
 const_pos(did, (0, did, 5), 1).
@@ -1087,6 +1097,11 @@ var_pos(0, (0, ayear, 5), 0).
 const_pos(ayear, (0, ayear, 5), 1).
 var_pos(5, (0, ayear, 5), 2).
 ordered_vars((0, ayear, 5),(0, ayear, 5)).
+vars(3, (0, tid, 1)).
+var_pos(0, (0, tid, 1), 0).
+const_pos(tid, (0, tid, 1), 1).
+var_pos(1, (0, tid, 1), 2).
+ordered_vars((0, tid, 1),(0, tid, 1)).
 vars(3, (0, did, 1)).
 var_pos(0, (0, did, 1), 0).
 const_pos(did, (0, did, 1), 1).
@@ -1137,6 +1152,11 @@ var_pos(0, (0, ayear, 1), 0).
 const_pos(ayear, (0, ayear, 1), 1).
 var_pos(1, (0, ayear, 1), 2).
 ordered_vars((0, ayear, 1),(0, ayear, 1)).
+vars(3, (0, tid, 3)).
+var_pos(0, (0, tid, 3), 0).
+const_pos(tid, (0, tid, 3), 1).
+var_pos(3, (0, tid, 3), 2).
+ordered_vars((0, tid, 3),(0, tid, 3)).
 vars(3, (0, did, 3)).
 var_pos(0, (0, did, 3), 0).
 const_pos(did, (0, did, 3), 1).
@@ -1187,6 +1207,11 @@ var_pos(0, (0, ayear, 3), 0).
 const_pos(ayear, (0, ayear, 3), 1).
 var_pos(3, (0, ayear, 3), 2).
 ordered_vars((0, ayear, 3),(0, ayear, 3)).
+vars(3, (0, tid, 4)).
+var_pos(0, (0, tid, 4), 0).
+const_pos(tid, (0, tid, 4), 1).
+var_pos(4, (0, tid, 4), 2).
+ordered_vars((0, tid, 4),(0, tid, 4)).
 vars(3, (0, did, 4)).
 var_pos(0, (0, did, 4), 0).
 const_pos(did, (0, did, 4), 1).
@@ -1237,6 +1262,11 @@ var_pos(0, (0, ayear, 4), 0).
 const_pos(ayear, (0, ayear, 4), 1).
 var_pos(4, (0, ayear, 4), 2).
 ordered_vars((0, ayear, 4),(0, ayear, 4)).
+vars(3, (0, tid, 5)).
+var_pos(0, (0, tid, 5), 0).
+const_pos(tid, (0, tid, 5), 1).
+var_pos(5, (0, tid, 5), 2).
+ordered_vars((0, tid, 5),(0, tid, 5)).
 vars(3, (0, did, 5)).
 var_pos(0, (0, did, 5), 0).
 const_pos(did, (0, did, 5), 1).
@@ -1287,6 +1317,11 @@ var_pos(0, (0, ayear, 5), 0).
 const_pos(ayear, (0, ayear, 5), 1).
 var_pos(5, (0, ayear, 5), 2).
 ordered_vars((0, ayear, 5),(0, ayear, 5)).
+vars(3, (0, tid, 1)).
+var_pos(0, (0, tid, 1), 0).
+const_pos(tid, (0, tid, 1), 1).
+var_pos(1, (0, tid, 1), 2).
+ordered_vars((0, tid, 1),(0, tid, 1)).
 vars(3, (0, did, 1)).
 var_pos(0, (0, did, 1), 0).
 const_pos(did, (0, did, 1), 1).
@@ -1337,6 +1372,11 @@ var_pos(0, (0, ayear, 1), 0).
 const_pos(ayear, (0, ayear, 1), 1).
 var_pos(1, (0, ayear, 1), 2).
 ordered_vars((0, ayear, 1),(0, ayear, 1)).
+vars(3, (0, tid, 2)).
+var_pos(0, (0, tid, 2), 0).
+const_pos(tid, (0, tid, 2), 1).
+var_pos(2, (0, tid, 2), 2).
+ordered_vars((0, tid, 2),(0, tid, 2)).
 vars(3, (0, did, 2)).
 var_pos(0, (0, did, 2), 0).
 const_pos(did, (0, did, 2), 1).
@@ -1387,6 +1427,11 @@ var_pos(0, (0, ayear, 2), 0).
 const_pos(ayear, (0, ayear, 2), 1).
 var_pos(2, (0, ayear, 2), 2).
 ordered_vars((0, ayear, 2),(0, ayear, 2)).
+vars(3, (0, tid, 4)).
+var_pos(0, (0, tid, 4), 0).
+const_pos(tid, (0, tid, 4), 1).
+var_pos(4, (0, tid, 4), 2).
+ordered_vars((0, tid, 4),(0, tid, 4)).
 vars(3, (0, did, 4)).
 var_pos(0, (0, did, 4), 0).
 const_pos(did, (0, did, 4), 1).
@@ -1437,6 +1482,11 @@ var_pos(0, (0, ayear, 4), 0).
 const_pos(ayear, (0, ayear, 4), 1).
 var_pos(4, (0, ayear, 4), 2).
 ordered_vars((0, ayear, 4),(0, ayear, 4)).
+vars(3, (0, tid, 5)).
+var_pos(0, (0, tid, 5), 0).
+const_pos(tid, (0, tid, 5), 1).
+var_pos(5, (0, tid, 5), 2).
+ordered_vars((0, tid, 5),(0, tid, 5)).
 vars(3, (0, did, 5)).
 var_pos(0, (0, did, 5), 0).
 const_pos(did, (0, did, 5), 1).
@@ -1487,6 +1537,11 @@ var_pos(0, (0, ayear, 5), 0).
 const_pos(ayear, (0, ayear, 5), 1).
 var_pos(5, (0, ayear, 5), 2).
 ordered_vars((0, ayear, 5),(0, ayear, 5)).
+vars(3, (0, tid, 1)).
+var_pos(0, (0, tid, 1), 0).
+const_pos(tid, (0, tid, 1), 1).
+var_pos(1, (0, tid, 1), 2).
+ordered_vars((0, tid, 1),(0, tid, 1)).
 vars(3, (0, did, 1)).
 var_pos(0, (0, did, 1), 0).
 const_pos(did, (0, did, 1), 1).
@@ -1537,6 +1592,11 @@ var_pos(0, (0, ayear, 1), 0).
 const_pos(ayear, (0, ayear, 1), 1).
 var_pos(1, (0, ayear, 1), 2).
 ordered_vars((0, ayear, 1),(0, ayear, 1)).
+vars(3, (0, tid, 2)).
+var_pos(0, (0, tid, 2), 0).
+const_pos(tid, (0, tid, 2), 1).
+var_pos(2, (0, tid, 2), 2).
+ordered_vars((0, tid, 2),(0, tid, 2)).
 vars(3, (0, did, 2)).
 var_pos(0, (0, did, 2), 0).
 const_pos(did, (0, did, 2), 1).
@@ -1587,6 +1647,11 @@ var_pos(0, (0, ayear, 2), 0).
 const_pos(ayear, (0, ayear, 2), 1).
 var_pos(2, (0, ayear, 2), 2).
 ordered_vars((0, ayear, 2),(0, ayear, 2)).
+vars(3, (0, tid, 3)).
+var_pos(0, (0, tid, 3), 0).
+const_pos(tid, (0, tid, 3), 1).
+var_pos(3, (0, tid, 3), 2).
+ordered_vars((0, tid, 3),(0, tid, 3)).
 vars(3, (0, did, 3)).
 var_pos(0, (0, did, 3), 0).
 const_pos(did, (0, did, 3), 1).
@@ -1637,6 +1702,11 @@ var_pos(0, (0, ayear, 3), 0).
 const_pos(ayear, (0, ayear, 3), 1).
 var_pos(3, (0, ayear, 3), 2).
 ordered_vars((0, ayear, 3),(0, ayear, 3)).
+vars(3, (0, tid, 5)).
+var_pos(0, (0, tid, 5), 0).
+const_pos(tid, (0, tid, 5), 1).
+var_pos(5, (0, tid, 5), 2).
+ordered_vars((0, tid, 5),(0, tid, 5)).
 vars(3, (0, did, 5)).
 var_pos(0, (0, did, 5), 0).
 const_pos(did, (0, did, 5), 1).
@@ -1687,6 +1757,11 @@ var_pos(0, (0, ayear, 5), 0).
 const_pos(ayear, (0, ayear, 5), 1).
 var_pos(5, (0, ayear, 5), 2).
 ordered_vars((0, ayear, 5),(0, ayear, 5)).
+vars(3, (0, tid, 1)).
+var_pos(0, (0, tid, 1), 0).
+const_pos(tid, (0, tid, 1), 1).
+var_pos(1, (0, tid, 1), 2).
+ordered_vars((0, tid, 1),(0, tid, 1)).
 vars(3, (0, did, 1)).
 var_pos(0, (0, did, 1), 0).
 const_pos(did, (0, did, 1), 1).
@@ -1737,6 +1812,11 @@ var_pos(0, (0, ayear, 1), 0).
 const_pos(ayear, (0, ayear, 1), 1).
 var_pos(1, (0, ayear, 1), 2).
 ordered_vars((0, ayear, 1),(0, ayear, 1)).
+vars(3, (0, tid, 2)).
+var_pos(0, (0, tid, 2), 0).
+const_pos(tid, (0, tid, 2), 1).
+var_pos(2, (0, tid, 2), 2).
+ordered_vars((0, tid, 2),(0, tid, 2)).
 vars(3, (0, did, 2)).
 var_pos(0, (0, did, 2), 0).
 const_pos(did, (0, did, 2), 1).
@@ -1787,6 +1867,11 @@ var_pos(0, (0, ayear, 2), 0).
 const_pos(ayear, (0, ayear, 2), 1).
 var_pos(2, (0, ayear, 2), 2).
 ordered_vars((0, ayear, 2),(0, ayear, 2)).
+vars(3, (0, tid, 3)).
+var_pos(0, (0, tid, 3), 0).
+const_pos(tid, (0, tid, 3), 1).
+var_pos(3, (0, tid, 3), 2).
+ordered_vars((0, tid, 3),(0, tid, 3)).
 vars(3, (0, did, 3)).
 var_pos(0, (0, did, 3), 0).
 const_pos(did, (0, did, 3), 1).
@@ -1837,6 +1922,11 @@ var_pos(0, (0, ayear, 3), 0).
 const_pos(ayear, (0, ayear, 3), 1).
 var_pos(3, (0, ayear, 3), 2).
 ordered_vars((0, ayear, 3),(0, ayear, 3)).
+vars(3, (0, tid, 4)).
+var_pos(0, (0, tid, 4), 0).
+const_pos(tid, (0, tid, 4), 1).
+var_pos(4, (0, tid, 4), 2).
+ordered_vars((0, tid, 4),(0, tid, 4)).
 vars(3, (0, did, 4)).
 var_pos(0, (0, did, 4), 0).
 const_pos(did, (0, did, 4), 1).
@@ -1887,6 +1977,11 @@ var_pos(0, (0, ayear, 4), 0).
 const_pos(ayear, (0, ayear, 4), 1).
 var_pos(4, (0, ayear, 4), 2).
 ordered_vars((0, ayear, 4),(0, ayear, 4)).
+vars(3, (1, tid, 2)).
+var_pos(1, (1, tid, 2), 0).
+const_pos(tid, (1, tid, 2), 1).
+var_pos(2, (1, tid, 2), 2).
+ordered_vars((1, tid, 2),(1, tid, 2)).
 vars(3, (1, did, 2)).
 var_pos(1, (1, did, 2), 0).
 const_pos(did, (1, did, 2), 1).
@@ -1937,6 +2032,11 @@ var_pos(1, (1, ayear, 2), 0).
 const_pos(ayear, (1, ayear, 2), 1).
 var_pos(2, (1, ayear, 2), 2).
 ordered_vars((1, ayear, 2),(1, ayear, 2)).
+vars(3, (1, tid, 3)).
+var_pos(1, (1, tid, 3), 0).
+const_pos(tid, (1, tid, 3), 1).
+var_pos(3, (1, tid, 3), 2).
+ordered_vars((1, tid, 3),(1, tid, 3)).
 vars(3, (1, did, 3)).
 var_pos(1, (1, did, 3), 0).
 const_pos(did, (1, did, 3), 1).
@@ -1987,6 +2087,11 @@ var_pos(1, (1, ayear, 3), 0).
 const_pos(ayear, (1, ayear, 3), 1).
 var_pos(3, (1, ayear, 3), 2).
 ordered_vars((1, ayear, 3),(1, ayear, 3)).
+vars(3, (1, tid, 4)).
+var_pos(1, (1, tid, 4), 0).
+const_pos(tid, (1, tid, 4), 1).
+var_pos(4, (1, tid, 4), 2).
+ordered_vars((1, tid, 4),(1, tid, 4)).
 vars(3, (1, did, 4)).
 var_pos(1, (1, did, 4), 0).
 const_pos(did, (1, did, 4), 1).
@@ -2037,6 +2142,11 @@ var_pos(1, (1, ayear, 4), 0).
 const_pos(ayear, (1, ayear, 4), 1).
 var_pos(4, (1, ayear, 4), 2).
 ordered_vars((1, ayear, 4),(1, ayear, 4)).
+vars(3, (1, tid, 5)).
+var_pos(1, (1, tid, 5), 0).
+const_pos(tid, (1, tid, 5), 1).
+var_pos(5, (1, tid, 5), 2).
+ordered_vars((1, tid, 5),(1, tid, 5)).
 vars(3, (1, did, 5)).
 var_pos(1, (1, did, 5), 0).
 const_pos(did, (1, did, 5), 1).
@@ -2087,6 +2197,11 @@ var_pos(1, (1, ayear, 5), 0).
 const_pos(ayear, (1, ayear, 5), 1).
 var_pos(5, (1, ayear, 5), 2).
 ordered_vars((1, ayear, 5),(1, ayear, 5)).
+vars(3, (1, tid, 0)).
+var_pos(1, (1, tid, 0), 0).
+const_pos(tid, (1, tid, 0), 1).
+var_pos(0, (1, tid, 0), 2).
+ordered_vars((1, tid, 0),(0, tid, 1)).
 vars(3, (1, did, 0)).
 var_pos(1, (1, did, 0), 0).
 const_pos(did, (1, did, 0), 1).
@@ -2137,6 +2252,11 @@ var_pos(1, (1, ayear, 0), 0).
 const_pos(ayear, (1, ayear, 0), 1).
 var_pos(0, (1, ayear, 0), 2).
 ordered_vars((1, ayear, 0),(0, ayear, 1)).
+vars(3, (1, tid, 3)).
+var_pos(1, (1, tid, 3), 0).
+const_pos(tid, (1, tid, 3), 1).
+var_pos(3, (1, tid, 3), 2).
+ordered_vars((1, tid, 3),(1, tid, 3)).
 vars(3, (1, did, 3)).
 var_pos(1, (1, did, 3), 0).
 const_pos(did, (1, did, 3), 1).
@@ -2187,6 +2307,11 @@ var_pos(1, (1, ayear, 3), 0).
 const_pos(ayear, (1, ayear, 3), 1).
 var_pos(3, (1, ayear, 3), 2).
 ordered_vars((1, ayear, 3),(1, ayear, 3)).
+vars(3, (1, tid, 4)).
+var_pos(1, (1, tid, 4), 0).
+const_pos(tid, (1, tid, 4), 1).
+var_pos(4, (1, tid, 4), 2).
+ordered_vars((1, tid, 4),(1, tid, 4)).
 vars(3, (1, did, 4)).
 var_pos(1, (1, did, 4), 0).
 const_pos(did, (1, did, 4), 1).
@@ -2237,6 +2362,11 @@ var_pos(1, (1, ayear, 4), 0).
 const_pos(ayear, (1, ayear, 4), 1).
 var_pos(4, (1, ayear, 4), 2).
 ordered_vars((1, ayear, 4),(1, ayear, 4)).
+vars(3, (1, tid, 5)).
+var_pos(1, (1, tid, 5), 0).
+const_pos(tid, (1, tid, 5), 1).
+var_pos(5, (1, tid, 5), 2).
+ordered_vars((1, tid, 5),(1, tid, 5)).
 vars(3, (1, did, 5)).
 var_pos(1, (1, did, 5), 0).
 const_pos(did, (1, did, 5), 1).
@@ -2287,6 +2417,11 @@ var_pos(1, (1, ayear, 5), 0).
 const_pos(ayear, (1, ayear, 5), 1).
 var_pos(5, (1, ayear, 5), 2).
 ordered_vars((1, ayear, 5),(1, ayear, 5)).
+vars(3, (1, tid, 0)).
+var_pos(1, (1, tid, 0), 0).
+const_pos(tid, (1, tid, 0), 1).
+var_pos(0, (1, tid, 0), 2).
+ordered_vars((1, tid, 0),(0, tid, 1)).
 vars(3, (1, did, 0)).
 var_pos(1, (1, did, 0), 0).
 const_pos(did, (1, did, 0), 1).
@@ -2337,6 +2472,11 @@ var_pos(1, (1, ayear, 0), 0).
 const_pos(ayear, (1, ayear, 0), 1).
 var_pos(0, (1, ayear, 0), 2).
 ordered_vars((1, ayear, 0),(0, ayear, 1)).
+vars(3, (1, tid, 2)).
+var_pos(1, (1, tid, 2), 0).
+const_pos(tid, (1, tid, 2), 1).
+var_pos(2, (1, tid, 2), 2).
+ordered_vars((1, tid, 2),(1, tid, 2)).
 vars(3, (1, did, 2)).
 var_pos(1, (1, did, 2), 0).
 const_pos(did, (1, did, 2), 1).
@@ -2387,6 +2527,11 @@ var_pos(1, (1, ayear, 2), 0).
 const_pos(ayear, (1, ayear, 2), 1).
 var_pos(2, (1, ayear, 2), 2).
 ordered_vars((1, ayear, 2),(1, ayear, 2)).
+vars(3, (1, tid, 4)).
+var_pos(1, (1, tid, 4), 0).
+const_pos(tid, (1, tid, 4), 1).
+var_pos(4, (1, tid, 4), 2).
+ordered_vars((1, tid, 4),(1, tid, 4)).
 vars(3, (1, did, 4)).
 var_pos(1, (1, did, 4), 0).
 const_pos(did, (1, did, 4), 1).
@@ -2437,6 +2582,11 @@ var_pos(1, (1, ayear, 4), 0).
 const_pos(ayear, (1, ayear, 4), 1).
 var_pos(4, (1, ayear, 4), 2).
 ordered_vars((1, ayear, 4),(1, ayear, 4)).
+vars(3, (1, tid, 5)).
+var_pos(1, (1, tid, 5), 0).
+const_pos(tid, (1, tid, 5), 1).
+var_pos(5, (1, tid, 5), 2).
+ordered_vars((1, tid, 5),(1, tid, 5)).
 vars(3, (1, did, 5)).
 var_pos(1, (1, did, 5), 0).
 const_pos(did, (1, did, 5), 1).
@@ -2487,6 +2637,11 @@ var_pos(1, (1, ayear, 5), 0).
 const_pos(ayear, (1, ayear, 5), 1).
 var_pos(5, (1, ayear, 5), 2).
 ordered_vars((1, ayear, 5),(1, ayear, 5)).
+vars(3, (1, tid, 0)).
+var_pos(1, (1, tid, 0), 0).
+const_pos(tid, (1, tid, 0), 1).
+var_pos(0, (1, tid, 0), 2).
+ordered_vars((1, tid, 0),(0, tid, 1)).
 vars(3, (1, did, 0)).
 var_pos(1, (1, did, 0), 0).
 const_pos(did, (1, did, 0), 1).
@@ -2537,6 +2692,11 @@ var_pos(1, (1, ayear, 0), 0).
 const_pos(ayear, (1, ayear, 0), 1).
 var_pos(0, (1, ayear, 0), 2).
 ordered_vars((1, ayear, 0),(0, ayear, 1)).
+vars(3, (1, tid, 2)).
+var_pos(1, (1, tid, 2), 0).
+const_pos(tid, (1, tid, 2), 1).
+var_pos(2, (1, tid, 2), 2).
+ordered_vars((1, tid, 2),(1, tid, 2)).
 vars(3, (1, did, 2)).
 var_pos(1, (1, did, 2), 0).
 const_pos(did, (1, did, 2), 1).
@@ -2587,6 +2747,11 @@ var_pos(1, (1, ayear, 2), 0).
 const_pos(ayear, (1, ayear, 2), 1).
 var_pos(2, (1, ayear, 2), 2).
 ordered_vars((1, ayear, 2),(1, ayear, 2)).
+vars(3, (1, tid, 3)).
+var_pos(1, (1, tid, 3), 0).
+const_pos(tid, (1, tid, 3), 1).
+var_pos(3, (1, tid, 3), 2).
+ordered_vars((1, tid, 3),(1, tid, 3)).
 vars(3, (1, did, 3)).
 var_pos(1, (1, did, 3), 0).
 const_pos(did, (1, did, 3), 1).
@@ -2637,6 +2802,11 @@ var_pos(1, (1, ayear, 3), 0).
 const_pos(ayear, (1, ayear, 3), 1).
 var_pos(3, (1, ayear, 3), 2).
 ordered_vars((1, ayear, 3),(1, ayear, 3)).
+vars(3, (1, tid, 5)).
+var_pos(1, (1, tid, 5), 0).
+const_pos(tid, (1, tid, 5), 1).
+var_pos(5, (1, tid, 5), 2).
+ordered_vars((1, tid, 5),(1, tid, 5)).
 vars(3, (1, did, 5)).
 var_pos(1, (1, did, 5), 0).
 const_pos(did, (1, did, 5), 1).
@@ -2687,6 +2857,11 @@ var_pos(1, (1, ayear, 5), 0).
 const_pos(ayear, (1, ayear, 5), 1).
 var_pos(5, (1, ayear, 5), 2).
 ordered_vars((1, ayear, 5),(1, ayear, 5)).
+vars(3, (1, tid, 0)).
+var_pos(1, (1, tid, 0), 0).
+const_pos(tid, (1, tid, 0), 1).
+var_pos(0, (1, tid, 0), 2).
+ordered_vars((1, tid, 0),(0, tid, 1)).
 vars(3, (1, did, 0)).
 var_pos(1, (1, did, 0), 0).
 const_pos(did, (1, did, 0), 1).
@@ -2737,6 +2912,11 @@ var_pos(1, (1, ayear, 0), 0).
 const_pos(ayear, (1, ayear, 0), 1).
 var_pos(0, (1, ayear, 0), 2).
 ordered_vars((1, ayear, 0),(0, ayear, 1)).
+vars(3, (1, tid, 2)).
+var_pos(1, (1, tid, 2), 0).
+const_pos(tid, (1, tid, 2), 1).
+var_pos(2, (1, tid, 2), 2).
+ordered_vars((1, tid, 2),(1, tid, 2)).
 vars(3, (1, did, 2)).
 var_pos(1, (1, did, 2), 0).
 const_pos(did, (1, did, 2), 1).
@@ -2787,6 +2967,11 @@ var_pos(1, (1, ayear, 2), 0).
 const_pos(ayear, (1, ayear, 2), 1).
 var_pos(2, (1, ayear, 2), 2).
 ordered_vars((1, ayear, 2),(1, ayear, 2)).
+vars(3, (1, tid, 3)).
+var_pos(1, (1, tid, 3), 0).
+const_pos(tid, (1, tid, 3), 1).
+var_pos(3, (1, tid, 3), 2).
+ordered_vars((1, tid, 3),(1, tid, 3)).
 vars(3, (1, did, 3)).
 var_pos(1, (1, did, 3), 0).
 const_pos(did, (1, did, 3), 1).
@@ -2837,6 +3022,11 @@ var_pos(1, (1, ayear, 3), 0).
 const_pos(ayear, (1, ayear, 3), 1).
 var_pos(3, (1, ayear, 3), 2).
 ordered_vars((1, ayear, 3),(1, ayear, 3)).
+vars(3, (1, tid, 4)).
+var_pos(1, (1, tid, 4), 0).
+const_pos(tid, (1, tid, 4), 1).
+var_pos(4, (1, tid, 4), 2).
+ordered_vars((1, tid, 4),(1, tid, 4)).
 vars(3, (1, did, 4)).
 var_pos(1, (1, did, 4), 0).
 const_pos(did, (1, did, 4), 1).
@@ -2887,6 +3077,11 @@ var_pos(1, (1, ayear, 4), 0).
 const_pos(ayear, (1, ayear, 4), 1).
 var_pos(4, (1, ayear, 4), 2).
 ordered_vars((1, ayear, 4),(1, ayear, 4)).
+vars(3, (2, tid, 1)).
+var_pos(2, (2, tid, 1), 0).
+const_pos(tid, (2, tid, 1), 1).
+var_pos(1, (2, tid, 1), 2).
+ordered_vars((2, tid, 1),(1, tid, 2)).
 vars(3, (2, did, 1)).
 var_pos(2, (2, did, 1), 0).
 const_pos(did, (2, did, 1), 1).
@@ -2937,6 +3132,11 @@ var_pos(2, (2, ayear, 1), 0).
 const_pos(ayear, (2, ayear, 1), 1).
 var_pos(1, (2, ayear, 1), 2).
 ordered_vars((2, ayear, 1),(1, ayear, 2)).
+vars(3, (2, tid, 3)).
+var_pos(2, (2, tid, 3), 0).
+const_pos(tid, (2, tid, 3), 1).
+var_pos(3, (2, tid, 3), 2).
+ordered_vars((2, tid, 3),(2, tid, 3)).
 vars(3, (2, did, 3)).
 var_pos(2, (2, did, 3), 0).
 const_pos(did, (2, did, 3), 1).
@@ -2987,6 +3187,11 @@ var_pos(2, (2, ayear, 3), 0).
 const_pos(ayear, (2, ayear, 3), 1).
 var_pos(3, (2, ayear, 3), 2).
 ordered_vars((2, ayear, 3),(2, ayear, 3)).
+vars(3, (2, tid, 4)).
+var_pos(2, (2, tid, 4), 0).
+const_pos(tid, (2, tid, 4), 1).
+var_pos(4, (2, tid, 4), 2).
+ordered_vars((2, tid, 4),(2, tid, 4)).
 vars(3, (2, did, 4)).
 var_pos(2, (2, did, 4), 0).
 const_pos(did, (2, did, 4), 1).
@@ -3037,6 +3242,11 @@ var_pos(2, (2, ayear, 4), 0).
 const_pos(ayear, (2, ayear, 4), 1).
 var_pos(4, (2, ayear, 4), 2).
 ordered_vars((2, ayear, 4),(2, ayear, 4)).
+vars(3, (2, tid, 5)).
+var_pos(2, (2, tid, 5), 0).
+const_pos(tid, (2, tid, 5), 1).
+var_pos(5, (2, tid, 5), 2).
+ordered_vars((2, tid, 5),(2, tid, 5)).
 vars(3, (2, did, 5)).
 var_pos(2, (2, did, 5), 0).
 const_pos(did, (2, did, 5), 1).
@@ -3087,6 +3297,11 @@ var_pos(2, (2, ayear, 5), 0).
 const_pos(ayear, (2, ayear, 5), 1).
 var_pos(5, (2, ayear, 5), 2).
 ordered_vars((2, ayear, 5),(2, ayear, 5)).
+vars(3, (2, tid, 0)).
+var_pos(2, (2, tid, 0), 0).
+const_pos(tid, (2, tid, 0), 1).
+var_pos(0, (2, tid, 0), 2).
+ordered_vars((2, tid, 0),(0, tid, 2)).
 vars(3, (2, did, 0)).
 var_pos(2, (2, did, 0), 0).
 const_pos(did, (2, did, 0), 1).
@@ -3137,6 +3352,11 @@ var_pos(2, (2, ayear, 0), 0).
 const_pos(ayear, (2, ayear, 0), 1).
 var_pos(0, (2, ayear, 0), 2).
 ordered_vars((2, ayear, 0),(0, ayear, 2)).
+vars(3, (2, tid, 3)).
+var_pos(2, (2, tid, 3), 0).
+const_pos(tid, (2, tid, 3), 1).
+var_pos(3, (2, tid, 3), 2).
+ordered_vars((2, tid, 3),(2, tid, 3)).
 vars(3, (2, did, 3)).
 var_pos(2, (2, did, 3), 0).
 const_pos(did, (2, did, 3), 1).
@@ -3187,6 +3407,11 @@ var_pos(2, (2, ayear, 3), 0).
 const_pos(ayear, (2, ayear, 3), 1).
 var_pos(3, (2, ayear, 3), 2).
 ordered_vars((2, ayear, 3),(2, ayear, 3)).
+vars(3, (2, tid, 4)).
+var_pos(2, (2, tid, 4), 0).
+const_pos(tid, (2, tid, 4), 1).
+var_pos(4, (2, tid, 4), 2).
+ordered_vars((2, tid, 4),(2, tid, 4)).
 vars(3, (2, did, 4)).
 var_pos(2, (2, did, 4), 0).
 const_pos(did, (2, did, 4), 1).
@@ -3237,6 +3462,11 @@ var_pos(2, (2, ayear, 4), 0).
 const_pos(ayear, (2, ayear, 4), 1).
 var_pos(4, (2, ayear, 4), 2).
 ordered_vars((2, ayear, 4),(2, ayear, 4)).
+vars(3, (2, tid, 5)).
+var_pos(2, (2, tid, 5), 0).
+const_pos(tid, (2, tid, 5), 1).
+var_pos(5, (2, tid, 5), 2).
+ordered_vars((2, tid, 5),(2, tid, 5)).
 vars(3, (2, did, 5)).
 var_pos(2, (2, did, 5), 0).
 const_pos(did, (2, did, 5), 1).
@@ -3287,6 +3517,11 @@ var_pos(2, (2, ayear, 5), 0).
 const_pos(ayear, (2, ayear, 5), 1).
 var_pos(5, (2, ayear, 5), 2).
 ordered_vars((2, ayear, 5),(2, ayear, 5)).
+vars(3, (2, tid, 0)).
+var_pos(2, (2, tid, 0), 0).
+const_pos(tid, (2, tid, 0), 1).
+var_pos(0, (2, tid, 0), 2).
+ordered_vars((2, tid, 0),(0, tid, 2)).
 vars(3, (2, did, 0)).
 var_pos(2, (2, did, 0), 0).
 const_pos(did, (2, did, 0), 1).
@@ -3337,6 +3572,11 @@ var_pos(2, (2, ayear, 0), 0).
 const_pos(ayear, (2, ayear, 0), 1).
 var_pos(0, (2, ayear, 0), 2).
 ordered_vars((2, ayear, 0),(0, ayear, 2)).
+vars(3, (2, tid, 1)).
+var_pos(2, (2, tid, 1), 0).
+const_pos(tid, (2, tid, 1), 1).
+var_pos(1, (2, tid, 1), 2).
+ordered_vars((2, tid, 1),(1, tid, 2)).
 vars(3, (2, did, 1)).
 var_pos(2, (2, did, 1), 0).
 const_pos(did, (2, did, 1), 1).
@@ -3387,6 +3627,11 @@ var_pos(2, (2, ayear, 1), 0).
 const_pos(ayear, (2, ayear, 1), 1).
 var_pos(1, (2, ayear, 1), 2).
 ordered_vars((2, ayear, 1),(1, ayear, 2)).
+vars(3, (2, tid, 4)).
+var_pos(2, (2, tid, 4), 0).
+const_pos(tid, (2, tid, 4), 1).
+var_pos(4, (2, tid, 4), 2).
+ordered_vars((2, tid, 4),(2, tid, 4)).
 vars(3, (2, did, 4)).
 var_pos(2, (2, did, 4), 0).
 const_pos(did, (2, did, 4), 1).
@@ -3437,6 +3682,11 @@ var_pos(2, (2, ayear, 4), 0).
 const_pos(ayear, (2, ayear, 4), 1).
 var_pos(4, (2, ayear, 4), 2).
 ordered_vars((2, ayear, 4),(2, ayear, 4)).
+vars(3, (2, tid, 5)).
+var_pos(2, (2, tid, 5), 0).
+const_pos(tid, (2, tid, 5), 1).
+var_pos(5, (2, tid, 5), 2).
+ordered_vars((2, tid, 5),(2, tid, 5)).
 vars(3, (2, did, 5)).
 var_pos(2, (2, did, 5), 0).
 const_pos(did, (2, did, 5), 1).
@@ -3487,6 +3737,11 @@ var_pos(2, (2, ayear, 5), 0).
 const_pos(ayear, (2, ayear, 5), 1).
 var_pos(5, (2, ayear, 5), 2).
 ordered_vars((2, ayear, 5),(2, ayear, 5)).
+vars(3, (2, tid, 0)).
+var_pos(2, (2, tid, 0), 0).
+const_pos(tid, (2, tid, 0), 1).
+var_pos(0, (2, tid, 0), 2).
+ordered_vars((2, tid, 0),(0, tid, 2)).
 vars(3, (2, did, 0)).
 var_pos(2, (2, did, 0), 0).
 const_pos(did, (2, did, 0), 1).
@@ -3537,6 +3792,11 @@ var_pos(2, (2, ayear, 0), 0).
 const_pos(ayear, (2, ayear, 0), 1).
 var_pos(0, (2, ayear, 0), 2).
 ordered_vars((2, ayear, 0),(0, ayear, 2)).
+vars(3, (2, tid, 1)).
+var_pos(2, (2, tid, 1), 0).
+const_pos(tid, (2, tid, 1), 1).
+var_pos(1, (2, tid, 1), 2).
+ordered_vars((2, tid, 1),(1, tid, 2)).
 vars(3, (2, did, 1)).
 var_pos(2, (2, did, 1), 0).
 const_pos(did, (2, did, 1), 1).
@@ -3587,6 +3847,11 @@ var_pos(2, (2, ayear, 1), 0).
 const_pos(ayear, (2, ayear, 1), 1).
 var_pos(1, (2, ayear, 1), 2).
 ordered_vars((2, ayear, 1),(1, ayear, 2)).
+vars(3, (2, tid, 3)).
+var_pos(2, (2, tid, 3), 0).
+const_pos(tid, (2, tid, 3), 1).
+var_pos(3, (2, tid, 3), 2).
+ordered_vars((2, tid, 3),(2, tid, 3)).
 vars(3, (2, did, 3)).
 var_pos(2, (2, did, 3), 0).
 const_pos(did, (2, did, 3), 1).
@@ -3637,6 +3902,11 @@ var_pos(2, (2, ayear, 3), 0).
 const_pos(ayear, (2, ayear, 3), 1).
 var_pos(3, (2, ayear, 3), 2).
 ordered_vars((2, ayear, 3),(2, ayear, 3)).
+vars(3, (2, tid, 5)).
+var_pos(2, (2, tid, 5), 0).
+const_pos(tid, (2, tid, 5), 1).
+var_pos(5, (2, tid, 5), 2).
+ordered_vars((2, tid, 5),(2, tid, 5)).
 vars(3, (2, did, 5)).
 var_pos(2, (2, did, 5), 0).
 const_pos(did, (2, did, 5), 1).
@@ -3687,6 +3957,11 @@ var_pos(2, (2, ayear, 5), 0).
 const_pos(ayear, (2, ayear, 5), 1).
 var_pos(5, (2, ayear, 5), 2).
 ordered_vars((2, ayear, 5),(2, ayear, 5)).
+vars(3, (2, tid, 0)).
+var_pos(2, (2, tid, 0), 0).
+const_pos(tid, (2, tid, 0), 1).
+var_pos(0, (2, tid, 0), 2).
+ordered_vars((2, tid, 0),(0, tid, 2)).
 vars(3, (2, did, 0)).
 var_pos(2, (2, did, 0), 0).
 const_pos(did, (2, did, 0), 1).
@@ -3737,6 +4012,11 @@ var_pos(2, (2, ayear, 0), 0).
 const_pos(ayear, (2, ayear, 0), 1).
 var_pos(0, (2, ayear, 0), 2).
 ordered_vars((2, ayear, 0),(0, ayear, 2)).
+vars(3, (2, tid, 1)).
+var_pos(2, (2, tid, 1), 0).
+const_pos(tid, (2, tid, 1), 1).
+var_pos(1, (2, tid, 1), 2).
+ordered_vars((2, tid, 1),(1, tid, 2)).
 vars(3, (2, did, 1)).
 var_pos(2, (2, did, 1), 0).
 const_pos(did, (2, did, 1), 1).
@@ -3787,6 +4067,11 @@ var_pos(2, (2, ayear, 1), 0).
 const_pos(ayear, (2, ayear, 1), 1).
 var_pos(1, (2, ayear, 1), 2).
 ordered_vars((2, ayear, 1),(1, ayear, 2)).
+vars(3, (2, tid, 3)).
+var_pos(2, (2, tid, 3), 0).
+const_pos(tid, (2, tid, 3), 1).
+var_pos(3, (2, tid, 3), 2).
+ordered_vars((2, tid, 3),(2, tid, 3)).
 vars(3, (2, did, 3)).
 var_pos(2, (2, did, 3), 0).
 const_pos(did, (2, did, 3), 1).
@@ -3837,6 +4122,11 @@ var_pos(2, (2, ayear, 3), 0).
 const_pos(ayear, (2, ayear, 3), 1).
 var_pos(3, (2, ayear, 3), 2).
 ordered_vars((2, ayear, 3),(2, ayear, 3)).
+vars(3, (2, tid, 4)).
+var_pos(2, (2, tid, 4), 0).
+const_pos(tid, (2, tid, 4), 1).
+var_pos(4, (2, tid, 4), 2).
+ordered_vars((2, tid, 4),(2, tid, 4)).
 vars(3, (2, did, 4)).
 var_pos(2, (2, did, 4), 0).
 const_pos(did, (2, did, 4), 1).
@@ -3887,6 +4177,11 @@ var_pos(2, (2, ayear, 4), 0).
 const_pos(ayear, (2, ayear, 4), 1).
 var_pos(4, (2, ayear, 4), 2).
 ordered_vars((2, ayear, 4),(2, ayear, 4)).
+vars(3, (3, tid, 1)).
+var_pos(3, (3, tid, 1), 0).
+const_pos(tid, (3, tid, 1), 1).
+var_pos(1, (3, tid, 1), 2).
+ordered_vars((3, tid, 1),(1, tid, 3)).
 vars(3, (3, did, 1)).
 var_pos(3, (3, did, 1), 0).
 const_pos(did, (3, did, 1), 1).
@@ -3937,6 +4232,11 @@ var_pos(3, (3, ayear, 1), 0).
 const_pos(ayear, (3, ayear, 1), 1).
 var_pos(1, (3, ayear, 1), 2).
 ordered_vars((3, ayear, 1),(1, ayear, 3)).
+vars(3, (3, tid, 2)).
+var_pos(3, (3, tid, 2), 0).
+const_pos(tid, (3, tid, 2), 1).
+var_pos(2, (3, tid, 2), 2).
+ordered_vars((3, tid, 2),(2, tid, 3)).
 vars(3, (3, did, 2)).
 var_pos(3, (3, did, 2), 0).
 const_pos(did, (3, did, 2), 1).
@@ -3987,6 +4287,11 @@ var_pos(3, (3, ayear, 2), 0).
 const_pos(ayear, (3, ayear, 2), 1).
 var_pos(2, (3, ayear, 2), 2).
 ordered_vars((3, ayear, 2),(2, ayear, 3)).
+vars(3, (3, tid, 4)).
+var_pos(3, (3, tid, 4), 0).
+const_pos(tid, (3, tid, 4), 1).
+var_pos(4, (3, tid, 4), 2).
+ordered_vars((3, tid, 4),(3, tid, 4)).
 vars(3, (3, did, 4)).
 var_pos(3, (3, did, 4), 0).
 const_pos(did, (3, did, 4), 1).
@@ -4037,6 +4342,11 @@ var_pos(3, (3, ayear, 4), 0).
 const_pos(ayear, (3, ayear, 4), 1).
 var_pos(4, (3, ayear, 4), 2).
 ordered_vars((3, ayear, 4),(3, ayear, 4)).
+vars(3, (3, tid, 5)).
+var_pos(3, (3, tid, 5), 0).
+const_pos(tid, (3, tid, 5), 1).
+var_pos(5, (3, tid, 5), 2).
+ordered_vars((3, tid, 5),(3, tid, 5)).
 vars(3, (3, did, 5)).
 var_pos(3, (3, did, 5), 0).
 const_pos(did, (3, did, 5), 1).
@@ -4087,6 +4397,11 @@ var_pos(3, (3, ayear, 5), 0).
 const_pos(ayear, (3, ayear, 5), 1).
 var_pos(5, (3, ayear, 5), 2).
 ordered_vars((3, ayear, 5),(3, ayear, 5)).
+vars(3, (3, tid, 0)).
+var_pos(3, (3, tid, 0), 0).
+const_pos(tid, (3, tid, 0), 1).
+var_pos(0, (3, tid, 0), 2).
+ordered_vars((3, tid, 0),(0, tid, 3)).
 vars(3, (3, did, 0)).
 var_pos(3, (3, did, 0), 0).
 const_pos(did, (3, did, 0), 1).
@@ -4137,6 +4452,11 @@ var_pos(3, (3, ayear, 0), 0).
 const_pos(ayear, (3, ayear, 0), 1).
 var_pos(0, (3, ayear, 0), 2).
 ordered_vars((3, ayear, 0),(0, ayear, 3)).
+vars(3, (3, tid, 2)).
+var_pos(3, (3, tid, 2), 0).
+const_pos(tid, (3, tid, 2), 1).
+var_pos(2, (3, tid, 2), 2).
+ordered_vars((3, tid, 2),(2, tid, 3)).
 vars(3, (3, did, 2)).
 var_pos(3, (3, did, 2), 0).
 const_pos(did, (3, did, 2), 1).
@@ -4187,6 +4507,11 @@ var_pos(3, (3, ayear, 2), 0).
 const_pos(ayear, (3, ayear, 2), 1).
 var_pos(2, (3, ayear, 2), 2).
 ordered_vars((3, ayear, 2),(2, ayear, 3)).
+vars(3, (3, tid, 4)).
+var_pos(3, (3, tid, 4), 0).
+const_pos(tid, (3, tid, 4), 1).
+var_pos(4, (3, tid, 4), 2).
+ordered_vars((3, tid, 4),(3, tid, 4)).
 vars(3, (3, did, 4)).
 var_pos(3, (3, did, 4), 0).
 const_pos(did, (3, did, 4), 1).
@@ -4237,6 +4562,11 @@ var_pos(3, (3, ayear, 4), 0).
 const_pos(ayear, (3, ayear, 4), 1).
 var_pos(4, (3, ayear, 4), 2).
 ordered_vars((3, ayear, 4),(3, ayear, 4)).
+vars(3, (3, tid, 5)).
+var_pos(3, (3, tid, 5), 0).
+const_pos(tid, (3, tid, 5), 1).
+var_pos(5, (3, tid, 5), 2).
+ordered_vars((3, tid, 5),(3, tid, 5)).
 vars(3, (3, did, 5)).
 var_pos(3, (3, did, 5), 0).
 const_pos(did, (3, did, 5), 1).
@@ -4287,6 +4617,11 @@ var_pos(3, (3, ayear, 5), 0).
 const_pos(ayear, (3, ayear, 5), 1).
 var_pos(5, (3, ayear, 5), 2).
 ordered_vars((3, ayear, 5),(3, ayear, 5)).
+vars(3, (3, tid, 0)).
+var_pos(3, (3, tid, 0), 0).
+const_pos(tid, (3, tid, 0), 1).
+var_pos(0, (3, tid, 0), 2).
+ordered_vars((3, tid, 0),(0, tid, 3)).
 vars(3, (3, did, 0)).
 var_pos(3, (3, did, 0), 0).
 const_pos(did, (3, did, 0), 1).
@@ -4337,6 +4672,11 @@ var_pos(3, (3, ayear, 0), 0).
 const_pos(ayear, (3, ayear, 0), 1).
 var_pos(0, (3, ayear, 0), 2).
 ordered_vars((3, ayear, 0),(0, ayear, 3)).
+vars(3, (3, tid, 1)).
+var_pos(3, (3, tid, 1), 0).
+const_pos(tid, (3, tid, 1), 1).
+var_pos(1, (3, tid, 1), 2).
+ordered_vars((3, tid, 1),(1, tid, 3)).
 vars(3, (3, did, 1)).
 var_pos(3, (3, did, 1), 0).
 const_pos(did, (3, did, 1), 1).
@@ -4387,6 +4727,11 @@ var_pos(3, (3, ayear, 1), 0).
 const_pos(ayear, (3, ayear, 1), 1).
 var_pos(1, (3, ayear, 1), 2).
 ordered_vars((3, ayear, 1),(1, ayear, 3)).
+vars(3, (3, tid, 4)).
+var_pos(3, (3, tid, 4), 0).
+const_pos(tid, (3, tid, 4), 1).
+var_pos(4, (3, tid, 4), 2).
+ordered_vars((3, tid, 4),(3, tid, 4)).
 vars(3, (3, did, 4)).
 var_pos(3, (3, did, 4), 0).
 const_pos(did, (3, did, 4), 1).
@@ -4437,6 +4782,11 @@ var_pos(3, (3, ayear, 4), 0).
 const_pos(ayear, (3, ayear, 4), 1).
 var_pos(4, (3, ayear, 4), 2).
 ordered_vars((3, ayear, 4),(3, ayear, 4)).
+vars(3, (3, tid, 5)).
+var_pos(3, (3, tid, 5), 0).
+const_pos(tid, (3, tid, 5), 1).
+var_pos(5, (3, tid, 5), 2).
+ordered_vars((3, tid, 5),(3, tid, 5)).
 vars(3, (3, did, 5)).
 var_pos(3, (3, did, 5), 0).
 const_pos(did, (3, did, 5), 1).
@@ -4487,6 +4837,11 @@ var_pos(3, (3, ayear, 5), 0).
 const_pos(ayear, (3, ayear, 5), 1).
 var_pos(5, (3, ayear, 5), 2).
 ordered_vars((3, ayear, 5),(3, ayear, 5)).
+vars(3, (3, tid, 0)).
+var_pos(3, (3, tid, 0), 0).
+const_pos(tid, (3, tid, 0), 1).
+var_pos(0, (3, tid, 0), 2).
+ordered_vars((3, tid, 0),(0, tid, 3)).
 vars(3, (3, did, 0)).
 var_pos(3, (3, did, 0), 0).
 const_pos(did, (3, did, 0), 1).
@@ -4537,6 +4892,11 @@ var_pos(3, (3, ayear, 0), 0).
 const_pos(ayear, (3, ayear, 0), 1).
 var_pos(0, (3, ayear, 0), 2).
 ordered_vars((3, ayear, 0),(0, ayear, 3)).
+vars(3, (3, tid, 1)).
+var_pos(3, (3, tid, 1), 0).
+const_pos(tid, (3, tid, 1), 1).
+var_pos(1, (3, tid, 1), 2).
+ordered_vars((3, tid, 1),(1, tid, 3)).
 vars(3, (3, did, 1)).
 var_pos(3, (3, did, 1), 0).
 const_pos(did, (3, did, 1), 1).
@@ -4587,6 +4947,11 @@ var_pos(3, (3, ayear, 1), 0).
 const_pos(ayear, (3, ayear, 1), 1).
 var_pos(1, (3, ayear, 1), 2).
 ordered_vars((3, ayear, 1),(1, ayear, 3)).
+vars(3, (3, tid, 2)).
+var_pos(3, (3, tid, 2), 0).
+const_pos(tid, (3, tid, 2), 1).
+var_pos(2, (3, tid, 2), 2).
+ordered_vars((3, tid, 2),(2, tid, 3)).
 vars(3, (3, did, 2)).
 var_pos(3, (3, did, 2), 0).
 const_pos(did, (3, did, 2), 1).
@@ -4637,6 +5002,11 @@ var_pos(3, (3, ayear, 2), 0).
 const_pos(ayear, (3, ayear, 2), 1).
 var_pos(2, (3, ayear, 2), 2).
 ordered_vars((3, ayear, 2),(2, ayear, 3)).
+vars(3, (3, tid, 5)).
+var_pos(3, (3, tid, 5), 0).
+const_pos(tid, (3, tid, 5), 1).
+var_pos(5, (3, tid, 5), 2).
+ordered_vars((3, tid, 5),(3, tid, 5)).
 vars(3, (3, did, 5)).
 var_pos(3, (3, did, 5), 0).
 const_pos(did, (3, did, 5), 1).
@@ -4687,6 +5057,11 @@ var_pos(3, (3, ayear, 5), 0).
 const_pos(ayear, (3, ayear, 5), 1).
 var_pos(5, (3, ayear, 5), 2).
 ordered_vars((3, ayear, 5),(3, ayear, 5)).
+vars(3, (3, tid, 0)).
+var_pos(3, (3, tid, 0), 0).
+const_pos(tid, (3, tid, 0), 1).
+var_pos(0, (3, tid, 0), 2).
+ordered_vars((3, tid, 0),(0, tid, 3)).
 vars(3, (3, did, 0)).
 var_pos(3, (3, did, 0), 0).
 const_pos(did, (3, did, 0), 1).
@@ -4737,6 +5112,11 @@ var_pos(3, (3, ayear, 0), 0).
 const_pos(ayear, (3, ayear, 0), 1).
 var_pos(0, (3, ayear, 0), 2).
 ordered_vars((3, ayear, 0),(0, ayear, 3)).
+vars(3, (3, tid, 1)).
+var_pos(3, (3, tid, 1), 0).
+const_pos(tid, (3, tid, 1), 1).
+var_pos(1, (3, tid, 1), 2).
+ordered_vars((3, tid, 1),(1, tid, 3)).
 vars(3, (3, did, 1)).
 var_pos(3, (3, did, 1), 0).
 const_pos(did, (3, did, 1), 1).
@@ -4787,6 +5167,11 @@ var_pos(3, (3, ayear, 1), 0).
 const_pos(ayear, (3, ayear, 1), 1).
 var_pos(1, (3, ayear, 1), 2).
 ordered_vars((3, ayear, 1),(1, ayear, 3)).
+vars(3, (3, tid, 2)).
+var_pos(3, (3, tid, 2), 0).
+const_pos(tid, (3, tid, 2), 1).
+var_pos(2, (3, tid, 2), 2).
+ordered_vars((3, tid, 2),(2, tid, 3)).
 vars(3, (3, did, 2)).
 var_pos(3, (3, did, 2), 0).
 const_pos(did, (3, did, 2), 1).
@@ -4837,6 +5222,11 @@ var_pos(3, (3, ayear, 2), 0).
 const_pos(ayear, (3, ayear, 2), 1).
 var_pos(2, (3, ayear, 2), 2).
 ordered_vars((3, ayear, 2),(2, ayear, 3)).
+vars(3, (3, tid, 4)).
+var_pos(3, (3, tid, 4), 0).
+const_pos(tid, (3, tid, 4), 1).
+var_pos(4, (3, tid, 4), 2).
+ordered_vars((3, tid, 4),(3, tid, 4)).
 vars(3, (3, did, 4)).
 var_pos(3, (3, did, 4), 0).
 const_pos(did, (3, did, 4), 1).
@@ -4887,6 +5277,11 @@ var_pos(3, (3, ayear, 4), 0).
 const_pos(ayear, (3, ayear, 4), 1).
 var_pos(4, (3, ayear, 4), 2).
 ordered_vars((3, ayear, 4),(3, ayear, 4)).
+vars(3, (4, tid, 1)).
+var_pos(4, (4, tid, 1), 0).
+const_pos(tid, (4, tid, 1), 1).
+var_pos(1, (4, tid, 1), 2).
+ordered_vars((4, tid, 1),(1, tid, 4)).
 vars(3, (4, did, 1)).
 var_pos(4, (4, did, 1), 0).
 const_pos(did, (4, did, 1), 1).
@@ -4937,6 +5332,11 @@ var_pos(4, (4, ayear, 1), 0).
 const_pos(ayear, (4, ayear, 1), 1).
 var_pos(1, (4, ayear, 1), 2).
 ordered_vars((4, ayear, 1),(1, ayear, 4)).
+vars(3, (4, tid, 2)).
+var_pos(4, (4, tid, 2), 0).
+const_pos(tid, (4, tid, 2), 1).
+var_pos(2, (4, tid, 2), 2).
+ordered_vars((4, tid, 2),(2, tid, 4)).
 vars(3, (4, did, 2)).
 var_pos(4, (4, did, 2), 0).
 const_pos(did, (4, did, 2), 1).
@@ -4987,6 +5387,11 @@ var_pos(4, (4, ayear, 2), 0).
 const_pos(ayear, (4, ayear, 2), 1).
 var_pos(2, (4, ayear, 2), 2).
 ordered_vars((4, ayear, 2),(2, ayear, 4)).
+vars(3, (4, tid, 3)).
+var_pos(4, (4, tid, 3), 0).
+const_pos(tid, (4, tid, 3), 1).
+var_pos(3, (4, tid, 3), 2).
+ordered_vars((4, tid, 3),(3, tid, 4)).
 vars(3, (4, did, 3)).
 var_pos(4, (4, did, 3), 0).
 const_pos(did, (4, did, 3), 1).
@@ -5037,6 +5442,11 @@ var_pos(4, (4, ayear, 3), 0).
 const_pos(ayear, (4, ayear, 3), 1).
 var_pos(3, (4, ayear, 3), 2).
 ordered_vars((4, ayear, 3),(3, ayear, 4)).
+vars(3, (4, tid, 5)).
+var_pos(4, (4, tid, 5), 0).
+const_pos(tid, (4, tid, 5), 1).
+var_pos(5, (4, tid, 5), 2).
+ordered_vars((4, tid, 5),(4, tid, 5)).
 vars(3, (4, did, 5)).
 var_pos(4, (4, did, 5), 0).
 const_pos(did, (4, did, 5), 1).
@@ -5087,6 +5497,11 @@ var_pos(4, (4, ayear, 5), 0).
 const_pos(ayear, (4, ayear, 5), 1).
 var_pos(5, (4, ayear, 5), 2).
 ordered_vars((4, ayear, 5),(4, ayear, 5)).
+vars(3, (4, tid, 0)).
+var_pos(4, (4, tid, 0), 0).
+const_pos(tid, (4, tid, 0), 1).
+var_pos(0, (4, tid, 0), 2).
+ordered_vars((4, tid, 0),(0, tid, 4)).
 vars(3, (4, did, 0)).
 var_pos(4, (4, did, 0), 0).
 const_pos(did, (4, did, 0), 1).
@@ -5137,6 +5552,11 @@ var_pos(4, (4, ayear, 0), 0).
 const_pos(ayear, (4, ayear, 0), 1).
 var_pos(0, (4, ayear, 0), 2).
 ordered_vars((4, ayear, 0),(0, ayear, 4)).
+vars(3, (4, tid, 2)).
+var_pos(4, (4, tid, 2), 0).
+const_pos(tid, (4, tid, 2), 1).
+var_pos(2, (4, tid, 2), 2).
+ordered_vars((4, tid, 2),(2, tid, 4)).
 vars(3, (4, did, 2)).
 var_pos(4, (4, did, 2), 0).
 const_pos(did, (4, did, 2), 1).
@@ -5187,6 +5607,11 @@ var_pos(4, (4, ayear, 2), 0).
 const_pos(ayear, (4, ayear, 2), 1).
 var_pos(2, (4, ayear, 2), 2).
 ordered_vars((4, ayear, 2),(2, ayear, 4)).
+vars(3, (4, tid, 3)).
+var_pos(4, (4, tid, 3), 0).
+const_pos(tid, (4, tid, 3), 1).
+var_pos(3, (4, tid, 3), 2).
+ordered_vars((4, tid, 3),(3, tid, 4)).
 vars(3, (4, did, 3)).
 var_pos(4, (4, did, 3), 0).
 const_pos(did, (4, did, 3), 1).
@@ -5237,6 +5662,11 @@ var_pos(4, (4, ayear, 3), 0).
 const_pos(ayear, (4, ayear, 3), 1).
 var_pos(3, (4, ayear, 3), 2).
 ordered_vars((4, ayear, 3),(3, ayear, 4)).
+vars(3, (4, tid, 5)).
+var_pos(4, (4, tid, 5), 0).
+const_pos(tid, (4, tid, 5), 1).
+var_pos(5, (4, tid, 5), 2).
+ordered_vars((4, tid, 5),(4, tid, 5)).
 vars(3, (4, did, 5)).
 var_pos(4, (4, did, 5), 0).
 const_pos(did, (4, did, 5), 1).
@@ -5287,6 +5717,11 @@ var_pos(4, (4, ayear, 5), 0).
 const_pos(ayear, (4, ayear, 5), 1).
 var_pos(5, (4, ayear, 5), 2).
 ordered_vars((4, ayear, 5),(4, ayear, 5)).
+vars(3, (4, tid, 0)).
+var_pos(4, (4, tid, 0), 0).
+const_pos(tid, (4, tid, 0), 1).
+var_pos(0, (4, tid, 0), 2).
+ordered_vars((4, tid, 0),(0, tid, 4)).
 vars(3, (4, did, 0)).
 var_pos(4, (4, did, 0), 0).
 const_pos(did, (4, did, 0), 1).
@@ -5337,6 +5772,11 @@ var_pos(4, (4, ayear, 0), 0).
 const_pos(ayear, (4, ayear, 0), 1).
 var_pos(0, (4, ayear, 0), 2).
 ordered_vars((4, ayear, 0),(0, ayear, 4)).
+vars(3, (4, tid, 1)).
+var_pos(4, (4, tid, 1), 0).
+const_pos(tid, (4, tid, 1), 1).
+var_pos(1, (4, tid, 1), 2).
+ordered_vars((4, tid, 1),(1, tid, 4)).
 vars(3, (4, did, 1)).
 var_pos(4, (4, did, 1), 0).
 const_pos(did, (4, did, 1), 1).
@@ -5387,6 +5827,11 @@ var_pos(4, (4, ayear, 1), 0).
 const_pos(ayear, (4, ayear, 1), 1).
 var_pos(1, (4, ayear, 1), 2).
 ordered_vars((4, ayear, 1),(1, ayear, 4)).
+vars(3, (4, tid, 3)).
+var_pos(4, (4, tid, 3), 0).
+const_pos(tid, (4, tid, 3), 1).
+var_pos(3, (4, tid, 3), 2).
+ordered_vars((4, tid, 3),(3, tid, 4)).
 vars(3, (4, did, 3)).
 var_pos(4, (4, did, 3), 0).
 const_pos(did, (4, did, 3), 1).
@@ -5437,6 +5882,11 @@ var_pos(4, (4, ayear, 3), 0).
 const_pos(ayear, (4, ayear, 3), 1).
 var_pos(3, (4, ayear, 3), 2).
 ordered_vars((4, ayear, 3),(3, ayear, 4)).
+vars(3, (4, tid, 5)).
+var_pos(4, (4, tid, 5), 0).
+const_pos(tid, (4, tid, 5), 1).
+var_pos(5, (4, tid, 5), 2).
+ordered_vars((4, tid, 5),(4, tid, 5)).
 vars(3, (4, did, 5)).
 var_pos(4, (4, did, 5), 0).
 const_pos(did, (4, did, 5), 1).
@@ -5487,6 +5937,11 @@ var_pos(4, (4, ayear, 5), 0).
 const_pos(ayear, (4, ayear, 5), 1).
 var_pos(5, (4, ayear, 5), 2).
 ordered_vars((4, ayear, 5),(4, ayear, 5)).
+vars(3, (4, tid, 0)).
+var_pos(4, (4, tid, 0), 0).
+const_pos(tid, (4, tid, 0), 1).
+var_pos(0, (4, tid, 0), 2).
+ordered_vars((4, tid, 0),(0, tid, 4)).
 vars(3, (4, did, 0)).
 var_pos(4, (4, did, 0), 0).
 const_pos(did, (4, did, 0), 1).
@@ -5537,6 +5992,11 @@ var_pos(4, (4, ayear, 0), 0).
 const_pos(ayear, (4, ayear, 0), 1).
 var_pos(0, (4, ayear, 0), 2).
 ordered_vars((4, ayear, 0),(0, ayear, 4)).
+vars(3, (4, tid, 1)).
+var_pos(4, (4, tid, 1), 0).
+const_pos(tid, (4, tid, 1), 1).
+var_pos(1, (4, tid, 1), 2).
+ordered_vars((4, tid, 1),(1, tid, 4)).
 vars(3, (4, did, 1)).
 var_pos(4, (4, did, 1), 0).
 const_pos(did, (4, did, 1), 1).
@@ -5587,6 +6047,11 @@ var_pos(4, (4, ayear, 1), 0).
 const_pos(ayear, (4, ayear, 1), 1).
 var_pos(1, (4, ayear, 1), 2).
 ordered_vars((4, ayear, 1),(1, ayear, 4)).
+vars(3, (4, tid, 2)).
+var_pos(4, (4, tid, 2), 0).
+const_pos(tid, (4, tid, 2), 1).
+var_pos(2, (4, tid, 2), 2).
+ordered_vars((4, tid, 2),(2, tid, 4)).
 vars(3, (4, did, 2)).
 var_pos(4, (4, did, 2), 0).
 const_pos(did, (4, did, 2), 1).
@@ -5637,6 +6102,11 @@ var_pos(4, (4, ayear, 2), 0).
 const_pos(ayear, (4, ayear, 2), 1).
 var_pos(2, (4, ayear, 2), 2).
 ordered_vars((4, ayear, 2),(2, ayear, 4)).
+vars(3, (4, tid, 5)).
+var_pos(4, (4, tid, 5), 0).
+const_pos(tid, (4, tid, 5), 1).
+var_pos(5, (4, tid, 5), 2).
+ordered_vars((4, tid, 5),(4, tid, 5)).
 vars(3, (4, did, 5)).
 var_pos(4, (4, did, 5), 0).
 const_pos(did, (4, did, 5), 1).
@@ -5687,6 +6157,11 @@ var_pos(4, (4, ayear, 5), 0).
 const_pos(ayear, (4, ayear, 5), 1).
 var_pos(5, (4, ayear, 5), 2).
 ordered_vars((4, ayear, 5),(4, ayear, 5)).
+vars(3, (4, tid, 0)).
+var_pos(4, (4, tid, 0), 0).
+const_pos(tid, (4, tid, 0), 1).
+var_pos(0, (4, tid, 0), 2).
+ordered_vars((4, tid, 0),(0, tid, 4)).
 vars(3, (4, did, 0)).
 var_pos(4, (4, did, 0), 0).
 const_pos(did, (4, did, 0), 1).
@@ -5737,6 +6212,11 @@ var_pos(4, (4, ayear, 0), 0).
 const_pos(ayear, (4, ayear, 0), 1).
 var_pos(0, (4, ayear, 0), 2).
 ordered_vars((4, ayear, 0),(0, ayear, 4)).
+vars(3, (4, tid, 1)).
+var_pos(4, (4, tid, 1), 0).
+const_pos(tid, (4, tid, 1), 1).
+var_pos(1, (4, tid, 1), 2).
+ordered_vars((4, tid, 1),(1, tid, 4)).
 vars(3, (4, did, 1)).
 var_pos(4, (4, did, 1), 0).
 const_pos(did, (4, did, 1), 1).
@@ -5787,6 +6267,11 @@ var_pos(4, (4, ayear, 1), 0).
 const_pos(ayear, (4, ayear, 1), 1).
 var_pos(1, (4, ayear, 1), 2).
 ordered_vars((4, ayear, 1),(1, ayear, 4)).
+vars(3, (4, tid, 2)).
+var_pos(4, (4, tid, 2), 0).
+const_pos(tid, (4, tid, 2), 1).
+var_pos(2, (4, tid, 2), 2).
+ordered_vars((4, tid, 2),(2, tid, 4)).
 vars(3, (4, did, 2)).
 var_pos(4, (4, did, 2), 0).
 const_pos(did, (4, did, 2), 1).
@@ -5837,6 +6322,11 @@ var_pos(4, (4, ayear, 2), 0).
 const_pos(ayear, (4, ayear, 2), 1).
 var_pos(2, (4, ayear, 2), 2).
 ordered_vars((4, ayear, 2),(2, ayear, 4)).
+vars(3, (4, tid, 3)).
+var_pos(4, (4, tid, 3), 0).
+const_pos(tid, (4, tid, 3), 1).
+var_pos(3, (4, tid, 3), 2).
+ordered_vars((4, tid, 3),(3, tid, 4)).
 vars(3, (4, did, 3)).
 var_pos(4, (4, did, 3), 0).
 const_pos(did, (4, did, 3), 1).
@@ -5887,6 +6377,11 @@ var_pos(4, (4, ayear, 3), 0).
 const_pos(ayear, (4, ayear, 3), 1).
 var_pos(3, (4, ayear, 3), 2).
 ordered_vars((4, ayear, 3),(3, ayear, 4)).
+vars(3, (5, tid, 1)).
+var_pos(5, (5, tid, 1), 0).
+const_pos(tid, (5, tid, 1), 1).
+var_pos(1, (5, tid, 1), 2).
+ordered_vars((5, tid, 1),(1, tid, 5)).
 vars(3, (5, did, 1)).
 var_pos(5, (5, did, 1), 0).
 const_pos(did, (5, did, 1), 1).
@@ -5937,6 +6432,11 @@ var_pos(5, (5, ayear, 1), 0).
 const_pos(ayear, (5, ayear, 1), 1).
 var_pos(1, (5, ayear, 1), 2).
 ordered_vars((5, ayear, 1),(1, ayear, 5)).
+vars(3, (5, tid, 2)).
+var_pos(5, (5, tid, 2), 0).
+const_pos(tid, (5, tid, 2), 1).
+var_pos(2, (5, tid, 2), 2).
+ordered_vars((5, tid, 2),(2, tid, 5)).
 vars(3, (5, did, 2)).
 var_pos(5, (5, did, 2), 0).
 const_pos(did, (5, did, 2), 1).
@@ -5987,6 +6487,11 @@ var_pos(5, (5, ayear, 2), 0).
 const_pos(ayear, (5, ayear, 2), 1).
 var_pos(2, (5, ayear, 2), 2).
 ordered_vars((5, ayear, 2),(2, ayear, 5)).
+vars(3, (5, tid, 3)).
+var_pos(5, (5, tid, 3), 0).
+const_pos(tid, (5, tid, 3), 1).
+var_pos(3, (5, tid, 3), 2).
+ordered_vars((5, tid, 3),(3, tid, 5)).
 vars(3, (5, did, 3)).
 var_pos(5, (5, did, 3), 0).
 const_pos(did, (5, did, 3), 1).
@@ -6037,6 +6542,11 @@ var_pos(5, (5, ayear, 3), 0).
 const_pos(ayear, (5, ayear, 3), 1).
 var_pos(3, (5, ayear, 3), 2).
 ordered_vars((5, ayear, 3),(3, ayear, 5)).
+vars(3, (5, tid, 4)).
+var_pos(5, (5, tid, 4), 0).
+const_pos(tid, (5, tid, 4), 1).
+var_pos(4, (5, tid, 4), 2).
+ordered_vars((5, tid, 4),(4, tid, 5)).
 vars(3, (5, did, 4)).
 var_pos(5, (5, did, 4), 0).
 const_pos(did, (5, did, 4), 1).
@@ -6087,6 +6597,11 @@ var_pos(5, (5, ayear, 4), 0).
 const_pos(ayear, (5, ayear, 4), 1).
 var_pos(4, (5, ayear, 4), 2).
 ordered_vars((5, ayear, 4),(4, ayear, 5)).
+vars(3, (5, tid, 0)).
+var_pos(5, (5, tid, 0), 0).
+const_pos(tid, (5, tid, 0), 1).
+var_pos(0, (5, tid, 0), 2).
+ordered_vars((5, tid, 0),(0, tid, 5)).
 vars(3, (5, did, 0)).
 var_pos(5, (5, did, 0), 0).
 const_pos(did, (5, did, 0), 1).
@@ -6137,6 +6652,11 @@ var_pos(5, (5, ayear, 0), 0).
 const_pos(ayear, (5, ayear, 0), 1).
 var_pos(0, (5, ayear, 0), 2).
 ordered_vars((5, ayear, 0),(0, ayear, 5)).
+vars(3, (5, tid, 2)).
+var_pos(5, (5, tid, 2), 0).
+const_pos(tid, (5, tid, 2), 1).
+var_pos(2, (5, tid, 2), 2).
+ordered_vars((5, tid, 2),(2, tid, 5)).
 vars(3, (5, did, 2)).
 var_pos(5, (5, did, 2), 0).
 const_pos(did, (5, did, 2), 1).
@@ -6187,6 +6707,11 @@ var_pos(5, (5, ayear, 2), 0).
 const_pos(ayear, (5, ayear, 2), 1).
 var_pos(2, (5, ayear, 2), 2).
 ordered_vars((5, ayear, 2),(2, ayear, 5)).
+vars(3, (5, tid, 3)).
+var_pos(5, (5, tid, 3), 0).
+const_pos(tid, (5, tid, 3), 1).
+var_pos(3, (5, tid, 3), 2).
+ordered_vars((5, tid, 3),(3, tid, 5)).
 vars(3, (5, did, 3)).
 var_pos(5, (5, did, 3), 0).
 const_pos(did, (5, did, 3), 1).
@@ -6237,6 +6762,11 @@ var_pos(5, (5, ayear, 3), 0).
 const_pos(ayear, (5, ayear, 3), 1).
 var_pos(3, (5, ayear, 3), 2).
 ordered_vars((5, ayear, 3),(3, ayear, 5)).
+vars(3, (5, tid, 4)).
+var_pos(5, (5, tid, 4), 0).
+const_pos(tid, (5, tid, 4), 1).
+var_pos(4, (5, tid, 4), 2).
+ordered_vars((5, tid, 4),(4, tid, 5)).
 vars(3, (5, did, 4)).
 var_pos(5, (5, did, 4), 0).
 const_pos(did, (5, did, 4), 1).
@@ -6287,6 +6817,11 @@ var_pos(5, (5, ayear, 4), 0).
 const_pos(ayear, (5, ayear, 4), 1).
 var_pos(4, (5, ayear, 4), 2).
 ordered_vars((5, ayear, 4),(4, ayear, 5)).
+vars(3, (5, tid, 0)).
+var_pos(5, (5, tid, 0), 0).
+const_pos(tid, (5, tid, 0), 1).
+var_pos(0, (5, tid, 0), 2).
+ordered_vars((5, tid, 0),(0, tid, 5)).
 vars(3, (5, did, 0)).
 var_pos(5, (5, did, 0), 0).
 const_pos(did, (5, did, 0), 1).
@@ -6337,6 +6872,11 @@ var_pos(5, (5, ayear, 0), 0).
 const_pos(ayear, (5, ayear, 0), 1).
 var_pos(0, (5, ayear, 0), 2).
 ordered_vars((5, ayear, 0),(0, ayear, 5)).
+vars(3, (5, tid, 1)).
+var_pos(5, (5, tid, 1), 0).
+const_pos(tid, (5, tid, 1), 1).
+var_pos(1, (5, tid, 1), 2).
+ordered_vars((5, tid, 1),(1, tid, 5)).
 vars(3, (5, did, 1)).
 var_pos(5, (5, did, 1), 0).
 const_pos(did, (5, did, 1), 1).
@@ -6387,6 +6927,11 @@ var_pos(5, (5, ayear, 1), 0).
 const_pos(ayear, (5, ayear, 1), 1).
 var_pos(1, (5, ayear, 1), 2).
 ordered_vars((5, ayear, 1),(1, ayear, 5)).
+vars(3, (5, tid, 3)).
+var_pos(5, (5, tid, 3), 0).
+const_pos(tid, (5, tid, 3), 1).
+var_pos(3, (5, tid, 3), 2).
+ordered_vars((5, tid, 3),(3, tid, 5)).
 vars(3, (5, did, 3)).
 var_pos(5, (5, did, 3), 0).
 const_pos(did, (5, did, 3), 1).
@@ -6437,6 +6982,11 @@ var_pos(5, (5, ayear, 3), 0).
 const_pos(ayear, (5, ayear, 3), 1).
 var_pos(3, (5, ayear, 3), 2).
 ordered_vars((5, ayear, 3),(3, ayear, 5)).
+vars(3, (5, tid, 4)).
+var_pos(5, (5, tid, 4), 0).
+const_pos(tid, (5, tid, 4), 1).
+var_pos(4, (5, tid, 4), 2).
+ordered_vars((5, tid, 4),(4, tid, 5)).
 vars(3, (5, did, 4)).
 var_pos(5, (5, did, 4), 0).
 const_pos(did, (5, did, 4), 1).
@@ -6487,6 +7037,11 @@ var_pos(5, (5, ayear, 4), 0).
 const_pos(ayear, (5, ayear, 4), 1).
 var_pos(4, (5, ayear, 4), 2).
 ordered_vars((5, ayear, 4),(4, ayear, 5)).
+vars(3, (5, tid, 0)).
+var_pos(5, (5, tid, 0), 0).
+const_pos(tid, (5, tid, 0), 1).
+var_pos(0, (5, tid, 0), 2).
+ordered_vars((5, tid, 0),(0, tid, 5)).
 vars(3, (5, did, 0)).
 var_pos(5, (5, did, 0), 0).
 const_pos(did, (5, did, 0), 1).
@@ -6537,6 +7092,11 @@ var_pos(5, (5, ayear, 0), 0).
 const_pos(ayear, (5, ayear, 0), 1).
 var_pos(0, (5, ayear, 0), 2).
 ordered_vars((5, ayear, 0),(0, ayear, 5)).
+vars(3, (5, tid, 1)).
+var_pos(5, (5, tid, 1), 0).
+const_pos(tid, (5, tid, 1), 1).
+var_pos(1, (5, tid, 1), 2).
+ordered_vars((5, tid, 1),(1, tid, 5)).
 vars(3, (5, did, 1)).
 var_pos(5, (5, did, 1), 0).
 const_pos(did, (5, did, 1), 1).
@@ -6587,6 +7147,11 @@ var_pos(5, (5, ayear, 1), 0).
 const_pos(ayear, (5, ayear, 1), 1).
 var_pos(1, (5, ayear, 1), 2).
 ordered_vars((5, ayear, 1),(1, ayear, 5)).
+vars(3, (5, tid, 2)).
+var_pos(5, (5, tid, 2), 0).
+const_pos(tid, (5, tid, 2), 1).
+var_pos(2, (5, tid, 2), 2).
+ordered_vars((5, tid, 2),(2, tid, 5)).
 vars(3, (5, did, 2)).
 var_pos(5, (5, did, 2), 0).
 const_pos(did, (5, did, 2), 1).
@@ -6637,6 +7202,11 @@ var_pos(5, (5, ayear, 2), 0).
 const_pos(ayear, (5, ayear, 2), 1).
 var_pos(2, (5, ayear, 2), 2).
 ordered_vars((5, ayear, 2),(2, ayear, 5)).
+vars(3, (5, tid, 4)).
+var_pos(5, (5, tid, 4), 0).
+const_pos(tid, (5, tid, 4), 1).
+var_pos(4, (5, tid, 4), 2).
+ordered_vars((5, tid, 4),(4, tid, 5)).
 vars(3, (5, did, 4)).
 var_pos(5, (5, did, 4), 0).
 const_pos(did, (5, did, 4), 1).
@@ -6687,6 +7257,11 @@ var_pos(5, (5, ayear, 4), 0).
 const_pos(ayear, (5, ayear, 4), 1).
 var_pos(4, (5, ayear, 4), 2).
 ordered_vars((5, ayear, 4),(4, ayear, 5)).
+vars(3, (5, tid, 0)).
+var_pos(5, (5, tid, 0), 0).
+const_pos(tid, (5, tid, 0), 1).
+var_pos(0, (5, tid, 0), 2).
+ordered_vars((5, tid, 0),(0, tid, 5)).
 vars(3, (5, did, 0)).
 var_pos(5, (5, did, 0), 0).
 const_pos(did, (5, did, 0), 1).
@@ -6737,6 +7312,11 @@ var_pos(5, (5, ayear, 0), 0).
 const_pos(ayear, (5, ayear, 0), 1).
 var_pos(0, (5, ayear, 0), 2).
 ordered_vars((5, ayear, 0),(0, ayear, 5)).
+vars(3, (5, tid, 1)).
+var_pos(5, (5, tid, 1), 0).
+const_pos(tid, (5, tid, 1), 1).
+var_pos(1, (5, tid, 1), 2).
+ordered_vars((5, tid, 1),(1, tid, 5)).
 vars(3, (5, did, 1)).
 var_pos(5, (5, did, 1), 0).
 const_pos(did, (5, did, 1), 1).
@@ -6787,6 +7367,11 @@ var_pos(5, (5, ayear, 1), 0).
 const_pos(ayear, (5, ayear, 1), 1).
 var_pos(1, (5, ayear, 1), 2).
 ordered_vars((5, ayear, 1),(1, ayear, 5)).
+vars(3, (5, tid, 2)).
+var_pos(5, (5, tid, 2), 0).
+const_pos(tid, (5, tid, 2), 1).
+var_pos(2, (5, tid, 2), 2).
+ordered_vars((5, tid, 2),(2, tid, 5)).
 vars(3, (5, did, 2)).
 var_pos(5, (5, did, 2), 0).
 const_pos(did, (5, did, 2), 1).
@@ -6837,6 +7422,11 @@ var_pos(5, (5, ayear, 2), 0).
 const_pos(ayear, (5, ayear, 2), 1).
 var_pos(2, (5, ayear, 2), 2).
 ordered_vars((5, ayear, 2),(2, ayear, 5)).
+vars(3, (5, tid, 3)).
+var_pos(5, (5, tid, 3), 0).
+const_pos(tid, (5, tid, 3), 1).
+var_pos(3, (5, tid, 3), 2).
+ordered_vars((5, tid, 3),(3, tid, 5)).
 vars(3, (5, did, 3)).
 var_pos(5, (5, did, 3), 0).
 const_pos(did, (5, did, 3), 1).
@@ -6893,244 +7483,232 @@ var_member(V,(0,V0,V1)):-vars(_, Vars), Vars=(V0,V1), var_member(V,Vars).
 appears((V0,V1,V2)):- body_literal(_,_,_,(X0,X1,X2)), ordered_vars((X0,X1,X2), (V0,V1,V2)).
 var_tuple((V0,V1,V2)):- body_pred(P,3), vars(3,Vars), not bad_body(P,Vars), not type_mismatch(P,Vars), ordered_vars(Vars,OrderedVars), OrderedVars=(V0,V1,V2).
 var_member(V,(V0,V1,V2)):-vars(_, Vars), Vars=(V0,V1,V2), var_member(V,Vars).
-lower((V0,V1,V2),(X0,X1,X2)):- var_tuple((V0,V1,V2)), var_tuple((X0,X1,X2)).
-% added to exclude fixed const pos const_pos(Var, (TVAR, att, VVar), POS).
-lower((V0,V1,V2),(V0,X1,X2)):- var_tuple((V0,V1,V2)), var_tuple((V0,X1,X2)), X1 < V1, 
-        not const_pos(V1, Vars1, 1), Vars1 = (V0,V1,V2), not const_pos(X1,Vars2,1), Vars2 = (V0,X1,X2).
-
-lower((V0,V1,V2),(V0,V1,X2)):- var_tuple((V0,V1,V2)), var_tuple((V0,V1,X2)).
-
-seen_lower(Vars1, V):- V=V1-1, Vars1 = (V0,V1,V2), V0 < V < V1, lower(Vars1, Vars2), var_tuple(Vars1), appears(Vars2), var_member(V, Vars2), 
-            not head_var(_,V), not const_pos(V1, Vars1,1), not const_pos(V, Vars2, 1).
-
-gap_((V0,V1,V2),V1-1):- var_tuple((V0,V1,V2)), V0 < V < V1, var(V), not const_pos(V1, Vars1, 1), Vars1 = (V0,V1,V2).
-
-seen_lower(Vars1, V):- V=V2-1, Vars1 = (V0,V1,V2), V1 < V < V2, lower(Vars1, Vars2), var_tuple(Vars1),
-            appears(Vars2), var_member(V, Vars2), not head_var(_,V), not const_pos(V1, Vars1, 1), not const_pos(V, Vars2, 1).
-% added if it is a constant position at the middle, then consider V-witness bounded by the first and last positions
-seen_lower(Vars1, V):- V=V2-1, Vars1 = (V0,V1,V2), V0 < V < V2, lower(Vars1, Vars2), var_tuple(Vars1), appears(Vars2), var_member(V, Vars2), not head_var(_,V), const_pos(V1, Vars1, 1).
-
-
-gap_((V0,V1,V2),V2-1):- var_tuple((V0,V1,V2)), V1 < V < V2, var(V), not const_pos(V1).
-% added if it is a constant position at the middle, then consider V-witness bounded by the first and last positions
-gap_((V0,V1,V2),V2-1):- var_tuple((V0,V1,V2)), V0 < V < V2, var(V), const_pos(V1, Vars1, 1).
-
-% why it is enough to conisder only the <_lex-max element in a skipped?
+lower((V0,V1,V2),(X0,X1,X2)):- var_tuple((V0,V1,V2)), var_tuple((X0,X1,X2)), X0 < V0.
+lower((V0,V1,V2),(V0,X1,X2)):- var_tuple((V0,V1,V2)), var_tuple((V0,X1,X2)), X1 < V1.
+lower((V0,V1,V2),(V0,V1,X2)):- var_tuple((V0,V1,V2)), var_tuple((V0,V1,X2)), X2 < V2.
+seen_lower(Vars1, V):- V=V1-1, Vars1 = (V0,V1,V2), V0 < V < V1, lower(Vars1, Vars2), var_tuple(Vars1), appears(Vars2), var_member(V, Vars2), not head_var(_,V).
+gap_((V0,V1,V2),V1-1):- var_tuple((V0,V1,V2)), V0 < V < V1, var(V).
+seen_lower(Vars1, V):- V=V2-1, Vars1 = (V0,V1,V2), V1 < V < V2, lower(Vars1, Vars2), var_tuple(Vars1), appears(Vars2), var_member(V, Vars2), not head_var(_,V).
+gap_((V0,V1,V2),V2-1):- var_tuple((V0,V1,V2)), V1 < V < V2, var(V).
 gap((V0,V1,V2),V):- gap_((V0,V1,V2), _), #max{X :gap_((V0,V1,V2), X)} == V.
 :- appears((V0,V1,V2)), gap((V0,V1,V2), V), not seen_lower((V0,V1,V2),V), not head_var(_,V).
-
+type_pos((dtitle,atitle), 1, atitle).
+type_pos((aauthors,dauthors), 0, aauthors).
+type_pos((atitle,atitle), 1, atitle).
+type_pos((did,aid), 1, aid).
+type_pos((avenue,avenue), 0, avenue).
+type_pos((tid,relation), 0, tid).
+type_pos((tid,attr,aid), 0, tid).
+type_pos((tid,attr,atitle), 0, tid).
+type_pos((tid,attr,avenue), 1, attr).
+type_pos((tid,attr,atitle), 2, atitle).
+type_pos((tid,attr,dauthors), 1, attr).
+type_pos((tid,attr,aid), 2, aid).
+type_pos((avenue,dvenue), 0, avenue).
+type_pos((aauthors,aauthors), 1, aauthors).
+type_pos((aauthors,aauthors), 0, aauthors).
+type_pos((dyear,dyear), 0, dyear).
+type_pos((dvenue,avenue), 0, dvenue).
+type_pos((tid,attr,dyear), 2, dyear).
+type_pos((tid,attr,dtitle), 1, attr).
+type_pos((tid,attr,aauthors), 0, tid).
+type_pos((aid,did), 1, did).
+type_pos((ayear,ayear), 1, ayear).
+type_pos((tid,attr,dyear), 0, tid).
+type_pos((tid,attr,dauthors), 2, dauthors).
+type_pos((dvenue,avenue), 1, avenue).
+type_pos((did,did), 0, did).
+type_pos((tid,attr,aid), 1, attr).
+type_pos((dyear,ayear), 1, ayear).
+type_pos((dauthors,aauthors), 1, aauthors).
+type_pos((tid,attr,dvenue), 2, dvenue).
+type_pos((aid,did), 0, aid).
+type_pos((aid,aid), 1, aid).
+type_pos((tid,relation), 1, relation).
+type_pos((tid,attr,avenue), 2, avenue).
+type_pos((tid,attr,aauthors), 1, attr).
+type_pos((dyear,ayear), 0, dyear).
+type_pos((dvenue,dvenue), 1, dvenue).
+type_pos((ayear,dyear), 1, dyear).
+type_pos((avenue,dvenue), 1, dvenue).
+type_pos((tid,attr,aauthors), 2, aauthors).
+type_pos((dvenue,dvenue), 0, dvenue).
+type_pos((tid,attr,dtitle), 2, dtitle).
+type_pos((ayear,ayear), 0, ayear).
+type_pos((tid,attr,dvenue), 1, attr).
+type_pos((avenue,avenue), 1, avenue).
+type_pos((tid,attr,did), 2, did).
+type_pos((ayear,dyear), 0, ayear).
+type_pos((dtitle,dtitle), 0, dtitle).
+type_pos((dyear,dyear), 1, dyear).
+type_pos((tid,attr,dvenue), 0, tid).
+type_pos((dtitle,dtitle), 1, dtitle).
+type_pos((tid,attr,dyear), 1, attr).
+type_pos((tid,attr,atitle), 1, attr).
+type_pos((tid,attr,did), 1, attr).
+type_pos((tid,attr,ayear), 2, ayear).
+type_pos((tid,attr,dtitle), 0, tid).
+type_pos((dauthors,aauthors), 0, dauthors).
+type_pos((tid,attr,avenue), 0, tid).
+type_pos((dauthors,dauthors), 0, dauthors).
+type_pos((atitle,dtitle), 0, atitle).
+type_pos((tid,attr,did), 0, tid).
+type_pos((atitle,atitle), 0, atitle).
+type_pos((tid,attr,dauthors), 0, tid).
+type_pos((tid,attr,ayear), 1, attr).
+type_pos((dauthors,dauthors), 1, dauthors).
+type_pos((dtitle,atitle), 0, dtitle).
 type_pos((atitle,dtitle), 1, dtitle).
 type_pos((aid,aid), 0, aid).
-type_pos((did,did), 0, did).
-type_pos((dvenue,avenue), 0, dvenue).
-type_pos((tid,relation), 0, tid).
-type_pos((tid,attr,dauthors), 0, tid).
-type_pos((dauthors,aauthors), 1, aauthors).
-type_pos((avenue,dvenue), 0, avenue).
-type_pos((tid,attr,aauthors), 0, tid).
 type_pos((did,aid), 0, did).
-type_pos((tid,attr,dauthors), 2, dauthors).
-type_pos((tid,attr,dvenue), 1, attr).
-type_pos((dauthors,dauthors), 0, dauthors).
-type_pos((aid,did), 1, did).
-type_pos((tid,attr,dvenue), 2, dvenue).
-type_pos((tid,attr,dauthors), 1, attr).
-type_pos((ayear,ayear), 0, ayear).
-type_pos((tid,attr,avenue), 1, attr).
-type_pos((tid,attr,atitle), 0, tid).
-type_pos((dauthors,dauthors), 1, dauthors).
 type_pos((did,did), 1, did).
-type_pos((aid,did), 0, aid).
-type_pos((ayear,dyear), 1, dyear).
-type_pos((tid,attr,did), 0, tid).
-type_pos((dvenue,avenue), 1, avenue).
-type_pos((tid,attr,dyear), 2, dyear).
-type_pos((tid,attr,atitle), 1, attr).
-type_pos((tid,attr,avenue), 0, tid).
-type_pos((tid,attr,ayear), 2, ayear).
-type_pos((tid,attr,dtitle), 1, attr).
-type_pos((tid,attr,aid), 1, attr).
-type_pos((aauthors,dauthors), 0, aauthors).
-type_pos((dvenue,dvenue), 0, dvenue).
 type_pos((tid,attr,ayear), 0, tid).
-type_pos((tid,attr,dtitle), 2, dtitle).
-type_pos((tid,attr,dyear), 0, tid).
-type_pos((dtitle,atitle), 0, dtitle).
-type_pos((dvenue,dvenue), 1, dvenue).
-type_pos((aauthors,aauthors), 0, aauthors).
-type_pos((tid,attr,avenue), 2, avenue).
-type_pos((aauthors,aauthors), 1, aauthors).
-type_pos((dyear,dyear), 1, dyear).
-type_pos((avenue,dvenue), 1, dvenue).
-type_pos((avenue,avenue), 0, avenue).
-type_pos((tid,attr,dtitle), 0, tid).
-type_pos((tid,attr,dyear), 1, attr).
-type_pos((tid,attr,did), 2, did).
-type_pos((dyear,ayear), 0, dyear).
-type_pos((aid,aid), 1, aid).
-type_pos((did,aid), 1, aid).
-type_pos((tid,attr,atitle), 2, atitle).
-type_pos((dtitle,atitle), 1, atitle).
-type_pos((avenue,avenue), 1, avenue).
-type_pos((tid,relation), 1, relation).
-type_pos((tid,attr,did), 1, attr).
-type_pos((tid,attr,aauthors), 1, attr).
-type_pos((ayear,dyear), 0, ayear).
-type_pos((atitle,atitle), 1, atitle).
 type_pos((aauthors,dauthors), 1, dauthors).
-type_pos((dyear,ayear), 1, ayear).
-type_pos((dtitle,dtitle), 0, dtitle).
-type_pos((tid,attr,aid), 0, tid).
-type_pos((ayear,ayear), 1, ayear).
-type_pos((tid,attr,aauthors), 2, aauthors).
-type_pos((atitle,atitle), 0, atitle).
-type_pos((tid,attr,dvenue), 0, tid).
-type_pos((dyear,dyear), 0, dyear).
-type_pos((dtitle,dtitle), 1, dtitle).
-type_pos((atitle,dtitle), 0, atitle).
-type_pos((dauthors,aauthors), 0, dauthors).
-type_pos((tid,attr,ayear), 1, attr).
-type_pos((tid,attr,aid), 2, aid).
-:- body_literal(Rule,att,_,(_,_,V2)), #count{V0,V1: body_literal(Rule,att,_,(V0,V1,V2))} > 2.
-:- body_literal(Rule,att,_,(_,V1,_)), #count{V0,V2: body_literal(Rule,att,_,(V0,V1,V2))} > 3.
-:- body_literal(Rule,att,_,(_,V1,V2)), #count{V0: body_literal(Rule,att,_,(V0,V1,V2))} > 1.
-:- body_literal(Rule,att,_,(V0,_,_)), #count{V1,V2: body_literal(Rule,att,_,(V0,V1,V2))} > 3.
-:- body_literal(Rule,att,_,(V0,_,V2)), #count{V1: body_literal(Rule,att,_,(V0,V1,V2))} > 1.
-:- body_literal(Rule,att,_,(V0,V1,_)), #count{V2: body_literal(Rule,att,_,(V0,V1,V2))} > 1.
 :- body_literal(Rule,sim,_,(_,_)), #count{V0,V1: body_literal(Rule,sim,_,(V0,V1))} > 2.
 :- body_literal(Rule,sim,_,(_,V1)), #count{V0: body_literal(Rule,sim,_,(V0,V1))} > 1.
 :- body_literal(Rule,sim,_,(V0,_)), #count{V1: body_literal(Rule,sim,_,(V0,V1))} > 1.
+:- body_literal(Rule,att,_,(_,_,V2)), #count{V0,V1: body_literal(Rule,att,_,(V0,V1,V2))} > 1.
+:- body_literal(Rule,att,_,(_,V1,_)), #count{V0,V2: body_literal(Rule,att,_,(V0,V1,V2))} > 2.
+:- body_literal(Rule,att,_,(_,V1,V2)), #count{V0: body_literal(Rule,att,_,(V0,V1,V2))} > 1.
+:- body_literal(Rule,att,_,(V0,_,_)), #count{V1,V2: body_literal(Rule,att,_,(V0,V1,V2))} > 2.
+:- body_literal(Rule,att,_,(V0,_,V2)), #count{V1: body_literal(Rule,att,_,(V0,V1,V2))} > 1.
+:- body_literal(Rule,att,_,(V0,V1,_)), #count{V2: body_literal(Rule,att,_,(V0,V1,V2))} > 1.
 :- body_literal(_, att, _, (V0,V1,V2)), singleton(V1),singleton(V2).
 :- body_literal(_, att, _, (V0,V1,V2)), singleton(V0),singleton(V2).
 :- body_literal(_, att, _, (V0,V1,V2)), singleton(V0),singleton(V1).
-:- clause(C), #count{V : var_type(C, V,tid)} > 5.
-:- clause(C), #count{V : var_type(C, V,attr)} > 6.
-prop(ab_cb_bc,(sim,sim,sim)).
+:- clause(C), #count{V : var_type(C, V,tid)} > 4.
+:- clause(C), #count{V : var_type(C, V,attr)} > 4.
 prop(ab_ba,(sim,sim)).
-prop(not_ab_bc_ca,(sim,sim,sim)).
-prop(ab_ca_ac,(sim,sim,sim)).
 prop(not_ab_ac_bc,(sim,sim,sim)).
-prop(not_ab_ca_cb,(sim,sim,sim)).
-prop(not_ab_ac_cb,(sim,sim,sim)).
-:- prop(not_abc_ac,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,C)).
-:- prop(abc_ac,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,C)), valid_var(Rule,A),valid_var(Rule,C).
-:- prop(not_abc_dba,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,B,A)).
-:- prop(not_abc_bc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,C)).
-:- prop(abc_bc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,C)), valid_var(Rule,B),valid_var(Rule,C).
-:- prop(not_abc_bca,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,C,A)).
-:- prop(abc_bca,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,C,A)), valid_var(Rule,B),valid_var(Rule,C),valid_var(Rule,A).
-:- prop(not_abc_adb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,_,B)).
+prop(ab_ca_ac,(sim,sim,sim)).
+prop(not_ab_cb_ac,(sim,sim,sim)).
+prop(not_ab_ca_bc,(sim,sim,sim)).
+prop(not_ab_cb_ca,(sim,sim,sim)).
+prop(ab_cb_bc,(sim,sim,sim)).
 :- prop(not_abc_ba,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,A)).
-:- prop(abc_ba,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,A)), valid_var(Rule,B),valid_var(Rule,A).
+:- prop(abc_ba,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,A)), valid_var(Rule,A),valid_var(Rule,B).
+:- prop(not_abc_dec,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,_,C)).
+:- prop(not_abc_adc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,_,C)).
+:- prop(not_abc_dc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,C)).
+:- prop(not_abc_acd,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,C,_)).
+:- prop(not_abc_bcd,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,C,_)).
+:- prop(not_abc_dab,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,A,B)).
+:- prop(not_abc_bc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,C)).
+:- prop(abc_bc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,C)), valid_var(Rule,C),valid_var(Rule,B).
+:- prop(not_ab_ba,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)).
+:- prop(ab_ba,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)), valid_var(Rule,A),valid_var(Rule,B).
+:- prop(not_abc_dbc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,B,C)).
+:- prop(not_abc_bdc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,_,C)).
 :- prop(not_abc_ab,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,B)).
 :- prop(abc_ab,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,B)), valid_var(Rule,B),valid_var(Rule,A).
-:- prop(not_abc_abd,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,B,_)).
-:- prop(not_abc_acb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,C,B)).
-:- prop(abc_acb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,C,B)), valid_var(Rule,B),valid_var(Rule,A),valid_var(Rule,C).
-:- prop(not_abc_bd,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,_)).
-:- prop(not_ab_ca,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(_,A)).
-:- prop(not_abc_cda,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,_,A)).
-:- prop(not_abc_ad,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,_)).
-:- prop(not_abc_bdc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,_,C)).
-:- prop(not_abc_adc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,_,C)).
-:- prop(not_ab_cb,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(_,B)).
-:- prop(not_abc_acd,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,C,_)).
-:- prop(not_abc_cdb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,_,B)).
-:- prop(not_abc_dca,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,C,A)).
+:- prop(not_abc_cbd,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,B,_)).
 :- prop(not_abc_dae,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,A,_)).
-:- prop(not_abc_dcb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,C,B)).
-:- prop(not_abc_dbe,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,B,_)).
-:- prop(not_abc_bda,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,_,A)).
-:- prop(not_abc_dec,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,_,C)).
-:- prop(not_abc_cab,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,A,B)).
-:- prop(abc_cab,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,A,B)), valid_var(Rule,B),valid_var(Rule,C),valid_var(Rule,A).
-:- prop(not_abc_bac,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,A,C)).
-:- prop(abc_bac,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,A,C)), valid_var(Rule,B),valid_var(Rule,A),valid_var(Rule,C).
-:- prop(not_abc_bcd,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,C,_)).
-:- prop(not_abc_dea,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,_,A)).
+:- prop(not_abc_cad,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,A,_)).
+:- prop(not_abc_abc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,B,C)).
+:- prop(abc_abc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,B,C)), valid_var(Rule,B),valid_var(Rule,C),valid_var(Rule,A).
+:- prop(not_abc_ac,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,C)).
+:- prop(abc_ac,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,C)), valid_var(Rule,C),valid_var(Rule,A).
+:- prop(not_abc_cda,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,_,A)).
 :- prop(not_abc_ca,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,A)).
 :- prop(abc_ca,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,A)), valid_var(Rule,C),valid_var(Rule,A).
-:- prop(not_abc_cb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,B)).
-:- prop(abc_cb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,B)), valid_var(Rule,B),valid_var(Rule,C).
-:- prop(not_abc_dce,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,C,_)).
-:- prop(not_abc_abc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,B,C)).
-:- prop(abc_abc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,B,C)), valid_var(Rule,B),valid_var(Rule,A),valid_var(Rule,C).
-:- prop(not_abc_cba,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,B,A)).
-:- prop(abc_cba,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,B,A)), valid_var(Rule,B),valid_var(Rule,C),valid_var(Rule,A).
-:- prop(not_abc_deb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,_,B)).
 :- prop(not_abc_cde,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,_,_)).
-:- prop(not_abc_dc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,C)).
-:- prop(not_ab_ac,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,_)).
-:- prop(not_abc_cd,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,_)).
+:- prop(not_abc_dca,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,C,A)).
+:- prop(not_abc_dce,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,C,_)).
 :- prop(not_ab_bc,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,_)).
-:- prop(not_abc_bad,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,A,_)).
-:- prop(not_abc_da,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,A)).
-:- prop(not_abc_dab,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,A,B)).
-:- prop(not_abc_cbd,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,B,_)).
-:- prop(not_abc_ade,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,_,_)).
-:- prop(not_abc_bde,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,_,_)).
-:- prop(not_ab_ba,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)).
-:- prop(ab_ba,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)), valid_var(Rule,B),valid_var(Rule,A).
-:- prop(not_abc_db,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,B)).
+:- prop(not_abc_bca,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,C,A)).
+:- prop(abc_bca,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,C,A)), valid_var(Rule,C),valid_var(Rule,A),valid_var(Rule,B).
+:- prop(not_abc_bd,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,_)).
 :- prop(not_ab_ab,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)).
 :- prop(ab_ab,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)), valid_var(Rule,B),valid_var(Rule,A).
 :- prop(not_abc_dac,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,A,C)).
-:- prop(not_abc_cad,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,A,_)).
-:- prop(not_abc_dbc,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,B,C)).
+:- prop(not_abc_cb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,B)).
+:- prop(abc_cb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,B)), valid_var(Rule,C),valid_var(Rule,B).
+:- prop(not_abc_dcb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,C,B)).
+:- prop(not_abc_cdb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,_,B)).
+:- prop(not_abc_ad,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,_)).
+:- prop(not_abc_abd,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,B,_)).
+:- prop(not_ab_ac,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,_)).
+:- prop(not_ab_ca,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(_,A)).
+:- prop(not_abc_acb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,C,B)).
+:- prop(abc_acb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,C,B)), valid_var(Rule,B),valid_var(Rule,C),valid_var(Rule,A).
+:- prop(not_abc_cba,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,B,A)).
+:- prop(abc_cba,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,B,A)), valid_var(Rule,C),valid_var(Rule,A),valid_var(Rule,B).
+:- prop(not_abc_da,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,A)).
+:- prop(not_abc_ade,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,_,_)).
+:- prop(not_abc_dea,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,_,A)).
+:- prop(not_abc_deb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,_,B)).
+:- prop(not_ab_cb,(P,Q)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(_,B)).
+:- prop(not_abc_bad,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,A,_)).
+:- prop(not_abc_dbe,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,B,_)).
+:- prop(not_abc_db,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,B)).
+:- prop(not_abc_bac,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,A,C)).
+:- prop(abc_bac,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,A,C)), valid_var(Rule,C),valid_var(Rule,A),valid_var(Rule,B).
+:- prop(not_abc_bde,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,_,_)).
+:- prop(not_abc_dba,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(_,B,A)).
+:- prop(not_abc_bda,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(B,_,A)).
+:- prop(not_abc_adb,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(A,_,B)).
+:- prop(not_abc_cd,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,_)).
+:- prop(not_abc_cab,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,A,B)).
+:- prop(abc_cab,(P,Q)), body_literal(Rule,P,_,(A,B,C)), body_literal(Rule,Q,_,(C,A,B)), valid_var(Rule,B),valid_var(Rule,C),valid_var(Rule,A).
+:- prop(not_ab_ca_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(B,A)).
+:- prop(ab_ca_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(B,A)), valid_var(Rule,A),valid_var(Rule,B).
+:- prop(not_ab_cb_cd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(C,D)).
+:- prop(not_ab_bc_ad,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(A,D)).
+:- prop(not_ab_ac_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(B,A)).
+:- prop(ab_ac_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(B,A)), valid_var(Rule,A),valid_var(Rule,B).
+:- prop(not_ab_ca_cd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(C,D)).
+:- prop(not_ab_ab_cb,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)), body_literal(Rule,R,_,(C,B)).
+:- prop(not_ab_ac_cd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(C,D)).
+:- prop(not_ab_ac_db,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(D,B)).
+:- prop(not_ab_ba_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)), body_literal(Rule,R,_,(B,A)).
+:- prop(ab_ba_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)), body_literal(Rule,R,_,(B,A)), valid_var(Rule,A),valid_var(Rule,B).
+:- prop(not_ab_ca_dc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(D,C)).
+:- prop(not_ab_cb_dc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(D,C)).
+:- prop(not_ab_bc_da,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(D,A)).
+:- prop(not_ab_ac_dc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(D,C)).
+:- prop(not_ab_ca_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(B,C)).
+:- prop(ab_ca_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(B,C)), valid_var(Rule,C),valid_var(Rule,B).
+:- prop(not_ab_cb_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,C)).
+:- prop(ab_cb_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,C)), valid_var(Rule,C),valid_var(Rule,B).
+:- prop(not_ab_bc_db,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(D,B)).
+:- prop(not_ab_bc_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(B,A)).
+:- prop(ab_bc_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(B,A)), valid_var(Rule,A),valid_var(Rule,B).
 :- prop(not_ab_ca_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(A,B)).
 :- prop(ab_ca_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(A,B)), valid_var(Rule,B),valid_var(Rule,A).
-:- prop(not_ab_ac_cb,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(C,B)).
-:- prop(ab_ac_cb,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(C,B)), valid_var(Rule,B),valid_var(Rule,C).
-:- prop(not_ab_ac_dc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(D,C)).
-:- prop(not_ab_cb_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,C)).
-:- prop(ab_cb_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,C)), valid_var(Rule,B),valid_var(Rule,C).
-:- prop(not_ab_bc_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(B,A)).
-:- prop(ab_bc_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(B,A)), valid_var(Rule,B),valid_var(Rule,A).
-:- prop(not_ab_ca_ad,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(A,D)).
-:- prop(not_ab_ac_cd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(C,D)).
-:- prop(not_ab_bc_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(A,B)).
-:- prop(ab_bc_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(A,B)), valid_var(Rule,B),valid_var(Rule,A).
-:- prop(not_ab_ca_bd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(B,D)).
-:- prop(not_ab_ac_da,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(D,A)).
-:- prop(not_ab_cb_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,A)).
-:- prop(ab_cb_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,A)), valid_var(Rule,B),valid_var(Rule,A).
-:- prop(not_ab_ac_db,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(D,B)).
-:- prop(not_ab_bc_bd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(B,D)).
-:- prop(not_ab_bc_ad,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(A,D)).
-:- prop(not_ab_cb_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(A,B)).
-:- prop(ab_cb_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(A,B)), valid_var(Rule,B),valid_var(Rule,A).
-:- prop(not_ab_ab_ac,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)), body_literal(Rule,R,_,(A,C)).
-:- prop(not_ab_ba_ca,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)), body_literal(Rule,R,_,(C,A)).
-:- prop(not_ab_cb_bd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,D)).
-:- prop(not_ab_cb_ad,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(A,D)).
-:- prop(not_ab_ab_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)), body_literal(Rule,R,_,(B,A)).
-:- prop(ab_ab_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)), body_literal(Rule,R,_,(B,A)), valid_var(Rule,B),valid_var(Rule,A).
 :- prop(not_ab_ac_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(B,C)).
-:- prop(ab_ac_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(B,C)), valid_var(Rule,B),valid_var(Rule,C).
+:- prop(ab_ac_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(B,C)), valid_var(Rule,C),valid_var(Rule,B).
+:- prop(not_ab_bc_cd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(C,D)).
+:- prop(not_ab_ac_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(A,B)).
+:- prop(ab_ac_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(A,B)), valid_var(Rule,B),valid_var(Rule,A).
+:- prop(not_ab_ca_ac,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(A,C)).
+:- prop(ab_ca_ac,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(A,C)), valid_var(Rule,C),valid_var(Rule,A).
+:- prop(not_ab_bc_dc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(D,C)).
+:- prop(not_ab_cb_ac,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(A,C)).
+:- prop(ab_cb_ac,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(A,C)), valid_var(Rule,C),valid_var(Rule,A).
+:- prop(not_ab_cb_ca,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(C,A)).
+:- prop(ab_cb_ca,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(C,A)), valid_var(Rule,C),valid_var(Rule,A).
+:- prop(not_ab_ca_bd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(B,D)).
+:- prop(not_ab_cb_bd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(B,D)).
+:- prop(not_ab_bc_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(B,C)).
+:- prop(ab_bc_bc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(B,C)), valid_var(Rule,C),valid_var(Rule,B).
+:- prop(not_ab_ac_bd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(B,D)).
+:- prop(not_ab_cb_ad,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(A,D)).
+:- prop(not_ab_ca_ad,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(A,D)).
 :- prop(not_ab_ab_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)), body_literal(Rule,R,_,(A,B)).
 :- prop(ab_ab_ab,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,B)), body_literal(Rule,R,_,(A,B)), valid_var(Rule,B),valid_var(Rule,A).
-:- prop(not_ab_ca_cb,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(C,B)).
-:- prop(ab_ca_cb,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(C,B)), valid_var(Rule,B),valid_var(Rule,C).
-:- prop(not_ab_ac_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(B,A)).
-:- prop(ab_ac_ba,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(B,A)), valid_var(Rule,B),valid_var(Rule,A).
-:- prop(not_ab_bc_ca,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(C,A)).
-:- prop(ab_bc_ca,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(C,A)), valid_var(Rule,C),valid_var(Rule,A).
-:- prop(not_ab_ca_dc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(D,C)).
-:- prop(not_ab_ca_cd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(C,D)).
+:- prop(not_ab_ba_cb,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,A)), body_literal(Rule,R,_,(C,B)).
 :- prop(not_ab_ca_da,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(D,A)).
-:- prop(not_ab_bc_dc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(D,C)).
-:- prop(not_ab_ac_ad,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(A,D)).
-:- prop(not_ab_bc_cd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(C,D)).
-:- prop(not_ab_ca_db,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(D,B)).
-:- prop(not_ab_ac_bd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(B,D)).
-:- prop(not_ab_bc_da,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(D,A)).
-:- prop(not_ab_cb_dc,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(D,C)).
-:- prop(not_ab_cb_cd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(C,D)).
-:- prop(not_ab_bc_db,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(D,B)).
 :- prop(not_ab_cb_da,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(D,A)).
-:- prop(not_ab_ca_ac,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(A,C)).
-:- prop(ab_ca_ac,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(A,C)), valid_var(Rule,A),valid_var(Rule,C).
+:- prop(not_ab_ac_ad,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(A,D)).
+:- prop(not_ab_bc_bd,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(B,C)), body_literal(Rule,R,_,(B,D)).
+:- prop(not_ab_ac_da,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(A,C)), body_literal(Rule,R,_,(D,A)).
 :- prop(not_ab_cb_db,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,B)), body_literal(Rule,R,_,(D,B)).
+:- prop(not_ab_ca_db,(P,Q,R)), body_literal(Rule,P,_,(A,B)), body_literal(Rule,Q,_,(C,A)), body_literal(Rule,R,_,(D,B)).
 
 #heuristic size(N). [1000-N,true]
 
+sim(_V3,_V2),att(_V4,dtitle,_V3),att(_V5,atitle,_V2),att(_V5,aid,_V1),neg_fact(_V0,_V1),att(_V4,did,_V0)
+********** SOLUTION **********
+Precision:1.00 Recall:1.00 TP:1 FN:0 TN:3 FP:0 Size:6
+eqo(V0,V1):- att(V5,aid,V1),att(V4,did,V0),att(V4,dtitle,V3),sim(V3,V2),att(V5,atitle,V2).
+******************************

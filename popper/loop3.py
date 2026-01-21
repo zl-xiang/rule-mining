@@ -2,8 +2,8 @@ import time
 from collections import defaultdict
 from bitarray.util import subset, any_and, ones
 from functools import cache
-from itertools import chain, combinations, permutations
-from . util import timeout, format_rule, rule_is_recursive, prog_is_recursive, prog_has_invention, calc_prog_size, format_literal, Constraint, mdl_score, suppress_stdout_stderr, get_raw_prog, Literal, remap_variables, format_prog, is_int
+from itertools import chain, combinations, permutations, product
+from . util import timeout, format_rule, rule_is_recursive, prog_is_recursive, prog_has_invention, calc_prog_size, format_literal, Constraint, mdl_score, suppress_stdout_stderr, get_raw_prog, Literal, remap_variables, format_prog, is_int, MAX_VARS
 from . tester import Tester
 from . bkcons import deduce_bk_cons, deduce_recalls, deduce_type_cons, deduce_non_singletons
 from . combine import Combiner
@@ -114,6 +114,8 @@ class Popper():
         # pos_covered_bit_array -> prog_size
         # it only maintains success sets for programs where fp = 0
         success_sets = self.success_sets = {}
+        # Leon: added stores succeeded rules indexed by positive example covered
+        success_rule_sets = self.success_rule_sets = {}
         success_sets_aux = self.success_sets_aux = {}
 
         # (pos_covered_bit_array, neg_covered_bitarray) -> prog_size
@@ -169,11 +171,11 @@ class Popper():
                 settings.logger.debug(f'*** Call generator')
                 # generate a program
                 with settings.stats.duration('generate'):
+                    # frozen_set{tuple(literal_head, frozen_set{body_literals})}
                     prog = generator.get_prog()
-                    
+                    # print(prog)
                     if prog is None:
                         break
-                # print(prog)
                 settings.logger.debug(f'*** Generation finished')
                 # Leon: The function size(H) returns the **total number of literals** in the hypothesis H
                 prog_size = calc_prog_size(prog)
@@ -585,6 +587,7 @@ class Popper():
                         success_sets_aux[pos_covered] = k
                         coverage_pos[k] = pos_covered
                         coverage_neg[k] = neg_covered
+                        ## [ATTENTION] Leon maybe useful to store suceeded rules
                         prog_lookup[k] = prog
 
                         for p, s in success_sets.items():
@@ -1759,14 +1762,90 @@ def rule_subsumes(r1, r2):
     return b1.issubset(b2)
 
 def atoms_subsume(c1:set,c2:set)-> bool:
+    c2 = {Literal(predicate='att', arguments=(4, 'did', 0)), Literal(predicate='att', arguments=(4, 'dtitle', 2)), Literal(predicate='att', arguments=(3, 'aid', 1)), Literal(predicate='att', arguments=(3, 'atitle', 2))}
+    c1 = {Literal(predicate='att', arguments=(4, 'aid', 1)), Literal(predicate='att', arguments=(5, 'did', 0)), Literal(predicate='sim', arguments=(3, 2)), Literal(predicate='att', arguments=(4, 'atitle', 3)), Literal(predicate='att', arguments=(5, 'dtitle', 2))}
     # get variables of c1 and c2
-    # create mapping dict from var(c1) to var(c2)
+    head_tuple1 = {literal.arguments for literal in c1 if literal.predicate == 'att' and (literal.arguments[-1] == 0 or literal.arguments[-1] == 1)}
+    head_tuple2 = {literal.arguments for literal in c2 if literal.predicate == 'att' and (literal.arguments[-1] == 0 or literal.arguments[-1] == 1)}
+    head_vars1 = {htv1 for htv1,_,_ in head_tuple1}
+    head_vars2 = {htv2 for htv2,_,_ in head_tuple2}
+    # head should be fixed mapping, no symmetric mapping which only matters in similarity atoms
+    head_mapping = {htv1:htv2 for htv1,att1,av1 in head_tuple1 for htv2,att2,av2 in head_tuple2 if att1 == att2 and av1 == av2}
+    c1_vars = set(literal.arguments[0] for literal in c1 if  literal.predicate =='att' and literal.arguments[0] not in head_vars1)
+    print(c1_vars)
+    c2_vars = set(literal.arguments[0] for literal in c2 if  literal.predicate =='att' and literal.arguments[0] not in head_vars2)
+    # create lists of mapping dict from (tuple) var(c1) to var(c2)
+    all_mappings = []
+    if len(c1_vars) == 0 or len(c2_vars) == 0:
+        all_mappings = [head_mapping]
+    else:
+        all_mappings = get_total_mappings(c1_vars,c2_vars)
+    #print(head_mapping)
+    for mapping in all_mappings:
+        apply_mapping(c1,mapping)
+   
+    # c2_perm_c1 = permutations(c2_vars, len(c1_vars))
+    # [print(perm) for perm in c2_perm_c1]
     # replace variables of c1 to c2
     # check set containment first
     # otherwise, check attribute joins containment
     # check similarity containment
     # check on the same pair of tuples attribute join implications on similarity
-    pass
+    #pass
+
+def get_total_mappings(s1,s2):
+    set1_list = list(s1)
+    set2_list = list(s2)
+    for values in product(set2_list, repeat=len(set1_list)):
+        yield dict(zip(set1_list, values))
+        
+def apply_mapping(c1,mapping,max_vars=None)->set:
+    max_vars = MAX_VARS if max_vars == None else max_vars
+    new_c1 = set()
+    for lit1 in c1:
+        if lit1.predicate == 'att':
+            # map argument 0
+            tup_var1_mapping = mapping[lit1.arguments[0]]
+            # if not head attributes
+            # create fresh variables on the 3 position of an attribute literal (in case variable clashing after applying mapping)
+            mark = '*' if  lit1.arguments[2] != 0 and lit1.arguments[2] != 1 else ''
+            new_lit1_args = (tup_var1_mapping,lit1.arguments[1], f'{str(lit1.arguments[2])}{mark}')
+            new_c1.add((lit1.predicate,new_lit1_args))
+        elif lit1.predicate == 'sim':
+            mark1 = '*' if  lit1.arguments[0] != 0 and lit1.arguments[0] != 1 else ''
+            mark2 = '*' if  lit1.arguments[1] != 0 and lit1.arguments[1] != 1 else ''
+            new_lit1_args = (f'{str(lit1.arguments[0])}{mark1}', f'{str(lit1.arguments[1])}{mark2}')
+            new_c1.add((lit1.predicate,new_lit1_args))
+                
+    new_c1 = list(new_c1)
+    # find variables that do not appear in new_c1 from all possible variables
+    all_vars = set(range(0,max_vars))
+    new_c1_vars = set()
+    to_replace_vars = set()
+    for i, (pred,args) in enumerate(new_c1.copy()):
+        if pred == 'att':
+            new_c1_vars.add(args[0])
+            if not args[2].endswith('*'):
+                new_c1_vars.add(int(args[2]))
+                new_c1[i] = (pred,(args[0],args[1],int(args[2])))
+            else:
+                to_replace_vars.add(args[2])
+    # get variable names that are not yet used in new c1, ascending order
+    not_yet_taken = sorted(list(all_vars.difference(new_c1_vars)))
+    to_replace_vars_index = dict()
+    for i,v in enumerate(to_replace_vars):
+        to_replace_vars_index[v] = not_yet_taken[i]
+    # update new c1 again
+    for i, (pred,args) in enumerate(new_c1.copy()):
+        _args = list(args)
+        for j, arg in enumerate(args):
+            if arg in to_replace_vars:
+                _args[j] = to_replace_vars_index[arg]
+        new_c1[i] = (pred,tuple(_args))
+            
+    new_c1 = set(new_c1)
+    print(new_c1)
+    return new_c1
 
 # P1 subsumes P2 if for every rule R2 in P2 there is a rule R1 in P1 such that R1 subsumes R2
 def theory_subsumes(prog1, prog2):
@@ -1817,3 +1896,5 @@ def connected(body):
 def non_empty_powerset(iterable):
     s = tuple(iterable)
     return chain.from_iterable(combinations(s, r) for r in range(1, len(s)+1))
+
+

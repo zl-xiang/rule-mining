@@ -531,7 +531,7 @@ class Generator:
 
     # @profile
     def constrain(self, tmp_new_cons):
-        model = self.model
+        model = self.model # initialised in self.get_prog, called at the beginning of each loop
         new_cons = set()
         debug = True
         # debug = False
@@ -591,13 +591,14 @@ class Generator:
 
         for con in new_cons:
             ground_rules = self.get_ground_rules((None, con))
+            # print(ground_rules)
             for ground_rule in ground_rules:
                 _ground_head, ground_body = ground_rule
                 ground_bodies.add(ground_body)
                 # if con_type == Constraint.REDUNDANCY_CONSTRAINT1:
                 # print(sorted(ground_body))
                 self.all_ground_cons.add(frozenset(ground_body))
-
+        
         nogoods = []
         for ground_body in ground_bodies:
             nogood = []
@@ -1057,7 +1058,7 @@ class Generator:
 
         encoding = '\n'.join(encoding)
 
-        # print(encoding)
+        print(encoding)
 
         # print('ASDASDA')
         # solver = clingo.Control()
