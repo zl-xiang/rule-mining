@@ -100,7 +100,9 @@ class Generator:
             for att_tup in schema_attr_tups:
                  # if the attribute is not a tid
                 if arity == 3 and int(att_tup[-1])!= 0:
-                        xs_vars = sorted((xs[0],xs[2]))
+                        # Leon: modified to support symmetry breaking ordering
+                        # xs_vars = sorted((xs[0],xs[2]))
+                        xs_vars = sorted((0,xs[0],xs[2]))
                         xs = list(xs)
                         xs[1] = att_tup[0]
                         xs_str = ', '.join(str(x) for x in xs)
@@ -110,7 +112,9 @@ class Generator:
                                 encoding.append(f'var_pos({x}, ({xs_str}), {i}).')
                             else:
                                 encoding.append(f'const_pos({x}, ({xs_str}), {i}).')
-                        ordered_xs_str = ', '.join(str(x) for x in tuple((xs_vars[0],xs[1],xs_vars[1])))
+                        # Leon: modified to support symmetry breaking ordering, constant position assigns 0
+                        # ordered_xs_str = ', '.join(str(x) for x in tuple((xs_vars[0],xs[1],xs_vars[1])))
+                        ordered_xs_str = ', '.join(str(x) for x in xs_vars)
                         encoding.append(f'ordered_vars(({xs_str}),({ordered_xs_str})).')
         # ORDERING THINGY
         # %% appears((0,0,V0)):- body_literal(_, _, _, (V0,)), not head_var(_,V0).
@@ -147,19 +151,34 @@ class Generator:
             if k > 0 and k < max_arity:
                 xs2 += ','
             xs2 += ','.join(f'X{i}' for i in range(k, max_arity))
-            order_cons.append(f'lower(({xs1}),({xs2})):- var_tuple(({xs1})), var_tuple(({xs2})), X{k} < V{k}.')
+            # added Leon to skip const position for counting symmetry breaking ordering
+            skip_const_pos_lower = ''
+            if max_arity == 3 and k ==1:
+                skip_const_pos_lower = f', not const_pos(V{k}, Vars1, 1), Vars1 = ({xs1}), not const_pos(X{k},Vars2,1), Vars2 = ({xs2})'
+            order_cons.append(f'lower(({xs1}),({xs2})):- var_tuple(({xs1})), var_tuple(({xs2})), X{k} < V{k} {skip_const_pos_lower}.')
 
         for k in range(max_arity-1):
             # A,B,C,D
             v0 = f'V{k}'
             v1 = f'V{k+1}'
-            order_cons.append(f'seen_lower(Vars1, V):- V={v1}-1, Vars1 = ({xs1}), {v0} < V < {v1}, lower(Vars1, Vars2), var_tuple(Vars1), appears(Vars2), var_member(V, Vars2), not head_var(_,V).')
-            # Leon: TODO suspecting issue after allowing constants, where when V is grounded with non-integer constant, the operation V1-1 fails
-            order_cons.append(f'gap_(({xs1}),{v1}-1):- var_tuple(({xs1})), {v0} < V < {v1}, var(V).')
+            # added Leon (hack):
+            skip_const_pos_seen_lower = ''
+            skip_const_pos_gap_ = ''
+            if max_arity == 3:
+                skip_const_pos_seen_lower = ', not const_pos(V1, Vars1,1), not const_pos(V, Vars2, 1)'
+                
+            order_cons.append(f'seen_lower(Vars1, V):- V={v1}-1, Vars1 = ({xs1}), {v0} < V < {v1}, lower(Vars1, Vars2), var_tuple(Vars1), appears(Vars2), var_member(V, Vars2), not head_var(_,V) {skip_const_pos_seen_lower}.')
+            
+            # Leon: [solved] suspecting issue after allowing constants, where when V is grounded with non-integer constant, the operation V1-1 fails
+            order_cons.append(f'gap_(({xs1}),{v1}-1):- var_tuple(({xs1})), {v0} < V < {v1}, var(V) {skip_const_pos_gap_}.')
+        # added Leon (hack): 
+        if max_arity == 3:
+            order_cons.append('seen_lower(Vars1, V):- V=V2-1, Vars1 = (V0,V1,V2), V0 < V < V2, lower(Vars1, Vars2), var_tuple(Vars1), appears(Vars2), var_member(V, Vars2), not head_var(_,V), const_pos(V1, Vars1, 1).')
+            count_const_pos_gap = 'gap_((V0,V1,V2),V2-1):- var_tuple((V0,V1,V2)), V0 < V < V2, var(V), const_pos(V1, (V0,V1,V2), 1).'
+            order_cons.append(count_const_pos_gap)
 
-        
         order_cons.append(f'gap(({xs1}),V):- gap_(({xs1}), _), #max' + '{X :gap_((' + xs1 + '), X)} == V.')
-        
+
         order_cons.append(f':- appears(({xs1})), gap(({xs1}), V), not seen_lower(({xs1}),V), not head_var(_,V).')
 
         # print('\n'.join(order_cons))
