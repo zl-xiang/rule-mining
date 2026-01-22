@@ -269,16 +269,19 @@ class Popper():
                 # success_sets: a dictionary indexes sizes of programs that covers positive examples
                 # print(format_prog(prog), tp, success_sets, settings.noisy)
                 # tp > 0 
-                settings.logger.debug(f'success sets:{success_sets}, pos_covered: {pos_covered}')
-                if tp > 0 and success_sets and (not settings.noisy or (settings.noisy and fp==0)):
+                settings.logger.debug(f'success sets:{success_sets}, pos_covered: {pos_covered}, success_rule_sets:{success_rule_sets}')
+                if tp > 0 and success_sets and success_rule_sets and (not settings.noisy or (settings.noisy and fp==0)):
                     # print('check subsumption')
                     with settings.stats.duration('check subsumed and covers_too_few'):
                         # TODO: Leon to check here how is subsumed defined
                          # if cover the same set of positives or the positives in this round is a subset of any covered positives in previous rounds
-                        subsumed = pos_covered in success_sets or any(subset(pos_covered, xs) for xs in success_sets)
-                        subsumed_by_two = not subsumed and self.check_subsumed_by_two(pos_covered, prog_size)
-                        covers_too_few = not subsumed and not subsumed_by_two and not settings.noisy and self.check_covers_too_few(prog_size, pos_covered)
-
+                        # subsumed = pos_covered in success_sets or any(subset(pos_covered, xs) for xs in success_sets)
+                        _prog = list(prog)[0]
+                        subsumed = pos_covered in success_rule_sets and any(rule_subsume_trc(succeed_r,_prog)  for succeed_r in success_rule_sets[pos_covered])
+                        # pos_covered in success_sets or any(subset(pos_covered, xs) for xs in success_sets)
+                        # subsumed_by_two = not subsumed and self.check_subsumed_by_two(pos_covered, prog_size)
+                        # covers_too_few = not subsumed and not subsumed_by_two and not settings.noisy and self.check_covers_too_few(prog_size, pos_covered)
+                        covers_too_few = not subsumed and not settings.noisy and self.check_covers_too_few(prog_size, pos_covered)
                     if subsumed or subsumed_by_two or covers_too_few:
                         add_spec = True
                         noisy_subsumed = True
@@ -544,6 +547,13 @@ class Popper():
                         prog_lookup[k] = prog
 
                         if fp == 0:
+                            succeed_rule = list(prog)[0]
+                            if pos_covered not in success_rule_sets:
+                                success_rule_sets[pos_covered] = [succeed_rule]
+                            else:
+                                success_rule_sets[pos_covered].append(succeed_rule)
+                            # TO REMOVE
+                            print(success_rule_sets)
                             success_sets[pos_covered] = prog_size
                             for p, s in success_sets.items():
                                 if p == pos_covered:
@@ -582,6 +592,13 @@ class Popper():
                                 # AC: SOMEHOW DELETE FROM PAIRED_SUCCESS_SETS
 
                         k = hash(prog)
+                        succeed_rule = list(prog)[0]
+                        if pos_covered not in success_rule_sets:
+                            success_rule_sets[pos_covered] = [succeed_rule]
+                        else:
+                            success_rule_sets[pos_covered].append(succeed_rule)
+                        # TO REMOVE
+                        print(success_rule_sets)
                         success_sets[pos_covered] = prog_size
                         # print('=====', success_sets)
                         success_sets_aux[pos_covered] = k
@@ -1761,38 +1778,135 @@ def rule_subsumes(r1, r2):
         return False
     return b1.issubset(b2)
 
-def atoms_subsume(c1:set,c2:set)-> bool:
-    c2 = {Literal(predicate='att', arguments=(4, 'did', 0)), Literal(predicate='att', arguments=(4, 'dtitle', 2)), Literal(predicate='att', arguments=(3, 'aid', 1)), Literal(predicate='att', arguments=(3, 'atitle', 2))}
-    c1 = {Literal(predicate='att', arguments=(4, 'aid', 1)), Literal(predicate='att', arguments=(5, 'did', 0)), Literal(predicate='sim', arguments=(3, 2)), Literal(predicate='att', arguments=(4, 'atitle', 3)), Literal(predicate='att', arguments=(5, 'dtitle', 2))}
-    # get variables of c1 and c2
-    head_tuple1 = {literal.arguments for literal in c1 if literal.predicate == 'att' and (literal.arguments[-1] == 0 or literal.arguments[-1] == 1)}
-    head_tuple2 = {literal.arguments for literal in c2 if literal.predicate == 'att' and (literal.arguments[-1] == 0 or literal.arguments[-1] == 1)}
-    head_vars1 = {htv1 for htv1,_,_ in head_tuple1}
-    head_vars2 = {htv2 for htv2,_,_ in head_tuple2}
-    # head should be fixed mapping, no symmetric mapping which only matters in similarity atoms
-    head_mapping = {htv1:htv2 for htv1,att1,av1 in head_tuple1 for htv2,att2,av2 in head_tuple2 if att1 == att2 and av1 == av2}
-    c1_vars = set(literal.arguments[0] for literal in c1 if  literal.predicate =='att' and literal.arguments[0] not in head_vars1)
-    print(c1_vars)
-    c2_vars = set(literal.arguments[0] for literal in c2 if  literal.predicate =='att' and literal.arguments[0] not in head_vars2)
-    # create lists of mapping dict from (tuple) var(c1) to var(c2)
-    all_mappings = []
-    if len(c1_vars) == 0 or len(c2_vars) == 0:
-        all_mappings = [head_mapping]
-    else:
-        all_mappings = get_total_mappings(c1_vars,c2_vars)
-    #print(head_mapping)
-    for mapping in all_mappings:
-        apply_mapping(c1,mapping)
-   
-    # c2_perm_c1 = permutations(c2_vars, len(c1_vars))
-    # [print(perm) for perm in c2_perm_c1]
-    # replace variables of c1 to c2
-    # check set containment first
-    # otherwise, check attribute joins containment
-    # check similarity containment
-    # check on the same pair of tuples attribute join implications on similarity
-    #pass
+def rule_subsume_trc(r1, r2):
+    # r1 subsumes r2 if r1 is a subset of r2
+    h1, b1 = r1
+    h2, b2 = r2
+    print('**** rule_subsume_trc:',h1,h2)
+    if h1 != None and h2 == None:
+        return False
+    return atoms_subsume(b1,b2,head_included=True)
 
+def atoms_subsume(c1:set,c2:set,head_included=False)-> bool:
+    # c2 = {Literal(predicate='att', arguments=(4, 'did', 0)), Literal(predicate='att', arguments=(4, 'dtitle', 2)), Literal(predicate='att', arguments=(3, 'aid', 1)), Literal(predicate='att', arguments=(3, 'atitle', 2))}
+    # c1 = {Literal(predicate='att', arguments=(4, 'aid', 1)), Literal(predicate='att', arguments=(5, 'did', 0)), Literal(predicate='sim', arguments=(3, 2)), Literal(predicate='att', arguments=(4, 'atitle', 3)), Literal(predicate='att', arguments=(5, 'dtitle', 2))}
+    # get variables of c1 and c2
+    if head_included:
+        head_tuple1 = {literal.arguments for literal in c1 if literal.predicate == 'att' and (literal.arguments[-1] == 0 or literal.arguments[-1] == 1)}
+        head_tuple2 = {literal.arguments for literal in c2 if literal.predicate == 'att' and (literal.arguments[-1] == 0 or literal.arguments[-1] == 1)}
+        # if one of the head is empty while the other is not empty, return False
+        if not head_tuple2 or  not head_tuple1:
+            return False
+        else:
+            head_vars1 = {htv1 for htv1,_,_ in head_tuple1}
+            head_vars2 = {htv2 for htv2,_,_ in head_tuple2}
+            # head should be fixed mapping, no symmetric mapping which only matters in similarity atoms
+            head_mapping = {htv1:htv2 for htv1,att1,av1 in head_tuple1 for htv2,att2,av2 in head_tuple2 if att1 == att2 and av1 == av2}
+            c1_vars = set(literal.arguments[0] for literal in c1 if  (literal.predicate =='att') and (literal.arguments[0] not in head_vars1))
+            # print(c1_vars)
+            c2_vars = set(literal.arguments[0] for literal in c2 if  (literal.predicate =='att') and (literal.arguments[0] not in head_vars2))
+            print('**** head vars1:',head_vars1)
+            print('**** head vars2:',head_vars2)
+            print('**** body vars1:',c1_vars)
+            print('**** body vars2:',c2_vars)
+            # create lists of mapping dict from (tuple) var(c1) to var(c2)
+            if not c1_vars or not c2_vars:
+                all_mappings = [head_mapping]
+            else:
+                all_mappings = get_total_mappings(c1_vars,c2_vars)
+                # TO REMOVE
+                print('**** total mapping:',all_mappings)
+    # if only body variables
+    else:
+        c1_vars = set(literal.arguments[0] for literal in c1 if  literal.predicate =='att')
+        # print(c1_vars)
+        c2_vars = set(literal.arguments[0] for literal in c2 if  literal.predicate =='att')
+        if not c1_vars or not c2_vars:
+            return False
+        all_mappings = get_total_mappings(c1_vars,c2_vars)
+
+    c2_tups = {(lit.predicate,(lit.arguments)) for lit in c2}
+    c2_joins = set()
+    for tup, _tup in combinations(c2_tups, 2):
+        if tup[0] == 'att' and _tup[0] == 'att' and tup != _tup:
+            if tup[1][2] == _tup[1][2]:
+                c2_joins.add((tup[:-1],_tup[:-1]))
+    #print(head_mapping)
+    # TO REMOVE
+    ind = 0
+  
+    for mapping in all_mappings:
+        # applying a mapping from var(c1) to var(c2)
+        c1h = apply_mapping(c1,mapping)
+        # TO REMOVE
+        ind+=1
+        print(f'**** applied mapping {str(ind)}')
+        print(f'    **** before:',c1)
+        print(f'    **** after:',c1h)
+        # check set containment first
+        # issubset means subseteq
+        if c1h.issubset(c2_tups):
+            # TO REMOVE
+            print(f'**** subset subsume')
+            print(f'    **** c1h:',c1h)
+            print(f'    **** c2:',c2)
+            return True
+        # otherwise, check attribute joins containment
+        else:
+            # for every pair of att(tid1,att1,v) att(tid2,att2,v) in c1h, there exist a pair in c2
+            included_flag = True
+            
+            for tup1 in c1h:
+                for tup2 in c1h:
+                    if tup1[0] == 'att' and tup2[0] == 'att' and tup1[:-1] != tup2[:-1]:
+                        var1 = tup1[1][2]
+                        var2 = tup2[1][2]
+                        if var1 == var2:
+                            included_flag = tup1 in c2_tups and tup2 in c2_tups
+            # if there is a pair of attribute joins in c1h not in c2, it c1 \not subsumes c2
+            # TO REMOVE
+            print(f'**** join check')
+            print(f'    **** c2 includes c1h:',included_flag)
+            if not included_flag:
+                continue
+            # check similarity containment [skipped] -  if sim containment holds c1h is already a subset of c2
+            # check on the same pair of tuples attribute join implications on similarity
+            # Note that joins in the same equivalence class have the same variable, so sim-atoms certainly hold variables from different equiv classes.
+            # Therefore, no sim-atom is implied by any joins in the same rule bodies
+            for tup1 in c1h:
+                if tup1[0] == 'sim':
+                    # a variable occurs in sim-atoms may in different att atoms
+                    # here look at for the cross product of att-atoms associating to the pair of sim variables in c1h
+                    # if there exist a pair that make a join in c2
+                    sim_var1 = tup1[1][0]
+                    sim_var2 = tup1[1][1]
+                    sim_var_range = {sim_var1:[],sim_var2:[]}
+                    for tup2 in c1h:
+                        if tup2[0] == 'att':
+                            if tup2[1][2] == sim_var1:
+                                sim_var_range[sim_var1].append((tup2[0],tup2[1]))
+                            elif tup2[1][2] == sim_var2:
+                                 sim_var_range[sim_var2].append((tup2[0],tup2[1]))
+                    pairs  = product(sim_var_range[sim_var1],sim_var_range[sim_var2])
+                    included_flag = any(((p[0],p[1]) in c2_joins or (p[1],p[0]) in c2_joins) for p in pairs)
+                    # TO REMOVE
+                    print(f'**** sim containment check')
+                    print(f'    **** c2 includes c1h:', included_flag)
+                    #if not any(((p[0],p[1]) in c2_joins or (p[1],p[0]) in c2_joins) for p in pairs):
+                    if not included_flag:
+                        included_flag = False
+                        break
+            if not included_flag:
+                continue
+            else:
+                # TO REMOVE
+                print(f'**** sim containment check survied')
+                # survived all the checks return true
+                return included_flag
+    # checked all and no match
+    return False
+    
+# create lists of mapping dict from (tuple) var(c1) to var(c2)
 def get_total_mappings(s1,s2):
     set1_list = list(s1)
     set2_list = list(s2)
@@ -1844,7 +1958,7 @@ def apply_mapping(c1,mapping,max_vars=None)->set:
         new_c1[i] = (pred,tuple(_args))
             
     new_c1 = set(new_c1)
-    print(new_c1)
+    # print(new_c1)
     return new_c1
 
 # P1 subsumes P2 if for every rule R2 in P2 there is a rule R1 in P1 such that R1 subsumes R2

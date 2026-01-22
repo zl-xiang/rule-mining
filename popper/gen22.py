@@ -251,7 +251,7 @@ class Generator:
 
         solver.configuration.solve.models = 0
         # TO REMOVE
-        print(encoding)
+        #print(encoding)
         solver.add('base', [], encoding)
         solver.ground([('base', [])])
         self.solver = solver

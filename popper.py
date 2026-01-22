@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 from popper.util import Settings
-from popper.loop import learn_solution
-from popper.loop3 import atoms_subsume
+# rom popper.loop import learn_solution
+from popper.loop3 import learn_solution
 
 if __name__ == '__main__':
     settings = Settings(cmd_line=True)

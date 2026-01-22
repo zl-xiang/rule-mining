@@ -173,7 +173,7 @@ class Popper():
                     
                     if prog is None:
                         break
-                # print(prog)
+                print(prog)
                 settings.logger.debug(f'*** Generation finished')
                 # Leon: The function size(H) returns the **total number of literals** in the hypothesis H
                 prog_size = calc_prog_size(prog)

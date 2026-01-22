@@ -2,8 +2,8 @@ import time
 from collections import defaultdict
 from bitarray.util import subset, any_and, ones
 from functools import cache
-from itertools import chain, combinations, permutations
-from . util import timeout, format_rule, rule_is_recursive, prog_is_recursive, prog_has_invention, calc_prog_size, format_literal, Constraint, mdl_score, suppress_stdout_stderr, get_raw_prog, Literal, remap_variables, format_prog
+from itertools import chain, combinations, permutations, product
+from . util import timeout, format_rule, rule_is_recursive, prog_is_recursive, prog_has_invention, calc_prog_size, format_literal, Constraint, mdl_score, suppress_stdout_stderr, get_raw_prog, Literal, remap_variables, format_prog, is_int, MAX_VARS
 from . tester import Tester
 from . bkcons import deduce_bk_cons, deduce_recalls, deduce_type_cons, deduce_non_singletons
 from . combine import Combiner
@@ -265,6 +265,8 @@ class Popper():
                 # success_sets is set later after testing
                 # success_sets: a dictionary indexes sizes of programs that covers positive examples
                 # print(format_prog(prog), tp, success_sets, settings.noisy)
+                # tp > 0 
+                settings.logger.debug(f'success sets:{success_sets}, pos_covered: {pos_covered}')
                 if tp > 0 and success_sets and (not settings.noisy or (settings.noisy and fp==0)):
                     # print('check subsumption')
                     with settings.stats.duration('check subsumed and covers_too_few'):
@@ -579,6 +581,7 @@ class Popper():
                         success_sets_aux[pos_covered] = k
                         coverage_pos[k] = pos_covered
                         coverage_neg[k] = neg_covered
+                        ## [ATTENTION] Leon maybe useful to store suceeded rules
                         prog_lookup[k] = prog
 
                         for p, s in success_sets.items():
@@ -1271,13 +1274,24 @@ class Popper():
         head, body = rule
         _head_pred, head_args = head
         head_arity = len(head_args)
-        body_vars = frozenset(x for literal in body for x in literal.arguments if x >= head_arity)
+        body_vars = frozenset(x for literal in body for x in literal.arguments if  is_int(x) and x >= head_arity)
         subset = range(head_arity, self.settings.max_vars)
         for xs in permutations(subset, len(body_vars)):
             xs = head_args + xs
             new_body = []
             for pred, args in body:
-                new_args = tuple(xs[arg] for arg in args)
+                # new_args = tuple(xs[arg] for arg in args)
+                # new_literal = (pred, new_args)
+                # new_body.append(new_literal)
+                new_args = list()
+                # first head_arity of variables of xs are head variables if body_literal is the range of head vars
+                # so here only the variables that are above head_arity is changed
+                for arg in args:
+                    if is_int(arg):
+                        new_args.append(xs[arg]) 
+                    else:
+                        new_args.append(arg)
+                new_args = tuple(new_args)
                 new_literal = (pred, new_args)
                 new_body.append(new_literal)
             yield frozenset(new_body)
@@ -1605,7 +1619,7 @@ def get_bk_cons(settings, tester):
 
 
         type_cons = tuple(deduce_type_cons(settings))
-        print(type_cons)
+        # print(type_cons)
         if settings.showcons:
             for x in type_cons:
                 print('type_con', x)
