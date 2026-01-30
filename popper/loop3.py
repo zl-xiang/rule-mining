@@ -263,6 +263,7 @@ class Popper():
                         with settings.stats.duration('find mucs'):
                             cons_ = tuple(self.explain_incomplete(prog))
                             new_cons.extend(cons_)
+                            print('---- pruned more general 2')
                             pruned_more_general = len(cons_) > 0
                 # Leon: where success_sets is called?
                 # success_sets is set later after testing
@@ -277,7 +278,7 @@ class Popper():
                          # if cover the same set of positives or the positives in this round is a subset of any covered positives in previous rounds
                         # subsumed = pos_covered in success_sets or any(subset(pos_covered, xs) for xs in success_sets)
                         _prog = list(prog)[0]
-                        subsumed = pos_covered in success_rule_sets and any(rule_subsume_trc(succeed_r,_prog)  for succeed_r in success_rule_sets[pos_covered])
+                        subsumed = pos_covered in success_rule_sets and any(self.rule_subsume_trc(succeed_r,_prog)  for succeed_r in success_rule_sets[pos_covered])
                         # pos_covered in success_sets or any(subset(pos_covered, xs) for xs in success_sets)
                         # subsumed_by_two = not subsumed and self.check_subsumed_by_two(pos_covered, prog_size)
                         # covers_too_few = not subsumed and not subsumed_by_two and not settings.noisy and self.check_covers_too_few(prog_size, pos_covered)
@@ -308,6 +309,7 @@ class Popper():
                         # I guess not neccessarily, could be that a rule found here corresponds to different collection in success set?
                         # but is there aniti-monontonicity? lesser literals in rule body derive more atoms if strictly proceeds, 
                         subsumed_progs = self.subsumed_or_covers_too_few(prog, seen=set())
+                    print('------- subsumed programs: ', subsumed_progs)
                     pruned_more_general = len(subsumed_progs) > 0
                     # Leon If no generalisation are found
                     if settings.showcons and not pruned_more_general:
@@ -410,28 +412,29 @@ class Popper():
                 #             print('\t','r2',format_rule(order_rule(r2)))
                 #         new_cons.append((Constraint.GENERALISATION, [r1,r2], None, None))
 
-                with settings.stats.duration('check_reducible1'):
-                    xs, pruned_smaller = self.check_redundant_literal(prog)
-                    if pruned_smaller:
-                        pruned_more_general = True
-                    if xs:
-                        add_spec = True
-                        for x in xs:
-                            if settings.showcons:
-                                print('\t', 'REDUCIBLE_1:', '\t', ','.join(format_literal(literal) for literal in x))
-                            new_cons.append((Constraint.UNSAT, x))
+                # with settings.stats.duration('check_reducible1'):
+                #     xs, pruned_smaller = self.check_redundant_literal(prog)
+                #     if pruned_smaller:
+                #         print('---- pruned more general 1')
+                #         pruned_more_general = True
+                #     if xs:
+                #         add_spec = True
+                #         for x in xs:
+                #             if settings.showcons:
+                #                 print('\t', 'REDUCIBLE_1:', '\t', ','.join(format_literal(literal) for literal in x))
+                #             new_cons.append((Constraint.UNSAT, x))
 
                 # CHECK WHETHER THE PROGRAM DOES NOT DISCRIMINATE AGAINST NEGATIVE EXAMPLES
                 # this paper outlines the idea: # https://arxiv.org/pdf/2502.01232
-                if not add_spec and not pruned_more_general and settings.datalog and not settings.recursion_enabled and num_neg > 0:
-                    with settings.stats.duration('check_reducible2'):
-                        bad_prog = self.check_neg_reducible(prog)
-                        if bad_prog:
-                            add_spec = True
-                            pruned_more_general = True
-                            if settings.showcons:
-                                print('\t', 'REDUCIBLE_2:', '\t', format_prog(bad_prog))
-                            new_cons.append((Constraint.SPECIALISATION, bad_prog))
+                # if not add_spec and not pruned_more_general and settings.datalog and not settings.recursion_enabled and num_neg > 0:
+                #     with settings.stats.duration('check_reducible2'):
+                #         bad_prog = self.check_neg_reducible(prog)
+                #         if bad_prog:
+                #             add_spec = True
+                #             pruned_more_general = True
+                #             if settings.showcons:
+                #                 print('\t', 'REDUCIBLE_2:', '\t', format_prog(bad_prog))
+                #             new_cons.append((Constraint.SPECIALISATION, bad_prog))
 
                 # must cover minimum number of examples
                 if not add_spec and not pruned_more_general:
@@ -552,8 +555,6 @@ class Popper():
                                 success_rule_sets[pos_covered] = [succeed_rule]
                             else:
                                 success_rule_sets[pos_covered].append(succeed_rule)
-                            # TO REMOVE
-                            print(success_rule_sets)
                             success_sets[pos_covered] = prog_size
                             for p, s in success_sets.items():
                                 if p == pos_covered:
@@ -1293,7 +1294,15 @@ class Popper():
             else:
                 assert(False)
         return out
-
+    def rule_subsume_trc(self, r1, r2):
+        # r1 subsumes r2 if r1 is a subset of r2
+        h1, b1 = r1
+        h2, b2 = r2
+        print('**** rule_subsume_trc:',h1,h2)
+        if h1 != None and h2 == None:
+            return False
+        return atoms_subsume(b1,b2,head_included=True, max_vars = self.settings.max_vars)
+    
     def find_variants(self, rule):
         head, body = rule
         _head_pred, head_args = head
@@ -1778,16 +1787,9 @@ def rule_subsumes(r1, r2):
         return False
     return b1.issubset(b2)
 
-def rule_subsume_trc(r1, r2):
-    # r1 subsumes r2 if r1 is a subset of r2
-    h1, b1 = r1
-    h2, b2 = r2
-    print('**** rule_subsume_trc:',h1,h2)
-    if h1 != None and h2 == None:
-        return False
-    return atoms_subsume(b1,b2,head_included=True)
 
-def atoms_subsume(c1:set,c2:set,head_included=False)-> bool:
+
+def atoms_subsume(c1:set,c2:set,head_included=False, max_vars = MAX_VARS)-> bool:
     # c2 = {Literal(predicate='att', arguments=(4, 'did', 0)), Literal(predicate='att', arguments=(4, 'dtitle', 2)), Literal(predicate='att', arguments=(3, 'aid', 1)), Literal(predicate='att', arguments=(3, 'atitle', 2))}
     # c1 = {Literal(predicate='att', arguments=(4, 'aid', 1)), Literal(predicate='att', arguments=(5, 'did', 0)), Literal(predicate='sim', arguments=(3, 2)), Literal(predicate='att', arguments=(4, 'atitle', 3)), Literal(predicate='att', arguments=(5, 'dtitle', 2))}
     # get variables of c1 and c2
@@ -1837,7 +1839,7 @@ def atoms_subsume(c1:set,c2:set,head_included=False)-> bool:
   
     for mapping in all_mappings:
         # applying a mapping from var(c1) to var(c2)
-        c1h = apply_mapping(c1,mapping)
+        c1h = apply_mapping(c1,mapping,max_vars)
         # TO REMOVE
         ind+=1
         print(f'**** applied mapping {str(ind)}')
@@ -1930,6 +1932,11 @@ def apply_mapping(c1,mapping,max_vars=None)->set:
             mark2 = '*' if  lit1.arguments[1] != 0 and lit1.arguments[1] != 1 else ''
             new_lit1_args = (f'{str(lit1.arguments[0])}{mark1}', f'{str(lit1.arguments[1])}{mark2}')
             new_c1.add((lit1.predicate,new_lit1_args))
+        # for tuple range atom
+        else:
+            tup_var1_mapping = mapping[lit1.arguments[0]]
+            new_lit1_args = tuple([tup_var1_mapping])
+            new_c1.add((lit1.predicate,new_lit1_args))
                 
     new_c1 = list(new_c1)
     # find variables that do not appear in new_c1 from all possible variables
@@ -1947,8 +1954,11 @@ def apply_mapping(c1,mapping,max_vars=None)->set:
     # get variable names that are not yet used in new c1, ascending order
     not_yet_taken = sorted(list(all_vars.difference(new_c1_vars)))
     to_replace_vars_index = dict()
+    
     for i,v in enumerate(to_replace_vars):
+        print(i,to_replace_vars,not_yet_taken)
         to_replace_vars_index[v] = not_yet_taken[i]
+    print(new_c1)
     # update new c1 again
     for i, (pred,args) in enumerate(new_c1.copy()):
         _args = list(args)

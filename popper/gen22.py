@@ -6,7 +6,7 @@ import clingo.script
 import pkg_resources
 from . util import Constraint, Literal, is_int
 from clingo import Function, Number, Tuple_
-from itertools import permutations
+from itertools import permutations, combinations
 
 def arg_to_symbol(arg):
     if isinstance(arg, tuple):
@@ -251,7 +251,7 @@ class Generator:
 
         solver.configuration.solve.models = 0
         # TO REMOVE
-        #print(encoding)
+        # print(encoding)
         solver.add('base', [], encoding)
         solver.ground([('base', [])])
         self.solver = solver
@@ -278,11 +278,15 @@ class Generator:
         head = settings.head_literal
         body = set()
         cached_literals = settings.cached_literals
+        # print(cached_literals)
         # Leon: Fixed atoms of body_literals on vars position may contain constants failed to parse
         for atom in model:
             args = atom.arguments
             # pred: arg[1], tuple: vars
-            body.add(cached_literals[args[1].name, tuple(args[3].arguments)])
+            # print(args[3])
+            vars = args[3].arguments if not is_int(str(args[3])) else [args[3]]
+            # there's an inconsistency here for unary atoms, where the arguments in generator program should be a single integer i, here is a tuple (i,)
+            body.add(cached_literals[args[1].name, tuple(vars)])
         rule = head, frozenset(body)
         return frozenset({rule})
 
@@ -296,10 +300,12 @@ class Generator:
     def constrain(self, tmp_new_cons):
         new_ground_cons = set()
         # new_ground_cons_typed = {}
+        
         for xs in tmp_new_cons:
             con_type = xs[0]
             con_prog = xs[1]
-
+            # print(con_prog)
+            # print(tuple(con_prog))
             if con_type == Constraint.GENERALISATION or con_type == Constraint.BANISH:
                 con_size = None
                 if self.settings.noisy and len(xs)>2:
@@ -332,7 +338,7 @@ class Generator:
                 #    new_ground_cons_typed[int(con_type)].update(cons_)            
                 new_ground_cons.update(cons_)
         # TO REMOVE        
-        # [print(i,c) for i,c in new_ground_cons_typed.items()]
+        # [print(i,c) for i,c in new_ground_cons_typed.items() if i == int(Constraint.GENERALISATION)]
         tmp = self.model.context.add_nogood
         cached_clingo_atoms = self.cached_clingo_atoms
 
@@ -372,6 +378,7 @@ class Generator:
 
     def build_generalisation_constraint3(self, prog, size=None):
         rule = tuple(prog)[0]
+        # print(rule)
         for body in self.find_variants(rule, max_rule_vars=True):
             body = list(body)
             body.append((True, 'body_size', (0, len(body))))
@@ -413,8 +420,11 @@ class Generator:
                         new_args.append(xs[arg]) 
                     else:
                         new_args.append(arg)
-                new_args = tuple(new_args)
-                new_literal = (True, 'body_literal', (0, pred, len(new_args), new_args))
+                
+                len_new_args = len(new_args)
+                new_args = tuple(new_args) if len_new_args >1 else new_args[0]
+                
+                new_literal = (True, 'body_literal', (0, pred, len_new_args, new_args))
                 new_body.append(new_literal)
             yield frozenset(new_body)
 

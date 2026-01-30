@@ -34,6 +34,14 @@ head_literal(0,eqo,A,Vars):-
     head_pred(eqo,A),
     head_vars(A,Vars). % only one head_vars-fact head_vars(eqo,(0,1)).
 
+{body_literal(0,R,1,Tid): head_var(0,Var),
+    var_pos(Var,Vars,_),
+    body_literal(0,att,3,Bvars),
+    var_pos(Var,Bvars,2),
+    const_pos(Attr,Bvars,1), fixed_var_type(Var,Attr), target(R,Attr,_),
+    var_pos(Tid,Bvars,0)}=2.
+   
+
 % to generate only those relevant to head
 %% Picking body literals
 % Base case, always starts with the relations that bound the head variables
@@ -42,6 +50,12 @@ head_literal(0,eqo,A,Vars):-
     type_pos(Types, 2, Attr),
     type(att,Types),
     fixed_var_type(Var,Attr)}=2.
+
+% expand the body with a relation atom if there exist some relational atom that has a compatible attrbute with the atom to be generated
+{body_literal(0,R,1,Tid)}:- body_literal(0,R1,1,Tid1), has_sort(R1,Attr1), has_sort(R,Attr2), compatible_attr(Attr1,Attr2), vars(3,Vars), var_pos(Tid,Vars,0), Tid!=Tid1.
+
+
+range_restricted(Tid1) :- body_literal(C,R1,1,Tid1), body_literal(C,att,3,Bvars1), var_pos(Tid1, Bvars1, 0).
 
 
 % Generate whatever
@@ -54,13 +68,16 @@ head_literal(0,eqo,A,Vars):-
     const_pos(Attr1, Bvars1, 1), 
     const_pos(Attr2, Bvars2, 1),
     compatible_attr(Attr1,Attr2),
+    var_pos(Tid1, Bvars1, 0), range_restricted(Tid1),
+    var_pos(Tid2, Bvars2, 0), range_restricted(Tid2),
     var_pos(Svar1, Bvars1, 2),
     var_pos(Svar2, Bvars2, 2), Svar1 != Svar2.
 
 %%% Leon this is very expensive [TO be OPTIMISED] %%% 
 % expand a body literal of a different attribute on the same tuple 
 {body_literal(0,att,3,Bvars)}:-
-    body_literal(0,att,3,Bvars1),
+    body_literal(0,att,3,Bvars1), 
+    range_restricted(Tid),
     const_pos(Attr1, Bvars1, 1), const_pos(Attr2, Bvars, 1),
     var_pos(Tid, Bvars1, 0), var_pos(Tid, Bvars, 0), Attr1!=Attr2. % TODO: require the expanded variable to be a new variable or add a constraint to prevent join on incompatible attributes
 
@@ -70,12 +87,14 @@ head_literal(0,eqo,A,Vars):-
 {body_literal(0,att,3,Bvars)}:-
     body_literal(0,att,3,Bvars1),
     const_pos(Attr1, Bvars1, 1), const_pos(Attr2, Bvars, 1),
+    range_restricted(Tid1), range_restricted(Tid2),
     var_pos(Tid1, Bvars1, 0), var_pos(Tid2, Bvars, 0), compatible_attr(Attr1,Attr2), Attr1!=Attr2,
     var_pos(Var, Bvars, 2), var_pos(Var, Bvars1, 2).
 
 {body_literal(0,att,3,Bvars)}:-
     body_literal(0,att,3,Bvars1),
     const_pos(Attr1, Bvars1, 1), const_pos(Attr2, Bvars, 1),
+    range_restricted(Tid1),range_restricted(Tid2),
     var_pos(Tid1, Bvars1, 0), var_pos(Tid2, Bvars, 0), Tid1!= Tid2, compatible_attr(Attr1,Attr2),
     var_pos(Var, Bvars, 2), var_pos(Var, Bvars1, 2).
 
@@ -212,7 +231,7 @@ bound(C,Var) :- body_literal(C,sim,2,Vars), var_member(Var,Vars), body_literal(C
 same_tuple_var(C,Vars1,Vars2):- body_literal(C,att,3,Vars1), body_literal(C,att,3,Vars2),  
         var_pos(Tid,Vars1,0),  var_pos(Tid,Vars2,0).
 
-unsafe_tid_range(C,Vars1,Vars2) :- same_tuple_var(C,Vars1,Vars2), const_pos(Attr1,Vars1,1), const_pos(Attr2,Vars2,1), has_sort(R1,Attr1),has_sort(R2,Attr2), R1!=R2.
+unsafe_tid_range(C,Vars1,Vars2) :- same_tuple_var(C,Vars1,Vars2), const_pos(Attr1,Vars1,1), const_pos(Attr2,Vars2,1), #count{R:has_sort(R,Attr1),has_sort(R,Attr2)} <1.
 
 
 %% TODO: check why the following do not generate connected rule
@@ -238,16 +257,34 @@ unsafe_tid_range(C,Vars1,Vars2) :- same_tuple_var(C,Vars1,Vars2), const_pos(Attr
 :- body_literal(C,sim,2,Vars), var_member(Var,Vars), not bound(C,Var).
 
 % no body literals join on tid and attribute values
-:- body_literal(C,att,3,Vars), var_pos(Var,Vars,0), body_literal(C,att,3,Vars1), var_pos(Var,Vars1,2).
+% :- body_literal(C,att,3,Vars), var_pos(Var,Vars,0), body_literal(C,att,3,Vars1), var_pos(Var,Vars1,2).
 
 % no joins on incompatible attributes
 :- body_literal(C,att,3,Vars), var_pos(Var,Vars,2), body_literal(C,att,3,Vars1), var_pos(Var,Vars1,2), 
         const_pos(Attr1, Vars, 1), const_pos(Attr2, Vars1, 1), not compatible_attr(Attr1,Attr2).
 
-:- body_literal(C,att,3,Vars), var_pos(Var,Vars,0), body_literal(C,sim,2,Vars1), var_member(Var,Vars1).
+% no similarity comparison on tid
+:- body_literal(C,R,1,Tid),  body_literal(C,sim,2,Vars1), var_member(Tid,Vars1).
+
 
 % no body literals join on tid and attribute values
-% :- body_literal(C,att,3,Vars), var_pos(Var,Vars,0), body_literal(C,att,3,Vars1), var_pos(Var,Vars1,2).
+:- body_literal(C,R,1,Tid), body_literal(C,att,3,Vars1), var_pos(Tid,Vars1,2).
+
+
+% body literal that has attribute Attr, 
+:- body_literal(C,att,3,Vars), var_pos(Tid,Vars,0),const_pos(Attr,Vars,1), #count{1:body_literal(C,R,1,Tid),has_sort(R,Attr)}<1.
+
+% no rules with head variable unbounded on the fixed pair attribute specified
+% not on tid
+:- head_literal(C,eqo,_,Hvars), var_pos(Tid,Hvars,_),body_literal(C,R,1,Tid).
+% not on different attributes than the fixed type
+:- head_literal(C,eqo,_,Hvars), fixed_var_type(Var,Attr), var_pos(Var,Hvars,_),body_literal(C,att,3,Bvars), var_pos(Var,Bvars,2), const_pos(Attr1,Bvars,1), Attr!=Attr1.
+
+% no tid range over different relations
+:- body_literal(0,R,1,Tid), body_literal(0,R1,1,Tid), R!= R1.
+
+% no unrestricted occurance of tuple id
+:- body_literal(C,att,3,(Tid,Attr,Val)), not range_restricted(Tid).
 %%%%%%%%%% ER rule mining connectivity %%%%%%%%%%%%
 
 % head_connected(C,Var):-

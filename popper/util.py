@@ -13,6 +13,7 @@ from contextlib import contextmanager
 class Literal(NamedTuple):
     predicate: str
     arguments: tuple
+    
 
 clingo.script.enable_python()
 
