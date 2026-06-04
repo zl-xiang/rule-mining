@@ -3,16 +3,17 @@ from collections import defaultdict
 from bitarray.util import subset, any_and, ones
 from functools import cache
 from itertools import chain, combinations, permutations, product
-from . util import timeout, format_rule, rule_is_recursive, prog_is_recursive, prog_has_invention, calc_prog_size, format_literal, Constraint, mdl_score, suppress_stdout_stderr, get_raw_prog, Literal, remap_variables, format_prog, is_int, MAX_VARS
-from . tester import Tester
-from . bkcons import deduce_bk_cons, deduce_recalls, deduce_type_cons, deduce_non_singletons
+from . util import timeout, format_rule, rule_is_recursive, prog_is_recursive, prog_has_invention, calc_prog_size, calc_rule_size, format_literal, Constraint, mdl_score, suppress_stdout_stderr, get_raw_prog, Literal, remap_variables, format_prog, is_int, MAX_VARS
+#from . tester import Tester
+from . tester_asp import Tester
+from . bkcons import deduce_bk_cons, deduce_recalls, deduce_type_cons, deduce_non_singletons, deduce_sim_defined
 from . combine import Combiner
-
-
+from . trc_subsume import rule_subsume_trc, compute_core
+from . subsume_cons import build_gen_rules, build_gen_rules4
+from . trc_util import parse_rule
 def load_solver(settings, tester, coverage_pos, coverage_neg, prog_lookup):
     if settings.debug:
         settings.logger.debug(f'Load exact solver: {settings.solver}')
-
     if settings.solver not in ['rc2', 'uwr', 'wmaxcdcl']:
         print('INVALID SOLVER')
         exit()
@@ -63,6 +64,7 @@ def load_solver(settings, tester, coverage_pos, coverage_neg, prog_lookup):
     return Combiner(settings, tester, coverage_pos, coverage_neg, prog_lookup)
 
 class Popper():
+    
     def __init__(self, settings, tester):
         self.settings = settings
         self.tester = tester
@@ -70,6 +72,7 @@ class Popper():
 
         # AC: SELF.SEEN_PROG CAN GROW VERY BIG
         self.seen_prog = set()
+        self.seen_cores = dict()
         self.unsat = set()
         self.tmp = {}
         self.seen_allsat = set()
@@ -83,17 +86,8 @@ class Popper():
 
         uncovered = ones(self.num_pos)
 
-        if settings.noisy:
-            min_score = None
-            saved_scores = dict()
-            settings.best_prog_score = 0, num_pos, num_neg, 0, 0
-            settings.best_mdl = num_pos
-            # save hypotheses for which we pruned spec / gen from a certain size only
-            # once we update the best mdl score, we can prune spec / gen from a better size for some of these
-            self.seen_hyp_spec, self.seen_hyp_gen = defaultdict(list), defaultdict(list)
-            max_size = min((1 + settings.max_body) * settings.max_rules, num_pos)
-        else:
-            max_size = (1 + settings.max_body) * settings.max_rules
+        range_pair = self.settings.range_pair
+        max_size = (1 + settings.max_body) * settings.max_rules
 
         settings.max_size = max_size
 
@@ -173,41 +167,97 @@ class Popper():
                 with settings.stats.duration('generate'):
                     # frozen_set{tuple(literal_head, frozen_set{body_literals})}
                     prog = generator.get_prog()
-                    # print(prog)
+                    # print('------- prog 1111: ', format_prog(prog))
                     if prog is None:
                         break
                 settings.logger.debug(f'*** Generation finished')
                 # Leon: The function size(H) returns the **total number of literals** in the hypothesis H
                 prog_size = calc_prog_size(prog)
-                is_recursive = settings.recursion_enabled and prog_is_recursive(prog)
-                has_invention = settings.pi_enabled and prog_has_invention(prog)
+                # is_recursive = settings.recursion_enabled and prog_is_recursive(prog)
+                # has_invention = settings.pi_enabled and prog_has_invention(prog)
 
                 settings.stats.total_programs += 1
 
-                if settings.stats.total_programs % 10000 == 0:
-                    tester.janus_clear_cache()
+                # if settings.stats.total_programs % 10000 == 0:
+                #     tester.janus_clear_cache()
 
                 if settings.debug:
                     settings.logger.debug(f'Program {settings.stats.total_programs}:')
                     settings.logger.debug(format_prog(prog))
+                    # TO REMOVE
+                    # print(f'Program {settings.stats.total_programs}:')
+                    # print(format_prog(prog))
                 # Leon: print on changes of program size
                 if last_size is None or prog_size != last_size:
                     size_change = True
                     last_size = prog_size
                     settings.search_depth = prog_size
-                    settings.logger.info(f'Generating programs of size: {prog_size}')
+                    settings.logger.debug(f'Generating programs of size: {prog_size}')
+                    # TO REMOVE
+                    #print(f'Generating programs of size: {prog_size}')
+                ### TODO: cahce that checks subsumption before testing
+                ### TODO: !!!! do we cache bad rules? i guess no? bad combinations are abandoned early on
+                # check whether equivalent rule in seen_cores and status of such cores
+                # status = (pos_covered, consistent)
+                # iterate seen cores
+                skip_flag = False
+                
+                for core, status in self.seen_cores.items():
+                    core_str = core
+                    core = parse_rule(core)
+                    _prog = list(prog)[0]
+                    # if pos_covered = T and consistent = T and _prog > core (prog could be a good generalisations of seen core)
+                    # or
+                    # pos_covered = T and consistent = F and core > _prog (prog could be a good specialisations of seen core)
+                    # proceed testing
+                    if status == (True, True) and rule_subsume_trc(core,_prog,range_pair):
+                        settings.logger.debug(f'*** [Skipped] exists seen_rule {core_str} > prog {format_rule(_prog)}, and seen_rule [covers pos] and [consistent] ')
+                        skip_flag = True
+                        break
+                    elif status == (True, False) and rule_subsume_trc(_prog,core,range_pair):
+                        settings.logger.debug(f'*** [Skipped] exists prog {format_rule(_prog)} > seen_rule {core_str}, and seen_rule [covers pos] and [inconsistent] ')
+                        skip_flag = True
+                        new_cons.append((Constraint.GENERALISATION, prog))
+                        with settings.stats.duration('constrain'):
+                            generator.constrain(new_cons)
+                        break
+                    # if (status == (True, True) and rule_subsume_trc(_prog,core,range_pair) and not rule_subsume_trc(core,_prog,range_pair)) or\
+                    # (status == (True, False) and rule_subsume_trc(core,_prog,range_pair) and not rule_subsume_trc(_prog,core,range_pair)):
+                    #     break
+                        # new_cons.append((Constraint.SPECIALISATION, prog))
+                    # BAD RULES
+                    ## for the two cases that are allowed for testing, 
+                        # if pos covered is false, specialisations are pruned (probably won't see such rules anymore)
+                    # for each core
+                        # check 
+                        # if the same size
+                        # if 
+                if skip_flag:
+                    continue
+                
                 ## Leon: testing against examples here!
+                settings.logger.debug('[Leon] Start testing ...')
                 with settings.stats.duration('test'):
-                    if settings.noisy:
-                        pos_covered, neg_covered, inconsistent, skipped, skip_early_neg = tester.test_prog_noisy(prog, prog_size)
-                    else:
-                        pos_covered, inconsistent = tester.test_prog(prog)
-                        # @CH: can you explain these?
-                        skipped, skip_early_neg = False, False
-                        # print(pos_covered)
-                # 
+
+                    pos_covered, neg_covered = tester.test_prog_all(prog)
+                    
+                    # @CH: can you explain these?
+                    skipped, skip_early_neg = False, False
+                    # print(pos_covered)
+                settings.logger.debug('[Leon] End testing ...')
                 tp = pos_covered.count(1)
                 fn = num_pos-tp
+                _fp = neg_covered.count(1)
+                neg_size = _fp + neg_covered.count(0)
+                inconsistent = _fp > int(self.settings.fp_tolerance/100 * neg_size)
+                covers_pos = tp >= 1
+                # force to check sequentially
+                delta = self.settings.delta
+                inconsistent = inconsistent or (covers_pos and _fp/tp >= delta)
+                if covers_pos:
+                    prog_core = compute_core(list(prog)[0],range_pair)
+                    prog_core_str = format_rule(prog_core)
+                    self.seen_cores[prog_core_str] = (covers_pos, not inconsistent)
                 ## Leon: success here return
                 # if non-separable program covers all examples, stop
                 if not inconsistent and tp == num_pos and not skipped:
@@ -216,29 +266,6 @@ class Popper():
                     settings.best_prog_score = num_pos, 0, num_neg, 0, prog_size
                     settings.best_mdl = prog_size
                     return
-
-                if settings.noisy and not skipped:
-                    fp = neg_covered.count(1)
-                    tn = num_neg-fp
-                    score = tp, fn, tn, fp, prog_size
-                    mdl = mdl_score(fn, fp, prog_size)
-                    if settings.debug:
-                        settings.logger.debug(f'tp:{tp} fn:{fn} tn:{tn} fp:{fp} mdl:{mdl}')
-                    saved_scores[prog] = [fp, fn, prog_size]
-                    if not min_score:
-                        min_score = prog_size
-
-                    if mdl < settings.best_mdl:
-                        if skip_early_neg:
-                            assert False
-                        # HORRIBLE
-                        combiner.best_cost = mdl
-                        settings.best_prog_score = score
-                        settings.solution = prog
-                        settings.best_mdl = mdl
-                        settings.max_literals = mdl-1
-                        settings.print_incomplete_solution2(prog, tp, fn, tn, fp, prog_size)
-                        new_cons.extend(self.build_constraints_previous_hypotheses(mdl, prog_size))
 
                 # if it does not cover any example, prune specialisations
                 if tp == 0:
@@ -258,36 +285,36 @@ class Popper():
                     add_gen = True
 
                 # if the program does not cover any positive examples, check whether it is has an unsat core
-                if not has_invention:
-                    if tp < min_coverage or (settings.noisy and tp <= prog_size):
-                        with settings.stats.duration('find mucs'):
-                            cons_ = tuple(self.explain_incomplete(prog))
-                            new_cons.extend(cons_)
-                            print('---- pruned more general 2')
-                            pruned_more_general = len(cons_) > 0
+                # Leon, something wrong here!!!
+                # if tp < min_coverage or tp <= prog_size:
+                #     with settings.stats.duration('find mucs'):
+                #         cons_ = tuple(self.explain_incomplete(prog))
+                #         print('------- prog 2222: ', prog)
+                #         new_cons.extend(cons_)
+                #         print('---- pruned more general 2')
+                #         pruned_more_general = len(cons_) > 0
                 # Leon: where success_sets is called?
                 # success_sets is set later after testing
                 # success_sets: a dictionary indexes sizes of programs that covers positive examples
                 # print(format_prog(prog), tp, success_sets, settings.noisy)
                 # tp > 0 
-                settings.logger.debug(f'success sets:{success_sets}, pos_covered: {pos_covered}, success_rule_sets:{success_rule_sets}')
-                if tp > 0 and success_sets and success_rule_sets and (not settings.noisy or (settings.noisy and fp==0)):
-                    # print('check subsumption')
-                    with settings.stats.duration('check subsumed and covers_too_few'):
-                        # TODO: Leon to check here how is subsumed defined
-                         # if cover the same set of positives or the positives in this round is a subset of any covered positives in previous rounds
-                        # subsumed = pos_covered in success_sets or any(subset(pos_covered, xs) for xs in success_sets)
-                        _prog = list(prog)[0]
-                        subsumed = pos_covered in success_rule_sets and any(self.rule_subsume_trc(succeed_r,_prog)  for succeed_r in success_rule_sets[pos_covered])
-                        # pos_covered in success_sets or any(subset(pos_covered, xs) for xs in success_sets)
-                        # subsumed_by_two = not subsumed and self.check_subsumed_by_two(pos_covered, prog_size)
-                        # covers_too_few = not subsumed and not subsumed_by_two and not settings.noisy and self.check_covers_too_few(prog_size, pos_covered)
-                        covers_too_few = not subsumed and not settings.noisy and self.check_covers_too_few(prog_size, pos_covered)
-                    if subsumed or subsumed_by_two or covers_too_few:
-                        add_spec = True
-                        noisy_subsumed = True
-
-                if not settings.noisy and not has_invention and not is_recursive and (subsumed or subsumed_by_two or covers_too_few):
+                # settings.logger.debug(f'success sets:{success_sets}, pos_covered: {pos_covered}')
+                # if tp > 0 and success_sets and success_rule_sets:
+                #     # print('check subsumption')
+                #     with settings.stats.duration('check subsumed and covers_too_few'):
+                #          # if cover the same set of positives or the positives in this round is a subset of any covered positives in previous rounds
+                #         # subsumed = pos_covered in success_sets or any(subset(pos_covered, xs) for xs in success_sets)
+                #         _prog = list(prog)[0]
+                #         # subsumed = pos_covered in success_sets or any(subset(pos_covered, xs) for xs in success_sets)
+                #         subsumed = pos_covered in success_rule_sets and any(rule_subsume_trc(succeed_r,_prog,settings.range_pair)  for succeed_r in success_rule_sets[pos_covered])
+                #         # pos_covered in success_sets or any(subset(pos_covered, xs) for xs in success_sets)
+                #         # subsumed_by_two = not subsumed and self.check_subsumed_by_two(pos_covered, prog_size)
+                #         # covers_too_few = not subsumed and not subsumed_by_two and not settings.noisy and self.check_covers_too_few(prog_size, pos_covered)
+                #         covers_too_few = not subsumed  and self.check_covers_too_few(prog_size, pos_covered)
+                #     if subsumed or subsumed_by_two or covers_too_few:
+                #         add_spec = True
+                ## [Leon] SKIPPED, since the specialisation we add is a core, which is already the "most general" form of the subsumed rule
+                # if  (subsumed or subsumed_by_two or covers_too_few):
                     
                     # TODO: FIND MOST GENERAL SUBSUMED RECURSIVE PROGRAM
                     # xs = self.subsumed_or_covers_too_few2(prog, check_coverage=False, check_subsumed=True)
@@ -303,40 +330,40 @@ class Popper():
 
                     # If a program is subsumed or doesn't cover enough examples, we search for the most general subprogram that also is also subsumed or doesn't cover enough examples
                     # only applies to non-recursive and non-PI programs
-                    subsumed_progs = []
-                    with settings.stats.duration('find most general subsumed/covers_too_few'):
-                        # is it kinda of searching for rules that are equivalent to r_curr but with better size here
-                        # I guess not neccessarily, could be that a rule found here corresponds to different collection in success set?
-                        # but is there aniti-monontonicity? lesser literals in rule body derive more atoms if strictly proceeds, 
-                        subsumed_progs = self.subsumed_or_covers_too_few(prog, seen=set())
-                    print('------- subsumed programs: ', subsumed_progs)
-                    pruned_more_general = len(subsumed_progs) > 0
-                    # Leon If no generalisation are found
-                    if settings.showcons and not pruned_more_general:
-                        if subsumed:
-                            print('\t', 'SUBSUMED:', '\t', format_prog(prog))
-                        elif subsumed_by_two:
-                            print('\t', 'SUBSUMED BY TWO:', '\t', format_prog(prog))
-                        elif covers_too_few:
-                            print('\t', 'COVERS TOO FEW:', '\t', format_prog(prog))
+                    # subsumed_progs = []
+                    # with settings.stats.duration('find most general subsumed/covers_too_few'):
+                    #     # is it kinda of searching for rules that are equivalent to r_curr but with better size here
+                    #     # I guess not neccessarily, could be that a rule found here corresponds to different collection in success set?
+                    #     # but is there aniti-monontonicity? lesser literals in rule body derive more atoms if strictly proceeds, 
+                    #     #subsumed_progs = self.subsumed_or_covers_too_few(prog, seen=set())
+                    #     # TODO !!! do not need to find all generalisations here, to pass the program directly prune core
+                    #     subsumed_progs = self.find_all_gen(prog=prog)
+                    #     # print('------- prog 3333: ', format_prog(prog))
+                    # # print('------- subsumed programs: ', subsumed_progs)
+                    # pruned_more_general = len(subsumed_progs) > 0
+                    # # Leon If no generalisation are found
+                    # if settings.showcons and not pruned_more_general:
+                    #     if subsumed:
+                    #         print('\t', 'SUBSUMED:', '\t', format_prog(prog))
+                    #     elif subsumed_by_two:
+                    #         print('\t', 'SUBSUMED BY TWO:', '\t', format_prog(prog))
+                    #     elif covers_too_few:
+                    #         print('\t', 'COVERS TOO FEW:', '\t', format_prog(prog))
                     # print(subsumed_progs)
                     # Leon If generalisations are found, prune all specialisations of the program and found generalisations
-                    for subsumed_prog, message in subsumed_progs:
-                        if settings.showcons:
-                            print('\t', message, '\t', format_prog(subsumed_prog))
+                    # for subsumed_prog, message in subsumed_progs:
+                    #     if settings.showcons:
+                    #         print('\t', message, '\t', format_prog(subsumed_prog))
+                    #     subsumed_prog_ = frozenset(remap_variables(rule) for rule in subsumed_prog)
+                        
+                    #     # TODO !!! leads to redudant computation of cores!
+                    #     # Do we still need to compute core provided size is from small to large?
+                    #     new_cons.append((Constraint.SPECIALISATION, subsumed_prog_))
 
-                        subsumed_prog_ = frozenset(remap_variables(rule) for rule in subsumed_prog)
-                        new_cons.append((Constraint.SPECIALISATION, subsumed_prog_))
-
-                if not settings.noisy and not pruned_more_general:
+                if not pruned_more_general:
                     if inconsistent:
                         # if inconsistent, prune generalisations
                         add_gen = True
-                        if is_recursive:
-                            combiner.add_inconsistent(prog)
-                            cons_ = frozenset(self.explain_inconsistent(prog))
-                            new_cons.extend(cons_)
-                            pruned_sub_inconsistent = len(cons_) > 0
                     else:
                         # messy thing so the combiner can look at something
                         neg_covered = frozenset()
@@ -344,6 +371,7 @@ class Popper():
                     # if consistent and partially complete, test whether functional
                     if not inconsistent and settings.functional_test and tp > 0 and not pruned_more_general:
                         if tester.is_non_functional(prog):
+                            #print('------- prog 4444: ', format_prog(prog))
                             # if not functional, rule out generalisations and set as inconsistent
                             add_gen = True
                             # V.IMPORTANT: do not prune specialisations!
@@ -353,88 +381,9 @@ class Popper():
                             # check whether any subprograms are non-functional
                             with settings.stats.duration('explain_none_functional'):
                                 cons_ = explain_none_functional(settings, tester, prog)
+                                #print('------- prog 5555: ', format_prog(prog))
                                 new_cons.extend(cons_)
 
-                if settings.noisy:
-                    # if a program of size k covers less than k positive examples, we can prune its specialisations
-                    # otherwise no useful mdl induction has taken place
-                    if tp <= prog_size:
-                        add_spec = True
-
-                    # we can prune specialisations with size greater than prog_size+fp or tp
-                    # only prune if the specialisation bounds are smaller than existing bounds
-                    if not skipped:
-                        spec_size_ = min([tp, fp + prog_size])
-                        if spec_size_ <= prog_size:
-                            add_spec = True
-                        elif len(prog) == 1 and spec_size_ < settings.max_body + 1 and spec_size_ < settings.max_literals:
-                            spec_size = spec_size_
-                        elif len(prog) > 1 and spec_size_ < settings.max_literals:
-                            spec_size = spec_size_
-
-                    if skipped or skip_early_neg:
-                        # only prune if the generalisation bounds are smaller than existing bounds
-                        gen_size_ = fn + prog_size
-                        if gen_size_ <= prog_size:
-                            add_gen = True
-                        if gen_size_ < settings.max_literals:
-                            gen_size = gen_size_
-                    else:
-                        # only prune if the generalisation bounds are smaller than existing bounds
-                        gen_size_ = min([fn + prog_size, num_pos-fp, settings.best_mdl - mdl + num_pos + prog_size])
-                        if gen_size_ <= prog_size:
-                            add_gen = True
-                        if gen_size_ < settings.max_literals:
-                            gen_size = gen_size_
-
-                # remove generalisations of programs with redundant literals
-                if is_recursive:
-                    for rule in prog:
-                        if rule_is_recursive(rule) and settings.max_rules == 2:
-                            continue
-                        if tester.has_redundant_literal(frozenset([rule])):
-                            add_gen = True
-                            new_cons.append((Constraint.GENERALISATION, [rule]))
-                            if settings.showcons:
-                                print('\t', format_rule(rule), '\t', 'has_redundant_literal')
-
-                # remove a subset of theta-subsumed rules when learning recursive programs with more than two rules
-                if settings.max_rules > 2 and is_recursive:
-                    new_cons.append((Constraint.TMP_ANDY, prog))
-
-                # remove generalisations of programs with redundant rules
-                # if is_recursive and len(prog) > 2 and tester.has_redundant_rule(prog):
-                #     with settings.stats.duration('has_redundant_rule'):
-                #         add_gen = True
-                #         r1, r2 = tester.find_redundant_rules(prog)
-                #         if settings.showcons:
-                #             print('\t','r1',format_rule(order_rule(r1)))
-                #             print('\t','r2',format_rule(order_rule(r2)))
-                #         new_cons.append((Constraint.GENERALISATION, [r1,r2], None, None))
-
-                # with settings.stats.duration('check_reducible1'):
-                #     xs, pruned_smaller = self.check_redundant_literal(prog)
-                #     if pruned_smaller:
-                #         print('---- pruned more general 1')
-                #         pruned_more_general = True
-                #     if xs:
-                #         add_spec = True
-                #         for x in xs:
-                #             if settings.showcons:
-                #                 print('\t', 'REDUCIBLE_1:', '\t', ','.join(format_literal(literal) for literal in x))
-                #             new_cons.append((Constraint.UNSAT, x))
-
-                # CHECK WHETHER THE PROGRAM DOES NOT DISCRIMINATE AGAINST NEGATIVE EXAMPLES
-                # this paper outlines the idea: # https://arxiv.org/pdf/2502.01232
-                # if not add_spec and not pruned_more_general and settings.datalog and not settings.recursion_enabled and num_neg > 0:
-                #     with settings.stats.duration('check_reducible2'):
-                #         bad_prog = self.check_neg_reducible(prog)
-                #         if bad_prog:
-                #             add_spec = True
-                #             pruned_more_general = True
-                #             if settings.showcons:
-                #                 print('\t', 'REDUCIBLE_2:', '\t', format_prog(bad_prog))
-                #             new_cons.append((Constraint.SPECIALISATION, bad_prog))
 
                 # must cover minimum number of examples
                 if not add_spec and not pruned_more_general:
@@ -442,204 +391,101 @@ class Popper():
                         add_spec = True
 
                 add_to_combiner = False
-                if settings.noisy and not skipped and not skip_early_neg and not is_recursive and not has_invention and tp > prog_size+fp and fp+prog_size < settings.best_mdl and not noisy_subsumed:
-
-                    local_delete = set()
-                    ignore_this_prog = (pos_covered, neg_covered) in success_sets_noise
-
-
-                    # if pos_covered is a subset and neg_covered is a superset of a previously seen program (which must be of equal size or smaller) then we can ignore this program
-                    if not ignore_this_prog:
-                        # find all progs where pos_covered is a subset of pos_covered_ of the other prog
-                        # s_pos_ = set.intersection(*(covered_by_pos[ex] for ex in pos_covered))
-                        s_pos = set.intersection(*(covered_by_pos[ex] for ex, ex_covered_ in enumerate(pos_covered) if ex_covered_ == 1))
-                        # now check whether neg_covered is a superset of the other program
-                        for prog1 in s_pos:
-                            n1 = coverage_neg[prog1]
-                            # if neg_covered(old) ⊆ new_covered(new) then ignore new
-                            if subset(n1, neg_covered):
-                                ignore_this_prog = True
-                                # print('skip1')
-                                break
-
-                    if not ignore_this_prog and (inconsistent or fp>0):
-                        # neg_covered is a subset of all programs in s_neg
-                        s_neg = set.intersection(*(covered_by_neg[ex] for ex, ex_covered_ in enumerate(neg_covered) if ex_covered_ == 1))
-                        # if neg_covered(new) ⊆ neg_covered(old)
-                        for prog1 in s_neg:
-                            # if pos_covered(old) ⊆ pos_covered(new)
-                            if subset(coverage_pos[prog1], pos_covered):
-                                size1, tp1, fp1 = scores[prog1]
-                                if size1 == prog_size:
-                                    # ignore OLD
-                                    # print('ignore old')
-                                    local_delete.add(prog1)
-                                    continue
-
-                                if fp == fp1 and (tp-prog_size) < (tp1-size1):
-                                    # NEW tp:50 fp:1 size:6 memberofdomainregion(V0,V1):- synsetdomaintopicof(V2,V3),synsetdomaintopicof(V1,V3),hypernym(V2,V4),membermeronym(V0,V5),synsetdomaintopicof(V2,V4).
-                                    # OLD tp:49 fp:1 size:4 memberofdomainregion(V0,V1):- synsetdomaintopicof(V1,V3),instancehypernym(V2,V3),membermeronym(V0,V4).
-                                    # print('skip2')
-                                    ignore_this_prog = True
-                                    break
-
-                                if tp == tp1 and (fp+prog_size) >= (fp1+size1):
-                                    # NEW tp:10 fp:1 mdl:350 less_toxic(V0,V1):- ring_subst_3(V1,V4),ring_substitutions(V1,V3),alk_groups(V0,V3),x_subst(V0,V2,V5).
-                                    # OLD tp:10 fp:2 mdl:350 less_toxic(V0,V1):- ring_substitutions(V0,V4),x_subst(V0,V3,V2),ring_subst_3(V1,V5).
-                                    # print('skip3')
-                                    ignore_this_prog = True
-                                    break
-
-                                if (tp-fp-prog_size) <= (tp1-fp1-size1):
-                                    # NEW tp:12 fp:3 size:7 less_toxic(V0,V1):- gt(V2,V5),gt(V2,V3),ring_subst_2(V1,V4),ring_substitutions(V0,V3),alk_groups(V0,V2),ring_substitutions(V1,V5).
-                                    # OLD tp:11 fp:4 size:3 less_toxic(V0,V1):- ring_subst_2(V1,V3),r_subst_3(V0,V2).
-                                    # print('skip4')
-                                    ignore_this_prog = True
-                                    break
-
-                    # backtrack prune for consistent programs
-                    if not inconsistent:
-                        # new is consistent
-                        # if pos_covered(old) ⊆ pos_covered(new) and size(old) >= size(new) then ignore old
-                        not_covered = tester.pos_examples_ ^ pos_covered
-                        progs_not_subsumed = set.union(*(covered_by_pos[ex] for ex, ex_covered_ in enumerate(not_covered) if ex_covered_ == 1))
-                        all_progs = set.union(*(covered_by_pos[ex] for ex, ex_covered_ in enumerate(tester.pos_examples_) if ex_covered_ == 1))
-                        s_pos = all_progs.difference(progs_not_subsumed)
-                        for prog1 in s_pos:
-                            size1, tp1, fp1 = scores[prog1]
-                            if size1 >= prog_size:
-                                local_delete.add(prog1)
-
-                    for k in local_delete:
-                        assert(k in combiner.saved_progs|to_combine)
-                        if k in combiner.saved_progs:
-                            combiner.saved_progs.remove(k)
-                        elif k in to_combine:
-                            to_combine.remove(k)
-
-                        k_pos, k_neg = coverage_pos[k], coverage_neg[k]
-                        del success_sets_noise[(k_pos, k_neg)]
-                        for ex, ex_covered_ in enumerate(k_pos):
-                            if ex_covered_ == 1:
-                                covered_by_pos[ex].remove(k)
-                        for ex, ex_covered_ in enumerate(k_neg):
-                            if ex_covered_ == 1:
-                                covered_by_neg[ex].remove(k)
-                        del coverage_pos[k]
-                        del coverage_neg[k]
-                        del scores[k]
-                        del cached_prog_size[k]
-                        del prog_lookup[k]
-
-                    if not ignore_this_prog:
-                        success_sets_noise[(pos_covered, neg_covered)] = prog, prog_size, fn, fp, tp
-                        add_to_combiner = True
-                        k = hash(prog)
-
-                        for ex, x in enumerate(pos_covered):
-                            if x == 1:
-                                covered_by_pos[ex].add(k)
-                        for ex, x in enumerate(neg_covered):
-                            if x == 1:
-                                covered_by_neg[ex].add(k)
-
-                        coverage_pos[k] = pos_covered
-                        coverage_neg[k] = neg_covered
-                        cached_prog_size[k] = prog_size
-                        scores[k] = prog_size, tp, fp
-                        prog_lookup[k] = prog
-
-                        if fp == 0:
-                            succeed_rule = list(prog)[0]
-                            if pos_covered not in success_rule_sets:
-                                success_rule_sets[pos_covered] = [succeed_rule]
-                            else:
-                                success_rule_sets[pos_covered].append(succeed_rule)
-                            success_sets[pos_covered] = prog_size
-                            for p, s in success_sets.items():
-                                if p == pos_covered:
-                                    continue
-                                # print(p, pos_covered, p|pos_covered)
-                                paired_success_sets[s+prog_size].add(p|pos_covered)
+               
                 ### Leon: default setting goes here
-                elif not settings.noisy:
-                    # if consistent, covers at least one example, is not subsumed, and has no redundancy, try to find a solution
-                    settings.logger.debug(f"[Leon] inconsistent: {str(inconsistent)}, subsumed: {str(subsumed)}, add_gen: {str(add_gen)}, tp: {str(tp)}, pruned_more_general: {str(pruned_more_general)}")
-                    if not inconsistent and not subsumed and not add_gen and tp > 0 and not pruned_more_general:
-                        add_to_combiner = True
-                        # print("=======", success_sets.items(),settings.recursion_enabled)
-                        if not settings.recursion_enabled:
-                            to_delete = []
-                            
-                            for pos_covered2, prog_size2 in success_sets.items():
-                                if prog_size > prog_size2:
-                                    continue
-                                if subset(pos_covered2, pos_covered):
-                                    to_delete.append(success_sets_aux[pos_covered2])
 
-                            for prog2_hash in to_delete:
-                                pos_covered2 = coverage_pos[prog2_hash]
-                                if prog2_hash in to_combine:
-                                    to_combine.remove(prog2_hash)
-                                elif prog2_hash in combiner.saved_progs:
-                                    combiner.saved_progs.remove(prog2_hash)
-                                else:
-                                    assert(False)
-                                del success_sets[pos_covered2]
-                                del success_sets_aux[pos_covered2]
-                                del coverage_pos[prog2_hash]
-                                del coverage_neg[prog2_hash]
-                                del prog_lookup[prog2_hash]
-                                # AC: SOMEHOW DELETE FROM PAIRED_SUCCESS_SETS
+                # if consistent, covers at least one example, is not subsumed, and has no redundancy, try to find a solution
+                # print(f"[Leon] inconsistent: {str(inconsistent)}, subsumed: {str(subsumed)}, add_gen: {str(add_gen)}, tp: {str(tp)}, fp:{str(_fp)}, fn:{str(fn)}, pruned_more_general: {str(pruned_more_general)}")
+                if not inconsistent and not subsumed and not add_gen and tp > 0 and not pruned_more_general:
+                    add_to_combiner = True
+                    # print("=======", success_sets.items(),settings.recursion_enabled)
+                    # if not settings.recursion_enabled:
+                    #     to_delete = []
+                        
+                    #     for pos_covered2, prog_size2 in success_sets.items():
+                    #         if prog_size > prog_size2:
+                    #             continue
+                    #         if subset(pos_covered2, pos_covered):
+                    #             to_delete.append(success_sets_aux[pos_covered2])
 
-                        k = hash(prog)
-                        succeed_rule = list(prog)[0]
-                        if pos_covered not in success_rule_sets:
-                            success_rule_sets[pos_covered] = [succeed_rule]
-                        else:
-                            success_rule_sets[pos_covered].append(succeed_rule)
-                        # TO REMOVE
-                        print(success_rule_sets)
-                        success_sets[pos_covered] = prog_size
-                        # print('=====', success_sets)
-                        success_sets_aux[pos_covered] = k
-                        coverage_pos[k] = pos_covered
-                        coverage_neg[k] = neg_covered
-                        ## [ATTENTION] Leon maybe useful to store suceeded rules
-                        prog_lookup[k] = prog
+                    #     for prog2_hash in to_delete:
+                    #         pos_covered2 = coverage_pos[prog2_hash]
+                    #         if prog2_hash in to_combine:
+                    #             to_combine.remove(prog2_hash)
+                    #         elif prog2_hash in combiner.saved_progs:
+                    #             combiner.saved_progs.remove(prog2_hash)
+                    #         else:
+                    #             assert(False)
+                    #         del success_sets[pos_covered2]
+                    #         del success_sets_aux[pos_covered2]
+                    #         del coverage_pos[prog2_hash]
+                    #         del coverage_neg[prog2_hash]
+                    #         del prog_lookup[prog2_hash]
+                            # AC: SOMEHOW DELETE FROM PAIRED_SUCCESS_SETS
 
-                        for p, s in success_sets.items():
-                            if p == pos_covered:
-                                continue
-                            paired_success_sets[s+prog_size].add(p|pos_covered)
+                    k = hash(prog)
+                    succeed_rule = list(prog)[0]
+                    ### TODO !!! why dont we prune directly the specialisations here for incomplete but consistent candidates?
+                    if pos_covered not in success_rule_sets:
+                        
+                        success_rule_sets[pos_covered] = [succeed_rule]
+                    else:
+                        success_rule_sets[pos_covered].append(succeed_rule)
+                    # TO REMOVE
 
-                        if self.min_size is None:
-                            self.min_size = prog_size
+                    success_sets[pos_covered] = prog_size
+                    # print('=====', success_sets)
+                    success_sets_aux[pos_covered] = k
+                    coverage_pos[k] = pos_covered
+                    coverage_neg[k] = neg_covered
+                    ## [ATTENTION] Leon maybe useful to store suceeded rules
+                    prog_lookup[k] = prog
 
+                    for p, s in success_sets.items():
+                        if p == pos_covered:
+                            continue
+                        paired_success_sets[s+prog_size].add(p|pos_covered)
+
+                    if self.min_size is None:
+                        self.min_size = prog_size
+                # for any pos covered and consistent ones
                 if add_to_combiner:
                     to_combine.add(hash(prog))
+                    # settings.logger.debug(f'^^^^^ succeed rules: {str(len(all_succeed))}, to combine: {str(len(to_combine))}')
+                # all_succeed = {r for pc,r_list in success_rule_sets.items() for r in r_list}
                 
                 call_combine = len(to_combine) > 0
-                call_combine = call_combine and (settings.noisy or settings.solution_found)
+                # False for incomplete rule
+                call_combine = call_combine and settings.solution_found
+                # False for incomplete rule
                 call_combine = call_combine and (len(to_combine) >= settings.batch_size or size_change)
+                
+                # incomplete join
 
-                if add_to_combiner and not settings.noisy and not settings.solution_found and not settings.recursion_enabled:
+                if add_to_combiner and not settings.solution_found:
+                # settings.logger.debug(f'^^^^^ any undercovered: {str(uncovered)}, pos covered: {str(pos_covered)}, tp: {str(tp)}')
                     # print('HERE')
+                    # TODO to recover here
+                    # proceed only when covering new examples from under_covered
+                    # if any_and(uncovered, pos_covered):
                     if any_and(uncovered, pos_covered):
-
+                        # TODO!! why is solution here different from success rule set
                         if settings.solution:
                             settings.solution = settings.solution | prog
                         else:
                             settings.solution = prog
+                        #  settings.logger.debug(f'^^^^^ succeed rules: {str(len(all_succeed))}, to combine: {str(len(to_combine))}, incomplete sol: {str(len(settings.solution))}')
                         uncovered = uncovered & ~pos_covered
                         tp = num_pos- uncovered.count(1)
                         fn = uncovered.count(1)
                         tn = num_neg
-                        fp = 0
+                        fp = _fp
                         hypothesis_size = calc_prog_size(settings.solution)
                         settings.best_prog_score = tp, fn, tn, fp, hypothesis_size
+                        # TO REMOVE
+                        # print(f'tp:{str(tp)}, fn:{str(fn)}, tn:{str(tn)}, fp:{str(fp)}, hypothesis_size:{str(hypothesis_size)}')
                         settings.print_incomplete_solution2(settings.solution, tp, fn, tn, fp, hypothesis_size)
-
+                        # print("99999999999999999999")
                         if not uncovered.any():
                             settings.solution_found = True
                             settings.max_literals = hypothesis_size-1
@@ -653,10 +499,10 @@ class Popper():
                                 generator.prune_size(i)
 
                         call_combine = not uncovered.any()
-
+                        
+                # here called only solution is found
                 if call_combine:
-                    if settings.noisy:
-                        self.filter_combine_programs(combiner, to_combine)
+                    
 
                     # COMBINE
                     # print('call combiner')
@@ -682,17 +528,9 @@ class Popper():
                         # print('here???')
 
                         settings.print_incomplete_solution2(new_hypothesis, tp, fn, tn, fp, hypothesis_size)
-
-                        if settings.noisy and best_score < settings.best_mdl:
-                            settings.best_mdl = best_score
-                            settings.max_literals = settings.best_mdl - 1
-                            new_cons.extend(self.build_constraints_previous_hypotheses(settings.best_mdl, prog_size))
-                            if settings.single_solve:
-                                # AC: sometimes adding these size constraints can take longer
-                                for i in range(best_score, max_size+1):
-                                    generator.prune_size(i)
+                        # print("123414124141241241241414")
                         # print("HERE!!!", tp, fn, tn, fp)
-                        if not settings.noisy and fp == 0 and fn == 0:
+                        if  fp == 0 and fn == 0:
                             settings.solution_found = True
                             settings.max_literals = hypothesis_size-1
 
@@ -709,56 +547,39 @@ class Popper():
                             # AC: sometimes adding these size constraints can take longer
                             for i in range(hypothesis_size, max_size+1):
                                 generator.prune_size(i)
-
+                #print('------- prog 6666: ', format_prog(prog))
                 # BUILD CONSTRAINTS
                 if add_spec and not pruned_more_general and not add_redund2:
                     new_cons.append((Constraint.SPECIALISATION, prog))
 
-                if not skipped:
-                    if settings.noisy and not add_spec and spec_size and not pruned_more_general:
-                        if spec_size <= settings.max_literals and ((is_recursive or has_invention or spec_size <= settings.max_body)):
-                            new_cons.append((Constraint.SPECIALISATION, prog, spec_size))
-                            self.seen_hyp_spec[fp+prog_size+mdl].append([prog, tp, fn, tn, fp, prog_size])
-
                 if add_gen and not pruned_sub_inconsistent:
-                    if settings.noisy or settings.recursion_enabled or settings.pi_enabled:
-                        if not pruned_more_general:
-                            new_cons.append((Constraint.GENERALISATION, prog))
-                    else:
-                        if not add_spec:
-                            new_cons.append((Constraint.GENERALISATION, prog))
-
-                if settings.noisy and not add_gen and gen_size and not pruned_sub_inconsistent:
-                    if gen_size <= settings.max_literals and (settings.recursion_enabled or settings.pi_enabled) and not pruned_more_general:
-                        new_cons.append((Constraint.GENERALISATION, prog, gen_size))
-                        self.seen_hyp_gen[fn+prog_size+mdl].append([prog, tp, fn, tn, fp, prog_size])
+                    if not add_spec:
+                        new_cons.append((Constraint.GENERALISATION, prog))
 
                 if add_redund1 and not pruned_more_general:
                     new_cons.append((Constraint.REDUNDANCY_CONSTRAINT1, prog))
 
                 if add_redund2 and not pruned_more_general:
                     new_cons.append((Constraint.REDUNDANCY_CONSTRAINT2, prog))
-
-                if settings.noisy and not add_spec and not add_gen:
-                    new_cons.append((Constraint.BANISH, prog))
                 # CONSTRAIN
                 with settings.stats.duration('constrain'):
                     generator.constrain(new_cons)
                 settings.logger.debug(f'*** iteration finished')
 
             # if not pi_or_rec:
-            # print('++++',to_combine)
+            # called when the loop is done
             # Leon: reduce a lot program generated
             if to_combine:
-                # print('LAST CALL')
+                settings.logger.debug('LAST CALL')
                 settings.last_combine_stage = True
                 # TODO: AWFUL: FIX REFACOTRING
                 # COMBINE
                 with settings.stats.duration('combine'):
+                    settings.logger.debug('update_best_prog')
                     # Leon: if consistent and covers at least one postive
                     is_new_solution_found = combiner.update_best_prog(to_combine)
                 to_combine=set()
-
+                settings.logger.debug('combine finished')
                 new_hypothesis_found = is_new_solution_found != None
 
                 # if we find a new solution, update the maximum program size
@@ -768,12 +589,14 @@ class Popper():
                     new_hypothesis, conf_matrix = is_new_solution_found
                     tp, fn, tn, fp, hypothesis_size = conf_matrix
                     settings.best_prog_score = conf_matrix
+                    # solution is updated at the end of the loop
                     settings.solution = new_hypothesis
+                    settings.logger.debug('compute best score')
                     best_score = mdl_score(fn, fp, hypothesis_size)
                     # TOUNDERSTAND: Leon: why this is called an iteration later after an ok hypothesis found?
                     settings.print_incomplete_solution2(new_hypothesis, tp, fn, tn, fp, hypothesis_size)
 
-                    if not settings.noisy and fp == 0 and fn == 0:
+                    if fp == 0 and fn == 0:
                         settings.solution_found = True
                         settings.max_literals = hypothesis_size-1
                         min_coverage = settings.min_coverage = 2
@@ -787,7 +610,6 @@ class Popper():
             if settings.single_solve:
                 break
             
-        
         assert(len(to_combine) == 0)
 
     def check_redundant_literal(self, prog):
@@ -1207,7 +1029,7 @@ class Popper():
         return cons
 
     def subsumed_or_covers_too_few(self, prog, seen=set()):
-        tester, success_sets, settings = self.tester, self.success_sets, self.settings
+        tester, success_sets,success_rule_sets, settings = self.tester, self.success_sets, self.success_rule_sets, self.settings
         head, body = list(prog)[0]
         #settings.logger.debug(f'Input rule: {head} :- {body}')
         #{print(s) for s in seen}
@@ -1220,6 +1042,7 @@ class Popper():
         head_vars = set(head.arguments)
         
         # try the body with one literal removed (the literal at position i)
+        # TODO: Leon to check is this still needed or our ways to generate all generalisation already suffice
         for i in range(len(body)):
             new_body = body[:i] + body[i+1:]
             new_body = frozenset(new_body)
@@ -1267,13 +1090,20 @@ class Popper():
             # with self.settings.stats.duration('old'):
             # TODO [?] Leon: why subsumption checking can be reduced to example set inclusion?
             # Leon: check this new generalisation is subsumed by any successed program
-            subsumed = sub_prog_pos_covered in success_sets or any(subset(sub_prog_pos_covered, xs) for xs in success_sets)
-            subsumed_by_two = not subsumed and self.check_subsumed_by_two(sub_prog_pos_covered, new_prog_size)
+            # subsumed = sub_prog_pos_covered in success_sets or any(subset(sub_prog_pos_covered, xs) for xs in success_sets)
+            subsumed = sub_prog_pos_covered in success_rule_sets and any(rule_subsume_trc(succeed_r,new_prog) for succeed_r in success_rule_sets[sub_prog_pos_covered])
+            #sub_prog_pos_covered in success_sets or any(rule_subsume_trc(succeed_r,_prog))
+            #any(subset(sub_prog_pos_covered, xs) for xs in success_sets)
+            #any(rule_subsume_trc(succeed_r,_prog))
+            # subsumed_by_two = not subsumed and self.check_subsumed_by_two(sub_prog_pos_covered, new_prog_size)
             # very hacky checking here
-            covers_too_few = not subsumed and not subsumed_by_two and self.check_covers_too_few(new_prog_size, sub_prog_pos_covered)
-            
-            if not (subsumed or subsumed_by_two or covers_too_few):
+            #covers_too_few = not subsumed and not subsumed_by_two and self.check_covers_too_few(new_prog_size, sub_prog_pos_covered)
+            covers_too_few = not subsumed and self.check_covers_too_few(new_prog_size, sub_prog_pos_covered)
+            # if not (subsumed or subsumed_by_two or covers_too_few):
+            #     continue
+            if not (subsumed or covers_too_few):
                 continue
+            
             
             xs = self.subsumed_or_covers_too_few(new_prog, seen)
             if len(xs) > 0:
@@ -1287,21 +1117,61 @@ class Popper():
 
             if subsumed:
                 out.add((new_prog, ('SUBSUMED (GENERALISATION)')))
-            elif subsumed_by_two:
-                out.add((new_prog, ('SUBSUMED BY TWO (GENERALISATION)')))
+            # elif subsumed_by_two:
+            #     out.add((new_prog, ('SUBSUMED BY TWO (GENERALISATION)')))
             elif covers_too_few:
                 out.add((new_prog, ('COVERS TOO FEW (GENERALISATION)')))
             else:
                 assert(False)
         return out
-    def rule_subsume_trc(self, r1, r2):
-        # r1 subsumes r2 if r1 is a subset of r2
-        h1, b1 = r1
-        h2, b2 = r2
-        print('**** rule_subsume_trc:',h1,h2)
-        if h1 != None and h2 == None:
-            return False
-        return atoms_subsume(b1,b2,head_included=True, max_vars = self.settings.max_vars)
+    
+    
+    def find_all_gen(self, prog):
+        # success_rule_sets  =  self.success_rule_sets, self.settings
+        range_pair = self.settings.range_pair
+        # head, body = list(prog)[0]
+        #settings.logger.debug(f'Input rule: {head} :- {body}')
+        #{print(s) for s in seen}
+        out = set()
+        # for each pruned program, add the variants to the list of pruned programs
+        # doing so reduces the number of pointless checks
+        #for x in self.find_variants(remap_variables(new_rule)):
+        # self.pruned2.add(hash(x))
+        all_gens = build_gen_rules4(list(prog)[0],range_pair, self.settings.max_vars)
+        for gen in all_gens:
+            gen = frozenset({gen})
+            out.add((gen, ('SUBSUMED (GENERALISATION)')))
+        # # elif subsumed_by_two:
+        # #     out.add((new_prog, ('SUBSUMED BY TWO (GENERALISATION)')))
+        # elif covers_too_few:
+        #     out.add((new_prog, ('COVERS TOO FEW (GENERALISATION)')))
+        # else:
+        #     assert(False)
+        return out
+    
+    # def find_core(self, prog):
+    #     # success_rule_sets  =  self.success_rule_sets, self.settings
+    #     range_pair = self.settings.range_pair
+    #     # head, body = list(prog)[0]
+    #     #settings.logger.debug(f'Input rule: {head} :- {body}')
+    #     #{print(s) for s in seen}
+    #     out = set()
+    #     # for each pruned program, add the variants to the list of pruned programs
+    #     # doing so reduces the number of pointless checks
+    #     #for x in self.find_variants(remap_variables(new_rule)):
+    #     # self.pruned2.add(hash(x))
+    #     all_gens = build_gen_rules4(list(prog)[0],range_pair, self.settings.max_vars)
+    #     for gen in all_gens:
+    #         gen = frozenset({gen})
+    #         out.add((gen, ('SUBSUMED (GENERALISATION)')))
+    #     # # elif subsumed_by_two:
+    #     # #     out.add((new_prog, ('SUBSUMED BY TWO (GENERALISATION)')))
+    #     # elif covers_too_few:
+    #     #     out.add((new_prog, ('COVERS TOO FEW (GENERALISATION)')))
+    #     # else:
+    #     #     assert(False)
+    #     return out
+   
     
     def find_variants(self, rule):
         head, body = rule
@@ -1580,15 +1450,22 @@ class Popper():
         return True
 
     def print_incomplete_solution2(self, prog, tp, fn, tn, fp, size):
-        self.logger.info('*'*20)
-        self.logger.info('New best hypothesis:')
+        self.logger.debug('*'*20)
+        # TO REMOVE
+        print('*'*20)
+        self.logger.debug('New best hypothesis:')
+        # TO REMOVE
+        print('New best hypothesis:')
         if self.noisy:
-            self.logger.info(f'tp:{tp} fn:{fn} tn:{tn} fp:{fp} size:{size} mdl:{size+fn+fp}')
+            self.logger.debug(f'tp:{tp} fn:{fn} tn:{tn} fp:{fp} size:{size} mdl:{size+fn+fp}')
         else:
-            self.logger.info(f'tp:{tp} fn:{fn} tn:{tn} fp:{fp} size:{size}')
+            # TO REMOVE
+            # print('New best hypothesis:')
+            print(f'tp:{tp} fn:{fn} tn:{tn} fp:{fp} size:{size}')
+            self.logger.debug(f'tp:{tp} fn:{fn} tn:{tn} fp:{fp} size:{size}')
         for rule in order_prog(prog):
-            self.logger.info(format_rule(order_rule(rule)))
-        self.logger.info('*'*20)
+            self.logger.debug(format_rule(order_rule(rule)))
+        self.logger.debug('*'*20)
 
     def needs_datalog(self, prog):
         if not self.settings.has_directions:
@@ -1641,14 +1518,26 @@ def get_bk_cons(settings, tester):
             for x in recalls:
                 print('recall', x)
         bkcons.extend(recalls)
-
+    if settings.deduce_sim:
+        with settings.stats.duration('sim_defined'):
+            # Leon: calculate the maximal times a literal can appear in rule bodies
+            # in the form of hypothesis constraints
+            # e.g. :- body_literal(Rule,dblp_title,_,(_,_)), #count{V0,V1: body_literal(Rule,dblp_title,_,(V0,V1))} > 3.
+            sim_defined = deduce_sim_defined(settings)
+        settings.logger.debug(sim_defined)
+        settings.logger.debug(settings.sim_defined)
+        if sim_defined != None:
+            bkcons.extend(sim_defined)
+            # settings.sim_defined = set(sim_defined)
+    # settings.logger.debug(f'***is datalog enabled:{settings.datalog}')
     if settings.datalog:
 
         xs = deduce_non_singletons(settings)
         if settings.showcons:
             for x in xs:
                 print('singletons', x)
-        bkcons.extend(xs)
+        # Leon: embedded directly in generator now
+        # bkcons.extend(xs)
 
 
         type_cons = tuple(deduce_type_cons(settings))
@@ -1662,26 +1551,27 @@ def get_bk_cons(settings, tester):
     if not settings.datalog:
         settings.logger.debug(f'Loading recalls FAILURE')
     else:
-        import signal
+        if settings.bkcons:
+            import signal
 
-        def handler(signum, frame):
-            raise TimeoutError()
+            def handler(signum, frame):
+                raise TimeoutError()
 
-        settings.logger.debug(f'Loading bkcons')
-        xs = []
-        with settings.stats.duration('bkcons'):
-            signal.signal(signal.SIGALRM, handler)
-            signal.alarm(settings.bkcons_timeout)
-            try:
-                xs = deduce_bk_cons(settings, tester)
-            except TimeoutError as _exc:
-                settings.logger.debug(f'Loading bkcons FAILURE')
-            finally:
-                signal.alarm(0)
-        if settings.showcons:
-            for x in sorted(xs):
-                print('BKCON', x)
-        bkcons.extend(xs)
+            settings.logger.debug(f'Loading bkcons')
+            xs = []
+            with settings.stats.duration('bkcons'):
+                signal.signal(signal.SIGALRM, handler)
+                signal.alarm(settings.bkcons_timeout)
+                try:
+                    xs = deduce_bk_cons(settings, tester)
+                except TimeoutError as _exc:
+                    settings.logger.debug(f'Loading bkcons FAILURE')
+                finally:
+                    signal.alarm(0)
+            if settings.showcons:
+                for x in sorted(xs):
+                    print('BKCON', x)
+            bkcons.extend(xs)
     return bkcons
 
 def learn_solution(settings):
@@ -1787,189 +1677,6 @@ def rule_subsumes(r1, r2):
         return False
     return b1.issubset(b2)
 
-
-
-def atoms_subsume(c1:set,c2:set,head_included=False, max_vars = MAX_VARS)-> bool:
-    # c2 = {Literal(predicate='att', arguments=(4, 'did', 0)), Literal(predicate='att', arguments=(4, 'dtitle', 2)), Literal(predicate='att', arguments=(3, 'aid', 1)), Literal(predicate='att', arguments=(3, 'atitle', 2))}
-    # c1 = {Literal(predicate='att', arguments=(4, 'aid', 1)), Literal(predicate='att', arguments=(5, 'did', 0)), Literal(predicate='sim', arguments=(3, 2)), Literal(predicate='att', arguments=(4, 'atitle', 3)), Literal(predicate='att', arguments=(5, 'dtitle', 2))}
-    # get variables of c1 and c2
-    if head_included:
-        head_tuple1 = {literal.arguments for literal in c1 if literal.predicate == 'att' and (literal.arguments[-1] == 0 or literal.arguments[-1] == 1)}
-        head_tuple2 = {literal.arguments for literal in c2 if literal.predicate == 'att' and (literal.arguments[-1] == 0 or literal.arguments[-1] == 1)}
-        # if one of the head is empty while the other is not empty, return False
-        if not head_tuple2 or  not head_tuple1:
-            return False
-        else:
-            head_vars1 = {htv1 for htv1,_,_ in head_tuple1}
-            head_vars2 = {htv2 for htv2,_,_ in head_tuple2}
-            # head should be fixed mapping, no symmetric mapping which only matters in similarity atoms
-            head_mapping = {htv1:htv2 for htv1,att1,av1 in head_tuple1 for htv2,att2,av2 in head_tuple2 if att1 == att2 and av1 == av2}
-            c1_vars = set(literal.arguments[0] for literal in c1 if  (literal.predicate =='att') and (literal.arguments[0] not in head_vars1))
-            # print(c1_vars)
-            c2_vars = set(literal.arguments[0] for literal in c2 if  (literal.predicate =='att') and (literal.arguments[0] not in head_vars2))
-            print('**** head vars1:',head_vars1)
-            print('**** head vars2:',head_vars2)
-            print('**** body vars1:',c1_vars)
-            print('**** body vars2:',c2_vars)
-            # create lists of mapping dict from (tuple) var(c1) to var(c2)
-            if not c1_vars or not c2_vars:
-                all_mappings = [head_mapping]
-            else:
-                all_mappings = get_total_mappings(c1_vars,c2_vars)
-                # TO REMOVE
-                print('**** total mapping:',all_mappings)
-    # if only body variables
-    else:
-        c1_vars = set(literal.arguments[0] for literal in c1 if  literal.predicate =='att')
-        # print(c1_vars)
-        c2_vars = set(literal.arguments[0] for literal in c2 if  literal.predicate =='att')
-        if not c1_vars or not c2_vars:
-            return False
-        all_mappings = get_total_mappings(c1_vars,c2_vars)
-
-    c2_tups = {(lit.predicate,(lit.arguments)) for lit in c2}
-    c2_joins = set()
-    for tup, _tup in combinations(c2_tups, 2):
-        if tup[0] == 'att' and _tup[0] == 'att' and tup != _tup:
-            if tup[1][2] == _tup[1][2]:
-                c2_joins.add((tup[:-1],_tup[:-1]))
-    #print(head_mapping)
-    # TO REMOVE
-    ind = 0
-  
-    for mapping in all_mappings:
-        # applying a mapping from var(c1) to var(c2)
-        c1h = apply_mapping(c1,mapping,max_vars)
-        # TO REMOVE
-        ind+=1
-        print(f'**** applied mapping {str(ind)}')
-        print(f'    **** before:',c1)
-        print(f'    **** after:',c1h)
-        # check set containment first
-        # issubset means subseteq
-        if c1h.issubset(c2_tups):
-            # TO REMOVE
-            print(f'**** subset subsume')
-            print(f'    **** c1h:',c1h)
-            print(f'    **** c2:',c2)
-            return True
-        # otherwise, check attribute joins containment
-        else:
-            # for every pair of att(tid1,att1,v) att(tid2,att2,v) in c1h, there exist a pair in c2
-            included_flag = True
-            
-            for tup1 in c1h:
-                for tup2 in c1h:
-                    if tup1[0] == 'att' and tup2[0] == 'att' and tup1[:-1] != tup2[:-1]:
-                        var1 = tup1[1][2]
-                        var2 = tup2[1][2]
-                        if var1 == var2:
-                            included_flag = tup1 in c2_tups and tup2 in c2_tups
-            # if there is a pair of attribute joins in c1h not in c2, it c1 \not subsumes c2
-            # TO REMOVE
-            print(f'**** join check')
-            print(f'    **** c2 includes c1h:',included_flag)
-            if not included_flag:
-                continue
-            # check similarity containment [skipped] -  if sim containment holds c1h is already a subset of c2
-            # check on the same pair of tuples attribute join implications on similarity
-            # Note that joins in the same equivalence class have the same variable, so sim-atoms certainly hold variables from different equiv classes.
-            # Therefore, no sim-atom is implied by any joins in the same rule bodies
-            for tup1 in c1h:
-                if tup1[0] == 'sim':
-                    # a variable occurs in sim-atoms may in different att atoms
-                    # here look at for the cross product of att-atoms associating to the pair of sim variables in c1h
-                    # if there exist a pair that make a join in c2
-                    sim_var1 = tup1[1][0]
-                    sim_var2 = tup1[1][1]
-                    sim_var_range = {sim_var1:[],sim_var2:[]}
-                    for tup2 in c1h:
-                        if tup2[0] == 'att':
-                            if tup2[1][2] == sim_var1:
-                                sim_var_range[sim_var1].append((tup2[0],tup2[1]))
-                            elif tup2[1][2] == sim_var2:
-                                 sim_var_range[sim_var2].append((tup2[0],tup2[1]))
-                    pairs  = product(sim_var_range[sim_var1],sim_var_range[sim_var2])
-                    included_flag = any(((p[0],p[1]) in c2_joins or (p[1],p[0]) in c2_joins) for p in pairs)
-                    # TO REMOVE
-                    print(f'**** sim containment check')
-                    print(f'    **** c2 includes c1h:', included_flag)
-                    #if not any(((p[0],p[1]) in c2_joins or (p[1],p[0]) in c2_joins) for p in pairs):
-                    if not included_flag:
-                        included_flag = False
-                        break
-            if not included_flag:
-                continue
-            else:
-                # TO REMOVE
-                print(f'**** sim containment check survied')
-                # survived all the checks return true
-                return included_flag
-    # checked all and no match
-    return False
-    
-# create lists of mapping dict from (tuple) var(c1) to var(c2)
-def get_total_mappings(s1,s2):
-    set1_list = list(s1)
-    set2_list = list(s2)
-    for values in product(set2_list, repeat=len(set1_list)):
-        yield dict(zip(set1_list, values))
-        
-def apply_mapping(c1,mapping,max_vars=None)->set:
-    max_vars = MAX_VARS if max_vars == None else max_vars
-    new_c1 = set()
-    for lit1 in c1:
-        if lit1.predicate == 'att':
-            # map argument 0
-            tup_var1_mapping = mapping[lit1.arguments[0]]
-            # if not head attributes
-            # create fresh variables on the 3 position of an attribute literal (in case variable clashing after applying mapping)
-            mark = '*' if  lit1.arguments[2] != 0 and lit1.arguments[2] != 1 else ''
-            new_lit1_args = (tup_var1_mapping,lit1.arguments[1], f'{str(lit1.arguments[2])}{mark}')
-            new_c1.add((lit1.predicate,new_lit1_args))
-        elif lit1.predicate == 'sim':
-            mark1 = '*' if  lit1.arguments[0] != 0 and lit1.arguments[0] != 1 else ''
-            mark2 = '*' if  lit1.arguments[1] != 0 and lit1.arguments[1] != 1 else ''
-            new_lit1_args = (f'{str(lit1.arguments[0])}{mark1}', f'{str(lit1.arguments[1])}{mark2}')
-            new_c1.add((lit1.predicate,new_lit1_args))
-        # for tuple range atom
-        else:
-            tup_var1_mapping = mapping[lit1.arguments[0]]
-            new_lit1_args = tuple([tup_var1_mapping])
-            new_c1.add((lit1.predicate,new_lit1_args))
-                
-    new_c1 = list(new_c1)
-    # find variables that do not appear in new_c1 from all possible variables
-    all_vars = set(range(0,max_vars))
-    new_c1_vars = set()
-    to_replace_vars = set()
-    for i, (pred,args) in enumerate(new_c1.copy()):
-        if pred == 'att':
-            new_c1_vars.add(args[0])
-            if not args[2].endswith('*'):
-                new_c1_vars.add(int(args[2]))
-                new_c1[i] = (pred,(args[0],args[1],int(args[2])))
-            else:
-                to_replace_vars.add(args[2])
-    # get variable names that are not yet used in new c1, ascending order
-    not_yet_taken = sorted(list(all_vars.difference(new_c1_vars)))
-    to_replace_vars_index = dict()
-    
-    for i,v in enumerate(to_replace_vars):
-        print(i,to_replace_vars,not_yet_taken)
-        to_replace_vars_index[v] = not_yet_taken[i]
-    print(new_c1)
-    # update new c1 again
-    for i, (pred,args) in enumerate(new_c1.copy()):
-        _args = list(args)
-        for j, arg in enumerate(args):
-            if arg in to_replace_vars:
-                _args[j] = to_replace_vars_index[arg]
-        new_c1[i] = (pred,tuple(_args))
-            
-    new_c1 = set(new_c1)
-    # print(new_c1)
-    return new_c1
 
 # P1 subsumes P2 if for every rule R2 in P2 there is a rule R1 in P1 such that R1 subsumes R2
 def theory_subsumes(prog1, prog2):

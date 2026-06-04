@@ -698,7 +698,7 @@ def deduce_bk_cons(settings, tester):
 
     # cons = pkg_resources.resource_string(__name__, "lp/cons.pl").decode()
     bk = bk.replace('\\+','not')
-
+    settings.logger.debug(f'build_props ... ')
     new_props1, new_cons1 = build_props(settings, arities, tester)
     new_props2, new_cons2 = build_props2(settings, arities)
 
@@ -734,13 +734,14 @@ def deduce_bk_cons(settings, tester):
     # with open('bkcons-encoding.pl', 'w') as f:
         # f.write(encoding)
     # exit()
+    settings.logger.debug(f'grounding props ... ')
     solver = clingo.Control(['-Wnone'])
     solver.add('base', [], encoding)
     solver.ground([('base', [])])
     out = set()
 
     implies_not = []
-
+    settings.logger.debug(f'solving props ... ')
     with solver.solve(yield_=True) as handle:
         for m in handle:
             for atom in m.symbols(shown = True):
@@ -750,6 +751,47 @@ def deduce_bk_cons(settings, tester):
     xs = [x + '.' for x in out]
     # [print(x) for x in new_cons]
     return xs + new_cons
+
+def deduce_sim_defined(settings):
+    # sim_defined = """
+    # sim_defined(A1,A2) :- att(TID1,A1,V1), att(TID2,A2,V2), sim(V1,V2), compatible_attr(A1,A2).
+    # #show sim_defined/2.
+    # """
+    # with open(settings.bk_file) as f:
+    #     bk = f.read()
+    # with open(settings.bias_file) as f:
+    #     bias = f.read()
+
+    # # cons = pkg_resources.resource_string(__name__, "lp/cons.pl").decode()
+    # # print('\n'.join(new_cons))
+    # encoding = [bias, bk, sim_defined]
+
+
+    # encoding = '\n'.join(encoding)
+    # # print(encoding)
+    # # with open('bkcons-encoding.pl', 'w') as f:
+    #     # f.write(encoding)
+    # # exit()
+    # settings.logger.debug(f'grounding sim_defined ... ')
+    # solver = clingo.Control(['-Wnone'])
+    # solver.add('base', [], encoding)
+    # solver.ground([('base', [])])
+    # out = set()
+
+    # implies_not = []
+    # settings.logger.debug(f'solving sim_defined ... ')
+    # with solver.solve(yield_=True) as handle:
+    #     for m in handle:
+    #         for atom in m.symbols(shown = True):
+    #             args = atom.arguments
+                
+    #             if atom.name == 'sim_defined':
+    #                 settings.sim_defined.add((str(args[0]),str(args[1])))
+    #                 out.add(str(atom))
+    # xs = [x + '.' for x in out]
+    # xs+=[':- body_literal(0,sim,2,(X,Y)), body_literal(C,att,3,(Tid1,Attr1,X)), body_literal(C,att,3,(Tid2,Attr2,Y)), not sim_defined(Attr1,Attr2).']
+    # [print(x) for x in new_cons]
+    return [':- body_literal(0,sim,2,(X,Y)), body_literal(C,att,3,(Tid1,Attr1,X)), body_literal(C,att,3,(Tid2,Attr2,Y)), not sim_defined(Attr1,Attr2).']
 
 
 def generate_binary_strings(bit_count):
@@ -1075,7 +1117,7 @@ def deduce_non_singletons(settings):
             # print(atom.symbol)
             # print('skip', con)
             continue
-        cons.append(con)
+        #cons.append(con)
         # print('MOOOO', con)
         seen[p].add(singletons_checked)
 

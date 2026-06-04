@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+*.pkl
 # Distribution / packaging
 .Python
 build/
@@ -24,6 +24,7 @@ pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
+**/archive/**
 *.egg
 MANIFEST
 

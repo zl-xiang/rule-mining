@@ -1,0 +1,434 @@
+tid,id,title,authors,venue,year
+69611,conf/vldb/RusinkiewiczKTWM95,Towards a Cooperative Transaction Model - The Cooperative Activity Model,"M Rusinkiewicz, W Klas, T Tesch, J Wäsch, P Muth",VLDB,1995
+69614,journals/sigmod/Liu02,Editor's Notes,L Liu,SIGMOD Record,2002
+69615,journals/sigmod/Hammer02,Report on the ACM Fourth International Workshop on Data Warehousing and OLAP (DOLAP 2001),,,2002
+69628,conf/vldb/MehtaD95,Managing Intra-operator Parallelism in Parallel Database Systems,"M Mehta, D DeWitt",VLDB,1995
+69632,journals/sigmod/Aberer02,Book Review Column,K Aberer,SIGMOD Record,2002
+69640,journals/sigmod/CiliaB02,An Active Functionality Service for E-Business Applications,"M Cilia, A Buchmann",SIGMOD Record,2002
+69661,journals/sigmod/OrlandicLS02,The Design of a Retrieval Technique for High-Dimensional Data on Tertiary Storage,"R Orlandic, J Lukaszuk, C Swietlik",SIGMOD Record,2002
+69680,conf/vldb/Galindo-LegariaPK94,"Fast, Randomized Join-Order Selection - Why Use Transformations?","C Galindo-Legaria, A Pellenkoft, M Kersten",VLDB,1994
+69682,conf/vldb/WienerN94,Bulk Loading into an OODB: A Performance Study,"J Wiener, J Naughton",VLDB,1994
+69684,journals/sigmod/Neven02,Automata Theory for XML Researchers,F Neven,SIGMOD Record,2002
+69693,conf/vldb/Guting94,GraphDB: Modeling and Querying Graphs in Databases,R Güting,VLDB,1994
+69699,journals/sigmod/Winslett02b,Hector Garcia-Molina Speaks Out,M Winslett,,2002
+69701,conf/vldb/BarjaPFWD94,An Effective Deductive Object-Oriented Database Through Language Integration,"M Barja, N Paton, A Fernandes, M Williams, A Dinn",VLDB,1994
+69703,journals/sigmod/RossAJS02,Reminiscences on Influential Papers,,,2002
+69704,conf/vldb/BaralisW94,An Algebraic Approach to Rule Analysis in Expert Database Systems,"E Baralis, J Widom",VLDB,1994
+69705,journals/sigmod/FrankNS02,Report on the Semantic Web Workshop at WWW 2002,,,2002
+69708,conf/vldb/HaberIL95,OPOSSUM: Desk-Top Schema Management through Customizable Visualization,"E Haber, Y Ioannidis, M Livny",VLDB,1995
+69731,conf/vldb/CatozziR95,OS Support for VLDBs: Unix Enhancements for the Teradata Data Base,"J Catozzi, S Rabinovici",VLDB,1995
+69752,journals/sigmod/ChienTZ01,XML Document Versioning,"S Chien, V Tsotras, C Zaniolo",SIGMOD Record,2001
+69762,journals/sigmod/Bernstein01,Report on the 2001 SIGMOD and PODS Awards,,,2001
+69763,journals/sigmod/BunemanFSW01,Constraints for Semi-structured Data and XML,"P Buneman, W Fan, J Siméon, S Weinstein",SIGMOD Record,2001
+69765,journals/sigmod/Liu01,Editor's Notes,,,2001
+69784,conf/vldb/SripadaW94,Cumulative Updates,"S Sripada, B Wüthrich",VLDB,1994
+69792,journals/sigmod/ShanmugasundaramSKKVNT01,A General Techniques for Querying XML Documents using a Relational Database System,"J Shanmugasundaram, E Shekita, J Kiernan, R Krishnamurthy, S Viglas, J Naughton, I Tatarinov",SIGMOD Record,2001
+69798,conf/vldb/AnandBH94,An Empirical Performance Study of the Ingres Search Accelerator for a Large Property Management Database System,"S Anand, D Bell, J Hughes",VLDB,1994
+69800,conf/vldb/RosenthalS94,Data Integration in the Large: The Challenge of Reuse,"A Rosenthal, L Seligman",VLDB,1994
+69803,conf/vldb/Bernstein94,PC Database Systems - Present and Future,P Bernstein,VLDB,1994
+69814,journals/sigmod/Cardelli01,Describing Semistructured Data,L Cardelli,SIGMOD Record,2001
+69822,conf/sigmod/ArasuG03,Extracting Structured Data from Web Pages,"A Arasu, H Garcia-Molina",SIGMOD Conference,2003
+69825,journals/sigmod/Scholl01,Transactional Information Systems - Book Review,,,2001
+69827,conf/sigmod/DeligiannakisR03,Extended Wavelets for Multiple Measures,"A Deligiannakis, N Roussopoulos",SIGMOD Conference,2003
+69832,conf/sigmod/BenediktCFFR03,Capturing both Types and Constraints in Data Integration,"M Benedikt, C Chan, W Fan, J Freire, R Rastogi",SIGMOD Conference,2003
+69837,journals/sigmod/Dogac02,Guest Editor's Introduction,,,2002
+69839,conf/vldb/MatthesS94,Persistent Threads,"F Matthes, J Schmidt",VLDB,1994
+69848,journals/sigmod/Bussler02,The Role of B2B Engines in B2B Integration Architectures,C Bussler,SIGMOD Record,2002
+69859,journals/sigmod/GobleR02,Report on the 18th British National Conference on Databases (BNCOD),,,2002
+69866,journals/sigmod/Snodgrass02,Why I Like Working in Academia,R Snodgrass,SIGMOD Record,2002
+69874,journals/sigmod/GatziuJSV99,Design and Management of Data Warehouses: Report on the DMDW'99 Workshop,"S Gatziu, M Jeusfeld, M Staudt, Y Vassiliou",SIGMOD Record,1999
+69875,conf/sigmod/WangPFY03,ViST: A Dynamic Index Method for Querying XML Data by Tree Structures,"H Wang, S Park, W Fan, P Yu",SIGMOD Conference,2003
+69879,journals/sigmod/RossFLOSSVW00,Reminiscences on Influential Papers,,,2000
+69883,conf/sigmod/JohnsonD03,Data Quality and Data Cleaning: An Overview,"T Johnson, T Dasu",SIGMOD Conference,2003
+69886,conf/sigmod/GuptaLM03,BIRN-M: A Semantic Mediator for Solving Real-World Neuroscience Problems,"A Gupta, B Ludäscher, M Martone",SIGMOD Conference,2003
+69896,conf/sigmod/Mamoulis03,Efficient Processing of Joins on Set-valued Attributes,N Mamoulis,SIGMOD Conference,2003
+69904,conf/sigmod/AbiteboulBCMM03,Dynamic XML documents with distribution and replication,"S Abiteboul, A Bonifati, G Cobena, I Manolescu, T Milo",SIGMOD Conference,2003
+69905,journals/sigmod/Franklin00,Editor's Notes,M Franklin,SIGMOD Record,2000
+69911,conf/sigmod/DeHaanTCO03,A Comprehensive XQuery to SQL Translation using Dynamic Interval Encoding,"D DeHaan, D Toman, M Consens, M Özsu",SIGMOD Conference,2003
+69918,conf/sigmod/SunAA03,Hardware Acceleration for Spatial Selections and Joins,"C Sun, D Agrawal, A Abbadi",SIGMOD Conference,2003
+69920,journals/sigmod/KantM00,"Workshop on Performance and Architecture of Web Servers (PAWS-2000, held in conjection with SIGMETRICS-2000)",,,2000
+69926,journals/sigmod/Naughton00,SIGMOD'2000 Program Chair's Message,,,2000
+69930,conf/sigmod/CuiOTS03,Contorting High Dimensional Data for Efficient Main Memory Processing,"B Cui, B Ooi, J Su, K Tan",SIGMOD Conference,2003
+69931,journals/sigmod/Snodgrass00a,Chair's Message,,,2000
+69946,journals/sigmod/TheodoridisN00,Generating Spatiotemporal Datasets on the WWW,"Y Theodoridis, M Nascimento",SIGMOD Record,2000
+69954,conf/sigmod/KimC03,Qcluster: Relevance Feedback Using Adaptive Clustering for Content-Based Image Retrieval,"D Kim, C Chung",SIGMOD Conference,2003
+69958,conf/sigmod/Pruscino03,Oracle RAC: Architecture and Performance,A Pruscino,SIGMOD Conference,2003
+69961,conf/sigmod/Cabrera03,The Future of Web services - II,F Cabrera,SIGMOD Conference,2003
+69965,journals/sigmod/YuenCLL00,Cache Invalidation Scheme for Mobile Computing Systems with Real-time Data,"J Yuen, E Chan, K Lam, H Leung",SIGMOD Record,2000
+69969,conf/sigmod/StoltePAG03,Scientific Data Repositories: Designing for a Moving Target,"E Stolte, C Praun, G Alonso, T Gross",SIGMOD Conference,2003
+69975,conf/sigmod/ZhangZPTL03,Location-based Spatial Queries,"J Zhang, M Zhu, D Papadias, Y Tao, D Lee",SIGMOD Conference,2003
+69982,journals/sigmod/FengJH01,Towards Knowledge-Based Digital Libraries,"L Feng, M Jeusfeld, J Hoppenbrouwers",SIGMOD Record,2001
+69985,journals/sigmod/Critchlow01,Report on XEWA-00: The XML Enabled Wide-Area Searches for Bioinformatics Workshop,,,2001
+69988,conf/sigmod/MelnikRB03,Rondo: A Programming Platform for Generic Model Management,"S Melnik, E Rahm, P Bernstein",SIGMOD Conference,2003
+69998,journals/sigmod/ChristoffelPSL98,Electronic Market: The Roadmap for University Libraries and Members to Survive in the Information Jungle,"M Christoffel, S Pulkowski, B Schmitt, P Lockemann",SIGMOD Record,1998
+70003,conf/sigmod/Grust02,Accelerating XPath location steps,T Grust,SIGMOD Conference,2002
+70008,conf/sigmod/OlstonW02,Best-effort cache synchronization with source cooperation,"C Olston, J Widom",SIGMOD Conference,2002
+70012,journals/sigmod/BollKB98,Design and Implementation of RMP - A Virtual Electronic Market Place,"S Boll, W Klas, B Battaglin",SIGMOD Record,1998
+70013,journals/sigmod/ReichB98,A Componentized Architecture for Dynamic Electronic Markets,"B Reich, I Ben-Shaul",SIGMOD Record,1998
+70019,journals/sigmod/Dogac98,Guest Editor's Introduction,,,1998
+70020,conf/sigmod/GraySSU03,The Lowell Report,"J Gray, H Schek, M Stonebraker, J Ullman",SIGMOD Conference,2003
+70023,conf/sigmod/KornMZ03,IPSOFACTO: A Visual Correlation Tool for Aggregate Network Traffic Data,"F Korn, S Muthukrishnan, Y Zhu",SIGMOD Conference,2003
+70026,conf/sigmod/SengarH03,PLASTIC: Reducing Query Optimization Overheads through Plan Recycling,"V Sengar, J Haritsa",SIGMOD Conference,2003
+70030,conf/sigmod/ZhuSZ03,Query by Humming - in Action with its Technology Revealed,"Y Zhu, D Shasha, X Zhao",SIGMOD Conference,2003
+70032,journals/sigmod/NascimentoM99,Report on the 13th Brazilian Symposium on Database Systems (SBBD'98),,,1999
+70038,conf/sigmod/ZhouWGGZWXYF03,TREX: DTD-Conforming XML to XML Transformations,"A Zhou, Q Wang, Z Guo, X Gong, S Zheng, H Wu, J Xiao, K Yue, W Fan",SIGMOD Conference,2003
+70041,journals/sigmod/EisenbergM99,"SQL: 1999, formerly known as SQL 3","A Eisenberg, J Melton",SIGMOD Record,1999
+70044,conf/sigmod/Amer-YahiaFSX03,PIX: Exact and Approximate Phrase Matching in XML,"S Amer-Yahia, M Fernandez, D Srivastava, Y Xu",SIGMOD Conference,2003
+70051,conf/sigmod/OoiTZGLLLNSWZ03,PeerDB: Peering into Personal Databases,"B Ooi, K Tan, A Zhou, C Goh, Y Li, C Liau, B Ling, W Ng, Y Shu, X Wang, M Zhang",SIGMOD Conference,2003
+70065,conf/sigmod/2002,"Proceedings of the 2002 ACM SIGMOD International Conference on Management of Data, Madison, Wisconsin, June 3-6, 2002",,,2002
+70083,conf/sigmod/KarbhariRXD02,ACDN: a content delivery network for applications,"P Karbhari, M Rabinovich, Z Xiao, F Douglis",SIGMOD Conference,2002
+70091,conf/sigmod/DogacTPPLKTK02,An ebXML infrastructure implementation through UDDI registries and RosettaNet PIPs,"A Dogac, Y Tambag, P Pembecioglu, S Pektas, G Laleci, G Kurt, S Toprak, Y Kabak",SIGMOD Conference,2002
+70094,journals/sigmod/Franklin99a,Editor's Notes,M Franklin,SIGMOD Record,1999
+70096,journals/sigmod/ConradHHKRSS99,Engineering Federated Information Systems: Report of EFIS '99 Workshop,"S Conrad, W Hasselbring, U Hohenstein, R Kutsche, M Roantree, G Saake, F Saltor",SIGMOD Record,1999
+70098,conf/sigmod/RaoZML02,Automating physical database design in a parallel database,"J Rao, C Zhang, N Megiddo, G Lohman",SIGMOD Conference,2002
+70108,conf/sigmod/MoonWH02,General match: a subsequence matching method in time-series databases based on generalized windows,"Y Moon, K Whang, W Han",SIGMOD Conference,2002
+70120,journals/sigmod/MusickC99,Practical Lessons in Supporting Large-Scale Computational Science,"R Musick, T Critchlow",SIGMOD Record,1999
+70127,conf/sigmod/ChenGMV02,Fractal prefetching B±Trees: optimizing both cache and disk performance,"S Chen, P Gibbons, T Mowry, G Valentin",SIGMOD Conference,2002
+70129,conf/sigmod/ZhouR02,Implementing database operations using SIMD instructions,"J Zhou, K Ross",SIGMOD Conference,2002
+70134,conf/sigmod/LiGS02,Skew handling techniques in sort-merge join,"W Li, D Gao, R Snodgrass",SIGMOD Conference,2002
+70137,conf/sigmod/PapakonstantinouPV02,QURSED: querying and reporting semistructured data,"Y Papakonstantinou, M Petropoulos, V Vassalos",SIGMOD Conference,2002
+70142,conf/sigmod/GillmannWW02,Workflow management with service quality guarantees,"M Gillmann, G Weikum, W Wonner",SIGMOD Conference,2002
+70153,journals/sigmod/GuptaHR97,Virtual Database technology,"A Gupta, V Harinarayan, A Rajaraman",SIGMOD Record,1997
+70169,journals/sigmod/SilberschatzZ97,Database Systems - Breaking Out of the Box,"A Silberschatz, S Zdonik",SIGMOD Record,1997
+70172,journals/sigmod/Fong97,Converting Relational to Object-Oriented Databases,J Fong,SIGMOD Record,1997
+70188,journals/sigmod/AtzeniM98,WebDB '98: International Workshop on the Web and Databases,,,1998
+70200,conf/sigmod/GarofalakisGR02,Querying and mining data streams: you only get one look a tutorial,,,2002
+70205,journals/sigmod/BurtonM98,Applications of the JAVA Programming Language to Database Management,"B Burton, V Marek",SIGMOD Record,1998
+70209,conf/sigmod/SlivinskasJS01,Adaptable Query Optimization and Evaluation in Temporal Middleware,"G Slivinskas, C Jensen, R Snodgrass",SIGMOD Conference,2001
+70229,conf/sigmod/CandanLLHA01,Enabling Dynamic Content Caching for Database-Driven Web Sites,"K Candan, W Li, Q Luo, W Hsiung, D Agrawal",SIGMOD Conference,2001
+70236,conf/sigmod/HanPDW01,Efficient Computation of Iceberg Cubes with Complex Measures,"J Han, J Pei, G Dong, K Wang",SIGMOD Conference,2001
+70243,journals/sigmod/KoksalAD98,Workflow History Management,"P Koksal, S Arpinar, A Dogac",SIGMOD Record,1998
+70254,conf/sigmod/AfratiLU01,Generating Efficient Plans for Queries Using Views,"F Afrati, C Li, J Ullman",SIGMOD Conference,2001
+70258,journals/sigmod/NormanZT96,Much Ado About Shared-Nothing,"M Norman, T Zurek, P Thanisch",SIGMOD Record,1996
+70259,journals/sigmod/BestavrosLS96,Report on First International Workshop on Real-Time Database Systems,,,1996
+70263,conf/sigmod/StonebrakerH01,Content Integration for E-Business,"M Stonebraker, J Hellerstein",SIGMOD Conference,2001
+70265,conf/sigmod/ShahC01,"Fault-tolerant, Load-balancing Queries in Telegraph","M Shah, S Chandrasekaran",SIGMOD Conference,2001
+70266,journals/sigmod/BilirisP96,The BeSS Object Storage Manager: Architecture Overview,"A Biliris, E Panagos",SIGMOD Record,1996
+70280,journals/sigmod/AndlerHEMBE96,DeeDS Towards a Distributed and Active Real-Time Database System,"S Andler, J Hansson, J Eriksson, J Mellin, M Berndtsson, B Eftring",SIGMOD Record,1996
+70282,conf/sigmod/GionisGK01,Efficient and Tunable Similar Set Retrieval,"A Gionis, D Gunopulos, N Koudas",SIGMOD Conference,2001
+70293,journals/sigmod/SonDT96,Improving Timeliness in Real-Time Secure Database Systems,"S Son, R David, B Thuraisingham",SIGMOD Record,1996
+70312,conf/sigmod/YuMWL01,Efficient and Effective Metasearch for Text Databases Incorporating Linkages among Documents,"C Yu, W Meng, W Wu, K Liu",SIGMOD Conference,2001
+70313,journals/sigmod/Qian96,"Shutdown, Budget, and Funding",X Qian,SIGMOD Record,1996
+70317,journals/sigmod/TomasicS97,Improving Access to Environmental Data Using Context Information,"A Tomasic, E Simon",SIGMOD Record,1997
+70329,journals/sigmod/RiekertMW97,Management of Data and Services in the Environmental Information System (UIS) of Baden-Württemberg,"W Riekert, R Mayer-Föll, G Wiest",SIGMOD Record,1997
+70336,conf/sigmod/JoshiA01,Mining Needle in a Haystack: Classifying Rare Classes via Two-phase Rule Induction,"M Joshi, R Agarwal",SIGMOD Conference,2001
+70356,journals/sigmod/Keim96,Pixel-oriented Database Visualizations,D Keim,SIGMOD Record,1996
+70372,conf/sigmod/CatarciS01,The Prototype of the DARE System,"T Catarci, G Santucci",SIGMOD Conference,2001
+70375,conf/sigmod/Rosenthal01,Will Database Researchers Have ANY Role in Data Security? (Panel Abstract),A Rosenthal,SIGMOD Conference,2001
+70376,journals/sigmod/Qian96b,New Programs at DARPA and NSF,X Qian,SIGMOD Record,1996
+70398,conf/sigmod/CorralMTV00,Closest Pair Queries in Spatial Databases,"A Corral, Y Manolopoulos, Y Theodoridis, M Vassilakopoulos",SIGMOD Conference,2000
+70399,conf/sigmod/RoySSB00,Efficient and Extensible Algorithms for Multi Query Optimization,"P Roy, S Seshadri, S Sudarshan, S Bhobe",SIGMOD Conference,2000
+70409,journals/sigmod/DogacDKOONEHAKKM95,METU Interoperable Database System,"A Dogac, C Dengi, E Kilic, G Özhan, F Ozcan, S Nural, C Evrendilek, U Halici, I Arpinar, P Koksal, N Kesim, S Mancuhan",SIGMOD Record,1995
+70414,conf/sigmod/GillmannWSWW00,A Goal-driven Auto-Configuration Tool for the Distributed Workflow Management System Mentor-lite,"M Gillmann, J Weißenfels, G Shegalov, W Wonner, G Weikum",SIGMOD Conference,2000
+70417,journals/sigmod/BohmR94,Metadata for Multimedia Documents,"K Böhm, T Rakow",SIGMOD Record,1994
+70418,conf/sigmod/OriaOILY00,DISIMA: A Distributed and Interoperable Image Database System,"V Oria, M Özsu, P Iglinski, S Lin, B Yao",SIGMOD Conference,2000
+70425,conf/sigmod/ShenoyHSBBS00,Turbo-charging Vertical Mining of Large Databases,"P Shenoy, J Haritsa, S Sudarshan, G Bhalotia, M Bawa, D Shah",SIGMOD Conference,2000
+70428,conf/sigmod/HsiaoN00,DLFM: A Transactional Resource Manager,"H Hsiao, I Narang",SIGMOD Conference,2000
+70429,journals/sigmod/SchlageterBHMSW95,The Database Group at University of Hagen (FernUniversitaet),"G Schlageter, T Berkel, E Heuel, S Mittrach, A Scherer, W Wilkes",SIGMOD Record,1995
+70431,conf/sigmod/Jhingran00,Anatomy of a Real E-Commerce System,A Jhingran,SIGMOD Conference,2000
+70434,journals/sigmod/Qian95,Political Winds Change Direction Again,X Qian,SIGMOD Record,1995
+70435,conf/sigmod/ChenDLT00,Fact: A Learning Based Web Query Processing System,"S Chen, Y Diao, H Lu, Z Tian",SIGMOD Conference,2000
+70438,conf/sigmod/WangSSZZW00,An Approximate Search Engine for Structural Databases,"J Wang, X Wang, D Shasha, B Shapiro, K Zhang, X Zheng, Q Ma, Z Weinberg",SIGMOD Conference,2000
+70442,journals/sigmod/DarwenD95,The Third Manifesto,"H Darwen, C Date",SIGMOD Record,1995
+70447,journals/sigmod/EnglertGH95,Parallelism and its Price: A Case Study of NonStop SQL/MP,"S Englert, R Glasstone, W Hasan",SIGMOD Record,1995
+70449,journals/sigmod/VenkatraoP95,SQL/CLI - A New Binding Style for SQL,"M Venkatrao, M Pizzo",SIGMOD Record,1995
+70457,conf/sigmod/SaltenisJLL00,Indexing the Positions of Continuously Moving Objects,"S Saltenis, C Jensen, S Leutenegger, M Lopez",SIGMOD Conference,2000
+70469,conf/sigmod/KornM00,Influence Sets Based on Reverse Nearest Neighbor Queries,"F Korn, S Muthukrishnan",SIGMOD Conference,2000
+70472,journals/sigmod/Widom95a,Editor's Notes,J Widom,SIGMOD Record,1995
+70474,conf/sigmod/GarofalakisGRSS00,XTRACT: A System for Extracting Document Type Descriptors from XML Documents,"M Garofalakis, A Gionis, R Rastogi, S Seshadri, K Shim",SIGMOD Conference,2000
+70483,conf/sigmod/BlakeleyD00,Tutorial: Data Access,,,2000
+70492,journals/sigmod/Wong95,An Introduction to Remy's Fast Polymorphic Record Projection,L Wong,SIGMOD Record,1995
+70496,conf/sigmod/JagadishKS00,On Effective Multi-Dimensional Indexing for Strings,"H Jagadish, N Koudas, D Srivastava",SIGMOD Conference,2000
+70497,journals/sigmod/Widom95,Editor's Notes,J Widom,SIGMOD Record,1995
+70502,journals/sigmod/Finkelstein95,The New Middleware,R Finkelstein,SIGMOD Record,1995
+70506,conf/sigmod/LehnerSPC00,Maintenance of Automatic Summary Tables,"W Lehner, R Sidle, H Pirahesh, R Cochrane",SIGMOD Conference,2000
+70509,journals/sigmod/Winslett94,Progress on HPCC and NII,M Winslett,SIGMOD Record,1994
+70513,journals/tods/LakshmananLN03,Efficient dynamic mining of constrained frequent sets,"L Lakshmanan, C Leung, R Ng",ACM Trans. Database Syst.,2003
+70514,conf/sigmod/AggarwalPWYP99,Fast Algorithms for Projected Clustering,"C Aggarwal, C Procopiuc, J Wolf, P Yu, J Park",SIGMOD Conference,1999
+70518,conf/sigmod/Rodriguez-Martinez00,MOCHA: A Database Middleware System Featuring Automatic Deployment of Application-Specific Functionality,"M Rodriguez-Martinez, N Roussopoulos, J McGann, S Kelley, V Katz, Z Song, J JáJá",SIGMOD Conference,2000
+70524,journals/sigmod/DreyerDS94,Research Perspectives for Time Series Management Systems,"W Dreyer, A Dittrich, D Schmidt",SIGMOD Record,1994
+70551,conf/sigmod/AggarwalWY99,A New Method for Similarity Indexing of Market Basket Data,"C Aggarwal, J Wolf, P Yu",SIGMOD Conference,1999
+70565,journals/tods/GunopulosKMSTS03,Discovering all most specific sentences,"D Gunopulos, R Khardon, H Mannila, S Saluja, H Toivonen, R Sharm",ACM Trans. Database Syst.,2003
+70569,conf/sigmod/AdaliSS99,A Multimedia Presentation Algebra,"S Adali, M Sapino, V Subrahmanian",SIGMOD Conference,1999
+70585,journals/sigmod/Group94,"Response to the March 1994 ODMG-93 Commentary Written by Dr. Won Kim of UniSQL, Inc",O Group,SIGMOD Record,1994
+70601,conf/sigmod/Mohan99,A Database Perspective on Lotus Domino/Notes,C Mohan,SIGMOD Conference,1999
+70607,conf/sigmod/AcharyaGPR99a,Join Synopses for Approximate Query Answering,"S Acharya, P Gibbons, V Poosala, S Ramaswamy",SIGMOD Conference,1999
+70620,conf/sigmod/LakshmananNHP99,Optimization of Constrained Frequent Set Queries with 2-variable Constraints,"L Lakshmanan, R Ng, J Han, A Pang",SIGMOD Conference,1999
+70629,journals/sigmod/Qian94,Jumping on the NII Bandwagon,X Qian,SIGMOD Record,1994
+70630,conf/sigmod/AnkerstBKS99,OPTICS: Ordering Points To Identify the Clustering Structure,"M Ankerst, M Breunig, H Kriegel, J Sander",SIGMOD Conference,1999
+70631,journals/sigmod/Alonso94a,Trade Press News,,,1994
+70644,conf/sigmod/DoRD99,The Need for Distributed Asynchronous Transactions,"L Do, P Ram, P Drew",SIGMOD Conference,1999
+70647,conf/vldb/MeccaCM01,RoadRunner: Towards Automatic Data Extraction from Large Web Sites,"V Crescenzi, G Mecca, P Merialdo",VLDB,2001
+70648,conf/sigmod/AdelbergD99,Nodose Version 2.0,"B Adelberg, M Denny",SIGMOD Conference,1999
+70651,conf/sigmod/LiVCAHMWBCHIKSS99,"PowerBookmarks: A System for Personalizable Web Information Organization, Sharing, and Management","W Li, Q Vu, E Chang, D Agrawal, K Hirata, S Mukherjea, Y Wu, C Bufi, K Chang, Y Hara, R Ito, Y Kimura, K Shimazu, Y Saito",SIGMOD Conference,1999
+70652,conf/vldb/MargaritisFT01,NetCube: A Scalable Tool for Fast Data Mining and Compression,"D Margaritis, C Faloutsos, S Thrun",VLDB,2001
+70661,conf/vldb/ShanmugasundaramKSFF01,Querying XML Views of Relational Data,"J Shanmugasundaram, J Kiernan, E Shekita, C Fan, J Funderburk",VLDB,2001
+70662,conf/sigmod/BonnetBCCCHKMMOSS99,The Cornell Jaguar System: Adding Mobility to PREDATOR,"P Bonnet, K Buza, Z Chen, V Cheng, R Chung, T Hickey, R Kennedy, D Mahashin, T Mayr, I Oprencak, P Seshadri, H Siu",SIGMOD Conference,1999
+70674,conf/sigmod/LabioYG99,Shrinking the Warehouse Update Window,"W Labio, R Yerneni, H Garcia-Molina",SIGMOD Conference,1999
+70675,conf/sigmod/PapakonstantinouV99,Query Rewriting for Semistructured Data,"Y Papakonstantinou, V Vassalos",SIGMOD Conference,1999
+70678,conf/sigmod/DeutschFS99,Storing Semistructured Data with STORED,"A Deutsch, M Fernandez, D Suciu",SIGMOD Conference,1999
+70679,conf/vldb/ZengBNN01,AgFlow: Agent-based Cross-Enterprise Workflow Management System,"L Zeng, B Benatallah, P Nguyen, A Ngu",VLDB,2001
+70682,conf/sigmod/EmbleyJN99,Record-Boundary Discovery in Web Documents,"D Embley, Y Jiang, Y Ng",SIGMOD Conference,1999
+70683,conf/vldb/StillgerLMK01,LEO - DB2's LEarning Optimizer,"M Stillger, G Lohman, V Markl, M Kandil",VLDB,2001
+70686,conf/sigmod/GarofalakisRRS99,"Of Crawlers, Portals, Mice and Men: Is there more to Mining the Web? (Panel)","M Garofalakis, S Ramaswamy, R Rastogi, K Shim",SIGMOD Conference,1999
+70687,conf/sigmod/Suciu99,Managing Web Data,,,1999
+70689,conf/sigmod/Chakrabarti99,Hypertext Databases and Data Mining,,,1999
+70702,conf/vldb/AboulnagaAN01,Estimating the Selectivity of XML Path Expressions for Internet Scale Applications,"A Aboulnaga, A Alameldeen, J Naughton",VLDB,2001
+70703,conf/vldb/YangG01,Comparing Hybrid Peer-to-Peer Systems,"B Yang, H Garcia-Molina",VLDB,2001
+70720,conf/vldb/Shmueli01,Architectures for Internal Web Services Deployment,O Shmueli,VLDB,2001
+70729,conf/sigmod/Aulakh98,About Quark Digital Media System,K Aulakh,SIGMOD Conference,1998
+70739,conf/vldb/WaasCB01,FeedbackBypass: A New Approach to Interactive Similarity Query Processing,"I Bartolini, P Ciaccia, F Waas",VLDB,2001
+70744,conf/sigmod/GuhaRS98,CURE: An Efficient Clustering Algorithm for Large Databases,"S Guha, R Rastogi, K Shim",SIGMOD Conference,1998
+70747,conf/sigmod/KotidisR98,An Alternative Storage Organization for ROLAP Aggregate Views Based on Cubetrees,"Y Kotidis, N Roussopoulos",SIGMOD Conference,1998
+70750,conf/vldb/BerckenS01,An Evaluation of Generic Bulk Loading Techniques,"J Bercken, B Seeger",VLDB,2001
+70751,conf/vldb/AnSVKIG01,Analyzing energy behavior of spatial access methods for memory-resident data,"N An, A Sivasubramaniam, N Vijaykrishnan, M Kandemir, M Irwin, S Gurumurthi",VLDB,2001
+70760,conf/vldb/ManolopoulosT01,C2P: Clustering based on Closest Pairs,"A Nanopoulos, Y Theodoridis, Y Manolopoulos",VLDB,2001
+70762,conf/vldb/TanEO01,Efficient Progressive Skyline Computation,"K Tan, P Eng, B Ooi",VLDB,2001
+70763,conf/vldb/AgrawalCN00,Automated Selection of Materialized Views and Indexes in SQL Databases,"S Agrawal, S Chaudhuri, V Narasayya",VLDB,2000
+70765,conf/sigmod/PapadopoulosM98,Similarity Query Processing Using Disk Arrays,"A Papadopoulos, Y Manolopoulos",SIGMOD Conference,1998
+70769,conf/vldb/PantiSG00,A Case-Based Approach to Information Integration,"M Panti, L Spalazzi, A Giretti",VLDB,2000
+70771,conf/sigmod/SeidlK98,Optimal Multi-Step k-Nearest Neighbor Search,"T Seidl, H Kriegel",SIGMOD Conference,1998
+70777,conf/vldb/DuttaDMRT00,Demonstration: Enabling Scalable Online Personalization on the Web,"K Dutta, A Datta, D VanderMeer, K Ramamritham, H Thomas",VLDB,2000
+70794,conf/vldb/Tsur00,Data Mining in the Bioinformatics Domain,S Tsur,VLDB,2000
+70797,conf/vldb/X00a,Author Index,,VLDB,2000
+70806,conf/sigmod/Brewer98,Delivering High Availability for Inktomi Search Engines,E Brewer,SIGMOD Conference,1998
+70807,conf/sigmod/OlstonWACELSS98,DataSplash,"C Olston, A Woodruff, A Aiken, M Chu, V Ercegovac, M Lin, M Spalding, M Stonebraker",SIGMOD Conference,1998
+70809,conf/sigmod/LiuPTBBZBHY98,CQ: A Personalized Update Monitoring Toolkit,"L Liu, C Pu, W Tang, D Buttler, J Biggs, T Zhou, P Benninghoff, W Han, F Yu",SIGMOD Conference,1998
+70812,conf/vldb/PardonA00,CheeTah: a Lightweight Transaction Server for Plug-and-Play Internet Data Management,"G Pardon, G Alonso",VLDB,2000
+70816,conf/sigmod/BerchtoldBK98,The Pyramid-Technique: Towards Breaking the Curse of Dimensionality,"S Berchtold, C Böhm, H Kriegel",SIGMOD Conference,1998
+70827,conf/vldb/CareyKRLABFLOPQRSSUVWY01,The Propel Distributed Services Platform,"M Carey, S Kirsch, M Roth, B Linden, N Adiba, M Blow, D Florescu, D Li, I Oprencak, R Panwar, R Qi, D Rieber, J Shafer, B Sterling, T Urhan, B Vickery, D Wineman, K Yee",VLDB,2001
+70845,conf/vldb/AmbiteKKMST01,The WorlInfo Assistant: Spatio-Temporal Information Integration on the Web,"J Ambite, C Knoblock, M Kolahdouzan, M Muslea, C Shahabi, S Thakkar",VLDB,2001
+70846,conf/sigmod/BrinMUT97,Dynamic Itemset Counting and Implication Rules for Market Basket Data,"S Brin, R Motwani, J Ullman, S Tsur",SIGMOD Conference,1997
+70850,conf/vldb/KoschBBHHLRT01,SMOOTH - A Distributed Multimedia Database System,"H Kosch, L Böszörményi, A Bachlechner, C Hanin, C Hofbauer, M Lang, C Riedler, R Tusch",VLDB,2001
+70853,conf/vldb/YagoubFIV00a,Building and Customizing Data-Intensive Web Sites Using Weave,"K Yagoub, D Florescu, V Issarny, P Valduriez",VLDB,2000
+70862,conf/sigmod/Eaton98,Managing Large Systems with DB2 UDB,C Eaton,SIGMOD Conference,1998
+70864,conf/sigmod/ReinwaldP98,SQL Open Heterogeneous Data Access,"B Reinwald, H Pirahesh",SIGMOD Conference,1998
+70866,conf/sigmod/BlakeleyP98,Microsoft Universal Data Access Platform,"J Blakeley, M Pizzo",SIGMOD Conference,1998
+70876,conf/vldb/Duranti01,The Long-Term Preservation of Authentic Electronic Records,L Duranti,VLDB,2001
+70879,conf/vldb/MarronL01,On Processing XML in LDAP,"P Marrón, G Lausen",VLDB,2001
+70883,conf/vldb/BonifatiCDS01,Warehousing Workflow Data: Challenges and Opportunities,"A Bonifati, F Casati, U Dayal, M Shan",VLDB,2001
+70898,conf/sigmod/GravanoCGP97,STARTS: Stanford Proposal for Internet Meta-Searching (Experience Paper),"L Gravano, K Chang, H Garcia-Molina, A Paepcke",SIGMOD Conference,1997
+70901,conf/sigmod/Arpaci-DusseauACHP97,High-Performance Sorting on Networks of Workstations,"A Arpaci-Dusseau, R Arpaci-Dusseau, D Culler, J Hellerstein, D Patterson",SIGMOD Conference,1997
+70902,conf/vldb/CasatiS00,Process Automation as the Foundation for E-Business,"F Casati, M Shan",VLDB,2000
+70904,conf/sigmod/KoudasS97,Size Separation Spatial Join,"N Koudas, K Sevcik",SIGMOD Conference,1997
+70908,conf/vldb/Ladin00,The Zero Latency Enterprise,D Liles,VLDB,2000
+70911,conf/vldb/Deshpande00,Linking Business to Deliver Value: A Data Management Challenge,A Deshpande,VLDB,2000
+70912,conf/sigmod/MumickQM97,Maintenance of Data Cubes and Summary Tables in a Warehouse,"I Mumick, D Quass, B Mumick",SIGMOD Conference,1997
+70919,conf/sigmod/AdelbergGW97,The STRIP Rule System For Efficiently Maintaining Derived Data,"B Adelberg, H Garcia-Molina, J Widom",SIGMOD Conference,1997
+70924,conf/sigmod/YangM97,Association Rules over Interval Data,"R Miller, Y Yang",SIGMOD Conference,1997
+70932,conf/sigmod/LivnyRBCDLMW97a,DEVise: Integrated Querying and Visual Exploration of Large Datasets (Demo Abstract),"M Livny, R Ramakrishnan, K Beyer, G Chen, D Donjerkovic, S Lawande, J Myllymaki, R Wenger",SIGMOD Conference,1997
+70936,conf/vldb/CarusoCGLM00,Telcordia's Database Reconciliation and Data Quality Analysis Tool,"F Caruso, M Cochinwala, U Ganapathy, G Lalk, P Missier",VLDB,2000
+70937,conf/sigmod/ChawatheG97,Meaningful Change Detection in Structured Data,"S Chawathe, H Garcia-Molina",SIGMOD Conference,1997
+70943,conf/sigmod/LivnyRBCDLMW97,DEVise: Integrated Querying and Visualization of Large Datasets,"M Livny, R Ramakrishnan, K Beyer, G Chen, D Donjerkovic, S Lawande, J Myllymaki, R Wenger",SIGMOD Conference,1997
+70962,conf/sigmod/SeshadriP97,PREDATOR: An OR-DBMS with Enhanced Data Types,"P Seshadri, M Paskin",SIGMOD Conference,1997
+70970,conf/vldb/ManegoldBK00,What Happens During a Join? Dissecting CPU and Memory Optimization Effects,"S Manegold, P Boncz, M Kersten",VLDB,2000
+70974,conf/sigmod/BohrerBBCFHKKMNRRSUUW97a,The InfoSleuth Project,"R Jr., W Bohrer, R Brice, A Cichocki, J Fowler, A Helal, V Kashyap, T Ksiezyk, G Martin, M Nodine, M Rashid, M Rusinkiewicz, R Shea, C Unnikrishnan, A Unruh, D Woelk",SIGMOD Conference,1997
+70977,conf/vldb/SrinivasanDFCJYKTDB00,Oracle8i Index-Organized Table and Its Application to New Domains,"J Srinivasan, S Das, C Freiwald, E Chong, M Jagannath, A Yalamanchi, R Krishnan, A Tran, S DeFazio, J Banerjee",VLDB,2000
+70982,conf/vldb/RamsakMFZEB00,Integrating the UB-Tree into a Database System Kernel,"F Ramsak, V Markl, R Fenk, M Zirkel, K Elhardt, R Bayer",VLDB,2000
+71020,conf/sigmod/GrayHOS96,The Dangers of Replication and a Solution,"J Gray, P Helland, P O'Neil, D Shasha",SIGMOD Conference,1996
+71025,conf/sigmod/MogiK96,Hot Mirroring: A Study to Hide Parity Upgrade Penalty and Degradations During Rebuilds for RAID5,"K Mogi, M Kitsuregawa",SIGMOD Conference,1996
+71027,conf/sigmod/ZouS96,On-line Reorganization of Sparsely-populated B+trees,"C Zou, B Salzberg",SIGMOD Conference,1996
+71028,conf/vldb/GionisIM99,Similarity Search in High Dimensions via Hashing,"A Gionis, P Indyk, R Motwani",VLDB,1999
+71038,conf/sigmod/SelfridgeSW96,IDEA: Interactive Data Exploration and Analysis,"P Selfridge, D Srivastava, L Wilson",SIGMOD Conference,1996
+71041,conf/vldb/McHughW99,Query Optimization for XML,"J McHugh, J Widom",VLDB,1999
+71046,conf/sigmod/HungYK96,CapBasED-AMS: A Capability-based and Event-driven Activity Management System,"P Hung, H Yeung, K Karlapalem",SIGMOD Conference,1996
+71051,conf/vldb/BrodieC99,Issues in Network Management in the Next Millennium,"M Brodie, S Chaudhuri",VLDB,1999
+71053,conf/vldb/Hamilton99,Networked Data Management Design Points,J Hamilton,VLDB,1999
+71061,conf/sigmod/ChawatheRGW96,Change Detection in Hierarchically Structured Information,"S Chawathe, A Rajaraman, H Garcia-Molina, J Widom",SIGMOD Conference,1996
+71071,conf/vldb/Mohan99,Repeating History Beyond ARIES,C Mohan,VLDB,1999
+71075,conf/vldb/Norvag99,The Persistent Cache: Improving OID Indexing in Temporal Object-Oriented Database Systems,K Nørvåg,VLDB,1999
+71078,conf/sigmod/Agarwal96,A Super Scalar Sort Algorithm for RISC Processors,R Agarwal,SIGMOD Conference,1996
+71093,conf/vldb/ZurekS99,Datawarehousing Has More Colours Than Just Black & White,"T Zurek, M Sinnwell",VLDB,1999
+71098,conf/vldb/ChanI99,Hierarchical Prefix Cubes for Range-Sum Queries,"C Chan, Y Ioannidis",VLDB,1999
+71100,conf/vldb/KonigW99,Combining Histograms and Parametric Curve Fitting for Feedback-Driven Query Result-size Estimation,"A König, G Weikum",VLDB,1999
+71101,conf/sigmod/QuassWGHLMNRRAUW96,LORE: A Lightweight Object REpository for Semistructured Data,"D Quass, J Widom, R Goldman, K Haas, Q Luo, J McHugh, S Nestorov, A Rajaraman, H Rivero, S Abiteboul, J Ullman, J Wiener",SIGMOD Conference,1996
+71102,conf/vldb/ChaudhuriG99,Evaluating Top-k Selection Queries,"S Chaudhuri, L Gravano",VLDB,1999
+71103,conf/sigmod/BohmA96,HyperStorM - Administering Structured Documents Using Object-Oriented Database Technology,"K Böhm, K Aberer",SIGMOD Conference,1996
+71110,conf/vldb/RothOH99,Cost Models DO Matter: Providing Cost Information for Diverse Data Sources in a Federated System,"M Roth, F Ozcan, L Haas",VLDB,1999
+71122,conf/sigmod/HellersteinN96,Query Execution Techniques for Caching Expensive Methods,"J Hellerstein, J Naughton",SIGMOD Conference,1996
+71128,conf/sigmod/Tajima96,Static Detection of Security Flaws in Object-Oriented Databases,K Tajima,SIGMOD Conference,1996
+71133,conf/vldb/Chawathe99,Comparing Hierarchical Data in External Memory,S Chawathe,VLDB,1999
+71137,conf/vldb/BonczMK99,Database Architecture Optimized for the New Bottleneck: Memory Access,"P Boncz, S Manegold, M Kersten",VLDB,1999
+71139,conf/sigmod/LoR96,Spatial Hash-Joins,"M Lo, C Ravishankar",SIGMOD Conference,1996
+71148,conf/sigmod/GuptaMR95,Adapting Materialized Views after Redefinitions,"A Gupta, I Mumick, K Ross",SIGMOD Conference,1995
+71170,conf/sigmod/LuMSS95,Efficient Maintenance of Materialized Mediated Views,"J Lu, G Moerkotte, J Schü, V Subrahmanian",SIGMOD Conference,1995
+71174,conf/sigmod/Ivinskis95,High Availability of Commercial Applications,K Ivinskis,SIGMOD Conference,1995
+71176,conf/vldb/Mihalisin98,A Single Pass Computing Engine for Interactive Analysis of VLDBs,T Mihalisin,VLDB,1998
+71191,conf/vldb/BraumandlCK98,Evaluating Functional Joins Along Nested Reference Sets in Object-Relational and Object-Oriented Databases,"R Braumandl, J Claußen, A Kemper",VLDB,1998
+71194,conf/sigmod/RadekeBBEKKN95,Efendi: Federated Database System of Cadlab,"E Radeke, R Böttger, B Burkert, Y Engel, G Kachel, S Kolmschlag, D Nolte",SIGMOD Conference,1995
+71206,conf/vldb/NipplM98,"TOPAZ: a Cost-Based, Rule-Driven, Multi-Phase Parallelizer","C Nippl, B Mitschang",VLDB,1998
+71211,conf/sigmod/BettiniWBJ95,Semantic Assumptions and Query Evaluation in Temporal Databases,"C Bettini, X Wang, E Bertino, S Jajodia",SIGMOD Conference,1995
+71215,conf/vldb/ZirintsisKM99,Hyper-Programming in Java,"E Zirintsis, G Kirby, R Morrison",VLDB,1999
+71226,conf/sigmod/GriffinL95,Incremental Maintenance of Views with Duplicates,"T Griffin, L Libkin",SIGMOD Conference,1995
+71227,conf/sigmod/ChaudhuriDY95,Join Queries with External Text Sources: Execution and Optimization Techniques,"S Chaudhuri, U Dayal, T Yan",SIGMOD Conference,1995
+71240,conf/sigmod/Ellison95,Keynote Address,,,1995
+71243,conf/vldb/GibsonKR98,Clustering Categorical Data: An Approach Based on Dynamical Systems,"D Gibson, J Kleinberg, P Raghavan",VLDB,1998
+71254,conf/sigmod/French95,``One Size Fits All'' Database Architectures Do Not Work for DDS,C French,SIGMOD Conference,1995
+71262,conf/vldb/PapadiasMD98,Algorithms for Querying by Spatial Structure,"D Papadias, N Mamoulis, V Delis",VLDB,1998
+71269,conf/sigmod/Sheth95,"Workflow Automation: Applications, Technology, and Research (Tutorial)",,,1995
+71271,conf/sigmod/Norrie95,Integration Approaches for CIM,,,1995
+71276,conf/sigmod/GatziuGD95,The SAMOS Active DBMS Prototype,"S Gatziu, A Geppert, K Dittrich",SIGMOD Conference,1995
+71282,conf/sigmod/MassariPSC95,QBI: Query By Icons,"A Massari, S Pavani, L Saladini, P Chrysanthis",SIGMOD Conference,1995
+71288,conf/vldb/VassalosP97,Describing and Using Query Capabilities of Heterogeneous Sources,"V Vassalos, Y Papakonstantinou",VLDB,1997
+71293,conf/sigmod/GrossmanHQ95,PTool: A Light Weight Persistent Object Manager,"R Grossman, D Hanley, X Qin",SIGMOD Conference,1995
+71296,conf/sigmod/WangZS95,"Pattern Matching and Pattern Discovery in Scientific, Program, and Document Databases","J Wang, K Zhang, D Shasha",SIGMOD Conference,1995
+71297,conf/vldb/StathatosRB97,Adaptive Data Broadcast in Hybrid Networks,"K Stathatos, N Roussopoulos, J Baras",VLDB,1997
+71303,conf/vldb/ZhangL97,Dynamic Memory Adjustment for External Mergesort,"W Zhang, P Larson",VLDB,1997
+71306,conf/sigmod/KeimK95,VisDB: A System for Visualizing Large Databases,"D Keim, H Kriegel",SIGMOD Conference,1995
+71325,conf/sigmod/FaloutsosRM94,Fast Subsequence Matching in Time-Series Databases,"C Faloutsos, M Ranganathan, Y Manolopoulos",SIGMOD Conference,1994
+71326,conf/vldb/KumarKA97,Caprera: An Activity Framework for Transaction Processing on Wide-Area Networks,"S Kumar, E Kwang, D Agrawal",VLDB,1997
+71329,conf/vldb/AlonsoHST97,Distributed Processing over Stand-alone Systems and Applications,"G Alonso, C Hagen, H Schek, M Tresch",VLDB,1997
+71330,conf/sigmod/ChristophidesACS94,From Structured Documents to Novel Query Facilities,"V Christophides, S Abiteboul, S Cluet, M Scholl",SIGMOD Conference,1994
+71356,conf/vldb/KornLKF98,"Ratio Rules: A New Paradigm for Fast, Quantifiable Data Mining","F Korn, A Labrinidis, Y Kotidis, C Faloutsos",VLDB,1998
+71366,conf/vldb/Slutz98,Massive Stochastic Testing of SQL,D Slutz,VLDB,1998
+71372,conf/sigmod/GraySEBW94,Quickly Generating Billion-Record Synthetic Databases,"J Gray, P Sundaresan, S Englert, K Baclawski, P Weinberger",SIGMOD Conference,1994
+71373,conf/vldb/FankhauserGLMT98,Experiences in Federated Databases: From IRO-DB to MIRO-Web,"P Fankhauser, G Gardarin, M Lopez, J Muñoz, A Tomasic",VLDB,1998
+71381,conf/sigmod/BrinkhoffKSS94,Multi-Step Processing of Spatial Joins,"T Brinkhoff, H Kriegel, R Schneider, B Seeger",SIGMOD Conference,1994
+71384,conf/vldb/FlorescuLS98,Is Web-site Management a Database Problem?,"D Florescu, A Levy, D Suciu",VLDB,1998
+71389,conf/vldb/RoussopoulosK98,The Cubetree Storage Organization,"N Roussopoulos, Y Kotidis",VLDB,1998
+71391,conf/sigmod/McIverK94,"Self-Adaptive, On-Line Reclustering of Complex Object Data","W Jr., R King",SIGMOD Conference,1994
+71408,conf/sigmod/Ubell94,The Montage Extensible DataBlade Achitecture,M Ubell,SIGMOD Conference,1994
+71409,conf/sigmod/Pirahesh94,Object-Oriented Features of DB2 Client/Server,H Pirahesh,SIGMOD Conference,1994
+71411,conf/vldb/SrivastavaDJL96,Answering Queries with Aggregation Using Views,"D Srivastava, S Dar, H Jagadish, A Levy",VLDB,1996
+71418,conf/vldb/ViverosNR96,Applying Data Mining Techniques to a Health Insurance Information System,"M Viveros, J Nearhos, M Rothman",VLDB,1996
+71423,conf/sigmod/SagonasSW94,XSB as an Efficient Deductive Database Engine,"K Sagonas, T Swift, D Warren",SIGMOD Conference,1994
+71436,journals/sigmod/Liu03c,Editor's Notes,L Liu,SIGMOD Record,2003
+71440,conf/sigmod/HwangLYMMGCSS94,The MYRIAD Federated Database Prototype,"S Hwang, E Lim, H Yang, S Musukula, K Mediratta, M Ganesh, D Clements, J Stenoien, J Srivastava",SIGMOD Conference,1994
+71449,conf/vldb/Hess96,Very Large Databases in a Commercial Application Environment,K Hess,VLDB,1996
+71450,journals/sigmod/Date03,Edgar F. Codd: a tribute and personal memoir,C Date,SIGMOD Record,2003
+71453,conf/vldb/Mohan96,DWMS: Data Warehouse Management System,N Mohan,VLDB,1996
+71456,conf/sigmod/KuhnTS94,A Language Based Multidatabase System,"e Kühn, T Tschernko, K Schwarz",SIGMOD Conference,1994
+71471,journals/sigmod/CalvaneseGLV03,Reasoning on regular path queries,"D Calvanese, G Giacomo, M Lenzerini, M Vardi",SIGMOD Record,2003
+71472,conf/vldb/TriantafillouP97,On-Demand Data Elevation in Hierarchical Multimedia Storage Servers,"P Triantafillou, T Papadakis",VLDB,1997
+71479,conf/vldb/WangYM97,STING: A Statistical Information Grid Approach to Spatial Data Mining,"W Wang, J Yang, R Muntz",VLDB,1997
+71480,journals/sigmod/GalianoM03,"Review of Data on the Web: from relational to semistructured data and XML by Serge Abiteboul, Peter Buneman, and Dan Suciu. Morgan Kaufmann 1999",,,2003
+71482,conf/vldb/GravanoG97,Merging Ranks from Heterogeneous Internet Sources,"L Gravano, H Garcia-Molina",VLDB,1997
+71484,conf/vldb/SeshadriLR97,The Case for Enhanced Abstract Data Types,"P Seshadri, M Livny, R Ramakrishnan",VLDB,1997
+71486,journals/sigmod/PalpanasPKG03,Distributed deviation detection in sensor networks,"T Palpanas, D Papadopoulos, V Kalogeraki, D Gunopulos",SIGMOD Record,2003
+71498,journals/sigmod/DemersGRTY03,The Cougar Project: a work-in-progress report,"A Demers, J Gehrke, R Rajaraman, A Trigoni, Y Yao",SIGMOD Record,2003
+71501,conf/vldb/LiCHH97,Facilitating Multimedia Database Exploration through Visual Interfaces and Perpetual Query Reformulations,"W Li, K Candan, K Hirata, Y Hara",VLDB,1997
+71504,conf/vldb/BridgeJKLLM97,The Oracle Universal Server Buffer,"W Bridge, A Joshi, M Keihl, T Lahiri, J Loaiza, N MacNaughton",VLDB,1997
+71512,conf/vldb/DesslochM97,Integrating SQL Databases with Content-Specific Search Engines,"S Deßloch, N Mattos",VLDB,1997
+71514,journals/sigmod/Halevy03,Learning about data integration challenges from day one,A Halevy,SIGMOD Record,2003
+71515,conf/vldb/HuangJR97,Spatial Joins Using R-trees: Breadth-First Traversal with Global Optimizations,"Y Huang, N Jing, E Rundensteiner",VLDB,1997
+71517,conf/vldb/PellenkoftLK97,The Complexity of Transformation-Based Join Enumeration,"A Pellenkoft, C Galindo-Legaria, M Kersten",VLDB,1997
+71526,journals/sigmod/Hainaut03,Research in database engineering at the University of Namur,J Hainaut,SIGMOD Record,2003
+71529,journals/sigmod/NascimentoSP03,Analysis of SIGMOD's co-authorship graph,"M Nascimento, J Sander, J Pound",SIGMOD Record,2003
+71543,conf/vldb/YanG95,Duplicate Removal in Information System Dissemination,"T Yan, H Garcia-Molina",VLDB,1995
+71544,journals/sigmod/Winslett03b,Interview with Rakesh Agrawal,,,2003
+71552,journals/sigmod/ArenasKKKMM03,The hyperion project: from data integration to data coordination,"M Arenas, V Kantere, A Kementsietsidis, I Kiringa, R Miller, J Mylopoulos",SIGMOD Record,2003
+71555,conf/vldb/Baru96,Performance of Future Database Systems: Bottlenecks and Bonananzas,C Baru,VLDB,1996
+71556,journals/sigmod/Hellerstein03,Toward network data independence,J Hellerstein,SIGMOD Record,2003
+71580,conf/vldb/HasanM95,Coloring Away Communication in Parallel Query Optimization,"W Hasan, R Motwani",VLDB,1995
+71581,conf/vldb/SteinbrunnPMK95,Bypassing Joins in Disjunctive Queries,"M Steinbrunn, K Peithner, G Moerkotte, A Kemper",VLDB,1995
+71586,journals/sigmod/GolabO03,Issues in data stream management,"L Golab, M Özsu",SIGMOD Record,2003
+71588,conf/vldb/GuptaHQ95,Aggregate-Query Processing in Data Warehousing Environments,"A Gupta, V Harinarayan, D Quass",VLDB,1995
+71594,journals/sigmod/MukhopadhyayGS03,An approach to confidence based page ranking for user oriented Web search,"D Mukhopadhyay, D Giri, S Singh",SIGMOD Record,2003
+71605,journals/sigmod/David03,ANSI SQL Hierarchical Processing Can Fully Integrate Native XML,M David,SIGMOD Record,2003
+71608,journals/sigmod/MarchiLPT03,Analysis of existing databases at the logical level: the DBA companion project,"F Marchi, S Lopes, J Petit, F Toumani",SIGMOD Record,2003
+71614,conf/vldb/WangC03,Avoiding Ordering and Grouping In Query Processing,"X Wang, M Cherniack",VLDB,2003
+71615,conf/vldb/HulgeriS03,AniPQO: Almost Non-intrusive Parametric Query Optimization for Nonlinear Cost Functions,"A Hulgeri, S Sudarshan",VLDB,2003
+71620,conf/vldb/SchindlerAG03,Lachesis: Robust Database Storage Management Based on Device-specific Performance Characteristics,"J Schindler, A Ailamaki, G Ganger",VLDB,2003
+71621,conf/vldb/VieiraM03,A Dependability Benchmark for OLTP Application Environments,"M Vieira, H Madeira",VLDB,2003
+71638,conf/vldb/PossP03,Data Compression in Oracle,"M Pöss, D Potapov",VLDB,2003
+71641,conf/vldb/GalanisWJD03,Locating Data Sources in Large Distributed Systems,"L Galanis, Y Wang, S Jeffery, D DeWitt",VLDB,2003
+71644,conf/vldb/WeberSNSS03,WebService Composition with O'GRAPE and OSIRIS,"R Weber, C Schuler, P Neukomm, H Schuldt, H Schek",VLDB,2003
+71651,conf/vldb/BergerBSW03,Xcerpt and visXcerpt: From Pattern-Based to Visual Querying of XML and Semistructured Data,"S Berger, F Bry, S Schaffert, C Wieser",VLDB,2003
+71657,conf/vldb/Leymann03,Grid and Applications (Industrial Session),F Leymann,VLDB,2003
+71660,conf/vldb/DeckerK03,The Semantic Web: Semantics for Data on the Web,,,2003
+71666,conf/vldb/LakshmananPZ03,Efficacious Data Cube Exploration by Semantic Summarization and Compression,"L Lakshmanan, J Pei, Y Zhao",VLDB,2003
+71670,conf/vldb/LiPHCAAT03,CachePortal II: Acceleration of Very Large Scale Data Center-Hosted Database-driven Web Applications,"W Li, O Po, W Hsiung, K Candan, D Agrawal, Y Akca, K Taniguchi",VLDB,2003
+71675,conf/vldb/Mattos03,Integrating Information for On Demand Computing,N Mattos,VLDB,2003
+71681,conf/vldb/YangLH03,Efficient Mining of XML Query Patterns for Caching,"L Yang, M Lee, W Hsu",VLDB,2003
+71689,conf/vldb/Koch03,Efficient Processing of Expressive Node-Selecting Queries on XML Data in Secondary Storage: A Tree Automata-based Approach,C Koch,VLDB,2003
+71700,conf/vldb/LabrinidisR03,Balancing Performance and Data Freshness in Web Database Servers,"A Labrinidis, N Roussopoulos",VLDB,2003
+71706,conf/vldb/HankinsP03,"Data Morphing: An Adaptive, Cache-Conscious Storage Technique","R Hankins, J Patel",VLDB,2003
+71713,conf/vldb/TianD03,Tuple Routing Strategies for Distributed Eddies,"F Tian, D DeWitt",VLDB,2003
+71714,conf/vldb/HuebschHLLSS03,Querying the Internet with PIER,"R Huebsch, J Hellerstein, N Lanham, B Loo, S Shenker, I Stoica",VLDB,2003
+71727,conf/vldb/KornMZ03,Checks and Balances: Monitoring Data Quality Problems in Network Traffic Databases,"F Korn, S Muthukrishnan, Y Zhu",VLDB,2003
+71733,conf/vldb/KarayannidisTSPMRFEB02,Processing Star Queries on Hierarchically-Clustered Fact Tables,"N Karayannidis, A Tsois, T Sellis, R Pieringer, V Markl, F Ramsak, R Fenk, K Elhardt, R Bayer",VLDB,2002
+71737,conf/vldb/RizviH02,Maintaining Data Privacy in Association Rule Mining,"S Rizvi, J Haritsa",VLDB,2002
+71738,conf/vldb/SenkulKT02,A Logical Framework for Scheduling Workflows under Resource Allocation Constraints,"P Senkul, M Kifer, I Toroslu",VLDB,2002
+71740,conf/vldb/KornMS02,Reverse Nearest Neighbor Aggregates Over Data Streams,"F Korn, S Muthukrishnan, D Srivastava",VLDB,2002
+71741,conf/vldb/ChanFFGR02,Tree Pattern Aggregation for Scalable XML Data Dissemination,"C Chan, W Fan, P Felber, M Garofalakis, R Rastogi",VLDB,2002
+71744,conf/vldb/LakshmananNWZJ02,The Generalized MDL Approach for Summarization,"L Lakshmanan, R Ng, C Wang, X Zhou, T Johnson",VLDB,2002
+71747,conf/vldb/ZellerK02,Experience Report: Exploiting Advanced Database Optimization Features for Large-Scale SAP R/3 Installations,"B Zeller, A Kemper",VLDB,2002
+71748,conf/vldb/Vingralek02,"GnatDb: A Small-Footprint, Secure Database System",R Vingralek,VLDB,2002
+71753,conf/vldb/SayalCDS02,Business Process Cockpit,"M Sayal, F Casati, U Dayal, M Shan",VLDB,2002
+71758,conf/vldb/PanRAMOHAMV02,The Denodo Data Integration Platform,"A Pan, J Raposo, M Álvarez, P Montoto, V Orjales, J Hidalgo, L Ardao, A Molano, Á Viña",VLDB,2002
+71773,conf/vldb/CiliaHB02,Profiling and Internet Connectivity in Automotive Environments,"M Cilia, P Hasselmayer, A Buchmann",VLDB,2002
+71775,conf/vldb/LamKR02,RTMonitor: Real-Time Data Monitoring Using Mobile Agent Technologies,"K Lam, A Kwan, K Ramamritham",VLDB,2002
+71782,conf/vldb/SarawagiBKM02,ALIAS: An Active Learning led Interactive Deduplication System,"S Sarawagi, A Bhamidipaty, A Kirpal, C Mouli",VLDB,2002
+71793,conf/vldb/DayalHL01,"Business Process Coordination: State of the Art, Trends, and Open Issues","U Dayal, M Hsu, R Ladin",VLDB,2001
+71795,conf/vldb/KoudasS03,Data Stream Query Processing: A Tutorial,,,2003
+71804,conf/vldb/GarofalakisG02,Querying and Mining Data Streams: You Only Get One Look,,,2002
+71806,conf/vldb/Sarawagi02,Automation in Information Extraction and Data Integration,,,2002
+71807,conf/vldb/Chakrabarti02,Searching and Mining Fine-Grained Semi-Structured Data,,,2002
+71809,conf/vldb/ImielinskiB02,"Wireless Graffiti - Data, Data Everywhere Matters","T Imielinski, B Badrinath",VLDB,2002
+71812,conf/vldb/CosleyLP02,REFEREE: An Open Framework for Practical Testing of Recommender Systems using ResearchIndex,"D Cosley, S Lawrence, D Pennock",VLDB,2002
+71824,conf/vldb/ManegoldBK02,Generic Database Cost Models for Hierarchical Memory Systems,"S Manegold, P Boncz, M Kersten",VLDB,2002
+71826,conf/vldb/CarneyCCCLSSTZ02,Monitoring Streams - A New Class of Data Management Applications,"D Carney, U Çetintemel, M Cherniack, C Convey, S Lee, G Seidman, M Stonebraker, N Tatbul, S Zdonik",VLDB,2002
+71830,conf/vldb/ChienVZTZ02,Efficient Structural Joins on Indexed XML Documents,"S Chien, Z Vagena, D Zhang, V Tsotras, C Zaniolo",VLDB,2002
+71832,conf/vldb/ChenHWW02,Multi-Dimensional Regression Analysis of Time-Series Data Streams,"Y Chen, G Dong, J Han, B Wah, J Wang",VLDB,2002
+71848,conf/vldb/ShahRS02,Maintaining Coherency of Dynamic Data in Cooperating Repositories,"S Shah, K Ramamritham, P Shenoy",VLDB,2002
+71850,conf/vldb/BettiniJWW02,Provisions and Obligations in Policy Management and Security Applications,"C Bettini, S Jajodia, X Wang, D Wijesekera",VLDB,2002
+71857,conf/vldb/DoR02,COMA - A System for Flexible Combination of Schema Matching Approaches,"H Do, E Rahm",VLDB,2002
+71859,journals/tods/AikenHW95,Static Analysis Techniques for Predicting the Behavior of Active Database Rules,"A Aiken, J Hellerstein, J Widom",ACM Trans. Database Syst.,1995
+71865,journals/tods/Chomicki95,Efficient Checking of Temporal Integrity Constraints Using Bounded History Encoding,J Chomicki,ACM Trans. Database Syst.,1995
+71868,journals/tods/Chen95a,Query Evaluation in Deductive Databases with Alternating Fixpoint Semantics,W Chen,ACM Trans. Database Syst.,1995
+71871,journals/tods/MokNE96,A Normal Form for Precisely Characterizing Redundancy in Nested Relations,"W Mok, Y Ng, D Embley",ACM Trans. Database Syst.,1996
+71884,journals/tods/Kuo96,Model and Verification of a Data Manager Based on ARIES,D Kuo,ACM Trans. Database Syst.,1996
+71892,journals/vldb/ChanGR03,RE-tree: an efficient index structure for regular expressions,"C Chan, M Garofalakis, R Rastogi",VLDB J.,2003
+71899,journals/vldb/FungKL03,Cost-driven vertical class partitioning for methods in object oriented databases,"C Fung, K Karlapalem, Q Li",VLDB J.,2003
+71903,journals/vldb/MaedcheMS03,Managing multiple and distributed ontologies on the Semantic Web,"A Maedche, B Motik, L Stojanovic",VLDB J.,2003
+71906,journals/vldb/AtluriJY03,Guest editorial,,,2003
+71907,journals/tods/Kim94,Charter and Scope,W Kim,ACM Trans. Database Syst.,1994
+71915,journals/tods/BrightHP94,Automated Resolution of Semantic Heterogeneity in Multidatabases,"M Bright, A Hurson, S Pakzad",ACM Trans. Database Syst.,1994
+71919,journals/tods/PolyzoisG94,Evaluation of Remote Backup Algorithms for Transaction-Processing Systems,"C Polyzois, H Garcia-Molina",ACM Trans. Database Syst.,1994
+71927,journals/tods/Lerner00,A model for compound type changes encountered in schema evolution,B Lerner,ACM Trans. Database Syst.,2000
+71932,journals/tods/HsuSY01,I/O reference behavior of production database workloads and the TPC benchmarks - an analysis at the logical level,"W Hsu, A Smith, H Young",ACM Trans. Database Syst.,2001
+71939,journals/tods/LiC01,Answering queries with useful bindings,"C Li, E Chang",ACM Trans. Database Syst.,2001
+71945,journals/tods/AndriesCPB01,Applying an update method to a set of receivers,"M Andries, L Cabibbo, J Paredaens, J Bussche",ACM Trans. Database Syst.,2001
+71947,journals/tods/Suciu02,Distributed query evaluation on semistructured data,D Suciu,ACM Trans. Database Syst.,2002
+71950,journals/tods/SchuldtABS02,Atomicity and isolation for transactional processes,"H Schuldt, G Alonso, C Beeri, H Schek",ACM Trans. Database Syst.,2002
+71951,journals/tods/MamoulisP01,Multiway spatial joins,"N Mamoulis, D Papadias",ACM Trans. Database Syst.,2001
+71956,journals/tods/EiterGM97,Disjunctive Datalog,"T Eiter, G Gottlob, H Mannila",ACM Trans. Database Syst.,1997
+71957,journals/tods/TariSS97,Object Normal Forms and Dependency Constraints for Object-Oriented Schemata,"Z Tari, J Stokes, S Spaccapietra",ACM Trans. Database Syst.,1997
+71961,journals/tods/LakshmananLRS97,ProbView: A Flexible Probabilistic Database System,"L Lakshmanan, N Leone, R Ross, V Subrahmanian",ACM Trans. Database Syst.,1997
+71965,journals/tods/FormicaGM98,An Efficient Method for Checking Object-Oriented Database Schema Correctness,"A Formica, H Gröger, M Missikoff",ACM Trans. Database Syst.,1998
+71966,journals/tods/Hellerstein98,Optimization Techniques for Queries with Expensive Methods,J Hellerstein,ACM Trans. Database Syst.,1998
+71981,journals/tods/YanG99,The SIFT Information Dissemination System,"T Yan, H Garcia-Molina",ACM Trans. Database Syst.,1999
+71985,journals/tods/ChaudhuriS99,Optimization of Queries with User-Defined Predicates,"S Chaudhuri, K Shim",ACM Trans. Database Syst.,1999
+71986,journals/tods/CasatiCPP99,Specification and Implementation of Exceptions in Workflow Management Systems,"F Casati, S Ceri, S Paraboschi, G Pozzi",ACM Trans. Database Syst.,1999
+71991,journals/vldb/LiangOY00,Optimizing Multiple Dimensional Queries Simultaneously in Multidimensional Databases,"W Liang, M Orlowska, J Yu",VLDB J.,2000
+71997,journals/vldb/NgS98,Optimal Clip Ordering for Multi-Clip Queries,"R Ng, P Shum",VLDB J.,1998
+72008,journals/vldb/FernandezFLS00,Declarative Specification of Web Sites with Strudel,"M Fernandez, D Florescu, A Levy, D Suciu",VLDB J.,2000
+72009,journals/vldb/BerendtS00,Analysis of Navigation Behaviour in Web Sites Integrating Multiple Information Systems,"B Berendt, M Spiliopoulou",VLDB J.,2000
+72035,journals/vldb/AbiteboulCM98,A Logical View of Structured Files,"S Abiteboul, S Cluet, T Milo",VLDB J.,1998
+72044,journals/vldb/FahlR97,Query Processing Over Object Views of Relational Data,"G Fahl, T Risch",VLDB J.,1997
+72047,journals/vldb/HansonCDERTX98,A Flexible and Recoverable Client/Server Database Event Notification System,"E Hanson, I Chen, R Dastur, K Engel, V Ramaswamy, W Tan, C Xu",VLDB J.,1998
+72050,journals/vldb/DesslochHMMT98,"Advanced Data Processing in KRISYS: Modeling Concepts, Implementation Techniques, and Client/Server Issues","S Deßloch, T Härder, N Mattos, B Mitschang, J Thomas",VLDB J.,1998
+72055,journals/vldb/FengYLH02,A template model for multidimensional inter-transactional association rules,"L Feng, J Yu, H Lu, J Han",VLDB J.,2002
+72062,journals/vldb/SaltenisJ02,Indexing of now-relative spatio-bitemporal data,"S Saltenis, C Jensen",VLDB J.,2002
+72067,journals/vldb/ChandrasekaranF03,PSoup: a system for streaming queries over streaming data,"S Chandrasekaran, M Franklin",VLDB J.,2003
+72069,journals/vldb/ShethTP03,Complex relationships and knowledge discovery support in the InfoQuilt system,"A Sheth, S Thacker, S Patel",VLDB J.,2003
+72073,journals/vldb/CuiW03,Lineage tracing for general data warehouse transformations,"Y Cui, J Widom",VLDB J.,2003
+72074,journals/vldb/ChienTZ02,Efficient schemes for managing multiversionXML documents,"S Chien, V Tsotras, C Zaniolo",VLDB J.,2002
+72083,journals/vldb/LeeSC01,A graph-theoretic model for optimizing queries involving methods,"C Lee, C Shih, Y Chen",VLDB J.,2001
+72089,journals/vldb/LiCHH01,Supporting efficient multimedia database exploration,"W Li, K Candan, K Hirata, Y Hara",VLDB J.,2001
+72099,journals/vldb/LaurentLSV01,Monotonic complements for independent data warehouses,"D Laurent, J Lechtenbörger, N Spyratos, G Vossen",VLDB J.,2001
+72101,journals/vldb/RahmB01,A survey of approaches to automatic schema matching,"E Rahm, P Bernstein",VLDB J.,2001
+72102,journals/vldb/TurkerG01,Semantic integrity support in SQL: 1999 and commercial (object-)relational database management systems,"C Türker, M Gertz",VLDB J.,2001
+72105,journals/vldb/ChangG01,Approximate query mapping: Accounting for translation closeness,"K Chang, H Garcia-Molina",VLDB J.,2001
+72109,journals/vldb/PottingerH01,MiniCon: A scalable algorithm for answering queries using views,"R Pottinger, A Halevy",VLDB J.,2001
+72112,journals/vldb/EyalM01,Integrating and customizing heterogeneous e-commerce applications,"A Eyal, T Milo",VLDB J.,2001
+72123,journals/vldb/BeckerGOSW96,An Asymptotically Optimal Multiversion B-Tree,"B Becker, S Gschwind, T Ohler, B Seeger, P Widmayer",VLDB J.,1996
+72127,journals/vldb/HarderR96,Access Path Support for Referential Integrity in SQL2,"T Härder, J Reinert",VLDB J.,1996
+72133,journals/vldb/WhiteD95,QuickStore: A High Performance Mapped Object Store,"S White, D DeWitt",VLDB J.,1995
+72135,journals/vldb/OzsuPSILM95,TIGUKAT: A Uniform Behavioral Objectbase Management System,"M Özsu, R Peters, D Szafron, B Irani, A Lipka, A Muñoz",VLDB J.,1995
+72180,journals/sigmod/Snodgrass03a,TODS Reviewers,,,2003
+72183,conf/vldb/BerckenS96,Query Processing Techniques for Multiversion Access Methods,"J Bercken, B Seeger",VLDB,1996
+72185,conf/vldb/CareyHMW96,PESTO : An Integrated Query/Browser for Object Databases,"M Carey, L Haas, V Maganty, J Williams",VLDB,1996
+72189,journals/sigmod/CampbellEM03,XML schema,"C Campbell, A Eisenberg, J Melton",SIGMOD Record,2003
+72200,conf/vldb/Gawlick96,Scalablity and Availability in Oracle7 7.3,D Gawlick,VLDB,1996
+72226,journals/sigmod/Aberer03a,"Report on the First International Conference on Ontologies, Databases and Applications of Semantics",,,2003

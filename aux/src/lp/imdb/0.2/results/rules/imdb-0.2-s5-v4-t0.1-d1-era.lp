@@ -1,0 +1,14 @@
+sim(X,X) :- att(T,Attr,X).
+sim(X,Y):- sim(Y,X).
+eqo(X,X):-att(T,tconst,X).
+eqo(X,X):-att(T,titleId,X).
+:- title_basics(V3),att(V3,tconst,V1),title_basics(V2),att(V2,tconst,V0),eqo(V1,V0), att(V2,titleType,V5),att(V3,titleType,V6), V5!=V6.
+:- title_basics(V3),att(V3,tconst,V1),title_basics(V2),att(V2,tconst,V0),eqo(V1,V0), att(V2,genres,V5),att(V3,genres,V6), V5!=V6.
+
+
+sim(X,X) :- att(T,Attr,X).
+sim(X,Y):- sim(Y,X).
+
+
+activeo(V0,V1) :- title_basics(V3),att(V3,tconst,V1),att(V3,primaryTitle,V5),sim(V5,V4),title_basics(V2),att(V2,primaryTitle,V4),att(V2,tconst,V0).
+activeo(V0,V1) :- title_basics(V3),att(V3,tconst,V1),title_basics(V2),att(V2,tconst,V0),title_akas(V5),att(V5,titleId,V0),att(V5,ordering,V6),att(V4,titleId,V1),title_akas(V4),att(V4,ordering,V6).

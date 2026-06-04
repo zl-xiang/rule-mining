@@ -11,11 +11,13 @@
 # examples and then search for a combination (a union) of these programs that covers all the examples.
 
 from . util import calc_prog_size, reduce_prog, prog_is_recursive, prog_has_invention, calc_rule_size, rule_is_recursive, format_prog
+from .util import find_direct_transitive_derivations
 from collections import defaultdict
 from . import maxsat
 from pysat.formula import IDPool
 import time
 import bitarray
+
 
 POS_EXAMPLE_WEIGHT = 1
 NEG_EXAMPLE_WEIGHT = 1
@@ -53,15 +55,32 @@ class Combiner:
 
         pos_example_covered_var = {}
         neg_example_covered_var = {}
-
+        trans_derivable_var = {}
+        pos_exs = self.tester.pos_ex
+        # [print(e) for e in pos_exs]
+        pos_direct_trans = find_direct_transitive_derivations(pos_exs)
+        trans_derivable = set().union(*pos_direct_trans)
+        trans_derivable = {int(t) for t in trans_derivable}
+        # [print(t) for t in trans_derivable]
+        include_trans = len(trans_derivable) > 0
+        #[print(trans) for trans in pos_direct_trans]
+        
+        
         pos_index = list(range(self.tester.num_pos))
         neg_index = list(range(self.tester.num_neg))
-
+        # TODO: 1. load equivalence closure of indices of examples
+        # TODO: 2. create a combination of each pair,
         for i in pos_index:
-            pos_example_covered_var[i] = vpool.id("pos_example_covered({0})".format(i))
+            # creating variables here
+            # for each positive example
+            pos_example_covered_var[i] = vpool.id("pos_example_covered({0})".format(i)) 
             programs_covering_pos_example[i] = []
 
-        if self.settings.noisy:
+        if include_trans:
+            for i in trans_derivable:
+                trans_derivable_var[i] = vpool.id("trans_derivable({0})".format(i))
+        
+        if self.settings.noisy or self.settings.fp_tolerance> 0:
             for i in neg_index:
                 neg_example_covered_var[i] = vpool.id("neg_example_covered({0})".format(i))
                 programs_covering_neg_example[i] = []
@@ -82,7 +101,8 @@ class Combiner:
             # fn = self.tester.num_pos - tp
             # print(f'size: {size} fp:{fp} tp:{tp} mdl:{size + fp + fn} {format_prog(prog)}')
             # print(sorted(pos_covered))
-
+            
+            # example id, covered or not
             for ex, x in enumerate(pos_covered):
                 if x == 1:
                     # AC: REALLY REALLY HACKY
@@ -139,10 +159,26 @@ class Combiner:
 
         if self.settings.lex and self.settings.recursion_enabled:
             encoding.append([rule_var[rule_id] for rule_id in base_rules])
-
+        # hard clause c_e -> \Bigvee_{e\in r(D), r\in\Sigma} p_r \vee t_e
         for ex in pos_index:
-            encoding.append([-pos_example_covered_var[ex]] + [program_var[p] for p in programs_covering_pos_example[ex]])
+            h = [-pos_example_covered_var[ex]] + [program_var[p] for p in programs_covering_pos_example[ex]]
+            if ex in trans_derivable_var:
+                h+=[trans_derivable_var[ex]]
+            encoding.append(h)
 
+        # hard clause c_e1 \wedge c_e2 -> t_e where e1 and e2 transitively derive e
+        count = 0
+        for trans in pos_direct_trans:
+            trans = list(trans)
+            for c_e in trans:
+                trans_body =[c_ep for c_ep in trans if c_e != c_ep]
+                h2 = [-pos_example_covered_var[c_ep] for c_ep in trans_body] + [trans_derivable_var[c_e]]
+                encoding.append(h2)
+                count+=1
+        
+        print(f'in total {count} trans clause added')
+            
+        
         if self.settings.noisy:
             for ex in neg_index:
                 for p in programs_covering_neg_example[ex]:
@@ -169,6 +205,8 @@ class Combiner:
                         if not self.settings.nonoise:
                             for i in neg_index:
                                 encoding.append([-neg_example_covered_var[i]])
+                        # TODO [Leon] bug in this function, particular in Pokemon dataset, 
+                        #             for our definition should proceed here instead of line 178
                         soft_lit_groups = [[lit for lit in rule_soft_lits]]
                     else:
                         soft_lit_groups = [[-neg_example_covered_var[i] for i in neg_index]]
@@ -219,8 +257,10 @@ class Combiner:
 
         if self.settings.best_mdl:
             mdl_ = self.settings.best_mdl
-
+        self.settings.logger.debug('find combination preprocessing finished')
+        i = 0
         while True:
+            self.settings.logger.debug(f'find combination while loop call {str(i+1)}')
             model_found = False
             model_inconsistent = False
 
@@ -231,10 +271,21 @@ class Combiner:
                     cost, model = maxsat.anytime_maxsat_solve(encoding, soft_clauses, weights, self.settings, timeout)
             else:
                 if timeout is None or self.settings.last_combine_stage:
+                    self.settings.logger.debug(f'exact_lex_solve')
+                    # result = (encoding, soft_lit_groups, weights, self.settings)
+                    # import pickle
+                    # CACHE_FILE = './test/test-sat-input.pkl'
+                    # import os
+
+                    # # create directory if missing
+                    # os.makedirs(os.path.dirname(CACHE_FILE), exist_ok=True)
+
+                    # with open(CACHE_FILE, "wb") as f:
+                    #     pickle.dump(result, f)
                     cost, model = maxsat.exact_lex_solve(encoding, soft_lit_groups, weights, self.settings)
                 else:
                     cost, model = maxsat.anytime_lex_solve(encoding, soft_lit_groups, weights, self.settings, timeout)
-
+            self.settings.logger.debug(f'maxsat solve done')
             if model is None:
                 print("WARNING: No solution found, exit combiner.")
                 break
@@ -293,11 +344,13 @@ class Combiner:
     def update_best_prog(self, new_progs, timeout=None):
         if timeout is None:
             timeout = self.settings.maxsat_timeout
-
+        self.settings.logger.debug('entering update_best_prog')
         self.saved_progs.update(new_progs)
         # print(self.saved_progs)
+        self.settings.logger.debug('find_combination')
         new_solution, cost = self.find_combination(timeout)
-        print(new_solution)
+        self.settings.logger.debug('finished find_combination')
+        # print(new_solution)
         if len(new_solution) == 0:
             return None
 
@@ -307,7 +360,7 @@ class Combiner:
             return None
 
         self.best_cost = cost
-
+        self.settings.logger.debug('reduce_prog')
         new_solution = reduce_prog(new_solution)
         pos_covered, neg_covered = self.tester.test_prog_all(new_solution)
         tp = pos_covered.count(1)

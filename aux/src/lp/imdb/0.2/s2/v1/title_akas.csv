@@ -1,0 +1,959 @@
+tid,titleId,ordering,title,region,isOriginalTitle
+6900,tt12544519,9,Vingança Nua,BR,0
+6909,tt3089896,1,Ali AlZibaq,EG,0
+6913,tt3142914,3,Ask aglatir,TR,0
+6914,tt1334247,2,Johnny Cash ja Folsom Prison,FI,0
+6919,tt0071449,8,Monsieur Dupont,XWG,0
+6920,tt0271887,1,Zivi mrtvaci,YUCS,0
+6944,tt6957448,1,Rampage 91,US,0
+6946,tt0071449,3,The Common Man,US,0
+6949,tt12533220,8,Khodahafez Dokhtar Shirazi,IR,1
+6956,tt12541654,8,The Mystery of St Pauls Hospital,XWW,0
+6959,tt4134678,1,Tutti insieme allimprovviso,IT,0
+6969,tt0071449,14,Это случилось в праздник,SUHH,0
+6974,tt12535121,3,Tainted in Red,XWW,1
+6976,tt12544519,1,Naga zemsta,PL,0
+6977,tt12539291,11,Sumpfwasser,AT,0
+6992,tt12544519,3,Naked Vengeance,GB,1
+6993,tt12534909,2,Les bouchers verts,FR,0
+6998,tt12541100,7,Yojimbo,NZ,1
+7002,tt5014322,3,1000 oczu dr Maddina,PL,0
+7019,tt12537677,13,El quinto infierno II,AR,0
+7025,tt0024542,1,Self Defense,US,0
+7030,tt12542145,6,Varg Veum  El mensaje en la pared,ES,1
+7034,tt1613875,1,The Boy Who Saw Through,US,0
+7037,tt7272242,4,Killing Jesus,XEU,0
+7038,tt12532475,3,Vánocní príbeh,CZ,0
+7039,tt0103893,6,Buffy  Vampyrdödaren,SE,0
+7040,tt12534909,9,Oi prasinoi hasapides,GR,0
+7048,tt12534909,8,De grønne slagtere,IN,0
+7056,tt12531863,6,The Wiccan,US,0
+7057,tt12542310,5,I Am Tiger Woods,GB,1
+7060,tt12544581,1,Californication Marcys Cougar Party,US,0
+7067,tt12534575,7,A háromszáz spártai,HU,0
+7082,tt12545536,3,Tormimurdja,EE,1
+7083,tt12541995,1,Sanya and the Sparrow,XWW,0
+7087,tt12533429,8,Medan vi dansar,SE,0
+7096,tt12538614,8,Kwelling,BE,0
+7101,tt0103893,24,Buffy Caçadora de Vampiros,PT,0
+7103,tt0076210,22,Острів доктора Моро,UA,0
+7109,tt12544388,4,Тхэквондо,RU,0
+7117,tt12533381,9,Death weekend,SE,1
+7150,tt12538614,19,Mennesker i trapez,DK,0
+7160,tt12545536,10,Alex Rider Stormbreaker,IT,1
+7163,tt12537199,7,MasterChef Turkey,TR,0
+7164,tt0494712,4,Хиллсайдские каннибалы,RU,0
+7174,tt0076210,30,La isla infernal del Dr Moreau,MX,0
+7176,tt0038635,8,In Dutch,US,0
+7177,tt0342492,11,Jeongyukjeomui bimil,KR,0
+7180,tt0015156,1,The Price They Pay,US,0
+7181,tt2180561,4,Маркетинг безумия Мы сошли с ума,RU,0
+7192,tt12537677,11,処刑人II,JP,0
+7203,tt12535744,3,Wild Things,US,0
+7206,tt12541065,1,Beyond Black Mesa,GB,0
+7210,tt3697868,2,Los Reyes del Juego,MX,0
+7211,tt0169268,5,ステイト・オブ・ドッグス,JP,0
+7213,tt12536431,3,The Formula,US,0
+7234,tt1255975,3,Обреченные,RU,0
+7254,tt12533122,8,Το Έπος του Biorn,GR,0
+7259,tt12545537,8,Alex Rider Operation Stormbreaker,US,0
+7264,tt12536338,10,Római lányok,HU,1
+7269,tt12543283,1,UFOs Above and Beyond,US,0
+7271,tt0017883,5,指紋名探偵,JP,0
+7278,tt12538792,7,Good Luck,US,1
+7286,tt12540527,12,Código do Crime,PT,0
+7289,tt0076210,2,Lisola del dottor Moreau,IT,0
+7290,tt12535810,7,A Grass Sandwich,US,1
+7297,tt0303418,1,Agua y aceite,MX,0
+7299,tt12538614,12,Du sollst nicht töten,AT,0
+7300,tt12538129,1,What Happened on the Moon  An Investigation Into Apollo,US,0
+7308,tt12534907,3,Zieloni rzeznicy,PL,0
+7311,tt12540918,8,Sweethearts,US,1
+7313,tt12544618,1,The Mask,US,0
+7337,tt12539365,1,Stale Mate,US,0
+7341,tt12537919,1,Σταυραετοί,GR,0
+7344,tt7712392,1,The Romantics Talking in Your Sleep,US,0
+7345,tt12545536,2,Pērkondārds,LV,0
+7347,tt0015156,5,Fiskaren på Stormskär,FI,0
+7349,tt12544710,1,Kissa ja Varjo,FI,0
+7354,tt0072308,18,Flammendes Inferno,DE,0
+7356,tt0103893,13,バッフィ ザ・バンパイア・キラー,JP,0
+7363,tt12540527,5,The Bletchley Circle,DE,0
+7366,tt7507362,2,Upside Down,XWW,0
+7374,tt5643380,6,Taekwondo,ES,0
+7380,tt12533122,2,To Epos tou Biorn,GR,0
+7392,tt12533381,3,Trágico fin de semana,MX,1
+7402,tt12538729,7,Ta mig,SE,0
+7406,tt12535368,1,Näin tehtiin Casino Royale,FI,0
+7407,tt0342492,15,Marinadimestari,FI,0
+7414,tt12537274,2,Eebenpuutorni,FI,0
+7417,tt12537252,7,Slipknot The Heretic Anthem,US,0
+7418,tt12535617,26,夜になるまえに,JP,0
+7420,tt0072308,8,Linferno di cristallo,IT,0
+7421,tt12533429,4,Long Distance,XWW,1
+7423,tt12542145,4,Varg Veum  Zeichen an der Wand,DE,0
+7435,tt0854119,1,Descifrando el código de los magos Los más grandes secretos de la magia finalmente revelados 2,ES,0
+7438,tt12535725,3,In Their Room Berlin,IN,0
+7441,tt12541100,43,Охоронець,UA,0
+7450,tt12533535,1,Kulkukoirana Mongoliassa,FI,1
+7453,tt0494712,8,Dealuri canibale,RO,0
+7471,tt12537677,20,Angeloi timoroi 2 I ekdikisi arhizei,GR,0
+7472,tt0071449,5,Monsieur Dupont  Zwischenfall an der Côte DAzur,DDDE,0
+7473,tt12543923,1,Kiusaus,FI,0
+7476,tt0015156,3,Fiskaren på Stormskär,SE,0
+7477,tt12537840,6,Kornblumenblau,DK,0
+7485,tt12545537,7,Άλεξ Ράιντερ Μυστική αποστολή,GR,1
+7486,tt0494712,3,Tromos stous lofous,GR,0
+7490,tt0076210,3,Förvandlingens Ö,SE,0
+7493,tt12535617,5,在夜幕降臨前,TW,1
+7497,tt12539448,2,Σάββατο,GR,1
+7499,tt1010401,1,Heavy Metal,FI,0
+7501,tt12545321,3,Arrastao,GR,0
+7509,tt12536101,10,Toujours lAmour,FR,1
+7512,tt0232677,1,O Sonho dos Cavalos Selvagens,PT,0
+7522,tt0072308,14,The Towering Inferno,GB,0
+7529,tt3811966,2,Genesis History or Myth,US,0
+7530,tt12542023,3,Star Wars The Clone Wars,US,0
+7531,tt0072308,20,The Towering Inferno,AU,0
+7557,tt0250784,1,Trick Shooting with Kenne Duncan,US,0
+7566,tt12543407,2,The Romance of a Gardener,US,0
+7571,tt2099698,4,Private Universe,XWW,0
+7581,tt12535617,6,Antes que anochezca,PE,0
+7583,tt0103893,23,Buffy the Vampire Slayer,GB,0
+7586,tt5210858,1,Tamako Love Story Derachan of the Southern Islands,XWW,0
+7588,tt12545734,1,Distortion,CA,0
+7592,tt12538540,6,Vera,GB,0
+7595,tt1343104,1,Red Dwarf Its Cold Outside  Series II,GB,0
+7597,tt7272242,3,Zabić Jesusa,PL,0
+7599,tt0057241,3,Dame koje rade,XYU,0
+7601,tt12531751,8,The Incident at Tower 37,US,1
+7603,tt7272242,9,Matar a Jesús,IT,0
+7609,tt12536209,10,Kryfos gamos,GR,0
+7623,tt0173787,1,Días de tormenta,ES,0
+7630,tt12535725,1,In Their Room Berlin,US,0
+7633,tt1758611,2,For the Love of Elephants,CA,0
+7637,tt0072308,32,Inferno i flammer,NO,0
+7641,tt12544636,5,Brødrene Dal og spektralsteinene,NO,0
+7663,tt0833621,2,Lécluse,FR,0
+7666,tt0169268,7,Kulkukoirana Mongoliassa,FI,0
+7673,tt12545536,8,Alex Rider,VE,1
+7677,tt0072308,11,La tour infernale,CA,0
+7681,tt12536209,22,Intrigues femenines,ES,0
+7696,tt12538944,2,Taksojuhid,EE,0
+7702,tt12533381,5,Fin de semaine infernale,CA,0
+7707,tt0103893,29,Buffy i vampirofonissa,GR,0
+7718,tt12534575,9,The 300 Spartans,GB,0
+7719,tt3811966,1,Genesis History or Myth,US,0
+7722,tt1787747,1,The Salesman,XWW,0
+7726,tt12545536,7,Άλεξ Ράιντερ Μυστική αποστολή,GR,0
+7731,tt0197267,1,Bangkok  Ein Mädchen verschwindet,DE,0
+7734,tt0382255,2,Against the Wall,CA,0
+7735,tt12541100,1,Йоджимбо,BG,0
+7737,tt12538433,1,Pavle,SI,0
+7745,tt12539290,4,In den Sümpfen,XWG,1
+7746,tt12539290,3,Vlucht in het moeras,NL,0
+7748,tt0493322,10,O Veterano,PT,0
+7749,tt12533226,11,Werewolf,PT,0
+7754,tt12537456,4,Sangre sobre los rieles,AR,0
+7757,tt0050282,12,Ember a vágányon,HU,0
+7765,tt0493322,5,アメリカン・ソルジャーズ2,JP,0
+7766,tt12533429,3,10 000 km,PL,1
+7774,tt12541725,9,Whitney Houston Where Do Broken Hearts Go,US,0
+7780,tt12538540,6,Vera,AU,0
+7789,tt12537778,21,Tämä maa on minun,FI,0
+7798,tt0169268,3,State of Dogs,GB,0
+7805,tt12539506,11,暴走52マイル,JP,0
+7806,tt3811966,3,Kent Hovind and Mike Schultz vs Terry Prewitt and Nick Powers,US,0
+7807,tt0028584,6,Arizona Thunderbolt,US,0
+7809,tt12544636,6,Kristallikivien salaisuus,FI,1
+7814,tt12542145,7,Varg Veum  Skriften på väggen,SE,0
+7818,tt12539291,8,Mocvara,XYU,1
+7823,tt12537202,6,Bad Buddha,US,0
+7829,tt12536209,7,Onderduimsch gehuwd,BE,1
+7841,tt7272242,10,Убить Хесуса,RU,0
+7845,tt2180561,1,The Marketing of Madness Are We All Insane,US,0
+7847,tt7651698,1,Der Wunschzettel,DE,0
+7850,tt0320558,3,El séptimo arcángel,AR,0
+7852,tt12542555,3,Südpol,AT,0
+7853,tt12535208,5,Karl för sin häst,SE,0
+7864,tt2873162,1,Sweeping Forward,CA,0
+7865,tt0232677,4,Der Traum der wilden Pferde,XWG,0
+7887,tt0342492,13,Zöld hentesek,HU,0
+7901,tt12538614,7,Gewissensnot,DDDE,0
+7905,tt12540527,6,Bletchley Circle,SE,0
+7911,tt0232677,5,Le songe des chevaux sauvages,FR,0
+7912,tt0072308,22,火燒摩天樓,TW,0
+7914,tt12545321,4,Merten rakastavaiset,FI,0
+7920,tt0072308,16,La tour infernale,FR,0
+7921,tt12536338,10,Die Mädchen vom Spanischen Platz,DDDE,1
+7924,tt12543667,7,I Bury the Living,AU,0
+7935,tt2265265,1,Young Single and Mormon,GB,0
+7941,tt2099698,1,Prywatny wszechświat,PL,0
+7942,tt12545537,6,Stormbreaker,AU,0
+7944,tt0043750,5,Lola i piconera,GR,0
+7948,tt12543654,3,La gatta dagli artigli doro,IT,0
+7950,tt0072308,24,Pakleni toranj,HR,0
+7961,tt12543879,3,Bandits of the West,US,0
+7969,tt0076210,9,A Ilha do Dr Moreau,BR,0
+7973,tt12537778,3,Caminho da Glória,PT,1
+7974,tt12537456,3,Człowiek na torze,PL,1
+7984,tt12534575,10,Cei 300 de Spartani,RO,1
+7986,tt0103893,12,Buffy tueuse de vampires,CA,0
+7995,tt12540106,10,Victoria  Männer und andere Missgeschicke,AT,0
+7997,tt12541100,30,Yojimbo el mercenario,MX,0
+8000,tt1548982,1,Going Vertical,SE,0
+8001,tt12539290,16,La palude della morte,IT,0
+8023,tt7176076,1,Camouflage,BE,0
+8050,tt0008915,6,Haremsäventyr,SE,0
+8057,tt0043750,6,Tra due bandiere,IT,0
+8061,tt0024542,2,Self Defense,GB,0
+8062,tt12545536,11,アレックス・ライダー,JP,0
+8066,tt12536431,2,The Formula Enriched,US,0
+8071,tt12534907,5,The Green Butchers,DE,1
+8090,tt0038635,2,Pluto na Holanda,BR,0
+8092,tt12534073,4,The Diplomatic Corpse,GB,0
+8094,tt12541915,1,Samir Abu elNil El vecino más odiado,AR,0
+8099,tt12537414,6,Alien Siege,US,0
+8100,tt12540137,5,O dolofonos me to angeliko hamogelo,GR,0
+8103,tt12540918,7,Подруги поневоле,RU,0
+8108,tt0071449,4,Oskyldigt offer,SE,0
+8112,tt0103893,30,魔法奇兵,TW,0
+8119,tt12545536,22,Alex Rider Operación Stormbreaker,ES,0
+8121,tt1787747,9,Az eladó,HU,0
+8122,tt12535276,1,Genesis History or Myth,US,0
+8128,tt0076210,17,The Island of Dr Moreau,CA,0
+8129,tt12543823,1,Bazilari dayak sever,TR,1
+8135,tt12542249,2,Psychosis in Stockholm,XWW,0
+8147,tt0076210,26,Insula doctorului Moreau,RO,0
+8148,tt12540527,6,The Bletchley Circle,GB,0
+8151,tt12543654,5,A Loba Solitária,PT,0
+8152,tt0015156,4,Spritsmuglernes overmand,DK,0
+8156,tt12534531,10,Creepy Campfire Stories,DE,0
+8158,tt12533429,8,10000 Km,GB,0
+8163,tt0103893,31,Buffy vanatoarea de vampiri,RO,0
+8165,tt12538540,13,女神探薇拉,TW,0
+8170,tt0169268,4,Estado de perros,AR,0
+8175,tt3740066,4,Pop Aye,GB,0
+8177,tt12541100,32,Телохранитель,SUHH,0
+8178,tt12542249,3,Psykos i Stockholm,SE,0
+8179,tt12533220,3,Goodbye Shirazi Girl,XWW,0
+8185,tt12533429,7,Η απόσταση μεταξύ μας,GR,1
+8200,tt12539807,8,Quarter Life Poetry,US,1
+8212,tt2295886,1,Fords Dagenham Dream,GB,0
+8214,tt2257246,3,In Their Room Berlin,IN,0
+8217,tt12533448,8,Doble juego,ES,0
+8223,tt12536209,10,Hänen salainen vaimonsa,FI,1
+8233,tt12540527,18,Kode for mord,DK,0
+8239,tt12545804,4,夫の休息日,JP,0
+8240,tt0076210,10,The Island of Dr Moreau,AU,0
+8247,tt12542022,1,Star Wars The Clone Wars,GB,0
+8252,tt0103893,32,Buffy  Vampyyrintappaja,FI,0
+8261,tt0409764,1,Blutrausch,DE,0
+8286,tt0307292,4,An Ordinary Killer,US,0
+8287,tt0103893,28,Buffy the Vampire Slayer,AU,0
+8293,tt1255975,1,Mahkumlar,AZ,0
+8294,tt0342492,2,Зеленые мясники,RU,0
+8301,tt12537414,9,A Föld ostroma,HU,0
+8303,tt0103893,14,Баффи  истребительница вампиров,RU,0
+8327,tt12536922,1,Bedroom,CA,0
+8328,tt12540023,10,3801 Lancaster American Tragedy,US,0
+8330,tt12536209,3,En livlig dame,DK,0
+8336,tt12545734,10,Distortion,US,0
+8351,tt12532665,9,A Madame com Desejos,BR,0
+8352,tt1431155,1,Sumaithangi,IN,0
+8356,tt0103893,9,Buffy der Vampirkiller,DE,0
+8358,tt12536338,3,Les jeunes filles devant lamour,BE,1
+8381,tt12536445,7,Survivor Series,US,0
+8393,tt12538540,6,Vera,BR,1
+8399,tt12545536,4,Stormbreaker,AU,0
+8403,tt7359270,1,Friss Hús,HU,0
+8408,tt0072308,15,Liekehtivä torni,FI,0
+8417,tt0311234,1,Groove on a Stanley Knife,GB,0
+8431,tt12541100,8,A testőr,HU,1
+8436,tt12542935,1,He matado a un hombre,MX,0
+8439,tt12534575,3,Los 300 espartanos,CL,1
+8443,tt12543923,6,Wench,US,1
+8447,tt12537274,9,Hebanowa wieża,PL,0
+8452,tt12537456,12,Ember a vágányon,HU,0
+8457,tt1334247,4,Johnny Cash at Folsom Prison,US,0
+8463,tt12535772,8,Botch,US,0
+8470,tt12533122,4,Сага о Бьорне,RU,1
+8476,tt12534909,17,Carne Fresca Procurase,PT,0
+8485,tt12540527,15,El cercle Bletchley,ES,0
+8486,tt0072308,42,Płonący wieżowiec,PL,0
+8497,tt0072308,21,Skyskrapan brinner,FI,0
+8499,tt12537778,1,Dicsőségre ítélve,HU,0
+8510,tt0062646,1,Al rojo vivo,MX,0
+8513,tt0038635,1,Ο Πλούτο στην χώρα της τουλίπας,GR,0
+8520,tt0076210,12,Het eiland van Dr Moreau,NL,0
+8521,tt0024542,4,My Mother,US,0
+8524,tt0400623,1,Making of Dads Dead,GB,0
+8527,tt1562890,1,The Legend of the Grand Director,US,0
+8530,tt12531192,3,ブロセリアンドの魔物,JP,0
+8531,tt12540106,7,Egy ágyban Victoriával,HU,0
+8546,tt12531610,4,Der Nesthocker,DE,0
+8550,tt5210858,2,南の島のデラちゃん,JP,0
+8553,tt0071449,16,Vacanze di sangue,IT,0
+8563,tt12534909,10,Les bouchers verts,CA,1
+8569,tt12534575,28,Os 300 de Esparta,BR,0
+8571,tt12534575,2,La bataille des Thermopyles,FR,0
+8574,tt0342492,1,De grønne slagtere,DK,0
+8578,tt12533122,3,Сага про Бйорна,UA,0
+8583,tt1351264,1,Vanessa Rising,US,0
+8589,tt12545536,7,Alex Rider Misja Stormbreaker,PL,0
+8593,tt12539678,2,Psychic Interactive,GB,0
+8602,tt12537677,10,The Boondock Saints 2  Il giorno di Ognissanti,IT,0
+8603,tt12539506,3,52 millas de terror,MX,0
+8605,tt12538540,3,Vera,FI,1
+8611,tt5797822,4,EradosGigantes,BR,0
+8615,tt0342492,3,Zieloni rzeznicy,PL,0
+8621,tt12536279,3,White Collar Blue,IN,0
+8623,tt12545512,4,GnihtemoS,IS,1
+8634,tt12534909,7,The Green Butchers,GB,0
+8639,tt12537677,7,O Próximo a Abater II,PT,1
+8646,tt12537274,8,Wieża z kości słoniowej,PL,0
+8648,tt0854119,4,Die Tricks der groessten Zauberer,DE,0
+8649,tt0038635,6,Pluto au pays des tulipes,FR,0
+8656,tt12539290,26,Létang tragique,FR,0
+8664,tt1787747,5,O Vendedor,BR,0
+8665,tt12538063,4,Маша и волшебное варенье,RU,0
+8672,tt12542539,8,Cannibals and Carpet Fitters,GB,0
+8686,tt12533429,8,10 000 км Любовь на расстоянии,RU,0
+8687,tt0387616,1,Superior Firepower The Making of Aliens,US,0
+8717,tt12535434,6,Drew Peterson An American Murder Mystery,US,1
+8719,tt12541100,23,Yojimbo,CA,0
+8720,tt0072308,6,The towering,KR,0
+8721,tt0103893,5,Бъфи убийцата на вампири,BG,0
+8723,tt0103893,3,Buffy der Vampir Killer,DE,0
+8728,tt12543667,9,I Bury the Living,CA,1
+8734,tt12537778,17,By nie pełzać na kolanach,PL,0
+8740,tt0076210,5,Η μυστηριώδης νήσος του δρ Μορώ,GR,0
+8748,tt12537677,7,The Boondock Saints II All Saints Day,US,0
+8754,tt12537778,1,Накъдето те води сърцето,BG,1
+8756,tt12539506,1,Helvete på hjul,NO,0
+8769,tt4227386,4,Familjen Jul,SE,0
+8773,tt12541583,1,Images of Indians,US,0
+8776,tt12539406,3,Alevli aşk,TR,0
+8780,tt12541763,5,Logik for mus,DK,0
+8789,tt12538866,5,Muse Absolution Tour,GB,0
+8797,tt12541100,33,Yojimbo,AU,0
+8805,tt0038635,7,En holandés,ES,0
+8808,tt0082126,3,Manche mögens prall,XWG,0
+8814,tt12535724,3,In Their Room Berlin,IN,0
+8819,tt12538965,7,Honor Student,US,0
+8820,tt12540917,5,Opasne žene,RS,0
+8823,tt12540917,4,Juntas no crime,BR,0
+8827,tt12545773,2,Hardcore,NL,0
+8829,tt12539506,5,52 miglia di terrore,IT,0
+8845,tt12533381,2,The House by the Lake,US,0
+8846,tt12536209,1,Onderduims gehuwd,BE,0
+8850,tt9747450,2,Bozic za junake,SI,0
+8851,tt0342492,17,Carne Fresca Procurase,PT,0
+8852,tt9747450,3,Holiday for Heroes,DE,0
+8863,tt1807409,1,MaDiWoDoVrijdagShow,NL,0
+8864,tt12537300,2,Dirty Dirty Jokes,US,0
+8866,tt12545460,4,En livskraftig planet,NO,0
+8872,tt12536209,17,Blond niebezpieczeństwo,PL,0
+8876,tt12540137,10,Death Smiles on a Murderer,US,0
+8890,tt12535810,1,Бесплатная поездка,RU,0
+8893,tt5916942,1,Superman Complexity  Truth,US,0
+8902,tt12545460,5,Tierra Las fuerzas del planeta,ES,0
+8916,tt0082126,5,COD,US,0
+8930,tt12541654,8,Sheng Baoluo yi yuan zhi mi,CN,1
+8932,tt12531543,2,Sisters of Wellber,XWW,0
+8939,tt12545537,10,Alex Rider  Mystiki apostoli,GR,0
+8941,tt7507362,1,Всё наоборот,RU,0
+8961,tt0072308,12,El coloso en llamas,ES,0
+8962,tt0342492,6,Zieloni rzeźnicy,PL,0
+8986,tt0103893,20,Buffy  Lammazzavampiri,IT,0
+8988,tt12535617,27,Zanim zapadnie noc,PL,0
+8993,tt12541100,2,La guardia del corpo,IT,1
+8999,tt12533226,8,Werewolf,GB,0
+9000,tt12534073,2,Exklusivbericht,XWG,1
+9015,tt12545536,1,Audros karys,LT,1
+9021,tt12540106,7,В постели с Викторией,RU,1
+9027,tt12543062,1,The Last Astronaut,US,0
+9040,tt0076210,1,En øy med tapte sjeler,NO,0
+9056,tt4557242,1,Balkon,PL,0
+9058,tt12537677,23,Sveci protiv mafije 2,HR,0
+9062,tt0057241,1,Städligan,SE,0
+9064,tt12539366,10,Stale Mate,US,0
+9074,tt12538540,9,Vera,IT,1
+9075,tt12540675,6,Masjede gowharshad,IR,1
+9080,tt12543667,6,Я хороню живого,SUHH,1
+9088,tt12533381,26,Party des Grauens,XWG,0
+9104,tt0017883,3,Finger Prints,US,0
+9110,tt12534909,6,Zieloni rzeźnicy,PL,0
+9114,tt12536209,10,Mariage incognito,FR,1
+9125,tt0071449,1,Dráma a tengerparton,HU,0
+9128,tt0332364,3,Sa piling ng aswang,PH,0
+9129,tt0103893,25,Bichette la terreur,CA,0
+9130,tt0043750,1,Lola A Piconera,BR,0
+9131,tt12539291,1,De afschrik van het moeras,BE,1
+9143,tt2477894,1,Pagate fratelli,IT,0
+9146,tt12531863,2,House of the Witch,US,0
+9149,tt1715726,1,This Is Hamlet,US,0
+9151,tt0008915,7,Haremseventyret,DK,0
+9155,tt0395147,1,The Fanimatrix Run Program,NZ,0
+9162,tt12545793,1,Reaching for the Stars,US,0
+9164,tt0103893,26,Bafi  vampyru žudike,LT,0
+9165,tt12541100,38,Garda personală,RO,0
+9166,tt0050282,9,Sangre sobre los rieles,AR,0
+9176,tt12543236,1,Koichiro Unos Female Gymnastic Teacher,XWW,0
+9177,tt12538614,1,Môshû no kage,JP,1
+9178,tt2279927,1,The Detective,XWW,0
+9184,tt12541100,5,Yojimbo o GuardaCostas,BR,0
+9188,tt12537919,2,The Golden Eagles,XWW,0
+9189,tt12541355,2,Vengeance,GR,0
+9190,tt12535579,7,Pappas flicka,FI,0
+9212,tt12533097,5,Maggie Simpson in Playdate with Destiny,US,1
+9219,tt12538614,4,Opętanie,PL,1
+9248,tt12538614,4,Gekweld geweten,NL,1
+9250,tt0103893,10,Μπάφι η βαμπιροφόνισσα,GR,0
+9259,tt1787747,10,Le vendeur,FR,0
+9261,tt0017883,2,Fingerprints,GB,0
+9266,tt12542022,3,Star Wars The Clone Wars,US,0
+9277,tt12537414,3,Alien Siege,GR,0
+9287,tt4327728,1,Town Bizzness Pt 2,US,0
+9290,tt12541100,15,La sfida del samurai,IT,0
+9307,tt12545808,8,21 and a WakeUp,US,0
+9310,tt0307292,3,An Ordinary Killer,JP,0
+9312,tt12534907,14,Dänische Delikatessen,DE,0
+9317,tt12542688,1,Brazils Next Top Model,BR,0
+9318,tt0076210,14,The Island of Dr Moreau,GB,0
+9335,tt12536338,9,Fetele din piaţa Spaniei,RO,0
+9354,tt2257246,1,In Their Room Berlin,US,0
+9358,tt7905602,1,Kala Varam Aaye,IN,0
+9361,tt12540106,12,Victoria y el sexo,UY,0
+9373,tt12538614,10,Ai no meiro,JP,0
+9375,tt1067065,1,Ben David Broken Sky,US,0
+9378,tt12533226,16,Vukodlak,RS,0
+9381,tt2591600,1,Assassins Creed Descendants,US,0
+9382,tt0071449,10,Férias Violentas,PT,0
+9390,tt0103893,19,Buffy der VampirKiller,DE,0
+9409,tt12541409,1,City of Lost Men,US,0
+9420,tt12545536,13,Stormbreaker Les aventures dAlex Rider,CA,0
+9421,tt12543667,12,Eu Enterro os Vivos,PT,0
+9442,tt0259362,2,À lombre dHollywood,CA,0
+9450,tt0076210,20,La isla del Doctor Moreau,ES,0
+9453,tt12533381,21,Inferno im Moor,XWG,0
+9461,tt12544736,1,Your Little Boy,US,0
+9462,tt12532664,3,A Madame com Desejos,BR,0
+9474,tt12532745,1,Ressha Sentai Tokkyûjâ DVD Supesharu Saraba Chiketto Arechi Sûpâ Tokkyû Batoru,JP,0
+9485,tt0103893,15,Buffy la caza vampiros,MX,0
+9489,tt12535666,6,La blessure dAndréa,FR,0
+9493,tt0342492,10,De grønne slakterne,NO,0
+9497,tt3740066,7,Dramblys Popajus,LT,0
+9504,tt12537274,7,La torre debano,IT,0
+9505,tt9426804,1,O Nosso Cônsul em Havana,PT,0
+9506,tt12543667,11,To mystiko ton exi nekron,GR,0
+9509,tt0076210,24,Doktor Moronun adası,TR,0
+9517,tt12536279,1,Pacific Paradise Police,DK,1
+9518,tt12533381,3,Weekend sauvage,FR,1
+9527,tt0038635,5,Tässä tulee Pluto,FI,0
+9532,tt0043750,2,Lola a Cantadeira Cigana,PT,0
+9541,tt1334247,5,Johnny Cash at Folsom Prison,AU,0
+9544,tt0169268,8,Nohoi oron,MN,0
+9551,tt0028584,2,Arizona Mahoney,US,0
+9554,tt12534575,4,300 Spartanere,NO,0
+9569,tt12538965,2,Honor Student,XWW,0
+9576,tt0207280,1,Wild Things,US,0
+9577,tt12533448,8,Double Bang,FR,1
+9580,tt12544532,4,Khotat Alshaitan,EG,0
+9586,tt3740066,9,Pop Aye,TH,0
+9592,tt12534405,1,Segment 76,PL,0
+9619,tt12543654,6,La loba solitaria,MX,0
+9624,tt0072308,40,Ο πύργος της Κολάσεως,GR,0
+9637,tt12545536,20,Alex Rider  Mystiki apostoli,GR,0
+9641,tt12541263,1,Groove on a Stanley Knife,GB,0
+9642,tt12543763,1,Travelling Doctor,CA,0
+9654,tt4222240,3,Keep Frozen,IS,0
+9668,tt12544388,10,男色假期,TW,1
+9675,tt12544519,13,Venganza desnuda,ES,0
+9677,tt0165818,1,Horses in Winter,CA,0
+9678,tt0028584,5,Bad Man of Arizona,GB,0
+9680,tt12539290,3,El pantano de la muerte,UY,0
+9687,tt12545460,8,Земля Мощь планеты,RU,0
+9690,tt12539291,7,Sumpen,DK,1
+9695,tt12537287,9,Astronauter og filmstjerner,NO,0
+9708,tt2099698,3,Soukromý vesmír,CZ,0
+9721,tt12540917,7,Подруги поневоле,RU,0
+9737,tt5582984,1,Baba Karam,IR,0
+9746,tt5189894,6,68 Kill,DE,0
+9747,tt12542145,10,The Writing on the Wall,XWW,0
+9748,tt12538063,4,Маша и волшебное варенье,SUHH,0
+9757,tt12541100,44,Onnensoturi,FI,0
+9761,tt0076210,29,The Island of Dr Moreau,US,0
+9767,tt12544388,9,Taekwondo,GB,0
+9769,tt5189894,2,68 Kill,GB,0
+9770,tt1548982,4,ゴーイング・バーティカル,JP,0
+9775,tt12534575,4,スパルタ総攻撃,JP,0
+9788,tt0072308,27,A Torre do Inferno,PT,0
+9795,tt12535208,5,Dans på låven,NO,0
+9797,tt0076210,8,Die Insel des Dr Moreau,XWG,0
+9803,tt0382255,4,Quality of Life,US,0
+9804,tt0103893,4,Buffy the Vampire Slayer,US,0
+9807,tt12537778,9,Bound for Glory,US,0
+9814,tt0072308,31,Pokoli torony,HU,0
+9815,tt0038635,4,Pluto i Holland,SE,0
+9817,tt12535161,8,Idiotiko sympan,GR,1
+9822,tt12533448,4,Double Bang,US,0
+9835,tt2180561,2,心の病を売り込む 私たちはみな精神病なのか,JP,0
+9850,tt12534575,18,Der Löwe von Sparta,AT,0
+9857,tt0072308,33,Skyskrapan brinner,SE,0
+9868,tt1758611,3,Az elefántok szeretetéért,HU,0
+9878,tt12534198,5,Identitate furata,RO,0
+9888,tt12536209,5,Casamento em Segredo,PT,0
+9904,tt0043750,7,Lola the Coalgirl,XWW,0
+9911,tt0493322,2,The Veteran,GR,0
+9926,tt12534907,1,De grønne slagtere,DK,0
+9929,tt12541410,1,City of Lost Men,US,0
+9950,tt1334247,3,Johnny Cash at Folsom Prison,FR,0
+9958,tt0028584,1,Arizona Raiders,US,0
+9959,tt12537456,7,Mannen på sporet,NO,0
+9969,tt7493294,1,The Streets Fit But You Know It,GB,0
+9970,tt12545321,8,Arrastão,BR,0
+9977,tt0072308,23,Ад под небето,BG,0
+9982,tt0103893,8,Buffy a vámpírok réme,HU,0
+9989,tt0028584,4,O Sabido do Arizona,BR,0
+9992,tt0342492,4,De grønne slagtere,IN,0
+9998,tt5643380,3,Taekwondo,GB,0
+10018,tt0342492,12,The Green Butchers,DE,0
+10034,tt12541100,2,Yojimbo  Der Leibwächter,XWG,1
+10036,tt9747450,1,Holiday for Heroes,CA,0
+10041,tt12545537,1,Alex Rider  Operação Stormbreaker,PT,1
+10053,tt0494712,2,Hillside Cannibals The Legend of Sawney Bean,US,0
+10066,tt12534907,1,Les bouchers verts,FR,0
+10073,tt12539290,6,Болотная вода,SUHH,1
+10082,tt0342492,8,De gröna slaktarna,SE,0
+10084,tt12536750,1,Demon in the Dark,US,1
+10090,tt12540786,7,Ninja Fighters,XWG,0
+10096,tt12533097,10,Rendezvous avec le destin,FR,1
+10101,tt0050282,1,Clovek na kolajách,SK,0
+10103,tt2836540,1,Greenscreen,CA,0
+10104,tt12544847,1,Directors Commentary Terror of Frankenstein,US,0
+10113,tt12534909,10,Jeongyukjeomui bimil,KR,1
+10122,tt5189894,1,68 Kill,US,0
+10127,tt0072308,38,Пекло у піднебессі,UA,0
+10130,tt12544496,6,Club Dead,US,1
+10137,tt12533381,4,Смертельный уикэнд,SUHH,1
+10143,tt12542471,6,Zivi mrtvaci,YUCS,0
+10144,tt12538614,10,Sonsuz Istırap,TR,0
+10146,tt0072308,41,Asemankharashe jahanami,IR,0
+10147,tt1787747,6,The Salesman,CA,0
+10148,tt0076210,11,Το νησί του Διαβόλου,GR,0
+10149,tt0054655,4,Badjao The Sea Gypsies,US,0
+10153,tt12537778,9,Esta tierra es mi tierra,AR,0
+10157,tt0076210,18,Lisola del Dr Moreau,IT,0
+10161,tt2763330,1,Без свидетелей,RU,0
+10162,tt12537778,13,На пути к славе,SUHH,0
+10166,tt0072308,30,The Towering Inferno,CA,0
+10171,tt12536126,10,Rafaël,NL,0
+10173,tt12539291,17,スワンプ・ウォーター,JP,0
+10183,tt12545537,5,Audros karys,LT,1
+10187,tt6662506,1,Whitney Houston Where Do Broken Hearts Go,US,0
+10190,tt2330549,3,Totally Biased with W Kamau Bell,US,0
+10197,tt12533535,10,State of Dogs,GB,1
+10198,tt12540137,4,Smrt se smijesi ubojici,XYU,0
+10213,tt0076210,21,ドクター・モローの島,JP,0
+10215,tt0050282,3,Чoвек на релсите,BG,0
+10219,tt0493322,3,The Veteran,IT,0
+10220,tt5189894,4,Убить за 68,RU,0
+10225,tt12540343,7,Jimeoin,AU,1
+10227,tt0090225,3,Twister Kicker,US,0
+10229,tt12534575,24,Los 300 héroes,CL,0
+10233,tt0003158,1,A Misunderstood Boy,US,0
+10237,tt9747450,5,Holiday for Heroes,US,0
+10246,tt12538614,20,Menschen am Trapez,XWG,0
+10262,tt0382255,1,Sprayowcy,PL,0
+10269,tt12539290,13,Águas Sombrias,PT,0
+10270,tt12535161,9,Prywatny wszechświat,PL,0
+10272,tt12543923,2,Eifersucht,DE,0
+10273,tt0250341,2,Dirty Dirty Jokes,US,0
+10276,tt0076210,28,Lîle du docteur Moreau,FR,0
+10287,tt0342492,19,The Green Butchers,XWW,0
+10289,tt12533226,5,Werewolf,IE,1
+10309,tt0076210,16,Wyspa doktora Moreau,PL,0
+10311,tt4227386,3,Familien Jul,DK,0
+10317,tt3142914,1,Rüya gibi geçti,TR,0
+10320,tt0364182,1,Sonic Cinema,US,0
+10326,tt12545536,17,Alex Rider Operation Stormbreaker,CA,0
+10328,tt0057241,2,Las extrañas mujeres de Pitt Street,ES,0
+10333,tt0057760,4,カレン,JP,0
+10336,tt12537919,2,Οι Σταυραετοί που Δεν Λύγισαν Ποτέ,GR,0
+10339,tt12534198,2,Albert Walker életei,HU,0
+10341,tt12533226,12,Hombre Lobo,CO,0
+10357,tt0071449,12,Дюпон Лажуа,SUHH,0
+10358,tt12542145,10,Varg Veum  Skriften på væggen,DK,1
+10360,tt12533226,10,Werewolf,XWW,1
+10366,tt12545460,2,Expedition Erde  Die Urkräfte unseres Planeten,DE,1
+10367,tt12538965,5,Une dangereuse élève,FR,0
+10373,tt0061002,1,The Solid Tin Coyote,US,0
+10377,tt12532678,1,Catherine,FR,0
+10396,tt12533381,13,ウィークエンド（1976）,JP,0
+10400,tt0320558,2,Sin Escape,US,0
+10401,tt2154007,2,Trilby Hypnotic Scene,US,0
+10423,tt0072308,4,Паклени торањ,RS,0
+10425,tt0854119,2,Breaking the Magicians Code Magics Biggest Secrets Finally Revealed 2,US,0
+10427,tt2265265,3,Duck Beach to Eternity,US,0
+10429,tt0103893,22,Buffy la cazavampiros,ES,0
+10431,tt12538792,5,Ost und West,AT,0
+10432,tt12532199,5,Kala Varam Aaye,IN,0
+10435,tt12539291,23,El pantano de la muerte,MX,0
+10443,tt12539222,4,Detective Conan Conan vs Kid vs Yaiba  The Grand Battle for the Treasure Sword,XWW,0
+10452,tt12543667,9,I Bury the Living,US,0
+10459,tt12545804,6,Maridos em Férias,BR,1
+10461,tt0054655,1,Badjao,PH,0
+10472,tt12534907,10,Oi prasinoi hasapides,GR,0
+10474,tt0494712,5,Menschenfresser XXL,DE,0
+10486,tt0050282,5,Man on the Tracks,US,0
+10487,tt0342492,16,The Green Butchers,GB,0
+10489,tt8305258,1,America Says,US,0
+10492,tt12541777,6,Jimmy Zip,US,1
+10493,tt0956193,1,Men Cry in the Dark,US,0
+10494,tt3740066,2,Pop Aye,US,0
+10495,tt5643380,4,Тхэквондо,RU,0
+10507,tt0008915,4,En la tierra del moro,ES,0
+10509,tt12543923,6,Bagarres,FR,0
+10511,tt12539290,9,De afschrik van het moeras,BE,0
+10527,tt12536445,10,WWF Survivor Series,US,1
+10535,tt12531863,7,La noche de la bruja,ES,0
+10540,tt12540106,9,Los casos de Victoria,ES,1
+10541,tt12541100,2,用心棒,JP,0
+10552,tt1228773,1,Ticket nach Telluride,DE,0
+10557,tt12540076,1,Peng Lai Land,CN,0
+10561,tt12537456,5,Man on the Tracks,US,0
+10562,tt4227386,8,De familie Kerst,NL,0
+10587,tt0266342,4,Занесенные ветром,RU,0
+10590,tt12540106,2,Victoria,CA,1
+10599,tt0071449,6,Dupont Lajoie,FR,0
+10603,tt0057760,1,Karen,US,0
+10607,tt0090225,4,Tornado,HK,0
+10609,tt9473520,1,Hamm,HU,0
+10619,tt12539291,2,Vlucht in het moeras,NL,0
+10634,tt12531173,10,Ramayan,IN,1
+10639,tt0008915,5,Douglas au pays des mosquées,FR,0
+10643,tt12534575,10,300 spartalaista,FI,0
+10647,tt0103893,17,Vampir Avcısı Buffy,TR,0
+10653,tt0243250,1,La trilogie marseillaise Fanny,FR,0
+10658,tt12541634,2,Olen vapaa,FI,1
+10660,tt7272242,8,Matar a Jesús,FR,0
+10664,tt12537456,3,Anthropos stis rages,GR,0
+10665,tt12537414,4,Obca krew,PL,0
+10667,tt0103893,16,Buffy  postrach wampirów,PL,0
+10669,tt0266342,1,Olen vapaa,FI,0
+10677,tt4995922,1,MBFF Mans Best Friend Forever,US,0
+10680,tt12534406,1,Segment 76,PL,0
+10684,tt0090225,1,O kitrinos arhigos me t atsalenia daktyla,GR,0
+10685,tt0008915,3,Bound in Morocco,US,0
+10694,tt12533523,2,W zamrozeniu,PL,0
+10696,tt12543667,14,Seppellisco i vivi,IT,0
+10697,tt12533429,9,10000 Km,DE,0
+10699,tt12543042,1,När syrenerna blomma,SE,0
+10702,tt0054655,3,Bajau anak laut,SG,0
+10703,tt12540918,8,Sweethearts,DE,0
+10704,tt12537962,2,Moves The Rise and Rise of the New Pornographers,US,1
+10715,tt7507362,5,All the Way Around,XEU,0
+10716,tt12541915,1,Samir Abu elNil,EG,1
+10718,tt12532718,1,Above It All,GB,0
+10722,tt12535617,2,Antes que anochezca,US,0
+10723,tt3740066,1,ポップ・アイ,JP,0
+10733,tt5189894,3,68キル,JP,0
+10736,tt12540918,6,Sweethearts,AT,0
+10738,tt0342492,14,Dänische Delikatessen,DE,0
+10747,tt12541100,10,Yojimbo,RO,0
+10752,tt12534575,20,Os 300 Espartanos,PT,0
+10768,tt0050282,8,O anthropos tou trainou,GR,0
+10777,tt12535617,29,Preden se znoci,SI,0
+10783,tt0342492,18,Les bouchers verts,CA,0
+10787,tt1358894,1,This Is This,US,0
+10788,tt12542550,3,O Fotógrafo,BR,0
+10795,tt12539291,12,Swamp Water,CA,0
+10806,tt12545047,4,Arte de Roubar,PT,0
+10825,tt12534907,16,The Green Butchers,GB,0
+10828,tt7272242,6,Killing Jesus,XWW,0
+10853,tt12538540,7,Les enquêtes de Vera,FR,0
+10854,tt0082126,1,Ragazze petto in fuori,IT,0
+10855,tt2099698,2,Idiotiko sympan,GR,0
+10860,tt12544362,7,Marilyn Manson Tourniquet,CA,0
+10878,tt0071449,11,Crónica de una violación,ES,0
+10889,tt0076210,27,Στη φωλιά του λυκάνθρωπου,GR,0
+10896,tt0391140,1,Extreme Schoolgirls 4,US,0
+10911,tt1456134,1,Brazils Next Top Model,BR,0
+10919,tt12533510,3,When We Go to War,NZ,0
+10920,tt12533226,7,Оборотень,RU,0
+10922,tt6002956,1,Caged,US,0
+10927,tt12536025,1,Ravioli,AT,0
+10934,tt12539290,6,Aguas pantanosas,ES,0
+10935,tt0493322,1,Escape the Past,DE,0
+10962,tt0050282,10,Anthropos stis rages,GR,0
+10965,tt12544467,1,O Trabalho dos Homens,BR,0
+10972,tt12537456,11,Der Mann auf den Schienen,DE,0
+10983,tt12544519,1,Venganza desnuda,MX,0
+10986,tt4227386,1,Jezískova rodina,CZ,0
+10999,tt12536279,4,White Collar Blue,AU,0
+11001,tt0250341,4,Stop the Bomb,US,0
+11004,tt0050282,4,Un homme sur la voie,FR,0
+11005,tt12544296,1,Dio Hey Angel,US,0
+11019,tt5635916,1,ElAlb Wma Yeshaq,EG,0
+11025,tt0072308,7,Infierno en la torre,VE,0
+11027,tt2099698,6,Privatni svemir,RS,0
+11029,tt0076210,15,A Ilha do Dr Moreau,PT,0
+11040,tt0076210,19,Остров доктора Моро,SUHH,0
+11048,tt12539804,2,Matrimonio al Sud,IT,0
+11054,tt12541085,1,Emma Smetana  Jordan Haj Lost and Found,CZ,0
+11061,tt4222240,2,W zamrozeniu,PL,0
+11067,tt12533097,5,Playdate with Destiny,US,0
+11073,tt3796272,1,Proximity,US,0
+11077,tt12539222,3,Meitantei Conan Conan vs Kid vs Yaiba,JP,0
+11079,tt0076210,23,Die Insel des Dr Moreau,AT,0
+11081,tt0266342,2,Blown in with the Wind,US,0
+11087,tt0072308,28,Tawâringu inferuno,JP,0
+11094,tt12545362,10,Лято в планините,BG,0
+11096,tt0848569,1,The Away Game,AU,0
+11100,tt12536101,4,Den fovoumai ton erota,GR,0
+11109,tt12534530,1,Creepy Campfire Stories,DE,1
+11120,tt0833621,1,A Napsugárhajú lány,HU,0
+11123,tt12533063,4,Futbolowi buntownicy,PL,0
+11140,tt0072308,2,Infierno en la torre,AR,0
+11147,tt9092600,1,Ополченочка,RU,0
+11148,tt2538194,1,Heroin A Love Story,US,0
+11149,tt12537230,1,Doutores Palhaços,PT,0
+11150,tt12545537,27,Stormbreaker,FI,0
+11156,tt1733412,1,Nepobedivo srce,RS,0
+11161,tt12544519,6,Naked Vengeance,US,0
+11171,tt0243250,3,Марсилска трилогия Фани,BG,0
+11174,tt12540106,8,Victoria  Männer  andere Missgeschicke,DE,0
+11176,tt12535617,6,Karanlıktan önce,TR,0
+11188,tt0057760,3,Karen,FI,0
+11189,tt2279927,2,Karagah,IR,0
+11195,tt0072308,39,O pyrgos tis Kolaseos,GR,0
+11198,tt0076210,13,De fordømtes øy,NO,0
+11200,tt0072308,36,Sklenené peklo,CSHH,0
+11227,tt12540786,8,La guerre des gangs,FR,0
+11232,tt12534907,8,De gröna slaktarna,SE,0
+11239,tt0057241,4,Ladies Who Do,GB,0
+11252,tt12545047,10,The Art of Stealing,US,0
+11253,tt0090225,2,Da feng bo,TW,0
+11258,tt12532394,3,Four Journeys Into Mystic Time OneTwoThree,US,1
+11261,tt0072308,25,Wolkenkrabber in Vlammen,BE,0
+11267,tt12541100,10,Yojimbo,ES,1
+11268,tt1113723,1,Dead Head Fred,US,0
+11272,tt12544906,6,WXW Rage TV,US,1
+11281,tt5643380,2,男色假期,TW,0
+11283,tt12533429,5,10000 km,ES,0
+11294,tt12545536,8,Alex Rider  Operação Stormbreaker,PT,1
+11297,tt12534303,1,Testimony,US,0
+11301,tt12533226,6,Les Rescapés,FR,1
+11317,tt0043750,3,Lola la piconera,ES,0
+11319,tt0477575,1,Benji Brown In Touch with Reality,US,0
+11324,tt12539620,3,Jack Fat and Jim Slim at Coney Island,US,1
+11331,tt0057241,5,Ladies Who Do,US,0
+11337,tt12543140,1,Date limite de consommation,FR,0
+11355,tt1787747,4,El vendedor,ES,0
+11357,tt12533381,19,Dødens weekend,DK,0
+11358,tt12538614,16,Falsa obsesión,ES,0
+11366,tt0008915,2,Bound in Morocco,GB,0
+11367,tt12533381,9,Death Weekend,SE,0
+11378,tt2154007,1,Hypnotic Scene,US,0
+11386,tt12544531,1,Khotat Alshaitan,EG,0
+11391,tt0081586,2,The Swift Sword,HK,0
+11400,tt12541100,53,Yojimbo,XEU,0
+11401,tt6053480,1,MrLooper,NO,0
+11411,tt0072308,37,Liepsnojantis pragaras,LT,0
+11426,tt12541831,6,Sexy Boom,IT,1
+11430,tt12539290,7,Moczary,PL,0
+11431,tt12538614,3,Obsession,FR,1
+11442,tt12532966,5,The Wedding Ring,SE,0
+11444,tt2512326,1,Pictures from a Hiroshima Schoolyard,US,0
+11447,tt12536338,12,Tres enamoradas,ES,0
+11448,tt0169268,6,Panstwo psów,PL,0
+11460,tt0833621,4,The Girl with the Sun in Her Hair,IE,0
+11471,tt12541008,1,Exit,US,0
+11482,tt0103893,18,Buffy a CaçaVampiros,BR,0
+11483,tt0072308,9,Det tårnhøje helvede,DK,0
+11497,tt12533381,28,Kanlı tatil,TR,0
+11501,tt0204694,1,O Trabalho dos Homens,BR,0
+11502,tt12534575,1,300 спaртанци,BG,1
+11514,tt12536338,10,Garotas da Praça de Espanha,BR,0
+11519,tt12538540,8,Vera,ES,0
+11533,tt12533226,10,Werewolf,US,0
+11551,tt12541831,4,La kermesse érotique,FR,0
+11556,tt12540918,4,Juntas no crime,BR,1
+11560,tt12539290,14,The Man Who Came Back,GB,0
+11563,tt4227386,6,Der kleine Elf,DE,0
+11572,tt0024542,3,SelfDefense,US,0
+11583,tt0332364,1,Aswang,PH,0
+11586,tt0169268,1,State of Dogs  Hundeleben,DE,0
+11592,tt0307292,2,An Ordinary Killer,DE,0
+11595,tt12533381,3,Un violento weekend di terrore,IT,1
+11598,tt12540341,7,Jimeoin,AU,1
+11599,tt12538540,4,Вера,RU,1
+11604,tt12540527,13,Bletchleyn nelikko,FI,0
+11605,tt4134678,3,Un Amore Per Due,IT,0
+11616,tt12542021,3,Star Wars The Clone Wars,US,0
+11630,tt12539291,8,Farligt område,SE,0
+11633,tt0072308,29,Inferno na Torre,BR,0
+11642,tt12538614,15,Domanda di grazia,IT,0
+11661,tt0050282,11,Der Mann auf den Schienen,DE,0
+11666,tt0072308,10,Infierno en la torre,MX,0
+11674,tt12536072,1,King of the Game,US,0
+11675,tt12533535,3,State of Dogs  Hundeleben,DE,0
+11676,tt0493322,6,The Veteran,CA,0
+11677,tt12545536,2,Alex Rider  Stormbreaker,FI,0
+11689,tt0169268,9,State of Dogs,BE,0
+11690,tt5014322,2,The 1000 Eyes of Dr Maddin,FR,0
+11692,tt0072308,35,Yangın kulesi,TR,0
+11702,tt12536209,1,Ardid femenino,AR,1
+11703,tt0072308,26,Infernul din zgarienori,RO,0
+11704,tt0072308,3,Flammendes Inferno,AT,0
+11709,tt12542145,4,Varg Veum  Kirjoitus seinässä,FI,0
+11713,tt12538540,2,Vera  Ein ganz spezieller Fall,DE,0
+11721,tt0342492,9,Oi prasinoi hasapides,GR,0
+11723,tt12545605,3,Nessuno mi può giudicare,IT,0
+11724,tt0072308,17,タワーリング・インフェルノ,JP,0
+11741,tt5210858,3,Derachan of the Southern Island,US,0
+11753,tt0494712,7,Hillside Cannibals,US,0
+11760,tt0072308,5,Flammendes Inferno,XWG,0
+11765,tt12539152,1,The Exam,US,0
+11772,tt7272242,5,Megölni Jézust,HU,0
+11775,tt12535617,8,Antes do Anoitecer,BR,0
+11776,tt12541100,9,Yojimbo  livvakten,NO,0
+11778,tt12533381,7,Trágico fin de semana,AR,1
+11783,tt0272121,1,He matado a un hombre,MX,0
+11789,tt9257696,1,Slipknot The Heretic Anthem,US,0
+11792,tt12535617,7,Before Night Falls,GB,0
+11806,tt12539291,6,Apă de mlaştină,RO,1
+11823,tt1548982,3,Going Vertical The Shortboard Revolution,AU,0
+11826,tt12534909,3,Zieloni rzeznicy,PL,0
+11833,tt12533381,11,Fin de semana sangriento,AR,0
+11845,tt12533535,3,ステイト・オブ・ドッグス,JP,0
+11847,tt5189894,7,68 lepedő,HU,0
+11851,tt3352564,1,Bad Buddha,US,0
+11871,tt12531192,2,Nel labirinto del terrore,IT,0
+11874,tt0258172,1,Snap Out of It,US,0
+11888,tt12538540,9,ヴェラ 〜信念の女警部〜,JP,0
+11898,tt0493322,7,Recuerdos de la guerra,AR,0
+11907,tt12540137,6,La muerte sonríe al asesino,ES,1
+11914,tt12537274,10,Der Elfenbeinturm,XWG,0
+11924,tt7507362,4,Всё наоборот,SUHH,0
+11926,tt12545536,27,Stormbreaker,FI,0
+11930,tt0103893,27,Buffy la caza vampiros,AR,0
+11931,tt12541100,4,Yojimbo  El guardaespaldas,AR,1
+11940,tt1787747,3,Prodavac,RS,0
+11941,tt0072308,34,The Towering Inferno,US,0
+11944,tt2543828,1,Long Live the Dead,US,0
+11946,tt12540917,10,Sweethearts,US,0
+11953,tt0342492,7,Les bouchers verts,FR,0
+11962,tt12541100,5,大鏢客,TW,1
+11964,tt12545175,6,Roar,AU,0
+11979,tt0072308,19,Nrk thi pheim khun,TH,0
+11980,tt12536338,8,Le ragazze di Piazza di Spagna,IT,1
+11982,tt12543817,3,Bajau anak laut,SG,0
+11997,tt12541100,25,Телохранитель,RU,0
+12001,tt12531863,1,Night of the Witch,US,0
+12002,tt7272242,7,Matar a Jesús,CO,0
+12009,tt12541100,9,Yojimbo,FI,0
+12030,tt12538434,1,Pavle,SI,0
+12035,tt12540076,9,Peng Lai Jian,CN,0
+12041,tt7272242,1,Matar a Jesús,AR,0
+12043,tt12536209,6,Que Papai não Saiba,BR,0
+12048,tt12534639,10,Al rojo vivo,MX,1
+12052,tt0071449,13,Mordgelüste,XWG,0
+12065,tt12533448,1,Duplo Disparo,BR,0
+12075,tt0103893,2,Buffy  vampyrernes skræk,DK,0
+12092,tt12533381,29,Vergewaltigung,XWG,0
+12096,tt0071449,9,Dogadjaj u autokampu,XYU,0
+12109,tt12532752,7,Eyewitness Accounts,CA,1
+12111,tt0076210,6,Paholaisen saari,FI,0
+12121,tt4227386,2,Pixy der kleine Wichtel,DE,0
+12131,tt12534198,4,The Many Lives of Albert Walker,GB,0
+12135,tt12540786,1,Pink Force Commandos,US,0
+12137,tt12532402,7,The Policy Girl,US,1
+12151,tt0072308,13,Leegitsev pilvelõhkuja,EE,0
+12162,tt1787747,8,O politis,GR,0
+12164,tt12545537,3,Alex Rider,VE,0
+12170,tt12536338,4,Tre piger fra Rom,DK,0
+12179,tt0017883,6,Noite Infernal,BR,0
+12180,tt12537042,10,MBFF Mans Best Friend Forever,US,1
+12187,tt12534907,17,Carne Fresca Procurase,PT,0
+12198,tt12537778,10,ウディ・ガスリー　わが心のふるさと,JP,0
+12213,tt0072343,1,Eine ungeliebte frau,XWG,0
+12217,tt12541100,2,Γιοζίμπο,GR,0
+12222,tt5797822,1,OntheShouldersofGiants,XWW,0
+12229,tt0050282,7,Mannen på sporet,NO,0
+12231,tt12534575,3,I mahi ton Thermopylon,GR,0
+12236,tt12534575,13,Der Löwe von Sparta,XWG,0
+12258,tt1216279,1,Checkmate,IN,0
+12262,tt12537677,5,Les anges de Boston 2,FR,0
+12264,tt0076210,7,Dr Moreau szigete,HU,0
+12270,tt12537803,1,King Me,ZA,0
+12275,tt0103893,21,Buffy tueuse de vampires,FR,0
+12284,tt0103893,1,Buffy zabíjecka upíru,CZ,0
+12292,tt12534907,4,De grønne slagtere,IN,0
+12295,tt0493322,9,Le vétéran,CA,0
+12308,tt12545585,10,Allari Premikudu,IN,0
+12312,tt12535368,2,Becoming Bond,GB,0
+12328,tt0082126,2,SNAP,GB,0
+12331,tt12533097,7,Maggie Simpson dans « Rendezvous avec le destin »,FR,0
+12336,tt12538792,4,O Velho e o Novo Mundo ou Paixão Israelita,BR,0
+12340,tt12537677,5,神鬼尖兵2,TW,1
+12359,tt0250341,1,Love Thy Neighbor,US,0
+12369,tt0050282,6,Człowiek na torze,PL,0
+12370,tt0081586,3,Swift Sword,XWW,0
+12371,tt12533381,6,Death Weekend,CA,0
+12374,tt12536101,6,Keine Angst vor Liebe,DE,0
+12384,tt12545460,2,Expedition Erde,DE,0
+12387,tt12539290,19,Matomenos valtos,GR,0
+12396,tt12536209,7,Hans hemliga fru,SE,0
+12398,tt12540137,10,Sette strani cadaveri,IT,0
+12400,tt12535617,1,Kol dar ne naktis,LT,1
+12403,tt12543817,8,Badjao,PH,1
+12406,tt1787747,2,Le vendeur,CA,0
+12409,tt0103893,11,Buffy the Vampire Slayer,SE,0
+12415,tt12544196,4,Shadows on the Wall,US,0
+12431,tt12539506,9,Hot Rods  Seikkailijat,FI,0
+12451,tt0076210,25,Острво доктора Мороа,RS,0
+12454,tt12537671,1,Prey of a Call Girl,US,0
+12464,tt5643380,1,Taekwondo,AR,0
+12467,tt4557242,2,Balcony,GB,0
+12476,tt12540137,15,La morte ha sorriso allassassino,IT,0
+12480,tt12545653,1,Kara peçe,TR,0
+12485,tt12545537,10,Alex Rider Operation Stormbreaker,CA,0
+12488,tt12538063,5,Masha and Magic Jam,XWW,1
+12492,tt12541775,4,Jimmy Zip,US,1
+12498,tt12536518,1,La insaciable,MX,0
+12501,tt12541100,40,Yojimbo,MX,0
+12509,tt3740066,3,Pop Aye,FR,0
+12513,tt0017883,1,Odcisk,PL,0
+12514,tt12539291,22,Létang tragique,BE,0
+12517,tt12533448,2,Dy herë vrasje,AL,0
+12522,tt12540786,5,La fuerza del comando Pink,ES,0
+12525,tt6736186,1,Bible Conspiracies,US,0
+12527,tt12532475,1,A Christmas Tale,XWW,0
+12531,tt12539406,9,Burning Love,XWW,0
+12536,tt2330549,1,Totally Biased,US,0
+12540,tt12545321,1,Doomed Lovers,US,0
+12541,tt0071449,2,Pan Dupont,CSHH,0
+12542,tt0493322,8,A veterán Kísért a múlt,HU,0
+12544,tt3740066,8,Pop Aye,PT,0
+12550,tt12545605,1,Schlager mit Caterina,DDDE,0
+12572,tt12537778,8,Dieses Land ist mein Land,XWG,0
+12573,tt12541995,3,Sania i Wróbel,PL,0
+12574,tt12543817,6,Badjao The Sea Gypsies,US,1
+12578,tt0072308,43,Вздымaющийся ад,SUHH,0
+12583,tt12541100,5,Yojimbo O Invencível,PT,0
+12593,tt12531192,5,Pakt der Druiden,DE,0
+12595,tt5643380,7,Taekwondo,US,0
+12596,tt12532664,4,Madame a des envies,FR,0
+12608,tt12537006,1,Elegant,BE,0
+12615,tt0494712,1,Kannibál szikla,HU,0
+12617,tt12540137,17,Смерть улыбается убийце,SUHH,0
+12618,tt12537778,19,Questa terra è la mia terra,IT,0
+12623,tt12536101,6,Ne félj a szerelemtől,HU,0
+12635,tt12533122,1,The Saga of Biorn,DK,0
+12638,tt12533448,7,De cealalta parte a legii,RO,1
+12648,tt12541100,45,Yojimbo,US,0
+12654,tt12539506,12,Hot Rods to Hell,US,0
+12677,tt0038635,3,Pluto bär ut mjölken,SE,0
+12678,tt0103893,33,Bafi ubica vampira,RS,0

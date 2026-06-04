@@ -1,12 +1,14 @@
 import time
 import re
 import clingo
+import gc
 import numbers
 import clingo.script
 import pkg_resources
-from . util import Constraint, Literal, is_int
+from . util import Constraint, Literal, is_int, format_rule
 from clingo import Function, Number, Tuple_
-from itertools import permutations, combinations
+from itertools import permutations
+from . subsume_cons import build_gen_rules3,build_gen_rules4, build_spe_rule
 
 def arg_to_symbol(arg):
     if isinstance(arg, tuple):
@@ -22,6 +24,16 @@ def atom_to_symbol(pred, args):
 
 DEFAULT_HEURISTIC = """
 #heuristic size(N). [1000-N,true]
+"""
+
+ATTR_HEURISTIC = """
+#heuristic  body_literal(C,att,3,(V1,primaryTitle,V2)). [70,true]
+#heuristic  body_literal(C,att,3,(V1,nconst,V2)). [50,true]
+"""
+
+SIM_HEUR = """#heuristic body_literal(C,sim,2,(V1,V2)):size(N). [2000-N,true]"""
+MULT_REL_HEUR = """
+#heuristic body_literal(C,R,1,Tid1): body_literal(C,R,1,Tid2), size(N). [1001-N,false]
 """
 
 NOISY_ENCODING = """
@@ -87,7 +99,7 @@ class Generator:
         # - for each vars with same arity, replace the variable at the constant position with a constant of attribute name
         schema_attr_patt = re.compile(
             r"^\s*attr\s*\(\s*"
-            r"([a-z0-9_]+)\s*,\s*"   # arg1
+            r"([a-zA-Z0-9_]+)\s*,\s*"   # arg1
             r"([0-9]+)\s*"
             r"\)\s*\.\s*$",
             re.MULTILINE
@@ -98,6 +110,7 @@ class Generator:
             schema_attr_tups.append(match.groups())        
         for arity, xs in vars_list:
             for att_tup in schema_attr_tups:
+                # print(att_tup)
                  # if the attribute is not a tid
                 if arity == 3 and int(att_tup[-1])!= 0:
                         # Leon: modified to support symmetry breaking ordering
@@ -122,7 +135,7 @@ class Generator:
         # appears((V0,V1,V2)):- body_literal(_, _, _, (A,B,C)), ordered_vars((A,B,C), (V0,V1,V2)).
         order_cons = []
         max_arity = max(arities)
-        for arity in range(2, max_arity+1):
+        for arity in range(1, max_arity+1):
             xs1 = ','.join(f'V{i}' for i in range(arity)) # Vs
             xs2 = ','.join(f'X{i}' for i in range(arity)) # Xs
 
@@ -131,16 +144,13 @@ class Generator:
             else:
                 prefix = xs1
 
-
-            order_cons.append(f'appears(({prefix})):- body_literal(_,_,_,({xs2})), ordered_vars(({xs2}), ({xs1})).')
-
-            order_cons.append(f'var_tuple(({prefix})):- body_pred(P,{arity}), vars({arity},Vars), not bad_body(P,Vars), not type_mismatch(P,Vars), ordered_vars(Vars,OrderedVars), OrderedVars=({xs1}).')
-
-
             if arity == 1:
-                order_cons.append(f'var_member(V,(0,0,0,V)):-var(V).')
+                order_cons.append(f'var_member(V,(0,0,V)):-var(V).')
             else:
                 order_cons.append(f'var_member(V,({prefix})):-vars(_, Vars), Vars=({xs1}), var_member(V,Vars).')
+            order_cons.append(f'appears(({prefix})):- body_literal(_,_,_,({xs2})), ordered_vars(({xs2}), ({xs1})).')
+            order_cons.append(f'var_tuple(({prefix})):- body_pred(P,{arity}), vars({arity},Vars), not bad_body(P,Vars), not type_mismatch(P,Vars), ordered_vars(Vars,OrderedVars), OrderedVars=({xs1}).')
+
             # print(f)
             # var_member(V,(0,0,V0,V1)):-vars(_, Vars), Vars=(V0,V1), var_member(V,Vars).
             # var_member(V,(0,V0,V1,V2)):-vars(_, Vars), Vars=(V0,V1,V2), var_member(V,Vars).
@@ -174,6 +184,7 @@ class Generator:
         # added Leon (hack): 
         if max_arity == 3:
             order_cons.append('seen_lower(Vars1, V):- V=V2-1, Vars1 = (V0,V1,V2), V0 < V < V2, lower(Vars1, Vars2), var_tuple(Vars1), appears(Vars2), var_member(V, Vars2), not head_var(_,V), const_pos(V1, Vars1, 1).')
+            # [Leon] [TODO] !!! this rule never applies? V1 must not be a const position since var_tuple are taken from ordered_vars
             count_const_pos_gap = 'gap_((V0,V1,V2),V2-1):- var_tuple((V0,V1,V2)), V0 < V < V2, var(V), const_pos(V1, (V0,V1,V2), 1).'
             order_cons.append(count_const_pos_gap)
 
@@ -240,6 +251,7 @@ class Generator:
 
         if settings.single_solve:
             encoding.append(DEFAULT_HEURISTIC)
+        #     # encoding.append(ATTR_HEURISTIC)
 
         encoding = '\n'.join(encoding)
 
@@ -259,27 +271,48 @@ class Generator:
     def update_solver(self, size):
         # not used when learning programs without pi or recursion
         pass
-
+    
+    def start_solving(self):
+        self.settings.logger.debug('*** start solving')
+        if self.handle is not None:
+            self.handle.close()
+            self.handle = None
+        self.handle = self.solver.solve(yield_=True)
+        
     def get_prog(self):
         if self.handle is None:
-            self.handle = iter(self.solver.solve(yield_ = True))
+            self.start_solving()
+        # if self.handle is None:
+        #     
+         # Resume solver in background
+            # self.handle = iter(self.solver.solve(yield_ = True))
+            # self.handle.resume()
         # TO REMOVE
-        print('*** get next model')
-        self.model = next(self.handle, None)
-        if self.model is None:
+        self.settings.logger.debug('*** get next model')
+        self.handle.resume()
+        model = self.handle.model()
+        self.settings.logger.debug('*** model obtained')
+        if model is None:
+            self.settings.logger.debug('*** no more new model')
+            self.model = None  # release reference
+            self.handle.cancel()
+            self.handle = None
+            self.solver = clingo.Control(['--heuristic=Domain', '-Wnone'])
             return None
-
+        
+        self.model = model
         return self.parse_model_single_rule(self.model.symbols(shown = True))
 
     def parse_model_single_rule(self, model):
         # TO REMOVE
-        print('*** parse_model_single_rule')
+        self.settings.logger.debug('*** parse_model_single_rule started')
         settings = self.settings
         head = settings.head_literal
         body = set()
         cached_literals = settings.cached_literals
         # print(cached_literals)
         # Leon: Fixed atoms of body_literals on vars position may contain constants failed to parse
+        self.settings.logger.debug('*** caching attoms')
         for atom in model:
             args = atom.arguments
             # pred: arg[1], tuple: vars
@@ -287,6 +320,7 @@ class Generator:
             vars = args[3].arguments if not is_int(str(args[3])) else [args[3]]
             # there's an inconsistency here for unary atoms, where the arguments in generator program should be a single integer i, here is a tuple (i,)
             body.add(cached_literals[args[1].name, tuple(vars)])
+        self.settings.logger.debug('*** caching attoms done')
         rule = head, frozenset(body)
         return frozenset({rule})
 
@@ -300,18 +334,18 @@ class Generator:
     def constrain(self, tmp_new_cons):
         new_ground_cons = set()
         # new_ground_cons_typed = {}
-        
+        # print('-----prog 7777', tmp_new_cons)
         for xs in tmp_new_cons:
+            # print('-----prog 9999', xs)
             con_type = xs[0]
             con_prog = xs[1]
-            # print(con_prog)
-            # print(tuple(con_prog))
+            # print('-----prog 9999', con_prog)
             if con_type == Constraint.GENERALISATION or con_type == Constraint.BANISH:
                 con_size = None
-                if self.settings.noisy and len(xs)>2:
-                    con_size = xs[2]
                 # print('gen', con_type)
+                self.settings.logger.debug('%%%%% [start] building generalisations')
                 ground_rules2 = tuple(self.build_generalisation_constraint3(con_prog, con_size))
+                self.settings.logger.debug('%%%%% [end] building generalisations')
                 new_ground_cons.update(ground_rules2)
                 # if int(con_type) in new_ground_cons_typed:
                 #     new_ground_cons_typed[int(con_type)].update(ground_rules2)
@@ -320,9 +354,9 @@ class Generator:
                 #    new_ground_cons_typed[int(con_type)].update(ground_rules2)
             elif con_type == Constraint.SPECIALISATION:
                 con_size = None
-                if self.settings.noisy and len(xs)>2:
-                    con_size = xs[2]
+                # print('-----prog 8888', con_prog)
                 ground_rules2 = tuple(self.build_specialisation_constraint3(con_prog, con_size))
+                
                 # if int(con_type) in new_ground_cons_typed:
                 #     new_ground_cons_typed[int(con_type)].update(ground_rules2)
                 # else:
@@ -338,7 +372,10 @@ class Generator:
                 #    new_ground_cons_typed[int(con_type)].update(cons_)            
                 new_ground_cons.update(cons_)
         # TO REMOVE        
-        # [print(i,c) for i,c in new_ground_cons_typed.items() if i == int(Constraint.GENERALISATION)]
+        # for i,c in new_ground_cons_typed.items(): 
+        #     if i == int(Constraint.SPECIALISATION):
+        #         for _c in c:
+        #             print(None,_c)
         tmp = self.model.context.add_nogood
         cached_clingo_atoms = self.cached_clingo_atoms
 
@@ -378,44 +415,75 @@ class Generator:
 
     def build_generalisation_constraint3(self, prog, size=None):
         rule = tuple(prog)[0]
-        # print(rule)
-        for body in self.find_variants(rule, max_rule_vars=True):
-            body = list(body)
-            body.append((True, 'body_size', (0, len(body))))
-            if size:
-                body.append((True, 'program_size_at_least', (size,)))
-            yield frozenset(body)
+        self.settings.logger.debug("%%%% [start] find all generalisations")
+        gen_rules = build_gen_rules4(rule,self.settings.range_pair,attr_bias=self.settings.schema_attrs, sim_defined=self.settings.sim_defined)
+        self.settings.logger.debug("%%%% [end] find all generalisations")
+        # print(rule, ' ===========')
+        
+        for i,gr in enumerate(gen_rules):
+            self.settings.logger.debug(f"%%% gen cons no. {str(i)}")
+            gr = remap_variables(gr)
+            body_len = len([lit for lit in gr[1] if lit.predicate!='sim'])
+            # print("*** add generalisation constraint based on rule:", format_rule(gr))
+            for body in self.find_variants(gr, max_rule_vars=True):
+                body = list(body)
+                body.append((True, 'body_size', (0, body_len)))
+                if size:
+                    body.append((True, 'program_size_at_least', (size,)))
+
+                yield frozenset(body)
 
     def build_specialisation_constraint3(self, prog, size=None):
         rule = tuple(prog)[0]
-        if not size:
-            # print('22222')
-            yield from self.find_variants(rule)
-            return
+        core_rules = build_spe_rule(rule, self.settings.range_pair)
+        
+        for cr in core_rules:
+            cr = remap_variables(cr)
+            self.settings.logger.debug(f'*** add specialisation constraints for rule {format_rule(cr)}')
+            if not size:
+                # print('22222')
+                # for body in self.find_variants(cr):
+                for body in self.find_variants(cr, max_rule_vars=True):
+                    yield frozenset(body)
+                #return
 
-        for body in self.find_variants(rule):
-            body = list(body)
-            body.append((True, 'program_size_at_least', (size,)))
-            yield frozenset(body)
+            # for body in self.find_variants(cr):
+            #     body = list(body)
+            #     body.append((True, 'program_size_at_least', (size,)))
+            #     yield frozenset(body)
     # Leon: find isomorphic rules
     def find_variants(self, rule, max_rule_vars=False):
         head, body = rule
         ## Leon: conditions added, if x is int
-        body_vars = frozenset(x for literal in body for x in literal.arguments if is_int(x) and x >= len(head.arguments))
+        # print(rule)
+        body_vars = frozenset(x for literal in body for x in literal.arguments if literal.predicate == 'att' and is_int(x) and x >= len(head.arguments))
+        body_vars = set()
+        for lit in body:
+            if lit.predicate == 'att':
+                for arg in lit.arguments:
+                    #print(arg) 
+                    if is_int(arg) and arg >= len(head.arguments):
+                        body_vars.add(arg)
+        # body_vars = frozenset(x for literal in body for x in literal.arguments if is_int(x) and x >= len(head.arguments))
+        body_vars = frozenset(body_vars)
+        # print(body_vars)
         if max_rule_vars:
             subset = range(len(head.arguments), len(body_vars | set(head.arguments)))
         else:
             subset = range(len(head.arguments), self.settings.max_vars)
         # subset = rang(2,max_vars)
+        # print(len(body_vars))
         for xs in permutations(subset, len(body_vars)): # range from the number greater than head arity (the numbers to be taken as body vars)
             xs = head.arguments + xs # 
             new_body = []
+            valid_head_ordering = True
             for pred, args in body:
                 # if pred == 'att':
                 new_args = list()
                 # first head_arity of variables of xs are head variables if body_literal is the range of head vars
                 # so here only the variables that are above head_arity is changed
                 for arg in args:
+                    # print(xs,arg)
                     if is_int(arg):
                         new_args.append(xs[arg]) 
                     else:
@@ -423,9 +491,67 @@ class Generator:
                 
                 len_new_args = len(new_args)
                 new_args = tuple(new_args) if len_new_args >1 else new_args[0]
-                
+                if pred == 'att' and new_args[0] in head.arguments and new_args[-1] != new_args[0]+2:
+                    valid_head_ordering = False
+                    break
                 new_literal = (True, 'body_literal', (0, pred, len_new_args, new_args))
                 new_body.append(new_literal)
+            if not valid_head_ordering:
+                continue
+            # print(new_body)
+            yield frozenset(new_body)
+            
+            
+    def find_variants2(self, rule, max_rule_vars=False):
+        """
+        Generate variants of a rule by permuting body integer variables
+        above head arity.
+
+        rule: tuple(head_literal, frozenset(body_literals))
+        max_rule_vars: if True, use len(head.arguments) + len(body_vars) as max
+        max_vars_global: fallback max variable index
+        """
+        head, body = rule
+        head_arity = len(head.arguments)
+
+        # Collect all integer body variables >= head arity
+        body_vars = [arg
+                    for lit in body
+                    for arg in lit.arguments
+                    if lit.predicate == 'att' and is_int(arg) and arg >= head_arity]
+
+        if not body_vars:
+            yield frozenset(body)  # nothing to permute
+            return
+
+        body_vars = sorted(set(body_vars))  # remove duplicates for permutations
+
+        # Determine the range of possible variable indices
+        if max_rule_vars:
+            subset = range(head_arity, head_arity + len(body_vars))
+        else:
+            subset = range(head_arity, self.settings.max_vars)
+
+        # Precompute for each literal which positions to replace
+        literal_replace_map = []
+        for lit in body:
+            replace_indices = [i for i, arg in enumerate(lit.arguments) if is_int(arg) and arg in body_vars]
+            literal_replace_map.append((lit, replace_indices))
+
+        # Iterate over all permutations of replacement variables
+        for perm in permutations(subset, len(body_vars)):
+            # Build mapping: old_var -> new_var
+            subst = dict(zip(body_vars, perm))
+
+            new_body = []
+            for lit, indices in literal_replace_map:
+                # Build new arguments
+                new_args = tuple(subst.get(arg, arg) for arg in lit.arguments)
+                len_new_args = len(new_args)
+                new_args = tuple(new_args) if len_new_args >1 else new_args[0]
+                new_literal = (True, 'body_literal', (0, lit.predicate, len_new_args, new_args))
+                new_body.append(new_literal)
+
             yield frozenset(new_body)
 
     def find_deep_bindings4(self, body):
@@ -550,11 +676,7 @@ class Generator:
 
 def remap_variables(rule):
     head, body = rule
-    head_vars = set()
-
-    if head:
-        head_vars.extend(head.arguments)
-
+    head_vars = frozenset(head.arguments) if head else frozenset()
     next_var = len(head_vars)
     lookup = {i:i for i in head_vars}
 

@@ -5,6 +5,8 @@
 #defined direction_/3.
 #defined type/2.
 #defined non_datalog/0.
+#defined pairwise/0.
+#defined circular_ref/0.
 
 #show body_literal/4.
 
@@ -23,6 +25,9 @@ size(N):-
     max_size(MaxSize),
     N = 2..MaxSize,
     #sum{K+1,Rule : body_size(Rule,K)} == N.
+    
+% size_with_sim(N):- size(N1), #count{Svars: body_literal(C,sim,2,Svars)}=N2, N=N1-N2.
+
 
 %% THIS DOES NOT WORK!!!???
 %% size(N+1):-
@@ -34,69 +39,64 @@ head_literal(0,eqo,A,Vars):-
     head_pred(eqo,A),
     head_vars(A,Vars). % only one head_vars-fact head_vars(eqo,(0,1)).
 
-{body_literal(0,R,1,Tid): head_var(0,Var),
-    var_pos(Var,Vars,_),
-    body_literal(0,att,3,Bvars),
-    var_pos(Var,Bvars,2),
-    const_pos(Attr,Bvars,1), fixed_var_type(Var,Attr), target(R,Attr,_),
-    var_pos(Tid,Bvars,0)}=2.
-   
-
 % to generate only those relevant to head
 %% Picking body literals
 % Base case, always starts with the relations that bound the head variables
-{body_literal(0,att,3,Vars):var_pos(Var,Vars,2),
-    const_pos(Attr,Vars,1),
+%{body_literal(0,att,3,Vars):var_pos(Var,Vars,2),
+ %   const_pos(Attr,Vars,1),
+  %  type_pos(Types, 2, Attr),
+   % type(att,Types),
+    %fixed_var_type(Var,Attr)}=2.
+
+{body_literal(0,att,3,(Var+2,Attr,Var)):
+    const_pos(Attr,(Var+2,Attr,Var), 1),
+    var_pos(Var+2,(Var+2,Attr,Var), 0),
+    var_pos(Var,(Var+2,Attr,Var), 2),
     type_pos(Types, 2, Attr),
-    type(att,Types),
+    type(att,Types), 
     fixed_var_type(Var,Attr)}=2.
 
+%{body_literal(0,R,1,Tid): head_var(0,Var),
+ %   body_literal(0,att,3,Bvars),
+  %  var_pos(Var,Bvars,2),
+   % const_pos(Attr,Bvars,1), fixed_var_type(Var,Attr), target(R,Attr,_),
+    %var_pos(Tid,Bvars,0)}=2.
+body_literal(0,R,1,2) :- body_literal(0,att,3,(2,Attr,0)),  const_pos(Attr,(2,Attr,0),1), target(R,Attr,_).
+body_literal(0,R,1,3) :- body_literal(0,att,3,(3,Attr,1)),  const_pos(Attr,(3,Attr,1),1), target(R,Attr,_).
+
+
+
 % expand the body with a relation atom if there exist some relational atom that has a compatible attrbute with the atom to be generated
-{body_literal(0,R,1,Tid)}:- body_literal(0,R1,1,Tid1), has_sort(R1,Attr1), has_sort(R,Attr2), compatible_attr(Attr1,Attr2), vars(3,Vars), var_pos(Tid,Vars,0), Tid!=Tid1.
+{body_literal(0,R,1,Tid)}:- body_literal(0,R1,1,Tid1), has_sort(R1,Attr1), has_sort(R,Attr2), compatible_attr(Attr1,Attr2), vars(3,Vars), var_pos(Tid,Vars,0), Tid!=Tid1, R1!=R, not circular_ref, not pairwise.
 
+{body_literal(0,R,1,Tid)}:- body_literal(0,R,1,Tid1), has_sort(R,Attr1), has_sort(R,Attr2), compatible_attr(Attr1,Attr2), vars(3,Vars), var_pos(Tid,Vars,0), Tid!=Tid1, circular_ref, not pairwise.
 
-range_restricted(Tid1) :- body_literal(C,R1,1,Tid1), body_literal(C,att,3,Bvars1), var_pos(Tid1, Bvars1, 0).
+% range_restricted(Tid1) :- body_literal(C,R1,1,Tid1), body_literal(C,att,3,Bvars1), var_pos(Tid1, Bvars1, 0).
 
 
 % Generate whatever
 % Similarity joins
-{body_literal(0,sim,2,Vars)}:-
-    var_pos(Svar1, Vars, 0),
-    var_pos(Svar2, Vars, 1),
-    body_literal(0,att,3,Bvars1),
-    body_literal(0,att,3,Bvars2),
-    const_pos(Attr1, Bvars1, 1), 
-    const_pos(Attr2, Bvars2, 1),
-    compatible_attr(Attr1,Attr2),
-    var_pos(Tid1, Bvars1, 0), range_restricted(Tid1),
-    var_pos(Tid2, Bvars2, 0), range_restricted(Tid2),
-    var_pos(Svar1, Bvars1, 2),
-    var_pos(Svar2, Bvars2, 2), Svar1 != Svar2.
+{body_literal(0,sim,2,(Svar1,Svar2))}:-
+    body_literal(0,R1,1,Tid1),
+    body_literal(0,R2,1,Tid2),
+    body_literal(0,att,3,(Tid1,Attr1,Svar1)),
+    body_literal(0,att,3,(Tid2,Attr2,Svar2)),
+    compatible_attr(Attr1,Attr2), Svar1 != Svar2.
 
 %%% Leon this is very expensive [TO be OPTIMISED] %%% 
 % expand a body literal of a different attribute on the same tuple 
 {body_literal(0,att,3,Bvars)}:-
     body_literal(0,att,3,Bvars1), 
-    range_restricted(Tid),
+    % range_restricted(Tid),
     const_pos(Attr1, Bvars1, 1), const_pos(Attr2, Bvars, 1),
     var_pos(Tid, Bvars1, 0), var_pos(Tid, Bvars, 0), Attr1!=Attr2. % TODO: require the expanded variable to be a new variable or add a constraint to prevent join on incompatible attributes
 
-
-% Joins
-% same tuple but different attributes
 {body_literal(0,att,3,Bvars)}:-
     body_literal(0,att,3,Bvars1),
     const_pos(Attr1, Bvars1, 1), const_pos(Attr2, Bvars, 1),
-    range_restricted(Tid1), range_restricted(Tid2),
-    var_pos(Tid1, Bvars1, 0), var_pos(Tid2, Bvars, 0), compatible_attr(Attr1,Attr2), Attr1!=Attr2,
-    var_pos(Var, Bvars, 2), var_pos(Var, Bvars1, 2).
-
-{body_literal(0,att,3,Bvars)}:-
-    body_literal(0,att,3,Bvars1),
-    const_pos(Attr1, Bvars1, 1), const_pos(Attr2, Bvars, 1),
-    range_restricted(Tid1),range_restricted(Tid2),
+    % range_restricted(Tid1),range_restricted(Tid2),
     var_pos(Tid1, Bvars1, 0), var_pos(Tid2, Bvars, 0), Tid1!= Tid2, compatible_attr(Attr1,Attr2),
-    var_pos(Var, Bvars, 2), var_pos(Var, Bvars1, 2).
+    var_pos(Var, Bvars, 2), var_pos(Var, Bvars1, 2), not pairwise.
 
 
 %% Leon may need to check this as well
@@ -132,7 +132,7 @@ body_size(Rule,N):-
     max_body(MaxN),
     N > 0,
     N <= MaxN,
-    #count{P,Vars : body_literal(Rule,P,_,Vars)} == N.
+    #count{P,Vars : body_literal(Rule,P,_,Vars),P!=sim} == N.
 
 %% USE VARS IN ORDER IN A CLAUSE
 :-
@@ -160,8 +160,10 @@ head_var(C,Var):-
 %% BODY VAR
 body_var(C,Var):-
     body_literal(C,P,A,Vars),
+    var_pos(Var,Vars,Pos).
     % var_member(Var,Vars), 
-    var_pos(Var,Vars,Pos), not const(A,Pos).
+    % const(P,POS) is not used
+    %var_pos(Var,Vars,Pos), not const(A,Pos).
 
 %% VAR IN A TUPLE OF VARS
 var_member(Var,Vars):-
@@ -207,7 +209,24 @@ valid_var(Rule,Var):-
 % and Var also occurs the in associated attribute body literal of Tid in the rule R
 
 % Similarity join
-connected(R,Tid,Tid1):-
+%connected(R,Tid,Tid1):-
+ %   body_literal(R,att,_,Bvars),
+  %  var_pos(Tid, Bvars, 0), 
+   % var_pos(Var, Bvars, 2),
+    %body_literal(R,att,_,Bvars1),
+    %var_pos(Tid1, Bvars1, 0), var_pos(Var1, Bvars1, 2),
+    %body_literal(R,sim,_,Svars), var_member(Var,Svars), var_member(Var1,Svars).
+
+
+% Equality join
+%connected(R,Tid,Tid1):-
+ %   body_literal(R,att,_,Bvars), var_pos(Var, Bvars, 2),
+  %  var_pos(Tid, Bvars, 0),
+   % body_literal(R,att,_,Bvars1), var_pos(Tid1, Bvars1, 0), var_pos(Var, Bvars1, 2).
+% tail_tvar(Tid) :- body_literal(C,R,1,Tid), #count{Tid1:adjacent(C,Tid,Tid1) , body_literal(C,R1,1,Tid1), Tid<>Tid1 }==1, Tid>3.
+
+% Similarity join
+adjacent(R,Tid,Tid1):-
     body_literal(R,att,_,Bvars),
     var_pos(Tid, Bvars, 0), 
     var_pos(Var, Bvars, 2),
@@ -217,12 +236,36 @@ connected(R,Tid,Tid1):-
 
 
 % Equality join
-connected(R,Tid,Tid1):-
+adjacent(R,Tid,Tid1):-
     body_literal(R,att,_,Bvars), var_pos(Var, Bvars, 2),
     var_pos(Tid, Bvars, 0),
     body_literal(R,att,_,Bvars1), var_pos(Tid1, Bvars1, 0), var_pos(Var, Bvars1, 2).
 
-connected(R,Tid,Tid1) :- connected(R,Tid,Tid2), connected(R,Tid2,Tid1).
+
+connected(R,Tid,Tid1):- adjacent(R,Tid,Tid1).
+
+connected(R,Tid,Tid1) :- adjacent(R,Tid,Tid2), connected(R,Tid2,Tid1).
+
+%%%%%%%%% k tail constraints %%%%%%%%%%%%
+% max is ok for k = 0 because there wont be dangling tail
+tail(C,Tid) :- #max{X : body_literal(C,R,1,X)} == Tid, body_literal(C,R1,1,Tid).
+head_tvar(C,Tid) :- body_literal(C,R,1,Tid), target(R,Attr,Var), body_literal(C,att,3,(Tid,Attr,Var)).
+no_body_graph(C) :- head_tvar(C,Tid), tail(C,Tid).
+
+edge(C,Tid,Tid1) :- adjacent(C,Tid,Tid1), Tid>Tid1, not no_body_graph(C).
+{ path(C,Tid,Tid1,TStar) : edge(C,Tid,Tid1) }=1 :- not no_body_graph(C), head_tvar(C,TStar), tail(C,Tid).
+{ path(C,Tid,Tid1,TStar) : edge(C,Tid,Tid1) }=1 :- path(C,_,Tid,TStar), Tid <> TStar.
+% {path(C,Tid,Tid1,TStar): edge(C,Tid,Tid1)} :- head_tvar(C,TStar), not no_body_graph(C).
+%{path(C,Tid,Tid1,TStar): edge(C,Tid,Tid1)}=1:- head_tvar(C,TStar), tail(C,Tid), not no_body_graph(C).
+% if Tid is not yet the head variable, proceed 1 step
+%{path(C,Tid,Tid1,TStar): edge(C,Tid,Tid1)}=1 :- path(C,_,Tid,TStar), Tid<>TStar, not no_body_graph(C).
+
+:- path(C,X,Y,T), path(C,X,Z,T), Y <> Z.
+:- path(C,X,Y,T), path(C,Z,Y,T), X <> Z.
+:- path(C,X0,Y0,T1), path(C,X1,Y1,T2), T1<>T2, Y0 == Y1.
+
+%%%%%%%%%%%%%%%%%%%%%
+
 
 % A variable on similarity predicate is bound in rule C if it occurs in any attribute atom (for efficiency)
 bound(C,Var) :- body_literal(C,sim,2,Vars), var_member(Var,Vars), body_literal(C,att,3,Bvars), var_pos(Var,Bvars,2).
@@ -238,8 +281,17 @@ unsafe_tid_range(C,Vars1,Vars2) :- same_tuple_var(C,Vars1,Vars2), const_pos(Attr
 % connected(0,0,0) body_literal(0,att,3,(0,dtitle,2)) body_literal(0,att,3,(1,atitle,3)) 
 % body_literal(0,sim,2,(2,3)) body_literal(0,att,3,(0,did,1)) body_literal(0,att,3,(1,aid,0)) 
 % fixed_var_type(1,did,dblp) fixed_var_type(0,aid,acm)
-:- not connected(R,Tid, Tid1), body_literal(R,att,_,Bvars),
-    var_pos(Tid, Bvars, 0), body_literal(R,att,_,Bvars1),var_pos(Tid1, Bvars1, 0) .
+:- not connected(R,Tid, Tid1), body_literal(R,_,1,Tid), body_literal(R,_,1,Tid1), Tid!=Tid1.
+
+% no tail var
+%:- body_literal(C,_,1,Tid), tail_tvar(Tid).
+
+:- body_literal(C,R,1,Tid), #count{Tid1 : body_literal(C,R,1,Tid1),Tid1<>Tid }>1.
+
+:-  body_literal(0,R1,1,Tid1),not body_literal(0,att,3,(Tid1,_,_)).
+
+%body_literal(R,att,_,Bvars),
+   % var_pos(Tid, Bvars, 0), body_literal(R,att,_,Bvars1),var_pos(Tid1, Bvars1, 0) .
 
 %:- body_literal(C,att,3,Vars1), body_literal(C,att,3,Vars2),  
  %       var_pos(Tid,Vars1,0),  var_pos(Tid,Vars2,0), const_pos(Attr1,Vars1,1), const_pos(Attr2,Vars2,1), #count{R:has_sort(R,Attr1),has_sort(R,Attr2)}<1.
@@ -277,49 +329,33 @@ unsafe_tid_range(C,Vars1,Vars2) :- same_tuple_var(C,Vars1,Vars2), const_pos(Attr
 % no rules with head variable unbounded on the fixed pair attribute specified
 % not on tid
 :- head_literal(C,eqo,_,Hvars), var_pos(Tid,Hvars,_),body_literal(C,R,1,Tid).
-% not on different attributes than the fixed type
-:- head_literal(C,eqo,_,Hvars), fixed_var_type(Var,Attr), var_pos(Var,Hvars,_),body_literal(C,att,3,Bvars), var_pos(Var,Bvars,2), const_pos(Attr1,Bvars,1), Attr!=Attr1.
+
+% not on different attributes than the fixed type for top clause
+:- head_literal(C,eqo,_,Hvars), fixed_var_type(Var,Attr), var_pos(Var,Hvars,_), target(R,Attr,Pos), body_literal(C,R,1,Tid), 
+                body_literal(C,att,3,(Tid,Attr1,Var)), Attr!=Attr1.
 
 % no tid range over different relations
 :- body_literal(0,R,1,Tid), body_literal(0,R1,1,Tid), R!= R1.
 
+:- body_literal(0,sim,2,(X,Y)),body_literal(0,sim,2,(Y,X)).
+
+
+% :- body_literal(0,sim,2,(X,Y)), body_literal(C,att,3,(Tid1,Attr1,X)), body_literal(C,att,3,(Tid2,Attr2,Y)), not sim_defined(Attr1,Attr2).
+
+% deleted
 % no unrestricted occurance of tuple id
-:- body_literal(C,att,3,(Tid,Attr,Val)), not range_restricted(Tid).
+% :- body_literal(C,att,3,(Tid,Attr,Val)), not range_restricted(Tid).
+
+% no similarity comparison on object positions
+:- body_literal(C,att,3,(Tid1,Attr,S1)), body_literal(C,att,3,(Tid2,Attr1,S2)), body_literal(C,sim,2,(S1,S2)), attr(Attr,2).
+
 %%%%%%%%%% ER rule mining connectivity %%%%%%%%%%%%
 
-% head_connected(C,Var):-
-%     head_var(C,Var).
-% head_connected(C,Var1):-
-%     head_literal(C,_,A,_),
-%     Var1 >= A,
-%     head_connected(C,Var2),
-%     body_literal(C,_,_,Vars),
-%     var_member(Var1,Vars),
-%     var_member(Var2,Vars),
-%     Var1 != Var2.
 
-%% violated %%
-% :-
-%     head_literal(C,_,A,_),
-%     Var >= A,
-%     body_var(C,Var),
-%     not head_connected(C,Var).
 
  fixed_var_type(Var, Type) :- type(eqo, Types),
         type_pos(Types, Pos, Type), target(R,Type,Pos), var_pos(Var, Vars, Pos), head_literal(_, eqo, _, Vars).
 
-% fixing type of variable Var to Type when it occurs on head
-%%%% Leon Original code below %%%%
-% fixed_var_type(Var, Type):-
-%     head_literal(_, P, _A, Vars),
-%     var_pos(Var, Vars, Pos),
-%     type(P, Types),
-%     %% head_vars(A, Vars),
-%     type_pos(Types, Pos, Type).
-
-% pred_arg_type(P, Pos, Type):-
-%     type(P, Types),
-%     type_pos(Types, Pos, Type).
 
 var_type(C, Var, Type):-
     body_literal(C,P,_,Vars),
@@ -610,7 +646,12 @@ bad_body(P, Vars):- prop(abcdef_fdecba,(P,P)), vars(_, Vars), Vars=(A,B,C,D,E,F)
 bad_body(P, Vars):- prop(abcdef_fecdba,(P,P)), vars(_, Vars), Vars=(A,B,C,D,E,F), B>E.
 bad_body(P, Vars):- prop(abcdef_fedcba,(P,P)), vars(_, Vars), Vars=(A,B,C,D,E,F), C>D.
 
-%% TRY TO REDUCE THE NUMBER OF RULES WITH REDUNDANT LITERALS
+
+:- body_literal(_, att, _, (V0,V1,V2)), singleton(V2).
+:- body_literal(_, att, _, (V0,V1,V2)), singleton(V0).
+:- body_literal(_, sim, _, (V0,V1)), singleton(V0).
+:- body_literal(_, sim, _, (V0,V1)), singleton(V1).
+
 
 % :-
 %     body_literal(_,P,_,(A,B)),

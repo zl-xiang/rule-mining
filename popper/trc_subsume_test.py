@@ -1,7 +1,7 @@
 from . util import  Literal, format_rule
 from . trc_util import is_body_connected
 from . trc_subsume import compute_core, rule_subsume_trc, atoms_subsume
-from . subsume_cons import build_gen_cons, build_spe_cons
+from . subsume_cons import build_gen_cons_meta, build_spe_cons_meta
 def test_all_pairing():
     # ---------- Rule r1 ----------
     r1_head = Literal(predicate="eqo", arguments=(0, 1))
@@ -146,68 +146,83 @@ def test_compute_core():
     
     
 def test_rule_subsume_trc_positive():
+    
+# att(V3,startYear,V6),title_basics(V2),sim(V4,V7),att(V3,tconst,V1),att(V8,startYear,V7),att(V2,titleType,V5),title_basics(V8),
+#                     att(V8,titleType,V5),att(V2,startYear,V4),title_basics(V3),att(V2,tconst,V0),sim(V6,V7).
+    
+#title_principals(V4),att(V3,primaryTitle,V5),title_basics(V3),att(V2,primaryTitle,V5),att(V2,tconst,V0),att(V7,nconst,V6),
+# att(V3,tconst,V1),att(V4,nconst,V6),title_principals(V7),title_basics(V2),att(V4,tconst,V1).
+    
+
     # head
     h1 = Literal('eqo', (0, 1))
     h2 = Literal('eqo', (0, 1))
 
     # r1 body (more specific)
     b1 = {
-        Literal('movie', (2,)),
-        Literal('movie', (3,)),
-        Literal('att', (2, 'mid', 0)),
-        Literal('att', (3, 'mid', 1)),
-        Literal('att', (2, 'rid', 4)),
-        Literal('att', (3, 'rid', 4)),
-        Literal('cast', (5,)),
-        Literal('cast', (6,)),
-        Literal('att', (2, 'cid', 7)),
-        Literal('att', (3, 'cid', 8)),
-        Literal('att', (5, 'cid', 7)),
-        Literal('att', (6, 'cid', 8)),
-        Literal('att', (5, 'name', 9)),
-        Literal('att', (6, 'name', 10)),
-        Literal('sim', (9,10)),
+        Literal('title_basics', (2,)),
+        Literal('title_basics', (3,)),
+        Literal('title_basics', (8,)),
+        Literal('att', (2, 'tconst', 0)),
+        Literal('att', (3, 'tconst', 1)),
+        Literal('att', (2, 'titleType', 5)),
+        Literal('att', (8, 'titleType', 5)),
+        Literal('att', (2, 'startYear', 4)),
+        Literal('att', (3, 'startYear', 6)),
+        Literal('att', (8, 'startYear', 7)),
+        Literal('sim', (6,7)),
+        Literal('sim', (4,7)),
         # join on rid
     }
 
-    # r2 body (more general)
+    # r1 body (more specific)
     b2 = {
-        Literal('movie', (5,)),
-        Literal('movie', (6,)),
-        Literal('att', (5, 'mid', 0)),
-        Literal('att', (6, 'mid', 1)),
-        Literal('att', (5, 'rid', 4)),
-        Literal('att', (6, 'rid', 4)),
-    }
-    
-    b3 = {
-        Literal('movie', (2,)),
-        Literal('movie', (3,)),
-        Literal('att', (2, 'mid', 0)),
-        Literal('att', (3, 'mid', 1)),
-        Literal('att', (2, 'rid', 4)),
-        Literal('att', (3, 'rid', 5)),
-        Literal('sim', (4,5)),
+        Literal('title_basics', (2,)),
+        Literal('title_basics', (3,)),
+        Literal('title_basics', (8,)),
+        Literal('att', (2, 'tconst', 0)),
+        Literal('att', (3, 'tconst', 1)),
+        Literal('att', (2, 'titleType', 5)),
+        Literal('att', (8, 'titleType', 5)),
+        Literal('att', (2, 'startYear', 4)),
+        Literal('att', (3, 'startYear', 6)),
+        Literal('att', (8, 'startYear', 7)),
+        Literal('sim', (7,6)),
+        Literal('sim', (4,7)),
         # join on rid
     }
-    
+        
+# eqo(V0,V1):- title_basics(V2),att(V2,genres,V5),title_principals(V7),att(V3,tconst,V1),att(V4,tconst,V1),att(V3,genres,V5),att(V7,category,V6),title_principals(V4),att(V4,category,V6),title_basics(V3),att(V2,tconst,V0). 
+  
+    b3 = {
+        Literal('title_basics', (2,)),
+        Literal('title_basics', (3,)),
+        Literal('title_principals', (4,)),
+        Literal('title_principals', (7,)),
+        Literal('att', (2, 'tconst', 0)),
+        Literal('att', (3, 'tconst', 1)),
+        Literal('att', (4, 'tconst', 1)),
+        Literal('att', (2, 'genres', 5)),
+        Literal('att', (3, 'genres', 5)),
+        Literal('att', (7, 'category', 6)),
+        Literal('att', (4, 'category', 6)),
+        # join on rid
+    }
+#   title_basics(V2),att(V2,genres,V5),att(V3,tconst,V1),att(V4,tconst,V1),att(V3,genres,V5),title_principals(V4),title_basics(V3),att(V2,tconst,V0).
+  
     
     b4 = {
-        Literal('movie', (2,)),
-        Literal('movie', (3,)),
-        Literal('att', (2, 'mid', 7)),
-        Literal('att', (3, 'mid', 8)),
-        Literal('att', (2, 'rid', 4)),
-        Literal('att', (3, 'rid', 4)),
-        Literal('sim', (4,4)),
-        Literal('cast', (5,)),
-        Literal('cast', (6,)),
-        Literal('att', (2, 'cid', 0)),
-        Literal('att', (3, 'cid', 1)),
-        Literal('att', (5, 'cid', 0)),
-        Literal('att', (6, 'cid', 1)),
-        Literal('att', (5, 'name', 9)),
-        Literal('att', (6, 'name', 9)),
+        Literal('title_basics', (2,)),
+        Literal('title_basics', (3,)),
+        Literal('title_principals', (4,)),
+        Literal('title_principals', (7,)),
+        Literal('att', (2, 'tconst', 0)),
+        Literal('att', (3, 'tconst', 1)),
+        Literal('att', (4, 'tconst', 1)),
+        Literal('att', (2, 'genres', 5)),
+        Literal('att', (3, 'genres', 5)),
+        Literal('att', (7, 'category', 6)),
+        Literal('att', (4, 'category', 6)),
         # join on rid
     }
 
@@ -239,9 +254,9 @@ def test_rule_subsume_trc_positive():
     r5 = (h1,b5)
 
     # expected range pair
-    range_pair = (('cast', 'cid'), ('cast', 'cid'))
+    range_pair = (('title_basics', 'tconst'), ('title_basics', 'tconst'))
 
-    result = rule_subsume_trc(r5, r4, range_pair)
+    result = rule_subsume_trc(r1, r2, range_pair)
 
     assert result is True, "Expected r2 to subsume r1 under the given range pair"
     print("✅ test_rule_subsume_trc_positive passed")

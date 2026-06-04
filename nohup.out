@@ -1,0 +1,9 @@
+/home/zhiliangxiang/Academic/project/rule-mining/rule-mining/popper/tester_asp.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+Traceback (most recent call last):
+  File "/home/zhiliangxiang/Academic/project/rule-mining/rule-mining/popper.py", line 12, in <module>
+    test_rule_subsume_trc_positive()
+  File "/home/zhiliangxiang/Academic/project/rule-mining/rule-mining/popper/trc_subsume_test.py", line 278, in test_rule_subsume_trc_positive
+    assert result is True, "Expected r2 to subsume r1 under the given range pair"
+           ^^^^^^^^^^^^^^
+AssertionError: Expected r2 to subsume r1 under the given range pair

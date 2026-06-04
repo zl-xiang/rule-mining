@@ -17,7 +17,7 @@ class Literal(NamedTuple):
 
 clingo.script.enable_python()
 
-TIMEOUT=1200
+TIMEOUT=2000000
 EVAL_TIMEOUT=0.001
 MAX_LITERALS=40
 MAX_SOLUTIONS=1
@@ -47,7 +47,7 @@ def parse_args():
 
     parser.add_argument('kbpath', help='Path to files to learn from')
     parser.add_argument('--noisy', default=False, action='store_true', help='tell Popper that there is noise')
-    # parser.add_argument('--bkcons', default=False, action='store_true', help='deduce background constraints from Datalog background (EXPERIMENTAL!)')
+    parser.add_argument('--bkcons', default=False, action='store_true', help='deduce background constraints from Datalog background (EXPERIMENTAL!)')
     parser.add_argument('--timeout', type=float, default=TIMEOUT, help=f'Overall timeout in seconds (default: {TIMEOUT})')
     parser.add_argument('--max-literals', type=int, default=MAX_LITERALS, help=f'Maximum number of literals allowed in program (default: {MAX_LITERALS})')
     parser.add_argument('--max-body', type=int, default=None, help=f'Maximum number of body literals allowed in rule (default: {MAX_BODY})')
@@ -63,6 +63,9 @@ def parse_args():
     parser.add_argument('--anytime-timeout', type=int, default=ANYTIME_TIMEOUT, help=f'Maximum timeout (seconds) for each anytime MaxSAT call (default: {ANYTIME_TIMEOUT})')
     parser.add_argument('--batch-size', type=int, default=BATCH_SIZE, help=f'Combine batch size (default: {BATCH_SIZE})')
     parser.add_argument('--functional-test', default=False, action='store_true', help='Run functional test')
+    parser.add_argument('--fp-tolerance','-fp', type=float, default=0, help=f'Percentage of negatives allowed to cover')
+    parser.add_argument('--delta','-d', type=float, default=0.5, help=f'Purity of an ER rule')
+    parser.add_argument('--deduce-sim',default=False,  action='store_true', help=f'Purity of an ER rule')
     # parser.add_argument('--datalog', default=False, action='store_true', help='EXPERIMENTAL FEATURE: use recall to order literals in rules')
     # parser.add_argument('--no-bias', default=False, action='store_true', help='EXPERIMENTAL FEATURE: do not use language bias')
     # parser.add_argument('--order-space', default=False, action='store_true', help='EXPERIMENTAL FEATURE: search space ordered by size')
@@ -177,7 +180,8 @@ def calc_prog_size(prog):
 
 def calc_rule_size(rule):
     head, body = rule
-    return 1 + len(body)
+    body_len = len([lit for lit in body if lit.predicate != 'sim'])
+    return 1 + body_len
 
 def reduce_prog(prog):
     reduced = {}
@@ -233,10 +237,18 @@ class Settings:
 
         if cmd_line:
             args = parse_args()
+            self.fp_tolerance = args.fp_tolerance
+            self.delta = args.delta
             self.bk_file, self.ex_file, self.bias_file = load_kbpath(args.kbpath)
             self.path = args.kbpath
+            self.deduce_sim = args.deduce_sim
+            self.sim_defined = set()
             quiet = args.quiet
             debug = args.debug
+            
+            self.bkcons = args.bkcons
+
+            
             show_stats = args.stats
             # bkcons = args.bkcons
             max_literals = args.max_literals
@@ -352,9 +364,18 @@ class Settings:
         self.non_datalog_flag = False
         for x in solver.symbolic_atoms.by_signature('non_datalog', arity=0):
             self.non_datalog_flag = True
-
-
-
+        
+        range_pair_dict = dict()
+        sim_thresh = list()
+        for x in solver.symbolic_atoms.by_signature('target', arity=3):
+           range_pair_dict[str(x.symbol.arguments[-1])] = (str(x.symbol.arguments[0]),str(x.symbol.arguments[1]))
+           
+        # for x in solver.symbolic_atoms.by_signature('sim_thresh', arity=1):
+        #     sim_thresh.append(int(x.symbol.arguments[-1]))
+        if len(sim_thresh) == 0:
+            sim_thresh.append(90)
+        self.sim_thresh = list(sorted(sim_thresh))
+        self.range_pair = (range_pair_dict[str(0)],range_pair_dict[str(1)])
         # read directions from bias file when there is no PI
         # if not self.pi_enabled:
         self.directions = directions = defaultdict(dict)
@@ -400,10 +421,19 @@ class Settings:
                 self.max_rules = MAX_RULES
             else:
                 self.max_rules = 1
+        self.logger.debug('ccccccccc')
+        if self.deduce_sim:
+            self.logger.debug(solver.symbolic_atoms.signatures)
+            for x in solver.symbolic_atoms.by_signature('sim_defined', arity=2):
+                self.logger.debug('aaaaaaaaaa')
+                attr1 = x.symbol.arguments[0].name
+                attr2 = x.symbol.arguments[1].name
+                self.sim_defined.add((attr1,attr2))
 
         # find all body preds
         self.body_preds = set()
         for x in solver.symbolic_atoms.by_signature('body_pred', arity=2):
+            self.logger.debug('dddddddddd')
             pred = x.symbol.arguments[0].name
             arity = x.symbol.arguments[1].number
             self.body_preds.add((pred, arity))
@@ -431,7 +461,7 @@ class Settings:
             for args in permutations(range(0, self.max_vars), i):
                 k = tuple(clingo.Number(x) for x in args)
                 self.cached_atom_args[k] = args
-        
+        self.schema_attrs = dict()
         cached_atom_copy = self.cached_atom_args.copy()
         # Leon: added arguments with att_name constants        
         for x in solver.symbolic_atoms.by_signature('attr', arity=2):
@@ -441,6 +471,11 @@ class Settings:
                     args_sym_index = (k[0],att_const,k[2])
                     att_tuple = (args[0], att_const.name, args[2])
                     self.cached_atom_args[args_sym_index] = att_tuple
+            self.schema_attrs[x.symbol.arguments[0].name] = x.symbol.arguments[1].number
+            
+        self.comp_attr = set()
+        for x in solver.symbolic_atoms.by_signature('compatible_attr', arity=2):
+            self.comp_attr.add((x.symbol.arguments[0].name,x.symbol.arguments[1].name))
         
         self.cached_literals = {}
         self.literal_inputs = {}
@@ -511,15 +546,23 @@ class Settings:
         self.single_solve = not (self.recursion_enabled or self.pi_enabled)
 
     def print_incomplete_solution2(self, prog, tp, fn, tn, fp, size):
-        self.logger.info('*'*20)
-        self.logger.info('New best hypothesis:')
+        # self.logger.info('*'*20)
+        # self.logger.info('New best hypothesis:')
+        # if self.noisy:
+        #     self.logger.info(f'tp:{tp} fn:{fn} tn:{tn} fp:{fp} size:{size} mdl:{size+fn+fp}')
+        # else:
+        #     self.logger.info(f'tp:{tp} fn:{fn} tn:{tn} fp:{fp} size:{size}')
+        self.logger.debug('New best hypothesis:')
         if self.noisy:
-            self.logger.info(f'tp:{tp} fn:{fn} tn:{tn} fp:{fp} size:{size} mdl:{size+fn+fp}')
+            self.logger.debug(f'tp:{tp} fn:{fn} tn:{tn} fp:{fp} size:{size} mdl:{size+fn+fp}')
         else:
-            self.logger.info(f'tp:{tp} fn:{fn} tn:{tn} fp:{fp} size:{size}')
+            self.logger.debug(f'tp:{tp} fn:{fn} tn:{tn} fp:{fp} size:{size}')
+        i = 0
         for rule in order_prog(prog):
-            self.logger.info(format_rule(self.order_rule(rule)))
-        self.logger.info('*'*20)
+            i+=1
+            self.logger.debug(format_rule(self.order_rule(rule)))
+        self.logger.debug(f'input sol len :{str(len(prog))}, ordered sol len :{str(i)}')
+        self.logger.debug('*'*20)
 
     def print_prog_score(self, prog, score):
         tp, fn, tn, fp, size = score
@@ -529,16 +572,18 @@ class Settings:
         recall = 'n/a'
         if (tp+fn) > 0:
             recall = f'{tp / (tp+fn):0.2f}'
-        print('*'*10 + ' SOLUTION ' + '*'*10)
+        # print('*'*10 + ' SOLUTION ' + '*'*10)
+        
         if self.noisy:
             print(f'Precision:{precision} Recall:{recall} TP:{tp} FN:{fn} TN:{tn} FP:{fp} Size:{size} MDL:{size+fn+fp}')
         else:
-          print(f'Precision:{precision} Recall:{recall} TP:{tp} FN:{fn} TN:{tn} FP:{fp} Size:{size}')
+          print(f'Precision:{precision} Recall:{recall} TP:{tp} FN:{fn} TN:{tn} FP:{fp} Rules:{len(prog)} Size:{size}')
         # print(self.format_prog(order_prog(prog)))
+        print('*'*30)
         for rule in order_prog(prog):
             print(format_rule(self.order_rule(rule)))
         # print(self.format_prog(order_prog(prog)))
-        print('*'*30)
+        # print('*'*30)
 
     def order_rule(self, rule):
         head, body = rule
@@ -612,10 +657,11 @@ class Settings:
             recursive_literals = set()
 
         body_literals = set(body) - recursive_literals
-
+        # print(body_literals)
         while body_literals:
             selected_literal = None
             for literal in body_literals:
+                
                 if set(literal.arguments).issubset(seen_vars):
                     selected_literal = literal
                     break
@@ -626,11 +672,13 @@ class Settings:
             ordered_body.append(selected_literal)
             seen_vars.update(selected_literal.arguments)
             body_literals.remove(selected_literal)
-
+        # print(seen_vars)
         return head, tuple(ordered_body) + tuple(recursive_literals)
 
     def tmp_score_(self, seen_vars, literal):
+        # print(self.recall.keys())
         pred, args = literal
+        # print(pred, args, '-----')
         return self.recall[pred, tuple(1 if x in seen_vars else 0 for x in args)]
 
 # def non_empty_powerset(iterable):
@@ -855,6 +903,7 @@ def prog_hash(prog):
 
 def remap_variables(rule):
     head, body = rule
+    
     head_vars = frozenset(head.arguments) if head else frozenset()
 
 
@@ -893,3 +942,123 @@ def is_int(s):
         return True
     except (TypeError, ValueError):
         return False
+    
+    
+def reorder_body(atoms:set[Literal]):
+    """
+    Reorder body atoms to improve execution efficiency.
+    
+    atoms: list of tuples representing atoms:
+        ("rel", predicate, [var])
+        ("att", "att", [var1, constant, var2])
+        ("sim", "sim", [var1, var2])
+    """
+
+    remaining = list(atoms)[:]
+    ordered = []
+    bound_vars = set()
+
+    def atom_vars(atom):
+        return {v for v in atom[1] if is_int(v)}
+
+    def score(atom):
+        vars_in_atom = atom_vars(atom)
+        bound_count = len(vars_in_atom & bound_vars)
+        new_vars = len(vars_in_atom - bound_vars)
+
+        # Base score
+        s = 0
+
+        # Prefer atoms that bind already-bound variables
+        s += bound_count * 10
+
+        # Penalize introducing many new vars
+        s -= new_vars * 5
+
+        # Attribute atoms with constants are good early anchors
+        if atom.predicate == "att":
+            s += 3
+
+        # Similarity atoms only useful when both sides bound
+        if atom.predicate == "sim":
+            if bound_count == 2:
+                s += 5
+            else:
+                s -= 20  # strongly delay if unbound
+
+        return s
+
+    while remaining:
+        # Pick best scoring atom
+        best_atom = max(remaining, key=score)
+        remaining.remove(best_atom)
+
+        ordered.append(best_atom)
+        bound_vars.update(atom_vars(best_atom))
+
+    return frozenset(ordered)
+
+import re
+def find_direct_transitive_derivations(examples):
+    """
+    Given ASP facts such as:
+        pos(eqo("x","y"),id1)
+
+    Return all triples of ids (id1, id2, id3) such that:
+        A -> B
+        B -> C
+        A -> C
+
+    where the relations are represented by eqo(X,Y).
+
+    Parameters
+    ----------
+    examples : list[str]
+
+    Returns
+    -------
+    list[set[str]]
+        Each set contains 3 ids participating in a direct transitive derivation.
+    """
+
+    # Parse examples
+    pattern = re.compile(
+        r'pos\s*\(\s*eqo\s*\(\s*"([^"]+)"\s*,\s*"([^"]+)"\s*\)\s*,\s*([^)]+)\s*\)'
+    )
+
+    # Store edges and ids
+    edge_to_id = {}
+    outgoing = defaultdict(list)
+
+    for ex in examples:
+        m = pattern.match(ex.strip())
+        if not m:
+            continue
+
+        src, dst, ex_id = m.groups()
+        ex_id = ex_id.strip()
+        ex_id = int(ex_id)
+        
+        edge_to_id[(src, dst)] = ex_id
+        outgoing[src].append(dst)
+
+    derivations = set()
+
+    # Find transitive triples:
+    # (a,b), (b,c), (a,c)
+    for a, b in edge_to_id:
+        if b not in outgoing:
+            continue
+
+        for c in outgoing[b]:
+            if (a, c) in edge_to_id:
+                ids = frozenset([
+                    edge_to_id[(a, b)],
+                    edge_to_id[(b, c)],
+                    edge_to_id[(a, c)]
+                ])
+
+                if len(ids) == 3:
+                    derivations.add(ids)
+
+    return [set(d) for d in derivations]
