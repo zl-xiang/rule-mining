@@ -1,9 +1,0 @@
-                        mean         std
-popper_time_sec  2663.000000  815.569433
-train_precision     0.994000    0.005477
-train_recall        0.946000    0.051769
-rules               4.000000    1.732051
-size               42.000000   16.881943
-test_precision      0.010159    0.015735
-test_recall         0.991667    0.018634
-test_f1             0.019738    0.030238
