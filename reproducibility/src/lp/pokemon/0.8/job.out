@@ -1,0 +1,68 @@
+=======================================
+Running theta=0.5 delta=0.1
+=======================================
+Activated ER rule learning environment
+Popper runtime: 1868 sec
+Rule file generated:
+./results/rules/pokemon-80-s1-t0.5-d0.1.lp
+Activated ERA environment
+/home/zhiliangxiang/Academic/project/lace-asp/ERA/src/experiment/trc-rule/pokemon/80/s1
+ERA finished.
+Evaluation line:
+============== Results [OVERALL] | Precision = 0.41509433962264153 | Recall = 1.0 | F1 = 0.5866666666666668 ==============
+Scores appended.
+=======================================
+Running theta=0.5 delta=0.1
+=======================================
+Activated ER rule learning environment
+Popper runtime: 2245 sec
+Rule file generated:
+./results/rules/pokemon-80-s2-t0.5-d0.1.lp
+Activated ERA environment
+/home/zhiliangxiang/Academic/project/lace-asp/ERA/src/experiment/trc-rule/pokemon/80/s2
+ERA finished.
+Evaluation line:
+============== Results [OVERALL] | Precision = 0.3793103448275862 | Recall = 1.0 | F1 = 0.5499999999999999 ==============
+Scores appended.
+=======================================
+Running theta=0.5 delta=0.1
+=======================================
+Activated ER rule learning environment
+Popper runtime: 1673 sec
+Rule file generated:
+./results/rules/pokemon-80-s3-t0.5-d0.1.lp
+Activated ERA environment
+/home/zhiliangxiang/Academic/project/lace-asp/ERA/src/experiment/trc-rule/pokemon/80/s3
+ERA finished.
+Evaluation line:
+============== Results [OVERALL] | Precision = 0.6052631578947368 | Recall = 1.0 | F1 = 0.7540983606557378 ==============
+Scores appended.
+=======================================
+Running theta=0.5 delta=0.1
+=======================================
+Activated ER rule learning environment
+Popper runtime: 2000 sec
+Rule file generated:
+./results/rules/pokemon-80-s4-t0.5-d0.1.lp
+Activated ERA environment
+/home/zhiliangxiang/Academic/project/lace-asp/ERA/src/experiment/trc-rule/pokemon/80/s4
+ERA finished.
+Evaluation line:
+============== Results [OVERALL] | Precision = 0.2711864406779661 | Recall = 1.0 | F1 = 0.4266666666666667 ==============
+Scores appended.
+=======================================
+Running theta=0.5 delta=0.1
+=======================================
+Activated ER rule learning environment
+Popper runtime: 1126 sec
+Rule file generated:
+./results/rules/pokemon-80-s5-t0.5-d0.1.lp
+Activated ERA environment
+/home/zhiliangxiang/Academic/project/lace-asp/ERA/src/experiment/trc-rule/pokemon/80/s5
+ERA finished.
+Evaluation line:
+============== Results [OVERALL] | Precision = 0.5208333333333334 | Recall = 1.0 | F1 = 0.684931506849315 ==============
+Scores appended.
+=======================================
+All jobs completed.
+=======================================

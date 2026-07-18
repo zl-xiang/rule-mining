@@ -58,7 +58,8 @@ class Combiner:
         trans_derivable_var = {}
         pos_exs = self.tester.pos_ex
         # [print(e) for e in pos_exs]
-        pos_direct_trans = find_direct_transitive_derivations(pos_exs)
+        
+        pos_direct_trans =  [] if self.settings.no_trans else  find_direct_transitive_derivations(pos_exs)
         trans_derivable = set().union(*pos_direct_trans)
         trans_derivable = {int(t) for t in trans_derivable}
         # [print(t) for t in trans_derivable]
@@ -205,7 +206,7 @@ class Combiner:
                         if not self.settings.nonoise:
                             for i in neg_index:
                                 encoding.append([-neg_example_covered_var[i]])
-                        # TODO [Leon] bug in this function, particular in Pokemon dataset, 
+                        # TODO [] bug in this function, particular in Pokemon dataset, 
                         #             for our definition should proceed here instead of line 178
                         soft_lit_groups = [[lit for lit in rule_soft_lits]]
                     else:

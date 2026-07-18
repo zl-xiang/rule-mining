@@ -56,7 +56,7 @@ class Tester():
             if os.name == 'nt': # if on Windows, SWI requires escaped directory separators
                 x = x.replace('\\', '\\\\')
             consult(x)
-        ## Leon: load_examples into test.lp
+        ## : load_examples into test.lp
         query_once('load_examples')
 
         neg_literal = Literal('neg_fact', tuple(range(len(self.settings.head_literal.arguments))))
@@ -104,7 +104,7 @@ class Tester():
     def janus_clear_cache(self):
         return query_once('retractall(janus:py_call_cache(_String,_Input,_TV,_M,_Goal,_Dict,_Truth,_OutVars))')
     
-    # Leon: parsing a clingo symbol object rule to string in a normal program syntax
+    # : parsing a clingo symbol object rule to string in a normal program syntax
     def parse_single_rule(self, prog):
         rule = next(iter(prog))
         head = rule[0]
@@ -181,10 +181,10 @@ class Tester():
             pos_covered_bits[pos_covered] = 1
             pos_covered = frozenbitarray(pos_covered_bits)
         else:
-            ### Leon: without recursion in the setting, test runs here
-            # Leon: parsing generated rule to prolog program
+            ### : without recursion in the setting, test runs here
+            # : parsing generated rule to prolog program
             atom_str, body_str = self.parse_single_rule(prog)
-            # Leon: collect all positive example IDs as list S provided there exists a rule body proving it is true
+            # : collect all positive example IDs as list S provided there exists a rule body proving it is true
             q = f'findall(_ID, (pos_index(_ID, {atom_str}),({body_str}->  true)), S)'
             pos_covered = query_once(q)['S']
             neg_covered = None

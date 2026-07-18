@@ -125,7 +125,6 @@ class Generator:
         # print('========', self.settings.body_types)
         type_encoding = set()
         if self.settings.head_types:
-            #### Leon: Origin code below ####
             # types = tuple(self.settings.head_types)
             # str_types = str(types).replace("'","")
             # type_encoding = set()
@@ -343,7 +342,6 @@ class Generator:
 
         # prohibit bad type matchings
         bad_type_matching = set()
-        # Leon: body vars matching with head vars to keep types of vars occur in both head and body consistent
         for x in body_vars:
             if x not in var_type_lookup:
                 continue

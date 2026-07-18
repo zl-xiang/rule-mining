@@ -81,6 +81,7 @@ class Popper():
         # TP:3 FN:0 TN:0 FP:0 only 
         # Complete = 0 FN and TP > 0
         # Consistent = 0 FP
+        learning_time_start = time.perf_counter()
         settings, tester = self.settings, self.tester
         num_pos, num_neg = self.num_pos, self.num_neg = tester.num_pos, tester.num_neg
 
@@ -108,7 +109,7 @@ class Popper():
         # pos_covered_bit_array -> prog_size
         # it only maintains success sets for programs where fp = 0
         success_sets = self.success_sets = {}
-        # Leon: added stores succeeded rules indexed by positive example covered
+        # : added stores succeeded rules indexed by positive example covered
         success_rule_sets = self.success_rule_sets = {}
         success_sets_aux = self.success_sets_aux = {}
 
@@ -171,7 +172,7 @@ class Popper():
                     if prog is None:
                         break
                 settings.logger.debug(f'*** Generation finished')
-                # Leon: The function size(H) returns the **total number of literals** in the hypothesis H
+                # : The function size(H) returns the **total number of literals** in the hypothesis H
                 prog_size = calc_prog_size(prog)
                 # is_recursive = settings.recursion_enabled and prog_is_recursive(prog)
                 # has_invention = settings.pi_enabled and prog_has_invention(prog)
@@ -187,7 +188,7 @@ class Popper():
                     # TO REMOVE
                     # print(f'Program {settings.stats.total_programs}:')
                     # print(format_prog(prog))
-                # Leon: print on changes of program size
+                # : print on changes of program size
                 if last_size is None or prog_size != last_size:
                     size_change = True
                     last_size = prog_size
@@ -235,8 +236,8 @@ class Popper():
                 if skip_flag:
                     continue
                 
-                ## Leon: testing against examples here!
-                settings.logger.debug('[Leon] Start testing ...')
+                ## : testing against examples here!
+                settings.logger.debug('[] Start testing ...')
                 with settings.stats.duration('test'):
 
                     pos_covered, neg_covered = tester.test_prog_all(prog)
@@ -244,7 +245,7 @@ class Popper():
                     # @CH: can you explain these?
                     skipped, skip_early_neg = False, False
                     # print(pos_covered)
-                settings.logger.debug('[Leon] End testing ...')
+                settings.logger.debug('[] End testing ...')
                 tp = pos_covered.count(1)
                 fn = num_pos-tp
                 _fp = neg_covered.count(1)
@@ -258,7 +259,7 @@ class Popper():
                     prog_core = compute_core(list(prog)[0],range_pair)
                     prog_core_str = format_rule(prog_core)
                     self.seen_cores[prog_core_str] = (covers_pos, not inconsistent)
-                ## Leon: success here return
+                ## : success here return
                 # if non-separable program covers all examples, stop
                 if not inconsistent and tp == num_pos and not skipped:
                     # if not settings.functional_test or not tester.is_non_functional(prog):
@@ -285,7 +286,7 @@ class Popper():
                     add_gen = True
 
                 # if the program does not cover any positive examples, check whether it is has an unsat core
-                # Leon, something wrong here!!!
+                # , something wrong here!!!
                 # if tp < min_coverage or tp <= prog_size:
                 #     with settings.stats.duration('find mucs'):
                 #         cons_ = tuple(self.explain_incomplete(prog))
@@ -293,7 +294,7 @@ class Popper():
                 #         new_cons.extend(cons_)
                 #         print('---- pruned more general 2')
                 #         pruned_more_general = len(cons_) > 0
-                # Leon: where success_sets is called?
+                # : where success_sets is called?
                 # success_sets is set later after testing
                 # success_sets: a dictionary indexes sizes of programs that covers positive examples
                 # print(format_prog(prog), tp, success_sets, settings.noisy)
@@ -313,7 +314,7 @@ class Popper():
                 #         covers_too_few = not subsumed  and self.check_covers_too_few(prog_size, pos_covered)
                 #     if subsumed or subsumed_by_two or covers_too_few:
                 #         add_spec = True
-                ## [Leon] SKIPPED, since the specialisation we add is a core, which is already the "most general" form of the subsumed rule
+                ## [] SKIPPED, since the specialisation we add is a core, which is already the "most general" form of the subsumed rule
                 # if  (subsumed or subsumed_by_two or covers_too_few):
                     
                     # TODO: FIND MOST GENERAL SUBSUMED RECURSIVE PROGRAM
@@ -341,7 +342,7 @@ class Popper():
                     #     # print('------- prog 3333: ', format_prog(prog))
                     # # print('------- subsumed programs: ', subsumed_progs)
                     # pruned_more_general = len(subsumed_progs) > 0
-                    # # Leon If no generalisation are found
+                    # #  If no generalisation are found
                     # if settings.showcons and not pruned_more_general:
                     #     if subsumed:
                     #         print('\t', 'SUBSUMED:', '\t', format_prog(prog))
@@ -350,7 +351,7 @@ class Popper():
                     #     elif covers_too_few:
                     #         print('\t', 'COVERS TOO FEW:', '\t', format_prog(prog))
                     # print(subsumed_progs)
-                    # Leon If generalisations are found, prune all specialisations of the program and found generalisations
+                    #  If generalisations are found, prune all specialisations of the program and found generalisations
                     # for subsumed_prog, message in subsumed_progs:
                     #     if settings.showcons:
                     #         print('\t', message, '\t', format_prog(subsumed_prog))
@@ -392,10 +393,10 @@ class Popper():
 
                 add_to_combiner = False
                
-                ### Leon: default setting goes here
+                ### : default setting goes here
 
                 # if consistent, covers at least one example, is not subsumed, and has no redundancy, try to find a solution
-                # print(f"[Leon] inconsistent: {str(inconsistent)}, subsumed: {str(subsumed)}, add_gen: {str(add_gen)}, tp: {str(tp)}, fp:{str(_fp)}, fn:{str(fn)}, pruned_more_general: {str(pruned_more_general)}")
+                # print(f"[] inconsistent: {str(inconsistent)}, subsumed: {str(subsumed)}, add_gen: {str(add_gen)}, tp: {str(tp)}, fp:{str(_fp)}, fn:{str(fn)}, pruned_more_general: {str(pruned_more_general)}")
                 if not inconsistent and not subsumed and not add_gen and tp > 0 and not pruned_more_general:
                     add_to_combiner = True
                     # print("=======", success_sets.items(),settings.recursion_enabled)
@@ -438,7 +439,7 @@ class Popper():
                     success_sets_aux[pos_covered] = k
                     coverage_pos[k] = pos_covered
                     coverage_neg[k] = neg_covered
-                    ## [ATTENTION] Leon maybe useful to store suceeded rules
+                    ## [ATTENTION]  maybe useful to store suceeded rules
                     prog_lookup[k] = prog
 
                     for p, s in success_sets.items():
@@ -499,10 +500,16 @@ class Popper():
                                 generator.prune_size(i)
 
                         call_combine = not uncovered.any()
-                        
+                        # [] added for ablation test without combiner 
+                        if call_combine and settings.no_combine:
+                            
+                            return
+                
                 # here called only solution is found
                 if call_combine:
-                    
+                    learning_time_end = time.perf_counter()
+                    print(f"Learning time: {learning_time_end - learning_time_start:.6f} seconds")
+
 
                     # COMBINE
                     # print('call combiner')
@@ -568,15 +575,22 @@ class Popper():
 
             # if not pi_or_rec:
             # called when the loop is done
-            # Leon: reduce a lot program generated
-            if to_combine:
+            # [] added for ablation test without combiner 
+            if  settings.no_combine:
+                to_combine = set()
+                return
+            # : reduce a lot program generated
+            if to_combine and not settings.no_combine:
                 settings.logger.debug('LAST CALL')
+                learning_time_end = time.perf_counter()
+                print(f"Learning time: {learning_time_end - learning_time_start:.6f} seconds")
+
                 settings.last_combine_stage = True
                 # TODO: AWFUL: FIX REFACOTRING
                 # COMBINE
                 with settings.stats.duration('combine'):
                     settings.logger.debug('update_best_prog')
-                    # Leon: if consistent and covers at least one postive
+                    # : if consistent and covers at least one postive
                     is_new_solution_found = combiner.update_best_prog(to_combine)
                 to_combine=set()
                 settings.logger.debug('combine finished')
@@ -593,7 +607,7 @@ class Popper():
                     settings.solution = new_hypothesis
                     settings.logger.debug('compute best score')
                     best_score = mdl_score(fn, fp, hypothesis_size)
-                    # TOUNDERSTAND: Leon: why this is called an iteration later after an ok hypothesis found?
+                    # TOUNDERSTAND: : why this is called an iteration later after an ok hypothesis found?
                     settings.print_incomplete_solution2(new_hypothesis, tp, fn, tn, fp, hypothesis_size)
 
                     if fp == 0 and fn == 0:
@@ -1042,7 +1056,7 @@ class Popper():
         head_vars = set(head.arguments)
         
         # try the body with one literal removed (the literal at position i)
-        # TODO: Leon to check is this still needed or our ways to generate all generalisation already suffice
+        # TODO:  to check is this still needed or our ways to generate all generalisation already suffice
         for i in range(len(body)):
             new_body = body[:i] + body[i+1:]
             new_body = frozenset(new_body)
@@ -1066,7 +1080,7 @@ class Popper():
             # check whether we have pruned any subset (HORRIBLE CODE)
             if any(hash(frozenset(x)) in self.pruned2 for x in non_empty_powerset(new_body)):
                 continue
-            # TODO: Leon here might need to be changed
+            # TODO:  here might need to be changed
             # if new program is not valid (one of the three conditions) or it is valid but subsumed by some succeeded rules, prune their generalisations
             if not head_connected(new_rule):
       
@@ -1083,13 +1097,13 @@ class Popper():
                 xs = self.subsumed_or_covers_too_few(new_prog, seen)
                 out.update(xs)
                 continue
-            # Leon: get a new more general program, then test the new program on examples
+            # : get a new more general program, then test the new program on examples
             new_prog_size = calc_prog_size(new_prog)
             sub_prog_pos_covered = tester.get_pos_covered(new_prog)
 
             # with self.settings.stats.duration('old'):
-            # TODO [?] Leon: why subsumption checking can be reduced to example set inclusion?
-            # Leon: check this new generalisation is subsumed by any successed program
+            # TODO [?] : why subsumption checking can be reduced to example set inclusion?
+            # : check this new generalisation is subsumed by any successed program
             # subsumed = sub_prog_pos_covered in success_sets or any(subset(sub_prog_pos_covered, xs) for xs in success_sets)
             subsumed = sub_prog_pos_covered in success_rule_sets and any(rule_subsume_trc(succeed_r,new_prog) for succeed_r in success_rule_sets[sub_prog_pos_covered])
             #sub_prog_pos_covered in success_sets or any(rule_subsume_trc(succeed_r,_prog))
@@ -1505,7 +1519,7 @@ def get_bk_cons(settings, tester):
     # if settings.datalog:
     settings.logger.debug(f'Loading recalls')
     with settings.stats.duration('recalls'):
-        # Leon: calculate the maximal times a literal can appear in rule bodies
+        # : calculate the maximal times a literal can appear in rule bodies
         # in the form of hypothesis constraints
         # e.g. :- body_literal(Rule,dblp_title,_,(_,_)), #count{V0,V1: body_literal(Rule,dblp_title,_,(V0,V1))} > 3.
         recalls = deduce_recalls(settings)
@@ -1520,7 +1534,7 @@ def get_bk_cons(settings, tester):
         bkcons.extend(recalls)
     if settings.deduce_sim:
         with settings.stats.duration('sim_defined'):
-            # Leon: calculate the maximal times a literal can appear in rule bodies
+            # : calculate the maximal times a literal can appear in rule bodies
             # in the form of hypothesis constraints
             # e.g. :- body_literal(Rule,dblp_title,_,(_,_)), #count{V0,V1: body_literal(Rule,dblp_title,_,(V0,V1))} > 3.
             sim_defined = deduce_sim_defined(settings)
@@ -1536,7 +1550,7 @@ def get_bk_cons(settings, tester):
         if settings.showcons:
             for x in xs:
                 print('singletons', x)
-        # Leon: embedded directly in generator now
+        # : embedded directly in generator now
         # bkcons.extend(xs)
 
 
@@ -1580,7 +1594,7 @@ def learn_solution(settings):
     settings.solution_found = False
 
     with settings.stats.duration('load data'):
-        ### Leon: tester is initialised here
+        ### : tester is initialised here
         tester = Tester(settings)
 
     bkcons = get_bk_cons(settings, tester)

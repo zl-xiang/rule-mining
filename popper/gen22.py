@@ -82,7 +82,7 @@ class Generator:
             for xs in permutations(range(settings.max_vars), arity):
                 vars_list.append((arity, tuple(xs)))
                 xs_str = ', '.join(str(x) for x in xs)
-                # !! Leon too restricted?
+                # !!  too restricted?
                 if arity!=3:
                     encoding.append(f'vars({arity}, ({xs_str})).')
                     for i, x in enumerate(xs):
@@ -91,7 +91,7 @@ class Generator:
                     encoding.append(f'ordered_vars(({xs_str}), ({sorted_xs_str})).')
                 # encoding.append(f'ordered_vars({tuple(xs)},{tuple(sorted(xs))}).')
                 
-        ## Leon: added to create vars with fixed-position constants from attrbute atoms from a schema in bias file
+        ## : added to create vars with fixed-position constants from attrbute atoms from a schema in bias file
         # to update
         # - find const-facts, get predicate and its position that is constant
         # - get arity of the predicate
@@ -113,7 +113,7 @@ class Generator:
                 # print(att_tup)
                  # if the attribute is not a tid
                 if arity == 3 and int(att_tup[-1])!= 0:
-                        # Leon: modified to support symmetry breaking ordering
+                        # : modified to support symmetry breaking ordering
                         # xs_vars = sorted((xs[0],xs[2]))
                         xs_vars = sorted((0,xs[0],xs[2]))
                         xs = list(xs)
@@ -125,7 +125,7 @@ class Generator:
                                 encoding.append(f'var_pos({x}, ({xs_str}), {i}).')
                             else:
                                 encoding.append(f'const_pos({x}, ({xs_str}), {i}).')
-                        # Leon: modified to support symmetry breaking ordering, constant position assigns 0
+                        # : modified to support symmetry breaking ordering, constant position assigns 0
                         # ordered_xs_str = ', '.join(str(x) for x in tuple((xs_vars[0],xs[1],xs_vars[1])))
                         ordered_xs_str = ', '.join(str(x) for x in xs_vars)
                         encoding.append(f'ordered_vars(({xs_str}),({ordered_xs_str})).')
@@ -161,7 +161,7 @@ class Generator:
             if k > 0 and k < max_arity:
                 xs2 += ','
             xs2 += ','.join(f'X{i}' for i in range(k, max_arity))
-            # added Leon to skip const position for counting symmetry breaking ordering
+            # added  to skip const position for counting symmetry breaking ordering
             skip_const_pos_lower = ''
             if max_arity == 3 and k ==1:
                 skip_const_pos_lower = f', not const_pos(V{k}, Vars1, 1), Vars1 = ({xs1}), not const_pos(X{k},Vars2,1), Vars2 = ({xs2})'
@@ -171,7 +171,7 @@ class Generator:
             # A,B,C,D
             v0 = f'V{k}'
             v1 = f'V{k+1}'
-            # added Leon (hack):
+            # added  (hack):
             skip_const_pos_seen_lower = ''
             skip_const_pos_gap_ = ''
             if max_arity == 3:
@@ -179,12 +179,12 @@ class Generator:
                 
             order_cons.append(f'seen_lower(Vars1, V):- V={v1}-1, Vars1 = ({xs1}), {v0} < V < {v1}, lower(Vars1, Vars2), var_tuple(Vars1), appears(Vars2), var_member(V, Vars2), not head_var(_,V) {skip_const_pos_seen_lower}.')
             
-            # Leon: [solved] suspecting issue after allowing constants, where when V is grounded with non-integer constant, the operation V1-1 fails
+            # : [solved] suspecting issue after allowing constants, where when V is grounded with non-integer constant, the operation V1-1 fails
             order_cons.append(f'gap_(({xs1}),{v1}-1):- var_tuple(({xs1})), {v0} < V < {v1}, var(V) {skip_const_pos_gap_}.')
-        # added Leon (hack): 
+        # added  (hack): 
         if max_arity == 3:
             order_cons.append('seen_lower(Vars1, V):- V=V2-1, Vars1 = (V0,V1,V2), V0 < V < V2, lower(Vars1, Vars2), var_tuple(Vars1), appears(Vars2), var_member(V, Vars2), not head_var(_,V), const_pos(V1, Vars1, 1).')
-            # [Leon] [TODO] !!! this rule never applies? V1 must not be a const position since var_tuple are taken from ordered_vars
+            # [] [TODO] !!! this rule never applies? V1 must not be a const position since var_tuple are taken from ordered_vars
             count_const_pos_gap = 'gap_((V0,V1,V2),V2-1):- var_tuple((V0,V1,V2)), V0 < V < V2, var(V), const_pos(V1, (V0,V1,V2), 1).'
             order_cons.append(count_const_pos_gap)
 
@@ -198,7 +198,7 @@ class Generator:
         # print('========', self.settings.body_types)
         type_encoding = set()
         if self.settings.head_types:
-            #### Leon: Origin code below ####
+            #### : Origin code below ####
             # types = tuple(self.settings.head_types)
             # str_types = str(types).replace("'","")
             # type_encoding = set()
@@ -217,7 +217,7 @@ class Generator:
             h_types = self.settings.head_types
             for t in h_types:
                 h_type = tuple(t)
-                # Leon: [bug] str(tuple) results to a string (t1,), leads to mismatch of types of unary predicate if declared as type(pred,(t1))
+                # : [bug] str(tuple) results to a string (t1,), leads to mismatch of types of unary predicate if declared as type(pred,(t1))
                 #str_types = str(h_type).replace("'","")
                 str_types = ','.join(str(x) for x in h_type)
                 # print(str_types)
@@ -311,7 +311,7 @@ class Generator:
         body = set()
         cached_literals = settings.cached_literals
         # print(cached_literals)
-        # Leon: Fixed atoms of body_literals on vars position may contain constants failed to parse
+        # : Fixed atoms of body_literals on vars position may contain constants failed to parse
         self.settings.logger.debug('*** caching attoms')
         for atom in model:
             args = atom.arguments
@@ -451,10 +451,10 @@ class Generator:
             #     body = list(body)
             #     body.append((True, 'program_size_at_least', (size,)))
             #     yield frozenset(body)
-    # Leon: find isomorphic rules
+    # : find isomorphic rules
     def find_variants(self, rule, max_rule_vars=False):
         head, body = rule
-        ## Leon: conditions added, if x is int
+        ## : conditions added, if x is int
         # print(rule)
         body_vars = frozenset(x for literal in body for x in literal.arguments if literal.predicate == 'att' and is_int(x) and x >= len(head.arguments))
         body_vars = set()
@@ -583,7 +583,7 @@ class Generator:
 
         # prohibit bad type matchings
         bad_type_matching = set()
-        # Leon: body vars matching with head vars to keep types of vars occur in both head and body consistent
+        # : body vars matching with head vars to keep types of vars occur in both head and body consistent
         for x in body_vars:
             if x not in var_type_lookup:
                 continue
@@ -644,7 +644,7 @@ class Generator:
         var_type_lookup = {k:set(v) for k,v in var_type_lookup.items()}
         # prohibit bad type matchings
         bad_type_matching = set()
-        # Leon: body vars matching with head vars to keep types of vars occur in both head and body consistent
+        # : body vars matching with head vars to keep types of vars occur in both head and body consistent
         for x in body_vars:
             if x not in var_type_lookup:
                 continue

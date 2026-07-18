@@ -1,0 +1,513 @@
+tid,address,authors,booktitle,date,editor,id,institution,journal,month,note,pages,publisher,tech,title,type,volume,year
+3,,"M. Ahlskog, J. Paloheimo, H. Stubb, P. Dyreklev, M. Fahlman, O.  Inganas and M.R.  Andersson,",,(1994).,,3,,"J Appl. Phys.,",,,"893,",,,,,"76,",
+5,,"M. Ahlskog, J. Paloheimo, H. Stubb, P. Dyreklev, M. Fahlman, O.  Inganas and M.R. Andersson,",,(1994).,,5,,"J Appl. Phys.,",,,"893,",,,,,"76,",
+6,,"M. Ahlskog, J. Paloheimo, H. Stubb, P. Dyreklev, M. Fahlman, O. Inganas and M.R. Andersson,",,(1994).,,6,,"J Appl. Phys.,",,,"893,",,,,,"76,",
+10,"Milan,",Steve Benford and Lennart E. Fahlen.,"In Proceedings of ECSCW'93,",1993.,,10,,,,,,,,A spatial model of interaction in large virtual environments.,,,
+16,"Paderborn, Germany,","Brown, D. F., Moura, H. & Watt, D. A.","`Proceedings of the International Workshop on Compiler Construction (CC-92)',","(1992b),","in U. Kas-tens & P. Pfahler, eds,",16,,,,"Vol. 641 of Lecture Notes in Computer Science,",pp. 95-109.,"Springer-Verlag,",,"Actress: an action semantics directed compiler generator,",,,
+20,,"B. Buth et. al.,","Compiler Construction,","1992,",in U. Karstens and P. Pfahler (eds.),20,,,,,pp. 141-155.,"Springer Verlag, LNCS 641,",,"Provably Correct Compiler Implementation,",,,
+26,"Pittsburgh, PA.","Daelemans, W., Van den Bosch, A., and Weijters, T.",,(1995).,"S. E. and Lebiere, C.",26,"School of Computer Science, Carnegie-Mellon University,",,,,,,"Technical Report CMU-CS-90-100,",(1990). The Cascade-correlation Learning Architecture.,,,
+43,,"Fahle, M., Edelman, S., and Poggio, T.",,(1995).,,43,,"Vision Research,",,,3003-3013.,,,Fast perceptual learning in hyperacuity.,,35,
+46,,"Fahle, M., Edelman, S., & Poggio, T.",,,,46,,"Vision Research,",,,3003-3013.,,,,,"35,",
+50,,"Lennart E. Fahlen, Charles Grant Brown, Olov Stahl, and Christer Carlsson.","In Proceedings of Interchi '93,",1993.,,50,,,,,"pages 43-48,",,,A space based model for user interaction in shared synthetic environments.,,,
+51,,"Lennart E. Fahlen, Charles Grant Brown, Olov Stahl, and Christer Carlsson.","In Proceedings of Interchi '93,",1993.,,51,,,,,"pages 43-48,",,,A space based model for user interaction in shared synthetic environments.,,,
+56,,Scott Elliott Fahlman.,,1974.,,56,,"Artificial Intelligence,",,,"1-49,",,,A planning system for robot construction tasks.,,5(1),
+57,,Scott Elliott Fahlman.,,1974.,,57,,"Artificial Intelligence,",,,"1-49,",,,A planning system for robot construction tasks.,,5(1),
+61,,S. E. Fahlman.,,1974.,,61,,"Artificial Intelligence,",,,"1-49,",,,A planning system for robot construction tasks.,,5,
+62,,S.E. Fahlman.,,1974.,,62,,"Artificial Intelligence,",,,"1-49,",,,A planning system for robot construction tasks.,,5,
+69,,"Fahlman, S.",,(1979).,,69,,,,,,MIT Press.,,NETL: A system for representing and using real world knowledge.,,,
+70,Cambridge MA.,"Fahlman, S. E.",,(1979).,,70,,,,,,"MIT Press,",,NETL: A System for Representing and Using Real World Knowledge.,,,
+71,"Cambridge, MA.","Fahlman, S. E.",,(1979).,,71,,,,,,"MIT Press,",,NETL: A System for Representing and Using Real World Knowledge.,,,
+77,,"Fahlman, S. E.,",,1979.,,77,,,,,,Cambridge: MIT Press.,,"NETL: A System for Representing and Using Real World Knowledge,",,,
+78,,"Fahlman, S. E.,",,1979.,,78,,,,,,MIT Press.,,"NETL: A System for Representing and Using Real World Knowledge, Cam-bridge:",,,
+79,,"Fahlman, S. E.,",,1979.,,79,,,,,,Cambridge: MIT Press.,,"NETL: A system for representing and using real world knowledge,",,,
+80,"Cambridge, MA.","Fahlman, S.E.",,(1979).,,80,,,,,,"MIT Press,",,NETL: A System for Representing and Using Real-World Knowledge.,,,
+82,"Cambridge, Mass.,",S. E. Fahlman.,,1979.,,82,,,,,,"MIT Press,",,NETL : a System for Representing and Using Real-World Knowledge.,,,
+83,,S.E. Fahlman.,,,,83,,,,,,MIT Press.,,"NETL: A system for representing real-world knowledge,",,,
+86,"Cambridge, MA,",Scott E. Fahlman.,,1979.,,86,,,,,,"MIT Press,",,NETL: A System for Representing and Using Real-World Knowledge.,,,
+87,"Cambridge, Massachusetts,","S. Fahlman,",,1979.,,87,,,,,,"The MIT Press,",,NETL: A System for Representing and Using Real-World Knowledge.,,,
+91,,Scott E Fahlman.,,1979.,,91,,,,,,"The MIT Press,",,"NETL, A System For Representing And Using Real-World Knowledge.",,,
+95,"Cambridge, MA,",S.E. Fahlman.,,1979.,,95,,,,,,"MIT Press,",,"NETL: A System for Representing and Using Real World Knowledge,",,,
+98,"Cambridge, Massachusetts,",S. Fahlman.,,1979.,,98,,,,,,"The MIT Press,",,NETL: A System for Representing and Using Real-World Knowledge.,,,
+101,"Hillsdale, NJ:","Fahlman, S.",Parallel Models of Associative Memory.,(1981).,"In G. Hinton and J. Anderson (Eds.),",101,,,,,,Lawrence Erlbaum Associates.,,Representing Implicit Knowledge.,,,
+102,Menlo Park:,"Fahlman S, Touretzky D and van Roggen W,","In Proc IJCAI-81,",,,102,,,,International Joint Conferences on AI.,"257-263,",,,"Cancellation in a Parallel Semantic Network,",,,
+104,,"Fahlman, S. & Hinton, G.",,(1987).,,104,,"Computer,",,,100-109.,,,Connectionist architectures for artificial intelligence.,,"20,",
+107,"San Mateo, CA:","S. E. Fahlman,","Proc. of the 1988 Connectionist Models Summer School,",1989.,"D. Touretzky, G. Hinton and T. Sejnowski, eds.,",107,,,,,"pp. 38-51,","Morgan Kauffman,",,"Faster-Learning Variations on Back-Propagation: An Empirical Study,",,,
+108,"San Mateo, CA.","Fahlman, S.",Proc. of the Connectionist Model Summer School.,(1988).,"In Touretzky, D. , Hinton, G. , and Sejnowski, T. , (eds.),",108,,,,,,"Morgan Kaufmann,",,Faster-learning variations on backpropagation: An empirical study.,,,
+111,"San Mateo, CA:","Fahlman, S.E.",In Proc. 1988 Connectionist Models Summer School.,(1988),,111,,,,,,Morgan Kauffman,,Faster learning variations on backpropagation: An empirical study.,,,
+115,San Mateo).,"Fahlman, S.E.","Proceedings of the 1988 Connectionist Models Summer School,",1989.,"In D. Touretzky, G. Hinton & T. Sejnowski, eds.",115,,,,,38-51,"(Morgan Kaufman,",,Fast-learning variations on back-propagation: an empirical study.,,,
+121,,Scott E. Fahlman.,,1988.,,121,"Carnegie Mellon University, School of Computer Science,",,,120 Bibliography,,,"Technical Report CMU-CS-88-162,",Faster learning variations on back-propagation: An empirical study.,,,
+126,"San Mateo, CA,","Fahlman, S. E.","Proceedings of 1988 Connectionist Models Summer School,",,"Touretzky, D., Hinton, G and Sejnowski T. (Eds.)",126,,,,,pp. 38-51.,"Morgan Kaufmann,",,(1988) Faster-Learning Variations on Back-Propagation: An Empiri cal Study.,,,
+129,"San Mateo, CA:","Fahlman, S. E.","Proceedings of the 1988 Connectionist Models Summer School,",1988.,"In D. Touretzky, G. E. Hinton, and T. J Sejnowski (Eds),",129,,,,,,"Morgan Kaufmann Publishers , 38-51,",,Faster-learning variations of backpropagation : An empirical study.,,,
+130,,"S. Fahlmann,","Proceedings of the 1988 Connectionist Models Summer School,",1988.,,130,,,,,"pp 38-51,",,,"Faster-Learning Variations on BackPropagation: An Empirical Study,",,,
+131,,"S. Fahlmann,","Proceedings of the 1988 Connectionist Models Summer School,",1988.,,131,,,,,"pp 38-51,",,,"Faster-Learning Variations on BackPropagation: An Empirical Study,",,,
+132,,"S.E. Fahlman,","in  1988 Connectionist Models Summer School,",1988.,"T.J. Sejnowski, G.E. Hinton, and D.S. Touretzky, Eds.",132,,,,,,"Mor-gan Kaufmann,",,"Faster-learning Variations on Backpropagation : An Empirical Study,",,,
+140,"San Mateo, CA:","S. E. Fahlman,","in Proceedings of the 1988 Connectionist Models Summer School,","1988,","D. S. Touretzky, G. E. Hinton, and T. J. Sejnowski,Eds.",140,,,,,pp. 38-51.,"Morgan Kaufmann,",,"Faster-learning variations on backpropagation: An empirical study,",,,
+147,"Pittsburgh, PA,",Scott E. Fahlman.,,1988.,,147,"School of Computer Science, Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-88-162,",An empirical study of learning speed in back-propagation networks.,,,
+159,,"Fahlman, Scott.",,1988.,,159,"Department of Computer Science, Carnegie Mellon University.",,,,,,"Technical Report CMU-CS-88-162,",An empirical study of learning speed in back-propagation networks.,,,
+166,,Scott E. Fahlman.,,1988.,,166,"CMU Department of Computer Science,",,,,,,"Technical Report CMU-CS-88-162,",An empirical strudy of learning speed in back-propagation networks.,,,
+168,"PA,","S. E. Fahlman,",,(1988).,,168,"School of Computer Science, Carnegie Mellon University, Pitts-burgh,",,,,,,"Tech--nical Report CMU-CS-88-162,","An Empirical Study of Learning Speed in Backpropagation Networks,",,,
+170,,S.E. Fahlman.,,1988.,,170,"Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-88-162,",An empirical study of learning speed in back-propagation networks.,,,
+177,"Pittsburgh, PA,","Fahlman, S.:",,1988.,,177,"Carnegie Mellon University,",,,,,,"CMU-CS-88-162,","An Empirical Study of Learning Speed in Back-Propagation Networks,",,,
+178,,S. E. Fahlman.,,1988.,,178,,,,,,,"Technical Report CMU-CS-88-162, Carnegie-Mellon Universtity Technical Report,",An empirical study of learning speed in back propagation networks.,,,
+185,"Pittsburgh, PA,",Scott E. Fahlman.,,1988.,,185,"School of Computer Science, Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-88-162,",An empirical study of learning speed in back-propagation networks.,,,
+186,,"S. E. Fahlman,",,"1988,",,186,,,,,,,CMU-CS-88-162.,"of Learning Speed in Back-Propagation Networks,",,,
+187,"Pittsburgh, PA.","Fahlman, Scott E.",,1988.,,187,"Computer Science Department, Carnegie Mellon University,",,,,,,Technical Report CMU-CS-88-162.,An Empirical Study of Learning Speed in Back-Propagation Networks.,,,
+189,,"Scott Fahlman,",,1988.,,189,"Department of Computer Science, Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-88-162,","An Empirical Study of Learning Speed in BackPropagation Networks,",,,
+191,,"Scott Fahlman,",,1988.,,191,"Department of Computer Science, Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-88-162,","An Empirical Study of Learning Speed in BackPropagation Networks,",,,
+193,"Pittsburgh, PA:",S.E. Fahlman and C. Lebiere:,,1991.,,193,"Carnegie-Mellon University,",,,,,,"(technical report), CMU-CS-90-100,","The Cascade-Correlation Learning Architecture,",,,
+194,"Pittsburgh, PA:",S.E. Fahlman and C. Lebiere:,,1991.,,194,"Carnegie-Mellon University,",,,,,,"(technical report),  CMU-CS-90-100,","The Cascade-Correlation Learning Architecture,",,,
+196,"Pittsburgh, PA 15213.","Fahlman, S. E. & Lebiere, C.",,"(1990),",,196,"School of Computer Science, Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-90-100,","The Cascade-Correlation learning architecture,",,,
+197,,"Fahlman, S. E. and Lebiere,C.",,(1990).,,197,Carnegie-Mellon Universtity.,,,,,,Technical Report CMU-CS-90-100.,The cascade-correlation learning architecture.,,,
+198,"Pittsburgh, PA 15213.","Fahlman, S. E. and Lebiere, C.",,(1990).,,198,"School of Computer Science, Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-90-100,",The Cascade-Correlation learning architecture.,,,
+207,"Pitts-burgh,PA",S. E. Fahlman and C. Lebiere.,,1990.,,207,"School of Computer Science, Carnegie-Mellon University,",,,,,,"Technical Report CMU-CS-90-100,",The cascade-correlation learning architecture.,,,
+208,,"Fahlman S. E., Lebiere C.,",,1990.,,208,"Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-90-100,","The cascade-correlation learning architecture,",,,
+209,"Pittsburgh, PA 15213.","Fahlman, S. and Lebiere, C.",,(1990).,,209,"School of Computer Science, Carnegie-Mellon University,",,,,,,"CMU-CS-90-100,",The Cascade-Correlation Learning Architecture.,,,
+210,"Pittsburgh, PA 15213,","S. E. Fahlman and C. Lebiere,",,1990.,,210,"School of Computer Science, Carnegie Mellon University,",,,,,,"Tech. Rep.  CMU-CS-90-100,","The Cascade-Correlation learning architecture,",,,
+211,,S. E. Fahlman and C. Lebiere.,,1990.,,211,"Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-90-100,",The cascade-correlation learning architecture.,,,
+212,,"S. E. Fahlman and C. Lebiere,",,1990,,212,,,,,,,"Technical Report:  CMU-CS-90-100,","The Cascade-Correlation Learning Architecture,",,,
+216,"Pittsburgh, PA,","Fahlman, S. E., and Lebiere, C.",,1990.,,216,"School of Computer Science, Carnegie Mellon University,",,,,,,"Tech. Rep.  CMU-CS-90-100,",The Cascade-Correlation learning architecture.,,,
+218,"Pittsburgh, PA,","Fahlman, S. E., and Lebiere, C.",,1990.,,218,"School of Computer Science, Carnegie Mellon University,",,,,,,"Tech. Rep.  CMU-CS-90-100,",The Cascade-Correlation learning architecture.,,,
+219,"Pittsburgh, PA,","Fahlman, S. E., and Lebiere, C.",,1990.,,219,"School of Computer Science, Carnegie Mellon University,",,,,,,"Tech. Rep.  CMU-CS-90-100,",The Cascade-Correlation learning architecture.,,,
+228,"Pittsburgh, PA 15213.","Fahlman, S. and Lebiere, C.",,(1990).,,228,"School of Computer Science, Carnegie-Mellon University,",,,,,,"CMU-CS-90-100,",The Cascade-Correlation Learning Architecture.,,,
+229,"Pittsburgh, PA 15213,",Scott E. Fahlman and Christian Lebiere.,,1990.,,229,"School of Computer Science, Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-90-100,",The cascade-correlation learning architecture.,,,
+230,"Pittsburgh, PA 15213,",S. E. Fahlman and Christian Lebiere.,,1990.,,230,"School of Computer Science, Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-90-100,",The cascade-correlation learning architecture.,,,
+232,"Pittsburgh, PA 15213.","Fahlman, S. and Lebiere, C.",,(1990).,,232,"School of Computer Science, Carnegie-Mellon University,",,,,,,"CMU-CS-90-100,",The Cascade-Correlation Learning Architecture.,,,
+233,"Pittsburgh, PA 15213.","Fahlman, S. and Lebiere, C.",,(1990).,,233,"School of Computer Science, Carnegie-Mellon University,",,,,,,"CMU-CS-90-100,",The Cascade-Correlation Learning Architecture.,,,
+236,"Pittsburgh, PA 15213,",S.E. Fahlman and C. Lebiere.,,1991.,,236,"School of Computer Science Carnegie Mellon University,",,,,,,"Technical report,",The cascade-correlation learning architecture.,,,
+240,"Pittsburgh, PA,",S. E. Fahlman and C. Lebiere.,,1990.,,240,"School of Computer Science, Carnegie-Mellon University,",,,,,,"Technical Report CMU-CS-90-100,",The cascade-correlation learning architecture.,,,
+248,,Scott E. Fahlman and Christian Lebiere.,"In ,",1990.,,248,,,,,"pages 524-532,",,,The Cascade-Correlation learning architecture.,,,
+249,"San Mateo, CA.","Fahlman, S. & Lebiere, C.","Advances in Neural Information Processing Systems (volume 2),",(1989).,"In Touretzky, D., editor,",249,,,,,"(pp. 524-532),",Morgan Kaufmann.,,The cascade-correlation learning architecture.,,,
+254,"San Mateo, CA.","Fahlman, S. & Lebiere, C.","Advances in Neural Information Processing Systems (volume 2),",(1989).,"In Touretzky, D., editor,",254,,,,,"(pp. 524-532),",Morgan Kaufmann.,,The cascade-correlation learning architecture.,,,
+256,"San Mateo, CA.","Fahlman, S. & Lebiere, C.","Advances in Neural Information Processing Systems (volume 2),",(1989).,"In Touretzky, D., editor,",256,,,,,"(pp. 524-532),",Morgan Kaufmann.,,The cascade-correlation learning architecture.,,,
+260,"Palo Alto, CA.","Fahlman, S. & Lebiere, C.",Advances in Neural Information Processing Systems (volume 2).,(1990).,"In Touretzky, D., editor,",260,,,,,,"Morgan Kaufmann,",,The cascade-correlation learning architecture.,,,
+263,"San Mateo, CA.","Fahlman, S. E. & Lebiere, C.","Advances in Neural Information Processing Systems (volume 2),",(1989).,"In Touretzky, D., editor,",263,,,,,"(pp. 524-532),",Morgan Kaufmann.,,The cascade-correlation learning architecture.,,,
+268,,"Fahlman, S. E. & Lebiere, C.","In Advances in Neural Information Processing Systems,",(1990).,,268,,,,,(pp.  524532).,,,The cascade correlation architecture.,,Volume 2,
+269,"Denver,","Fahlman, S. E. & Lebiere, C.","In Advances in Neural Information Processing Systems,",1989.,,269,,,,,"pages 524-532,",CO. Morgan Kaufmann.,,The cascade-correlation learning architecture.,,"volume 2,",
+272,,"Fahlman, S. E. and Lebiere, C.",In Neural Information Processing Systems,1990.,"Touretzky, D. S. (ed).",272,,,,,pp 524-532.,"Morgan-Kauffman,",,The Cascade Correlation Learning Architecture.,,2.,
+281,,"Fahlman, S. E., & Lebiere, C.","Advances in Neural Information Processing Systems,",(1990).,,281,,,,,524-532.,,,The cascade correlation architecture.,,"2,",
+287,"San Mateo, CA:","Fahlman, S. E., and Lebiere, C.",Advances in Neural Information Processing Systems,(1990).,"In Touretzky, D. S., editor,",287,,,,,524-532.,Morgan Kaufmann.,,The cascade-correlation learning architecture.,,"2,",
+288,"San Mateo, CA:","Fahlman, S. E., and Lebiere, C.",Advances in Neural Information Processing Systems,(1990).,"In Touretzky, D. S., editor,",288,,,,,524-532.,Morgan Kaufmann.,,The cascade-correlation learning architecture.,,"2,",
+307,"Denver,","Fahlman, S., and Lebiere, C.",In Advances in Neural Information Processing Systems,(1989).,,307,,,,,524-532.,CO.,,The cascade-correlation learning architecture.,,"2,",
+309,,"Fahlman, S.E. and Lebiere, C.",Advances in Neural Information Processing Systems,(1990).,,309,,,,,pp. 524-532.,Morgan Kaufmann.,,The Cascade-Correlation Learning Architecture.,,"II,",
+310,,"Fahlman, S.E. and Lebiere, C.,","NIPS,",1990.,,310,,,,,"pp. 524-532,","Morgan Kaufmann,",,"The Cascade Correlation Learning Architecture,",,"Vol. 2,",
+311,"Denver, Colorado.","Fahlmann, S. E. and Lebiere, C.","In Advances in Neural Information Processing Systems 2 (NIPS-2),",(1989).,,311,,,,,,,,The cascade-correlation learning architecture.,,,
+313,,S. E. Fahlman and C. Lebiere.,Advances in Neural Information Processing Systems,(1990),"In D. S. Touretzky, (ed.),",313,,,,,pages 524-532.,Morgan Kaufmann.,,The cascade-correlation learning architecture.,,"volume2,",
+320,"San Mateo, 1990.",S.E. Fahlman and C. Lebiere.,"Advances in Neural Information Processing Systems,",,"Touretzky, editor,",320,,,,,"pages 524-532,",Morgan Kaufmann.,,The cascade-correlation learn-ing architecture. In D.S.,,"volume 2,",
+327,,"S. Fahlman and C. Lebiere,",in Advances in Neural Information Processing Systems,1990.,"(D. Touretzky, ed.),",327,,,,"(San Mateo),","pp. 524-532,","Morgan Kaufmann,",,"The cascade-correlation learning architecture,",,"vol.2,",
+335,,S. E. Fahlman and C. Lebiere.,"Neural Information Processing Systems,",1990.,"In D. Touretzky, editor,",335,,,,,,"Morgan Kauffman Inc.,",,The cascade-correlation learning architecture.,,volume 2.,
+336,"Los Altos, CA.","Fahlmann, Scott, C. Lebiere.",in Advances in Neural Information Processing,,,336,,,,,pp. 524-532.,Morgan Kaufmann Publishers:,,The Cascade-Correlation Learning Architechture.,,2 .,
+342,San Mateo:,"Fahlman, S.E. and Lebiere C.","In Advances in Neural Information Processing Systems II (Denver 1989),","(1990),","ed. D.S. Touretzky,",342,,,,,524-532.,Morgan Kaufmann.,,The Cascade-Correlation Learning Architecture.,,,
+350,,Scott E. Fahlman and Christian Lebiere.,"In [13],",1990.,,350,,,,,"pages 524-532,",,,The Cascade-Correlation learning architec-ture.,,,
+356,"San Mateo, CA:","Fahlman, S.E. and Lebiere, C.","Advances in Neural Information Processing,","1990,","D.S. Touretzky, (Ed.)",356,,,,,pp. 524-532.,"Morgan Kauffman,",,"The cascade-correlation learning architecture,",,"vol. 2,",
+371,"(San Mateo, CA),","S. Fahlman,",in Advances in Neural Information Processing Systems,1990.,"D. Touretzky, ed.",371,,,,,"pp. 524- ed.532,","Morgan Kaufmann Publishers,",,"The cascade-correlation learning architecture,",,2,
+375,,Scott E. Fahlman and Christian Lebiere.,In Advances in Neural Information Processing Systems,1990.,"Touretzky, Ed.",375,,,,,,"Morgan Kauffman,",,The Cascade-Correlation Learning Architecture.,,"2,",
+385,"San Mateo, CA,","S.E. Fahlman and C. Lebiere,",Advances in Neural Information Processing Systems,1990.,,385,,,,,"2, pp. 524-532,","Morgan Kaufmann,",,"The cascade-correlation learning architecture,",,"Vol.2,",
+391,San Mateo:,"Fahlman, S.E. and Lebiere C.","In Advances in Neural Information Processing Systems II (Denver 1989),","(1990),","ed. D.S. Touretzky,",391,,,,,524-532.,Morgan Kaufmann.,,The Cascade-Correlation Learning Architecture.,,,
+394,,S. E. Fahlman and C. Lebiere,"in Advances in Neural Information Systems II,","1990,","D. E. Touretzky, ed.",394,,,,,pp. 524-532,Morgan Kaufmann.,,"The Cascade-Correlation Learning Architecture,",,,
+399,"San Mateo, CA:","Fahlman, S. E.",Advances in Neural Information Processing Systems,(1991).,"In Lippmann, R. P., Moody, J. E., and Touretzky, D. S., editors,",399,,,,,190-205.,Morgan Kaufmann.,,The recurrent cascade-correlation architecture.,,"3,",
+403,"San Mateo, CA:","Fahlman, S. E.","NIPS 3,",(1991).,"In Lippmann, R. P., Moody, J. E., and Touretzky, D. S., editors,",403,,,,,pages 190-196.,Morgan Kaufmann.,,The recurrent cascade-correlation learning algorithm.,,,
+404,,"Fahlmann, S.E.(1990).","InAdvances in Neural Information Processing Systgems,",,,404,,,,,pp.380-387.,,,The recurrent cascade-correlation architecture.,,,
+409,"San Mateo, California,",Scott E. Fahlman.,Advances in Neural Information Processing Systems,1991.,"In R. P. Lippmann, J. E. Moody, and D. S. Touretzky, editors,",409,,,,,"pages 190-196,",Morgan Kaufmann Publishers.,,The recurrent cascade-correlation architecture.,,"3,",
+410,"San Mateo, California,",Scott E. Fahlman.,Advances in Neural Information Processing Systems,1991.,"In R. P. Lippmann, J. E. Moody, and D. S. Touretzky, editors,",410,,,,,"pages 190-196,",Morgan Kaufmann Publishers.,,The recurrent cascade-correlation architecture.,,"3,",
+419,,"Scott E. Fahlman,",,1991.,,419,"Dept. of Computer Science, Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-91-100,","The Recurrent Cascade-Correlation Architecture,",,,
+421,,Scott E. Fahlman.,"Innovative Applications of Massive Parallelism,",1993.,"In James Geller, editor,",421,Stanford University.,,,"Working Notes, Spring Symposium Series,",pages 85-89.,"AAAI,",,Some thoughts on NETL 15 years later.,,,
+424,,"S. E. Fahlman, L. D. Baker and J. A. Boyan,",,1996.,,424,"CMU-CS-TR-96-184, Carnegie Mellon University,",,,,,,"Technical Report,","The Cascade 2 Learning Architecture,",,,
+434,"New York, NY","Knoop, J. and Steffen, B.,","in Proceedings of the Fourth International Conference on Compiler Construction,",(1992).,U. Kastens and P. ed.,434,,,,"Lecture Notes in Computer Science,",pp.  125-140,"Pfahler,Springer-Verlag,",,"The interprocedural coincidence theorem,",,"Vol. 641,",
+435,"New York, NY","Knoop, J. and Steffen, B.,","in Proceedings of the Fourth International Conference on Compiler Construction,",(1992).,"U. Kastens and P. Pfahler, ed.",435,,,,"Lecture Notes in Computer Science,",pp. 125-140,"Springer-Verlag,",,"The interprocedural coincidence theorem,",,"Vol. 641,",
+436,"New York, NY","Knoop, J. and Steffen, B.,","in Proceedings of the Fourth International Conference on Compiler Construction,",(1992).,"U. Kastens and P. Pfahler, ed.",436,,,,"Lecture Notes in Computer Science,",pp.125-140,"Springer-Verlag,",,"The interprocedural coincidence theorem,",,"Vol. 641,",
+441,"New York, NY","Knoop, J. and Steffen, B.,","in Proceedings of the Fourth International Conference on Compiler Construction,",(1992).,U. Kastens and P. ed.,441,,,,"Lecture Notes in Computer Science,",pp. 125-140,"Pfahler,Springer-Verlag,",,"The interprocedural coincidence theorem,",,"Vol. 641,",
+443,"New York, NY","Knoop, J. and Steffen, B.,","in Proceedings of the Fourth International Conference on Compiler Construction,",(1992).,U. Kastens and P. ed.,443,,,,"Lecture Notes in Computer Science,",pp.125-140,"Pfahler,Springer-Verlag,",,"The interprocedural coincidence theorem,",,"Vol. 641,",
+447,,J. Knoop and B. Steffen.,"Proceedings of the Fourth International Conference on Compiler Construction, Lecture Notes in Computer Science",1992.,"In U. Kastens and P. Pfahler, editors,",447,,,,,pages 125-140.,"Springer Verlag,",,The interprocedural coincidence theorem.,,"Vol. 641,",
+448,,J. Knoop and B. Steffen.,"Proceedings of the Fourth International Conference on Compiler Construction, Lecture Notes in Computer Science",1992.,"In U. Kastens and P. Pfahler, editors,",448,,,,,pages 125-140.,"Springer Verlag,",,The interprocedural coincidence theorem.,,"Vol. 641,",
+452,,"Kriegel, H.P., Heep S., Fahldiek A., Mysliwitz N.","Proc. 4th Int. Conf. DEXA 1993,",,,452,,,,,pp. 349-360.,,,Query Processing of Geometric Objects with Free Form Boundaries in Spatial Databases.,,,
+455,,"David B. McDonald, Scott E. Fahlman, and Skef Wholey.",,1988.,,455,"Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-87-157,",Internal design of cmu common lisp on the IBM RT PC.,,,
+462,,"Poggio, T., Fahle, M., and Edelman, S.",,(1992).,,462,,"Science,",,,1018-1021.,,,Fast perceptual learning in visual hyperacuity.,,256,
+463,,"Poggio, T., Fahle, M., and Edelman, S.",,(1992b).,,463,,"Science,",,,1018-1021.,,,Fast perceptual learning in visual hyperacuity.,,256,
+465,,"T. Poggio, M. Fahle, and S. Edelman.",,1992.,,465,,"Science,",,,"1018-1021,",,,Fast Per ceptual Learning in Visual Hyperacuity.,,256,
+468,,"T. Poggio, S. Edelman, and M. Fahle.",,1992.,"Y. Aloimonos (Ed.),",468,,,,,"22-30,",,,"Learning of visual modules from examples: A framework for understanding adaptive visual performance. CVGIP: Image Understanding, Special Issue on Purposive, Qualitative, Active Vision,",,56,
+469,"(Stockholm, Sweden),",S. T. Pope and L. E.,"in Proceedings of the 5th MultiG Workshop,",1992.,,469,,,,,,,,"Fahl en, Building sound into a virtual environment,",,,
+471,"Burlington, Massachusetts,","Guy L. Steele Jr., Scott E. Fahlman, Richard P. Gabriel, David A. Moon, and Daniel L. Weinreb.",,1984.,,471,,,,,,"Digital Press,",,Common Lisp: The Language.,,,
+478,"Bedford, Massachusetts,","Common Lisp: The Language (Second Edition). By Guy L. Steele Jr., Scott E. Fahlman, Richard P. Gabriel, David A. Moon, Daniel L. Weinreb, Daniel G. Bobrow, Linda G. DeMichiel, Sonya E. Keene, Gregor Kiczales, Crispin Perdue, Kent M. Pitman, Richard C. Waters, and Jon L White.",,1990.,,478,,,,"ISBN 1-55558-041-6. Steele and Gabriel, Evolution of Lisp 72",,"Digital Press,",,,,,
+481,,"S.B. Thrun, J. Bala, E. Bloedorn, I. Bratko, B. Cestnik, J. Cheng, K. De Jong, S. Dzeroski andS.E. Fahlman, D. Fisher, R. Hamann, K. Kaufman, S. Keller, I. Kononenko, J. Kreuziger, R.S. Michalski, T. Mitchell, P. Pachowicz, Y. Reich, H. Vafaie, W. Van de Weldel, W. Wenzel, J. Wnek, and J. Zhang.",,1991.,,481,"Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-91-197,",The monk's problems: A performance comparison of different learning algorithms.,,,
+483,"Pittsburgh, PA,","Thrun, S.B., Bala, J., Bloedorn, E., Bratko, I., Cestnik, B., Cheng, J., De Jong, K., Dzerowski, S., Fahlman, S.E., Hamann, R., Kaufman, K., Keller, S., Kononenko, I., Kreuziger, J., Michalski, R.S., Mitchell, T., Pachowicz, P., Vafaie, H., Van de Velde, W., Wenzel, W., Wnek, J., and Zhang, J.,",,1991.,,483,"Carnegie Mellon University,",,,,,,"CMU-CS-91-197,","The MONKS Problems: A Performance Comparison of Different Learning Algorithms,",,,
+484,,"Fahlman, D. Fisher, R. Hamann, K. Kaufman, S. Keller, I. Kononenko, J. Kreuziger, R.S. Michal-ski, T. Mitchell, P. Pachowicz, Y. Reich, H. Vafaie, W. Van de Welde, W. Wenzel, J. Wnek, and J. Zhang.",,1991.,,484,"Carnegie Mellon University,",,,,,,"Technical Report CS-CMU-91-197,",The MONK's problems A performance comparison of different learning algorithms.,,,
+485,,"Fahlman, D. Fisher, R. Hamann, K. Kaufman, S. Keller, I. Kononenko, J. Kreuziger, R.S. Michal-ski, T. Mitchell, P. Pachowicz, Y. Reich, H. Vafaie, W. Van de Welde, W. Wenzel, J. Wnek, and J. Zhang.",,1991.,,485,"Carnegie Mellon University,",,,,,,"Technical Report CS-CMU-91-197,",The MONK's problems A performance comparison of different learning algorithms.,,,
+486,,"Thrun, S., Bala, J., Bloedorn, E., Bratko, I., Cestnik, B., Cheng, J., De Jong, K., Dzeroski, S., Fahlman, S., Fisher, D., Hamann, R., Kaufman, K., Keller, S., Kononenko, I., Kreuziger, J., Michalski, R., Mitchell, T., Pachowicz, P., Reich, Y., Vafaie, H., Van de Welde, W., Wenzel, W., Wnek, J., & Zhang, J.",,(1991).,,486,"Pittsburgh, PA: Carnegie Mellon.",,,,,,"(Technical Report CMU-CS-91-197),",The MONK's Problem: A Performance Comparison of Different Learning Algorithms.,,,
+488,"Pittsburgh, PA,","Thrun, S.B., Bala, J., Bloedorn, E., Bratko, I., Cestnik, B., Cheng, J., De Jong, K.A., Dzeroski, S., Fahlman, S.E., Hamann, R., Kaufman, K., Keller, S., Kononenko, I., Kreuziger, J., Michalski, R.S., Mitchell, T., Pachowicz, P., Vafaie, H., Van de Velde, W., Wenzel, W., Wnek, J. and Zhang, J.,","Computer Science Reports,",December l991.,,488,"CMU-CS-91-197, Carnegie Mellon University,",,,,,,,"The MONK's problems: A Performance Comparison of Different Learning Algorithms,",,,
+491,"Pittsburgh, PA - USA,","S. B. Thrun, J. Bala, E. Bloendorn, I. Bratko, B. Cestnik, J. Cheng, K. De Jong, S. D^zeroski, S. E. Fahlman, D. Fisher, R. Hamann, K. Kauf-man, S. Keller, I. Kononenko, J. Kreuziger, R. S. Michalski, T. Mitchell, P. Pachovicz, Y. Re-ich, H. Vafaie, W. Van de Welde, W. Wentzel, J. Wnek, and J. Zhang.",,1991.,,491,"School of Computer Science, Carnegie-Mellon University.,",,,,,,"Technical Report CMU-CS-91-197,",The monk's problems a performance comparison of different learning algorithms.,,,
+493,,"S.B. Thrun, J. Bala, E. Bloedorn, I. Bratko, B. Cestnik, J. Cheng, K. De Jong, S. Dzeroski, S.E. Fahlman, D. Fisher, R. Hamann, K. Kaufman, S. Keller, I. Kononenko, J. Kreuziger, R.S. Michalski, T. Mitchell, P. Pachowicz, Y. Reich, H. Vafaie, W. Van de Welde, W. Wenzel, J. Wnek, and J. Zhang,",,1991.,,493,"CMU-CD-91-197, Carnegie Mellon University,",,,,,,Tech. Report:,The MONK's problems a performance comparison of different learning algorithms.,,,
+494,,"S.B. Thrun, J. Bala, E. Bloedorn, I. Bratko, B. Cestnik, J. Cheng, K. De Jong, S. Dzeroski, S.E. Fahlman, D. Fisher, R. Hamann, K. Kaufman, S. Keller, I. Kononenko, J. Kreuziger, R.S. Michalski, T. Mitchell, P. Pachowicz, Y. Reich, H. Vafaie, W. Van de Weldel, W. Wenzel, J. Wnek, and J. Zhang.",,1991.,,494,"Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-91-197,",The monk's problems: A performance comparison of different learning algorithms.,,,
+495,"Pittsburgh, PA,","Sebastian B. Thrun, Jerzy Bala, Eric Bloedorn, Ivan Bratko, Bojan Cestnik, John Cheng, Kenneth De Jong, Saso Dzeroski, Douglas Fisher, Scott E. Fahlman, Rainer Hamann, Kenneth Kaufman, Stefan Keller, Igor Kononenko, Juergen Kreuziger, Ryszard S. Michalski, Tom Mitchell, Peter Pachowicz, Yoram Reich, Haleh Vafaie, Walter Van de Welde, Walter Wenzel, Janusz Wnek, and Jianping Zhang.",,1991.,,495,"Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-91-197,",The MONK's problems a performance comparison of different learning algorithms.,,,
+497,"Pittsburgh, PA,","Sebastian B. Thrun, Jerzy Bala, Eric Bloedorn, Ivan Bratko, Bojan Cestnik, John Cheng, Kenneth De Jong, Saso Dzeroski, Douglas Fisher, Scott E. Fahlman, Rainer Hamann, Kenneth Kaufman, Stefan Keller, Igor Kononenko, Juergen Kreuziger, Ryszard S. Michalski, Tom Mitchell, Peter Pachowicz, Yoram Reich, Haleh Vafaie, Walter Van de Welde, Walter Wenzel, Janusz Wnek, and Jianping Zhang.",,1991.,,497,"Carnegie Mellon University,",,,,,,"Technical Report CMU-CS-91-197,",The MONK's problems a performance comparison of different learning algorithms.,,,
+504,,"S. Thrun, J. Bala, E. Bloedorn, I. Bratko, B. Cestnik, J. Cheng, K. De Jong, S. Dzeroski, S.E. Fahlman, D. Fisher, R. Hamann, K. Kaufman, S. Keller, I. Kononenko, J. Kreuziger, R.S. Michalski, T. Mitchell, P. Pachowicz, Y. Reich, H. Vafaie, W. Van de Welde, W. Wenzel, J. Wnek, and J. Zhang.",,1991.,,504,"School of Computer Science, Carnegie Mellon University,",,,"Available via anonymous ftp from archive.cis.ohio-state.edu, file /pub/neuroprose/thrun.comparison.ps.Z.",,,"Technical Report CMU-CS-91-197,",The monk's problems a performance comparison of different learning algorithms.,,,
+505,,"S.B. Thrun, J. Bala, E. Bloedorn, B. Cheng I. Bratko, S. Dzeroski k. De-Jong, S. Fahlman, D. Fisher, R. Hamann, K. Kaufman, S. Keller, I. Kononenko, J. Kreuziger, R. Michalski, T. Mitchell, P. Pachowicz, Y. Reich, H. Vafaie, K. Van de Welde, W. Wenzel, J. Wnek, and J. Zhang.",,1990.,,505,"Carnegie Mellon University CMU-CS-91-197,",,,,,,"Technical report,",The monk's problem: a performance comparison of different learning algorithms.,,,
+509,,"Thrun, S., Bala, J., Bloedorn, E., Bratko, I., Cestnik, B., Cheng, J., De Jong, K., Dzeroski, S., Fisher, D., Fahlman, S., Hamann, R., Kaufman, K., Keller, S., Kononenko, I., Kreuziger, J., Michalski, R., Mitchell, T., Pa-chowicz, P., Reich, Y., Vafaie, H., Van de Welde, W., Wenzel, W., Wnek, J. and Zhang, J.",,(1991).,,509,"School of Computer Science, Carnegie-Mellon University.",,,,,,"CMU-CS-91-197,",The MONK's problems a performance comparison of different learning algorithms.,,,
+519,,"Thurn, S. B., Bala, J., Bloedorn, E., Bratko, I., Cestnik, B., Cheng, J., De Jong, K., Dzeroski, S., Fahlman, S. E., Fisher, D., Hamann, R., Kaufman, K., Keller, S., Kononenko, I., Kreuziger, J., Michalski, R. S., Mitchell, T., Pachowicz, P., Reich, Y., Vafaie, H., Van de Welde, W., Wenzel, W., Wnek, J., and Zhang, J.:",,1991.,,519,"Carnegie Mellon University,",,,The training and test data sets for the MONK's problems are available at the ftp site ics.uci.edu,,,"CMU-CS-91-197,","`The MONK's problems: A performance comparison of different learning algorithms',",,,
+520,"Berlin, Germany,","Vitek, J., Horspool, R. N., and Uhl, J. S.","Proceedings of the Fourth International Conference on Compiler Construction,",1992.,"In Kastens U. and Pfahler, P., Eds.,",520,,,,"volume 641 of Lecture Notes in Computer Science, (Paderborn, Germany, Oct.).",pp. 236-250.,"Springer-Verlag,",,Compile-time analysis of object-oriented programs.,,,
+521,,"Walter, J., Henke-Fahle, S. & Bonhoeffer, F.","Development 101,",,,521,,,,,909-913.,,,1987 Avoidance of posterior tectal membranes by temporal retinal axons.,,,
+524,,"Weiss, Y., Edelman, S., and Fahle, M.",,(1993).,,524,,"Neural Computation,",,,695-718.,,,Models of perceptual learning in vernier hyperacuity.,,5,
+525,,"Weiss, Y., Edelman, S., and Fahle, M.",,(1993).,,525,,"Neural Computation,",,,695-718.,,,Models of perceptual learning in vernier hyperacuity.,,5,
+526,,"Weiss, Y., Edelman, S., and Fahle, M.",,(1993).,,526,,"Neural Computation,",,,695-718.,,,Models of perceptual learning in vernier hyperacuity.,,5,
+528,,"White, M. & Fahlman, S. E.",,"(1994),",,528,,,,Available by anonymous ftp to ftp.cs.cmu.edu in the /afs/cs/project/connect/bench directory.,,,,"Neural-bench benchmark collection,",,,
+530,"Irvine, CA:","Kibler, D. & Aha, D. W.",Proceedings of the Fourth International Workshop on Machine Learning,,,530,,,,,(pp. 24-30).,Morgan Kaufmann.,,Learning Representative Exemplars of Concepts: An Initial Case Study.,,,(1987).
+537,"Irvine, CA:","Kibler, D., and Aha, D. W.",In Proceedings of the Fourth International Workshop on Machine Learning.,,,537,,,,,24-30.,"Morgan Kaufmann,",,Learning Representative Exemplars of Concepts: An Initial Case Study.,,,(1987).
+538,"Irvine, CA:","Kibler, D., and Aha, D. W.",In Proceedings of the Fourth International Workshop on Machine Learning.,,,538,,,,,24-30.,"Morgan Kaufmann,",,Learning Representative Exemplars of Concepts: An Initial Case Study.,,,(1987).
+542,"Irvine, CA:","Kibler, D., and David W. Aha,",Proceedings of the Fourth International Workshop on Machine Learning.,,,542,,,,,pp. 24-30.,"Morgan Kaufmann,",,Learning representative exemplars of concepts: An initial case study.,,,(1987).
+546,"Irvine, CA,",D. Kibler and D. Aha.,"In Proc. of the 4 th International Workshop on Machine Learning,",,,546,,,,,"pages 24-30,",,,Learning representative exemplars of concepts: An initial case study.,,,1987.
+549,,"Kibler, D., and Aha, D.W.","In Proceedings of the Fourth International Workshop on Machine Learning,",,,549,,,,,24-30.,,,Learning Representative Exemplars of Concepts: An Initial Case Study.,,,"1987,"
+550,,"Kibler, D., and Aha, D.W.","In Proceedings of the Fourth International Workshop on Machine Learning,",,,550,,,,,24-30.,,,Learning Representative Exemplars of Concepts: An Initial Case Study.,,,"1987,"
+552,"Los Altos, California,",Dennis Kibler and David W. Aha.,"Proceedings of the Fourth International Workshop on Machine Learning,",,"In Pat Langley, editor,",552,,,,,pages 24-30.,"Morgan Kaufmann,",,Learning representative exemplars of concepts: An initial case study.,,,1987.
+560,"San Mateo, CA.","Aha, D. W. and Kibler, D.","In Eleventh International Joint Conference on Artificial Intelligence,",,,560,,,,,pages 794-799.,"Morgan Kaufmann,",,Noise-tolerant instance-based learning algorithms.,,,(1989).
+567,"Detroit, MI:","Aha, D. and Kibler, D.",Proceedings of the Eleventh International Joint Conference on 39 Artificial Intelligence,,,567,,,,,(pp. 794-799).,Morgan Kaufmann.,,Noise-tolerant instace-based learning algorithms.,,,(1989)
+569,"Detroit, MI:","Aha, D., & Kibler, D.","Proceedings of the Eleventh International Joint Conference on Artificial Intelligence,",,,569,,,,,,Morgan Kaufmann.,,Noise tolerant instance-based learning algorithms.,,,(1989).
+587,,"D. Aha, D. Kibler, and M. Albert.",,,,587,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+590,,"Aha, D. W., D. Kibler, and M. K. Albert,",,,,590,,"Machine Learning,",,,"pp. 37-66,",,,"``Instance Based Learning Algorithms,''",,"Vol 6,",1991.
+595,,"Aha, D. W., Kibler, D. & Albert, M. K.",,,,595,,"Machine Learning 6(1),",,,pp. 37-66.,,,"Instance-based learning algorithms,",,,"(1991),"
+597,,"Aha, D. W., Kibler, D., & Albert, M.",,,,597,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,"6 (1),",(1991).
+599,,"Aha, D. W., Kibler, D., & Albert, M.",,,,599,,"Machine Learning,",,,,,,Instance-based learning algorithms.,,6 (1).,(1991).
+605,,"Aha, D. W., Kibler, D., & Albert, M. K.",,,,605,,"Machine Learning,",,,37-66.,,,Instance-Based Learning Algorithms.,,"6,",(1991).
+610,,"Aha, D. W., Kibler, D., & Albert, M. K.",,,,610,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,"6,",(1991).
+615,,"Aha, D. W., Kibler, D., & Albert, M. K.",,,,615,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,"6,",(1991).
+618,,"Aha, D. W., Kibler, D., & Albert, M. K.",,,,618,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,"6,",(1991).
+619,,"Aha, D. W., Kibler, D., & Albert, M. K.",,,,619,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,"6,",(1991).
+620,,"Aha, D. W., Kibler, D., & Albert, M. K.",,,,620,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,"6,",(1991).
+622,,"Aha, D. W., Kibler, D., & Albert, M. K.",,,,622,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,"6,",(1991).
+625,,"Aha, D. W., Kibler, D., & Albert, M. K.",,,,625,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,"6,",(1991).
+632,,"Aha, D. W., Kibler, D., and Albert, M. K.",,,,632,,Machine Learning,,,37-66.,,,Instance-Based Learning Algorithms.,,"6,",(1991).
+634,,"Aha, D. W., Kibler, D., and Albert, M. K.",,,,634,,Machine Learning,,,37-66.,,,"Instance-based learning algorithms,",,"6(1),",(1991).
+635,,"Aha, D., Kibler D., and Albert, M.K",,,,635,,Machine Learning,,,pp.37-66.,,,Instance-Based Learning.,,"6(1),",(1991).
+637,"Boston, MA:","Aha, D., Kibler, D. & Albert M.",,,,637,,"Machine learning,",,,pp 37-66.,Kluwer Publishers.,,Instance-based learning algorithms.,,"volume 6,",(1991).
+649,,"Aha, D., Kibler, D., and Albert, M.",,,,649,,"Machine Learning,",,,pp. 37-66.,,,Instance-based learning algorithms.,,"7,",(1991).
+651,,"Aha, D.W., D. Kibler & Albert M.K.",,,,651,,"Machine Learning,",,,pp. 37-66.,,,"Instance-Based Learning Algorithms,",,"6,","(1991),"
+657,,"Aha, David W., Dennis Kibler, Marc K. Albert,",,,,657,,"Machine Learning,",,,pp. 37-66.,,,"Instance-Based Learning Algorithms,",,vol. 6,(1991).
+658,,"Aha, David W., Dennis Kibler, Marc K. Albert,",,,,658,,"Machine Learning,",,,pp. 37-66.,,,"Instance-Based Learning Algorithms,",,"vol.6,",(1991).
+661,,"Aha, David W., Dennis Kibler, and Marc K. Albert,",,,,661,,"Machine Learning,",,,pp. 37-66.,,,Instance-Based Learning Algorithms.,,"Vol6,",(1991).
+665,,"D. Aha, D. Kibler, and M. Albert.",,,,665,,"Machine Learning,",,,pp. 37-66.,,,Instance-based Learning Algorithms.,,"Vol. 6,",1991.
+667,,"Aha, D. W., Kibler, D., Albert, M. K.",,,,667,,"Machine Learning,",,,37-66.,,,"Instance-Based Learning Methods,",,"6,",(1991)
+670,,"D. Aha, D. Kibler, and M. Albert.",,,,670,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+674,,"Aha, D.W., Kibler, D., and Albert,",,,,674,,"Machine Learning,",,,37-66.,,,M.K. Instance-Based Learning Algorithms.,,"6,","1991,"
+678,,"Aha, D.W., Kibler, D., and Albert, M.K.",,,,678,,"Machine Learning,",,,37-66.,,,Instance-Based Learning Algorithms.,,"6,",(1991).
+681,,"D. Aha, D. Kibler, and M. Albert,",,,,681,,"Machine Learning,",,,,,,"Instance-based learning algorithms,",,"vol. 6, no. 1,",1991.
+682,,"D. Aha, D. Kibler, and M. Albert,",,,,682,,"Machine Learning,",,,,,,"Instance-based learning algorithms,",,"vol.  6, no. 1,",1991.
+683,,"D. W. Aha, D. Kibler, and M. K. Albert.",,,,683,,"Machine Learning,",,,,,,Instance-based learning algorithms.,,"6,",1991.
+684,,"D.W. Aha, D. Kibler, and M.K. Albert,",,,,684,,"Machine Learning,",,,"37-66,",,,"`Instance-Based Learning Algorithms',",,"6,",(1991).
+687,,"Aha, David W., Dennis Kibler, Marc K. Albert,",,,,687,,"Machine Learning,",,,pp. 37-66.,,,"Instance-Based Learning Algorithms,",,"vol. 6,",(1991).
+691,,"Aha, David W., Dennis Kibler, Marc K. Albert,",,,,691,,"Machine Learning,",,,pp. 37-66.,,,"Instance-Based Learning Algorithms,",,"vol. 6,",(1991).
+694,,"D. Aha, D. Kibler, and M. Albert.",,,,694,,"Machine Learning,",,,,,,Instance-based learning algorithms.,,"6(1),",1991.
+695,,"Aha, D.W., Kibler, D., and Albert, M.K.",,,,695,,"Machine Learning,",,,37-66.,,,Instance-Based Learning Algorithms.,,"6,",(1991).
+697,,"D. Aha, D. Kibler, and M. Albert.",,,,697,,"Machine Learning,",,,,,,Instance-based learning algorithms.,,"6(1),",1991.
+698,,"David W. Aha, Dennis Kibler, and Marc K. Albert.",,,,698,,"Machine Learning,",,,,,,Instance-based learning algorithms.,,"6(1),",1991.
+700,,"Aha, D. W., D. Kibler, & Albert M. K.",,,,700,,Machine Learning,,,37-66.,,,Instance-Based Learning Algorithms.,,"6 (1),",(1991).
+706,,"J.S. Conery, D.F. Kibler,","in Proceedings ACM Symposium on Functional Programming and Computer Architecture,",,,706,,,,,,,,"Parallel interpretation of logic programs,",,,1981.
+707,,"J.S. Conery, D.F. Kibler,","in Proceedings ACM Symposium on Functional Programming and Computer Architecture,",,,707,,,,,,,,"Parallel interpretation of logic programs,",,,1981.
+718,"Tahoe City, CA:","Datta, P., & Kibler, D.",Proc. Twelfth International Conference on Machine Learning,,,718,,,,,(pp. 158-166).,Morgan Kaufmann.,,Learning prototypical concept descriptions.,,,(1995).
+719,"Tahoe City, CA:","Datta, P., & Kibler, D.",Proc. Twelfth International Conference on Machine Learning,,,719,,,,,(pp. 158-166).,Morgan Kaufmann.,,Learning prototypical concept descriptions.,,,(1995).
+721,"Tahoe City, CA,",P. Datta and D. Kibler.,"In Proceedings of the Twelfth International Conference on Machine Learning,",,,721,,,,,"pages 158-166,",Morgan Kaufmann.,,Learning prototypical concept descriptions.,,16,1995.
+722,,"Hall, R., Kibler, D., Wenger, E., & Truxaw, C.",,,,722,,"Cognition and instruction,",,,223-283.,,,Exploring the episodic structure of algebra story problem solving.,,"6,",(1989a).
+726,,"Hampson, D., & Kibler, S.","DIMACS Series in Discrete Mathematics and Theoretical Computer Science: Cliques, Colors and Satisfiability,",,"In Johnson, D., & Trick, M. (Eds.),",726,,,,,pp. 437-456.,American Mathematical Society.,,Large plateaus and plateau search in boolean satisfia-bility problems: When to give up searching and start again.,,"vol.26,",(1995).
+735,"Los Altos, CA:","Kibler, D., & Porter, B.",In Proceedings of AAAI-83.,,,735,,,,,191-196.,Morgan-Kaufmann.,,Episodic learning.,,,(1983).
+744,,"Kibler, D. & Langley, P.","in Proceedings of the Third European Working Session on Learning,",,,744,,,,,pp. 81-92.,"Pitman Publishing, London, UK,",,"Machine learning as an experimental science,",,,"(1988),"
+746,"London, UK:","Kibler, D. & Langley, P.",Proceedings of the Third European Session on Machine Learning.,,,746,,,,,,Pitman.,,Machine Learning as an Experimental Science.,,,(1988).
+747,"Glasgow, Scotland.","Kibler, D. & Langley, P.","In Proceedings of the Third European Working Session on Learning,",,,747,,,,,,Pitman.,,Machine learning as an experimental science.,,,(1988).
+749,"Glasgow, Scotland.","Kibler, D. & Langley, P.","In Proceedings of the Third European Working Session on Learning,",,,749,,,,,,Pitman.,,Machine learning as an experimental science.,,,(1988).
+758,Glasgow:,"Kibler, D., & Langley, P.",Proceedings of the Third Eu-ropean Working Session on Learning,,,758,,,,,(pp. 81-92).,Pittman.,,Machine learning as an experimental science.,,,(1988).
+762,Glasgow: Pittman.,"Kibler, D., & Langley, P.",Proceedings of the Third European Working Session on Learning,,,762,,,,,(pp. 81-92).,,,Machine learning as an experimental science.,,,(1988).
+763,Glasgow:  Pittman.,"Kibler, D., & Langley, P.",Proceedings of the Third European Working Session on Learning,,,763,,,,,(pp. 81-92).,,,Machine learning as an experimental science.,,,(1988).
+775,,Pat Langley and Dennis Kibler.,,,,775,,,,"Unpublished paper,",,,,The experimental study of machine learning.,,,1991.
+777,"Glasgow, Scotland:","Kibler, D., & Aha, D. W.",In Proceedings of the Third European Working Session on Learning,,,777,,,,,(pp. 63-80).,Pitman.,,Comparing instance-averaging with instance-filtering learning algorithms.,,,(1988).
+781,,"D. Kibler, D.W. Aha, and M.K. Albert:",,,,781,,"Computational Intelligence,",,,"51-57,",,,"Instance-based prediction of real-valued attributes,",,"5,",1989.
+783,,"Kibler, D., Aha, D.W., and M.K., Albert,",,,,783,,"Computational Intelligence,",,,"pp. 51-57,",,,"Instance-based prediction of real-valued attributes,",,"5,",1989.
+792,"San Mateo, CA.","Norvig, P.",,,,792,,,,,,"Morgan Kaufmann,",,Paradigms of Artificial Intelligence Programming: Case Studies in Common Lisp.,,,(1992).
+793,"San Mateo, CA.","Norvig, P.",,,,793,,,,,,"Morgan Kaufmann,",,Paradigms of Artificial Intelligence Programming: Case Studies in Common Lisp.,,,(1992).
+800,,Pazzani M. and Kibler D.,,,,800,,"Machine Learning,",,,57-94.,,,The utility of knowledge in inductive learning.,,"9, 1,",(1991).
+806,"Boston, MA:","Pazzani, M. J., Kibler, D.",,,,806,,"Machine Learning,",,,1.,Kluwer Academic Publishers.,,The utility of knowledge in inductive learning.,,"volume 9,",(1992).
+816,,"Pazzani, M., & Kibler, D.",,,,816,,"Machine Learning,",,,,,,The utility of knowledge in inductive learning.,,9 (1).,(1992).
+819,,"Pazzani, M., & Kibler, D.",,,,819,,"Machine Learning,",,,(57-94).,,,The utility of knowledge in inductive learning.,,"9,",(1992).
+832,,"Pazzani, M., & Kibler, D.",,,,832,,"Machine Learning,",,,57-94.,,,The utility of knowledge in inductive learning.,,"9,",(1992).
+836,,"Pazzani, M., & Kibler, D.",,,,836,,"Machine Learning,",,,57-94.,,,The utility of prior knowledge in inductive learning.,,"9,",(1992).
+837,,"Pazzani, M., & Kibler, D.",,,,837,,"Machine Learning,",,,57-94.,,,The utility of prior knowledge in inductive learning.,,"9,",(1992).
+839,,"Pazzani, M. J. and Kibler, D.",,,,839,,"Ma chine Learning,",,,pp. 54-97.,,,The role of prior knowledge in inductive learning.,,"vol.9 (1992),",
+846,,"M. Pazzani and D. Kibler,",,,,846,,"Machine Learning,",,,"pp. 57-94,",,,"The utility of knowledge in inductive learning,",,"vol.9,",1992.
+848,,M. Pazzani and D. Kibler.,,,,848,,"Machine Learning,",,,,,,The utility of knowledge in inductive learning.,,"9(1),",1992.
+854,,"Porter, B. W., & Kibler, D. F.",,,,854,,"Machine Learning,",,,249-285.,,,Experimental goal regression: A method for learning problem-solving.,,"1 (3),",(1986).
+857,,"Ruby, D., & Kibler, D.",In Proceedings of AAAI-91.,,,857,,,,,,AAAI Press.,,Learning subgoal sequences for planning.,,,(1991).
+858,,"Ruby, D., & Kibler, D.",In Proceedings of AAAI-91.,,,858,,,,,,AAAI Press.,,Learning subgoal sequences for planning.,,,(1991).
+860,"Menlo Park, CA:","Ruby, D., Kibler, D.",In Proceedings of the Ninth National Conference on Artificial Intelligence.,,,860,,,,,,AAAI Press/The Mit Press.,,SteppingStone: An empirical and analytical evaluation.,,,(1991).
+861,"Los Altos, CA:","Ruby, D., Kibler, D.",Proceedings of the Ninth National Conference on Artificial Intelligence.,,,861,,,,,,Morgan Kaufmann.,,SteppingStone: An empirical and analytical evaluation.,,,(1991).
+866,,"Rudy, D., Kibler, D.","Proceedings of the Ninth International Conference on Machine Learning,",,,866,,,,,,Morgan Kaufmann.,,Learning episodes for optimization.,,,(1992).
+871,"Seattle, WA:","Townsend-Weber, T., & Kibler, D.",Proceedings of the 1994 AAAI Workshop on Case-Based Reasoning,,,871,,,,,(pp. 30-35).,AAAI.,,Instance-based prediction of continuous values.,,,(1994).
+876,"Seattle, WA:","Townsend-Weber, T., & Kibler, D.",Working Notes of the AAAI94 Workshop on Case-Based Reasoning,,,876,,,,,pp. 30-35,AAAI Press.,,Instance-based prediction of continuous values.,,,(1994).
+880,"U. C. Irvine,  CA,","Aha, D. and Kibler, D.","In Proceedings of the Fourth International Conference on Machine Learning,",,,880,,,,,"pages 24-30,",Morgan Kaufmann.,,Learning Representative Exemplars of Concepts: An Initial Case Study.,,,1987.
+888,,"D. Kibler and D. W. Aha,","Proceedings of 3rd European Working Session on Learning,",,,888,,,,,,"Pitman,",,"Comparing Instance Averaging and Instance Filtering Learning Algorithms,",,,1988
+889,,"D. Kibler and D. W. Aha,","Proceedings of 3rd European Working Session on Learning,",,,889,,,,,,"Pitman,",,"Comparing Instance Averaging and Instance Filtering Learning Algorithms,",,,1988
+890,,"D. Aha, D. Kibler, and M. Albert.",,,,890,,"Machine Learning,",,,"37-66,",,,Instance-Based Learning Algorithms.,,6(1),1991.
+901,,"Aha, D. W., Kibler, D. & Albert, M. K.",,,,901,,"Machine Learning,",,,37-66.,,,Instance-Based Learning Algorithms.,,6,(1991).
+903,,"Aha, D. W., Kibler, D., and Albert, M. K.",,,,903,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,6,(1991).
+906,,"Aha, D. W., Kibler, D., and Albert, M. K.",,,,906,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,6(1),(1991).
+911,,"Aha, D. W.; Kibler, D.; and Albert, M. K.",,,,911,,Machine Learning,,,37-66.,,,Instance-based Learning Algorithms.,,6,1991.
+913,,"Aha, D. W.; Kibler, D.; and Albert, M. K.",,,,913,,Machine Learning,,,37-66.,,,Instance-based learning algorithms.,,6,1991.
+924,,"Aha, D., Kibler, D., & Albert, M.",,,,924,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,6,(1991).
+925,,"Aha, D., Kibler, D., & Albert, M.",,,,925,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,6,(1991).
+928,,"Aha, D., Kibler, D., and Albert, M.",,,,928,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,6,(1991).
+929,,"Aha, D., Kibler, D., and Albert, M.",,,,929,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,6(1),(1991).
+933,,"Aha, D.W., Kibler, D., & Albert, M.K.",,,,933,,"Machine Learning,",,,37-66.,,,"Instance-based learning algorithms,",,6,(1991)
+945,,"D. Aha, D. Kibler, and M. Albert.",,,,945,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6(1),1991.
+946,,"D. W. Aha, D. Kibler, and M. K. Albert.",,,,946,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+948,,"D. W. Aha, D. Kibler, and M. K. Albert.",,,,948,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+950,,"D. W. Aha, D. Kibler, and M. K. Albert.",,,,950,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+954,,"D. W. Aha, D. Kibler, and M. K. Albert.",,,,954,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6(1),1991.
+955,,"D. W. Aha, D. Kibler, and M. K. Albert.",,,,955,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6(1),1991.
+957,,"D.W. Aha, D. Kibler, and M.K. Albert.",,,,957,,"Machine Learning,",January,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+958,,"D.W. Aha, D. Kibler, and M.K. Albert.",,,,958,,"Machine Learning,",January,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+959,,"D.W. Aha, D. Kibler, and M.K. Albert.",,,,959,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+962,,"David W. Aha, Dennis Kibler, and Marc K. Albert.",,,,962,,"Machine Learning,",January,,"37-66,",,,Instance-based learning algorithms.,,6(1),1991.
+966,,"D. W. Aha, D. Kibler, and M. K. Albert.",,,,966,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+967,,"D. W. Aha, D. Kibler, and M. K. Albert.",,,,967,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+968,,"D.W. Aha, D. Kibler and M.K. Albert",,,,968,,"Machine Learning,",,,37-66.,,,. Instance-Based Learning Algorithms.,,6,(1991)
+969,,D. Aha and D. Kibler.,,,,969,,"Machine Learning,",,,"794-799,",,,Noise-tolerant instance-based learning algorithms.,,8:,1991.
+978,,"D. W. Aha, D. Kibler, and J. K. Albert.",,,,978,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6(1),1991.
+979,,"D. W. Aha, D. Kibler, and M. K. Albert.",,,,979,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6(1),1991.
+980,,"D. W. Aha, D. Kibler, and M. K. Albert.",,,,980,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6(1),1991.
+984,,"D. W. Aha, D. Kibler, and M. K. Albert.",,,,984,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6(1),1991.
+992,,"D. Aha, D. Kibler, and M. Albert.",,,,992,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+994,,"D. W. Aha, D. Kibler, and M. K. Al-bert.",,,,994,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+998,,"David W. Aha, Dennis Kibler, and Marc K. Albert.",,,,998,,"Machine Learning,",,,,,,Instance-based learning algorithms.,,"6(1),",1991.
+999,,"David W. Aha, Dennis Kibler, and Mark K. Albert.",,,,999,,"Machine Learning,",,,"37-66,",,,Instance-based learning algorithms.,,6,1991.
+1002,,"D.W. Aha, D. Kibler, and M.K. Albert,",,,,1002,,"Machine Learning,",,,"37-66,",,,"Instance-based learning algorithms,",,"6,",1991.
+1004,,"Aha, D., Kibler, D., & Albert, M.",,,,1004,,"Machine Learning,",,,37-66.,,,Instance-based learning algorithms.,,"6,",(1991).
+1010,,J.S. Conery and D.F. Kibler.,,,,1010,,"New Generation Computing,",,,"43-70,",,,And parallelism and nondeterminism in logic programs.,,3,1985.
+1013,,Dennis Kibler.,,,,1013,"Department of Computer Science, University of California at Irvine,",,,,,,,Natural generation of heuristics by transforming the problem representation.,"Technical Report TR-85-20,",,1985.
+1016,"Irvine, CA.","Kibler, D. and Aha, D.","In Proc. of the 4 th International Workshop on Machine Learning,",,,1016,,,,,"pages 24-30,",,,Learning representative exemplars of concepts: An initial case study.,,,(1987).
+1018,"Irvine, CA,",Dennis Kibler and David W. Aha.,"In Proceedings of the 4 th International Workshop on Machine Learning,",,,1018,,,,,,,,Learning representative exemplars of concepts: An initial case study.,,,1987.
+1019,"Glasgow, UK.","Kibler, D. and Langley, P.,",,,"editor,In Sleeman, D.,",1019,,,October,,"pages 81-92,","Turing Institute, Pitman.",,Machine Learning as an Experimental Science.,,,1988.
+1023,,"Kibler, D. and Aha, D. W.",,,,1023,,"Computational Intelligence,",,,51-57.,,,Instance-based prediction of real-valued attributes.,,5(2),(1989).
+1025,,"Kibler, D., Aha, D. W., and Albert, M.",,,,1025,,"Computational Intelligence,",,,51-57.,,,Instance-based prediction of real-valued attributes.,,5,(1989).
+1028,,"D. Kibler, D. W. Aha, and M. K. Albert.",,,,1028,,"Computational Intelligence,",,,"51-57,",,,Instance-Based Prediction of Real-Valued Attributes.,,5,1989.
+1034,,Michael Pazzani and Dennis Kibler.,,,,1034,,"Machine Learning,",,,"57-94,",,,The role of prior knowledge in inductive learning.,,9,1992.
+1035,,Michael Pazzani and Dennis Kibler.,,,,1035,,"Machine Learning,",,,"57-94,",,,The role of prior knowledge in inductive learning.,,9,1992.
+1036,,Michael Pazzani and Dennis Kibler.,,,,1036,,"Machine Learning,",,,"57-94,",,,The role of prior knowledge in inductive learning.,,9,1992.
+1038,"Amherst, MA.",Dennis Kibler (1993).,"In Proceedings of KCSL93, 3rd International Workshop on Knowledge Compilation and Speedup Learning (in ICML93),",,,1038,,,,,,,,Some real-world domains for learning problem solvers.,,,
+1048,,"Ourston, D. & Mooney, R.",,,,1048,,"Artificial Intelligence,",,,273-309.,,,Theory refinement combining analytical and empirical methods.,,66(2),(1994).
+1049,,"Ourston, D. & Mooney, R.",,,,1049,,"Artificial Intelligence,",,,273-309.,,,Theory refinement combining analytical and empirical methods.,,66(2),(1994).
+1059,,"Pazzani, M. & Kibler, D.",,,,1059,,"Machine Learning,",,,57-94.,,,The utility of knowledge in inductive learning.,,9,(1992).
+1066,,"Pazzani, M. J., and Kibler, D.",,,,1066,,Machine Learning,,,57-94.,,,The utility of knowledge in inductive learning.,,9,(1992).
+1067,,"Pazzani, M. and Kibler, D.",,,,1067,,"Machine Learning Journal,",,,57-94.,,,The utility of knowledge in inductive learning.,,9(1),(1992).
+1071,,"Pazzani, M. and Kibler, D.,",,,,1071,,"Machine Learning,",,,,,,"The Utility of Knowledge in Inductive Learning,",,9(1),1992.
+1072,,"Pazzani, M. and Kibler, D.,",,,,1072,,"Machine Learning,",,,,,,"The Utility of Knowledge in Inductive Learning,",,9(1),1992.
+1090,,M. Pazzani and D. Kibler.,,,,1090,,"Machine Learning,",,,"57-94,",,,The utility of knowledge in inductive learning.,,9,1992.
+1092,,M. Pazzani and D. Kibler.,,,,1092,,"Machine Learning,",,,"57-94,",,,The utility of knowledge in inductive learning.,,9(1),1992.
+1097,,Micheal J. Pazzani and Dennis Kibler.,,,,1097,,"Machine Learning,",,,"54-97,",,,The role of prior knowledge in inductive learning.,,9,1992.
+1101,,Micheal J. Pazzani and Dennis Kibler.,,,,1101,,"Machine Learning,",,,"54-97,",,,The role of prior knowledge in inductive learning.,,9,1992.
+1103,,M. Pazzani and D. Kibler.,,,,1103,,"Machine Learning,",,,"57-94,",,,The utility of background knowledge in inductive learning.,,9,1992.
+1108,,"Pazzani, M., and Kibler, D.,",,,,1108,,"Machine Learning,",,,"57-94,",,,"The utility of knowledge in inductive learning,",,9(1),1992.
+1111,,M. Pazzani and D. Kibler.,,,,1111,,"Machine Learning,",,,"57-94,",,,The utility of knowledge in inductive learning.,,9(1),1997.
+1116,,Bruce Porter and Dennus Kibler.,,,,1116,,"Machine Learning,",,,"249-286,",,,Experimental goal regression: A method for learning problem-solving heuristics.,,1,1986.
+1124,"Amherst, MA,","Brodley, C. E. & Utgoff, P. E.",,,,1124,"Department of Computer Science, University of Mas-sachusetts,",,,,,,,"Multivariate versus univariate decision trees,","Tech--nical Report COINS TR 92-8,",,"(1992),"
+1132,"Amherst, MA:","Brodley, C. E., & Utgoff, P. E.",,,,1132,"University of Massachusetts, Department of Computer and Information Science.",,,,,,,"Multivariate versus univariate decision trees,","(Coins Technical Report 92-8),",,(1992).
+1141,"Amherst, Massachusetts, USA,","C.E. Brodley and P.E. Ut-goff,",,,,1141,"Department of Computer Science, University of Massachusetts,",,,,,,,Multivariate versus univariate decision trees.,"COINS Technical Report 92-8,",,1992.
+1146,"Amherst, MA,",Carla E. Brodley and Paul E. Utgoff.,,,,1146,"Dept. of Computer Science, University of Massachusetts,",,January,,,,,Multivariate versus univariate decision trees.,"Technical Report COINS-CR-92-8,",,1992.
+1148,"Amherst, MA,",Carla E. Brodley and Paul E. Utgoff.,,,,1148,"Dept. of Computer Science, University of Massachusetts,",,January,,,,,Multivariate versus univariate decision trees.,"Technical Report COINS-CR-92-8,",,1992.
+1150,"Amherst, MA,",Carla E. Brodley and Paul E. Utgoff.,,,,1150,"Dept. of Computer Science, University of Massachusetts,",,January,,,,,Multivariate versus univariate decision trees.,"Technical Report COINS-CR-92-8,",,1992.
+1151,"Amherst, MA,",Carla E. Brodley and Paul E. Utgoff.,,,,1151,"Dept. of Computer Science, University of Massachusetts,",,January,,,,,Multivariate versus univariate decision trees.,"Technical Report COINS-CR-92-8,",,1992.
+1153,UMass.,"Brodley, C.E., and Utgoff, P.E.",,,,1153,"Computer Science Dept.,",,,,,,,Multivariate Versus Univariate Decision Trees.,"COINS Technical Report 92-8,",,1992.
+1159,"University of Massachussetts,",C.E. Brodley and P.E. Utgoff.,,,,1159,"Department of Computer Science,",,,,,,,Multivariate versus univariate decision trees.,"TR 8,",,1992.
+1160,"Amherst,",Carla E. Brodley and Paul Utgoff.,,,,1160,"University of Massachusetts,",,,,,,,Multivariate decision trees.,"Technical Report MASSCS 92-93,",,1992.
+1161,"Amherst,",Carla E. Brodley and Paul Utgoff.,,,,1161,"University of Massachusetts,",,,,,,,Multivariate decision trees.,"Technical Report MASSCS 92-93,",,1992.
+1163,,"Brodley, C. E. and Utgoff, P. E.",,,,1163,Department of Computer Sciences University of Massachussetts.,,,,,,,Multivariate versus univariate decision trees.,"Technical report,",,(1992).
+1166,,C. E. Brodley and P. E. Utgoff.,,,,1166,,"Machine Learning,",,,,,,Goal-directed Classification Using Linear Machine Decision Trees.,,,1994.
+1170,,Carla E. Brodley and Paul E. Utgoff.,,,,1170,,"Machine Learning,",,,"45-77,",,,Multivariate decision trees.,,19,1995.
+1177,,"Brodley, C. E. and Utgoff, P. E.",,,,1177,,Machine Learning,,,45-77.,,,"Multivariate decision trees,",,19:,(1995).
+1180,,"Brodley, C. E., & Utgoff, P. E.",,,,1180,,"Machine Learning,",,,,,,Multivariate decision trees.,,,(1994).
+1183,,"Brodley, C. E., & Utgoff, P. E.",,,,1183,,"Machine Learning,",,,,,,Multivariate decision trees.,,,(1994).
+1184,,"Brodley, C. E., & Utgoff, P. E.",,,,1184,,"Machine Learning,",,,,,,Multivariate decision trees.,,,(1994).
+1185,,"Brodley, C. E., & Utgoff, P. E.",,,,1185,,"Machine Learning,",,,,,,Multivariate decision trees.,,,(1994).
+1189,,"Brodley, C.E. and Utgoff P.E.",,,,1189,,Machine Learning,,,45-77.,,,"Multivariate Decision Trees,",,"19,","(1995),"
+1191,,C. E. Brodley and P. E. Utgoff.,,,,1191,,"Machine Learning,",,,"45-77,",,,Multivariate decision trees.,,19(1),1995.
+1194,,C. E. Brodley and P. E. Utgoff.,,,,1194,,"Machine Learning,",,,"45-77,",,,Multivariate decision trees.,,19(1),1995.
+1200,,Carla E. Brodley and Paul E. Utgoff.,,,,1200,,"Machine Learning,",,,"45-77,",,,Multivariate decision trees.,,19,1995.
+1203,,Carla E. Brodley and Paul E. Utgoff.,,,,1203,,"Machine Learning,",,,"45-77,",,,Multivariate decision trees.,,19,1995.
+1204,,Carla E. Brodley and Paul E. Utgoff.,,,,1204,,"Machine Learning,",,,"45-77,",,,Multivariate decision trees.,,19,1995.
+1207,,"C.E. Brodley and P.E. Utgoff,",,,,1207,,"Machine Learning,",,,,,,"Multivariate decision trees,",,,1995.
+1208,,C. Brodley and P. Utgoff.,,,,1208,,"Machine Learning,",,,,,,Multivariate trees.,,"19,",1995.
+1209,,C. E. Brodley and P. E. Utgoff.,,,,1209,,"Machine Learning,",,,"45-77,",,,Multivariate decision trees.,,19(1),1995.
+1211,,"Brodley, C.E., and Utgoff, P.E.",,,,1211,,Machine Learning.,,,,,,Multivariate Decision Trees.,,,1994.
+1216,"Northwestern University, Chicago, IL,","Callan, J. and Utgoff, P.","In Proceedings of the Eighth International Workshop on Machine Learning,",,,1216,,,,,"pages 122-126,",Morgan Kauf-mann.,,A Transformational Approach to Constructive Induction.,,,1991.
+1219,,J. Callan and P. Utgoff.,"In Proceedings of the Eighth International Workshop on Machine Learning,",,,1219,,,,,pages 122-126.,"Morgan Kaufmann,",,A transformational approach to constructive induction.,,,1991.
+1225,"Amherst, MA,",C. Cardie.,"Proceedings of the Tenth International Conference on Machine Learning,",,"In P. Utgoff, editor,",1225,"University of Massachusetts,",,,,"pages 25-32,",Morgan Kaufmann.,,Using Decision Trees to Improve Case-Based Learning.,,,1993.
+1232,"Amherst, MA,","Cardie, C.","Proceedings of the Tenth International Conference on Machine Learning,",,"In Utgoff, P., editor,",1232,"University of Massachusetts,",,,,"pages 25-32,",Morgan Kaufmann.,,Using Decision Trees to Improve Case-Based Learning.,,,1993.
+1233,"Amherst, MA,","Cardie, C.","Proceedings of the Tenth International Conference on Machine Learning,",,"In Utgoff, P., editor,",1233,"University of Massachusetts,",,,,"pages 25-32,",Morgan Kaufmann.,,Using Decision Trees to Improve Case-Based Learning.,,,1993.
+1235,"San Mateo, CA,",R. Caruana.,"Proceedings of the Tenth International Conference on Machine Learning,",,"In Paul E. Utgoff, editor,",1235,,,,,"pages 41-48,",Morgan Kaufmann.,,Multitask learning: A knowledge-based of source of inductive bias.,,,1993.
+1238,"San Mateo, CA,",Richard Caruana.,"Proceedings of the Tenth International Conference on Machine Learning,",,"In Paul E. Utgoff, editor,",1238,,,,,"pages 41-48,",Morgan Kaufmann.,,Multitask learning: A knowledge-based of source of inductive bias.,,,1993.
+1239,"San Mateo, CA,",Richard Caruana.,"Proceedings of the Tenth International Conference on Machine Learning,",,"In Paul E. Utgoff, editor,",1239,,,,,"pages 41-48,",Morgan Kaufmann.,,Multitask learning: A knowledge-based of source of inductive bias.,,,1993.
+1240,"San Mateo, CA,",Richard Caruana.,"Proceedings of the Tenth International Conference on Machine Learning,",,"In Paul E. Utgoff, editor,",1240,,,,,"pages 41-48,",Morgan Kaufmann.,,Multitask learning: A knowledge-based of source of inductive bias.,,,1993.
+1244,"San Mateo, CA,",R. Caruana.,"Proceedings of the Tenth International Conference on Machine Learning,",,"In P. E. Utgoff, editor,",1244,,,,,"pages 41-48,",Morgan Kaufmann.,,Multitask learning: A knowledge-based of source of inductive bias.,,,1993.
+1245,"San Mateo, CA,",R. Caruana.,"Proceedings of the Tenth International Conference on Machine Learning,",,"In P. E. Utgoff, editor,",1245,,,,,"pages 41-48,",Morgan Kaufmann.,,Multitask learning: A knowledge-based of source of inductive bias.,,,1993.
+1246,"San Mateo, CA,",R. Caruana.,"Proceedings of the Tenth International Conference on Machine Learning,",,"In P. E. Utgoff, editor,",1246,,,,,"pages 41-48,",Morgan Kaufmann.,,Multitask learning: A knowledge-based of source of inductive bias.,,,1993.
+1248,"San Mateo, CA,",R. Caruana.,"Proceedings of the Tenth International Conference on Machine Learning,",,"In P. E. Utgoff, editor,",1248,,,,,"pages 41-48,",Morgan Kaufmann.,,Multitask learning: A knowledge-based of source of inductive bias.,,,1993.
+1251,"San Mateo, CA,","Caruana, R.","in: Proceedings of the Tenth International Conference on Machine Learning,",,P E. Utgoff.,1251,,,,,pp. 41-48.,"Morgan Kaufmann,",,Multitask Learning: A Knowledge-Based of Source of Inductive Bias.,,,"1993,"
+1252,"San Mateo, CA,","Caruana, R.","in:Proceedings of the Tenth International Conference on Machine Learning,",,edited by P.  E. Utgoff.,1252,,,,,pp. 41-48.,"Morgan Kaufmann,",,Multitask Learning: A Knowledge-Based of Source of Inductive Bias.,,,"1993,"
+1254,,"Chapman, D.",,,,1254,,"Artificial Intelligence,",,,333-377.,,,Planning for conjunctive goals.,,"32,",(1987).
+1261,,"Clouse, J. A. & Utgoff, P. E.",In Proceedings of the Ninth International Conference on Machine Learning.,,"edited by P. Ed. D. Sleeman, & P. Edwards.",1261,,,,,92-101.,"Morgan Kaufmann,",,A Teaching Method for Reinforcement Learning.,,,(1992).
+1262,"San Mateo, CA:","Clouse, J. A., & Utgoff, P. E.",Proceedings of the Ninth International Conference,,,1262,,Machine Learning:,,,(pp. 92-101).,Morgan Kaufmann.,,A teaching method for reinforcement learning.,,,(1992).
+1263,"San Mateo, CA:","Clouse, J. A., & Utgoff, P. E.",Proceedings of the Ninth International Conference,,,1263,,Machine Learning:,,,(pp. 92-101).,Morgan Kaufmann.,,A teaching method for reinforcement learning.,,,(1992).
+1264,"Aberdeen, Scotland.","Clouse, J., & Utgoff, P.","In Proceedings of the Ninth International Conference on Machine Learning,",,,1264,,,,,pp. 92-101,,,A teaching method for reinforcement learning.,,,(1992).
+1268,"Aberdeen, Scotland,","Clouse, J.A., & P.E. Utgoff,","Proceedings of the Ninth Conference on Machine Learning,",,,1268,,,,,92-101.,,,A teaching method for reinforcement learning.,,,1992.
+1271,,J. A. Clouse and P. E. Utgoff.,In Proceedings of the Ninth Conference on Machine Learning.,,,1271,,,,,,"Morgan Kaufmann,",,A teaching method for reinforcement learning.,,,1992.
+1272,"San Mateo, CA,","Clouse, J.A., & Utgoff, P.E.","In Proceedings of the Ninth International Conference of Machine Learning,",,,1272,,,,,92-101.,"Morgan Kaufmann,",,A teaching method for reinforcement learning.,,,(1992).
+1276,"Aberdeen, Scotland,",J. Clouse and P. Utgoff.,"In Proceedings of the Ninth International Conference on Machine Learning,",,,1276,,,,,"pages 92-101,",Morgan Kaufman.,,A teaching method for reinforcement learning.,,,1992.
+1279,"San Mateo, CA.","Connell, M. E. and Utgoff, P. E.","In Sixth National Conference on Artificial Intelligence,",,,1279,,,,,"pages 456-460,","Morgan Kaufmann,",,Learning to control a dynamic physical system.,,,(1987).
+1282,"Seattle, WA:","Connell, M. E., & Utgoff, P. E.",In Proceedings of the Sixth National Conference on Artificial Intelligence,,,1282,,,,,(pp. 456-460).,Morgan Kaufmann.,,Learning to control a dynamic physical system.,,,(1987).
+1283,"Seattle, WA:","Connell, M. E., & Utgoff, P. E.",In Proceedings of the Sixth National Conference on Artificial Intelligence,,,1283,,,,,(pp. 456-460).,Morgan Kaufmann.,,Learning to control a dynamic physical system.,,,(1987).
+1288,,"Craven, M. W. & Shavlik, J. W.","Proceedings of the Tenth International Conference on Machine Learning,",,"in P. Utgoff, ed.,",1288,,,,,pp. 73-80.,"Morgan Kaufmann,",,"Learning symbolic rules using artificial neural networks,",,,"(1993),"
+1292,"San Mateo, CA,",Mark W. Craven and Jude W. Shavlik.,"Proceedings of the Tenth International Conference on Machine Learning,",,"In Paul E. Utgoff, editor,",1292,,,,to appear.,,Morgan Kaufmann.,,Learning symbolic rules using artificial neural networks.,,,1993.
+1301,,"Draper, B. A., Brodley, C. E. & Utgoff, P. E.",,,,1301,,IEEE Transactions on Pattern Analysis and Machine Intelligence,,,888-893.,,,"`Goal-directed classification using linear machine decision trees',",,"16(9),","(1994),"
+1302,,"Draper, B. A., Brodley, C. E., & Utgoff, P. E.",,,,1302,,"IEEE Transactions on Pattern Analysis and Machine Intelligence,",,,888-893.,,,Goal-directed classification using linear machine decision trees.,,"16,",(1994).
+1303,,"B. A. Draper, Carla E. Brodley, and Paul E. Utgoff.",,,,1303,,"IEEE Transactions on Pattern Analysis and Machine Intelligence,",,,"888,",,,Goal-directed classification using linear machine decision trees.,,16(9):,1994.
+1305,,"B. A. Draper, Carla E. Brodley, and Paul E. Utgoff.",,,,1305,,"IEEE Transactions on Pattern Analysis and Machine Intelligence,",,,":888,",,,Goal-directed classification using linear machine decision trees.,,16(9),1994.
+1306,,"B. A. Draper, Carla E. Brodley, and Paul E. Utgoff.",,,,1306,,"IEEE Transactions on Pattern Analysis and Machine Intelligence,",,,":888,",,,Goal-directed classification using linear machine decision trees.,,16(9),1994.
+1307,,"B. A. Draper, Carla E. Brodley, and Paul E. Utgoff.",,,,1307,,"IEEE Transactions on Pattern Analysis and Machine Intelligence,",,,":888,",,,Goal-directed classification using linear machine decision trees.,,16(9),1994.
+1308,,"B. A. Draper, Carla E. Brodley, and Paul E. Utgoff.",,,,1308,,"IEEE Transactions on Pattern Analysis and Machine Intelligence,",,,":888,",,,Goal-directed classification using linear machine decision trees.,,16(9),1994.
+1311,,"B. A. Draper, Carla E. Brodley, and Paul E. Utgoff.",,,,1311,,"IEEE Transactions on Pattern Analysis and Machine Intelligence,",,,":888,",,,Goal-directed classification using linear machine decision trees.,,16(9),1994.
+1312,,"Bruce A. Draper, Carla E. Brodley, and Paul E. Utgoff.",,,,1312,,"IEEE Transactions on Pattern Analysis and Machine Intelligence,",September,,"888-893,",,,Goal-Directed Classification using Linear Machine Decision Trees.,,16(9),1994.
+1317,"Evanston, IL:","Fawcett, T. E., & Utgoff, P. E.",Machine Learning:  Proceedings of the Eighth International Workshop,,,1317,,,,,(pp. 137-141).,Morgan Kaufmann.,,A hybrid method for feature generation.,,,(1991).
+1320,"Evanston, Ill.","Fawcett, T. and Utgoff, P.",Proceedings of the Eighth International Workshop on Machine Learning,,,1320,,,,,(pp. 137-141).,,,A hybrid method for feature generation.,,,(1991).
+1323,"UK,","Fawcett, T. and Utgoff, P.","In Proceedings of the Ninth International Conference on Machine Learning,",,,1323,"University of Aberdeen,",,,,"pages 144-153,",Morgan Kaufmann.,,Automatic feature Generation for Problem Solving Systems.,,,1992.
+1326,"Amherst, MA.","Tom E. Fawcett, Paul E. Utgoff.",,,,1326,"University of Massachusetts,",,Jan,,,,,Automatic feature generation for problem solving systems.,"COINS technical report 92-9,",,1992.
+1329,"San Mateo, CA:","T.E. Fawcett and P.E. Utgoff,","Proceedings of the Ninth International Workshop on Machine Learning,",,,1329,,,,,144-153.,"Morgan Kaufmann,",,Automatic feature generation for problem solving systems.,,,
+1330,"Scotland,",Tom E. Fawcett and Paul E. Utgoff.,"Proceedings of the Ninth Interntational Workshop on Machine Learning, Aberdeen,",,"In Derek Sleeman and Peter Edwards, editors,",1330,,,,,,,,Automatic feature generation for problem solving systems.,,,1992.
+1334,,"Usama M. Fayyad, Nicholas Weir, and D. Djorgovski. SKICAT:","In ML-93 ,",,Editor: Paul E. Utgoff.,1334,,,,,pages 112-119.,,,A machine learning system for automated cataloging of large scale sky surveys.,,,
+1338,,"Usama M. Fayyad, Nicholas Weir, and D. Djorgovski. SKICAT:","In ML-93 ,",,Editor: Paul E. Utgoff.,1338,,,,,pages 112-119.,,,A machine learning system for automated cataloging of large scale sky surveys.,,,
+1343,,Scott B. Huffman and John E. Laird.,"Machine Learning: Proceedings of the Tenth International Conference,",,"In P. Utgoff, editor,",1343,,,,,,,,Learning procedures from inter-active natural language instructions.,,,1993.
+1346,,Scott B. Huffman and John E. Laird.,"Machine Learning: Proceedings of the Tenth International Conference,",,"In P. Utgoff, editor,",1346,,,,,,,,Learning procedures from interactive natural language instructions.,,,1993.
+1353,,L. P. Kaelbling.,"Proceedings of the Tenth International Conference on Machine Learning,",,"In Paul E. Utgoff, editor,",1353,,,,,,Morgan Kaufmann.,,Hierarchical learning in stochastic domains: Preliminary results.,,,1993.
+1354,,"McCallum, R. A.","Machine Learning: Proceedings of the Tenth International Conference,",,"In Utgoff, P. (Ed.),",1354,,,,,pages 190-196.,Morgan Kaufmann.,,Overcoming incomplete perception with utile distinction memory.,,,(1993).
+1358,,R.A. McCallum.,"Machine Learning: Proceedings of the Tenth International Conference,",,"In P. Utgoff, editor,",1358,,,,,pages 190-196.,"Morgan Kaufmann,",,Overcoming incomplete perception with utile distinction memory.,,,1993.
+1365,"Cambridge,CA.","Minton, S., Drummond, M., Bresina, J. L., & Phillips, A. B.","In Proceedings of the Third International Conference on Principles of Knowledge Representation and Reasoning,",,,1365,,,,,pp. 83-92,,,Total order vs. partial order planning: Factors influencing performance.,,,(1992).
+1368,"San Mateo, CA.","Mitchell, T. M., Utgoff, P. E. & Banerji, R. B.",Machine Learning: An Artificial Intelligence Approach,,"In R.S.  Michalski, J.G. Carbonell, & T.M. Mitchell (Eds.),",1368,,,,,,"Morgan Kaufmann,",,Learning by experimentation: Acquiring and refining problem-solving heuristics.,,"(Vol. I),",(1983).
+1370,"San Mateo, CA:","Mitchell, T. M., Utgoff, P., & Banerji, R.",Machine leaning: An artificial intelligence approach,,"In R. Michalski, J. Carbonell, & T. Mitchell (Eds.),",1370,,,,,(pp. 163-190).,M. Kaufmann.,,(1983) Learning by experimentation: Acquiring and refining problem-solving heuristics.,,,
+1376,"Palo Alto, CA.","Mitchell, T., Utgoff, P., & Banerji, R.",,,"In Michalski, R., Carbonell, J., & Mitchell, T. (Eds.),",1376,,"Machine Learning,",,,pp. 163-190.,"Tioga,",,Learning by experimentation: Acquiring and refining problem solving heuristics.,,,(1983).
+1377,"Palo Alto, CA.","Mitchell, T., Utgoff, P., & Banerji, R.",,,"In Michalski, R., Carbonell, J., & Mitchell, T. (Eds.),",1377,,"Machine Learning,",,,pp. 163-190.,"Tioga,",,Learning by experimentation: Acquiring and refining problem solving heuristics.,,,(1983).
+1383,"Palo Alto, CA.","Mitchell, T., Utgoff, T., & Banerji, R.",Machine Learning: An Artificial Intelligence Approach.,,"In Michalski, R., Mitchell, T., & Carbonell, J. (Eds.),",1383,,,,,,"Morgan Kaufmann,",,Learning problem solving heuristics by experimentation.,,,(1983).
+1389,"San Mateo, CA,","Mitchell, T.M., Utgoff, P.E., and Banerji, R.",,,"Mitchell (eds.),  R.S. Michalski, J.G. Carbonell, and T.M.",1389,,,,,"pp. 163-189,","Morgan Kaufman Publishers,",,"Learning by Experimentation: Acquiring and Refining Problem-Solving Heuristics, Machine Learning: An Artificial Intelligence Approach,",,,1983.
+1392,,"Mitchell, T.M.; Utgoff, P.E.; and Banerji, R.B.",,,,1392,,Machine Learning.,,,,Morgan Kaufmann.,,Learning by experimentation: Acquiring and refining problem-solving heuristics.,,,1983.
+1393,,"Mitchell,T.M., Utgoff,P.E. & Banerji,R.,",,,"eds Michalski,  Carbonell & Mitchell,",1393,,,,,,Tioga Press,,Learning by Experimentation: Acquiring and Refining Problem Solving Heuristics In Machine Learning,,,(1983).
+1401,"Palo Alto, California,","Mitchell, T. M., Utgoff, P. E. and Banerji, R.,","Machine Learning : An Artificial Intelligence Approach,",,"in:R. S. Michalski, J. G. Carbonell and T. M. Mitchell (eds.),",1401,,,,,,"Tioga,",,"Learning by Experimentation: Acquiring and Refining ProblemSolving Heuristics,",,,1983.
+1402,"Palo Alto, CA,","T.M. Mitchell, P.E. Utgoff, and R.B. Banerji.",Machine Learning.,,"In J.G. Carbonell R.S. Michalski and T.M. Mitchell, editors,",1402,,,,,,"Tioga,",,Learning by experimentation: Acquiring and refining problem-solving heuristics.,,,1983.
+1403,"Palo Alto, CA,","T. Mitchell, T. Utgoff, and R. Banerji.",Machine Learning: An Artificial Intelligence Approach.,,"In R. Michalski, T. Mitchell, and J. Carbonell, editors,",1403,,,,,,"Morgan Kaufmann,",,Learning problem solving heuristics by experimentation.,,,1983.
+1404,"Palo Alto, CA,","T. Mitchell, T. Utgoff, and R. Banerji.",Machine Learning: An Artificial Intelligence Approach.,,"In R. Michalski, T. Mitchell, and J. Carbonell, editors,",1404,,,,,,"Morgan Kaufmann,",,Learning problem solving heuristics by experimentation.,,,1983.
+1408,"Palo Alto, Ca,","T. M. Mitchell, P. Utgoff, and R. Banerji.","Machine Learning, vol.",,"In J. G. Carbonell, R. S. Michalski, and T. M. Mitchell, editors,",1408,,,,,,"Tioga,",,Learning by experimentation: acquiring and refining problem-solving heuristics.,,"1,",1983.
+1409,"San Mateo, CA.","Mitchell, T. M., Utgoff, P. E. & Banerji, R. B.",Machine Learning: An Artificial Intelligence Approach,,"In R.S.  Michalski, J.G. Carbonell, & T.M. Mitchell (Eds.),",1409,,,,,,"Morgan Kaufmann,",,Learning by experimentation: Acquiring and refining problem-solving heuristics.,,"(Vol. I),",(1983).
+1413,"Los Altos, California,","T. M. Mitchell, P. E. Utgoff, and R. Banerji.","Machine Learning : An Artificial Intelligence Approach,",,"In R. S. Michalski, J. G. Carbonell, and T. M. Mitchell, editors,",1413,,,,,pages 163-190.,"Morgan Kaufmann,",,Learning by experimentation : Acquiring and refining problem-solving heuristics.,,"Vol. 1.,",1983.
+1417,,Tom M. Mitchaell and Paul E. Utgoff.,In Shavlik and Dietterich,,,1417,,,,,pages 510-522.,,,Learning by experimentation: Acquiring and refining problem-solving heuristics.,,"[17],",
+1423,"San Mateo, CA,",Tom M. Mitchell and Sebastian Thrun.,"Proceedings of the Tenth International Conference on Machine Learning,",,"In Paul E. Utgoff, editor,",1423,,,,,"pages 197-204,",Morgan Kaufmann.,,Explanation based learning: A comparison of symbolic and neural network approaches.,,,1993.
+1432,,Dunja Mladenic.,"In ML-93 ,",,Editor: Paul E. Utgoff.,1432,,,,,pages 205-211.,,,Combinatorial optimization in inductive concept learning.,,,
+1444,,"R. Musick, Jason Catlett, and S. Russell.","In ML-93 ,",,Editor: Paul E. Utgoff.,1444,,,,,pages 212-219.,,,Decision theoretic subsampling for induction on large databases.,,,
+1446,"San Francisco, CA.","Quinlan, J. R.",Proc. Int. Conf. on Mach. Learn.,,"In Utgoff, P. E. (Ed.),",1446,,,,,,Morgan Kaufmann.,,Combining instance-based and model-based learning.,,,(1993b).
+1449,,John Ross Quinlan.,"In ML-93 ,",,Editor: Paul E. Utgoff.,1449,,,,,pages 236-243.,,,Combining instance-based and model-based learning.,,,
+1454,,John Ross Quinlan.,"In ML-93 ,",,Editor: Paul E. Utgoff.,1454,,,,,pages 236-243.,,,Combining instance-based and model-based learning.,,,
+1456,,John Ross Quinlan.,"In ML-93 ,",,Editor: Paul E. Utgoff.,1456,,,,,pages 236-243.,,,Combining instance-based and model-based learning.,,,
+1465,,Harish Ragavan and Larry Rendell.,"In ML-93 ,",,Editor: Paul E. Utgoff,1465,,,,,pages 252-259.,,,Lookahead feature construction for learning hard concepts.,,,
+1473,,Ron Rymon.,"In ML-93 ,",,Editor: Paul E. Utgoff.,1473,,,,,pages 268-275.,,,An SE-tree based characterization of the induction problem.,,,
+1477,,Ron Rymon.,"In ML-93 ,",,Editor: Paul E. Utgoff.,1477,,,,,pages 268-275.,,,An SE-tree based characterization of the induction problem.,,,
+1479,,"Schmill, M. D.; Rosenstein, M. T.; Cohen, P. R.; and Utgoff, P.",,,,1479,,,,To appear in Proceedings of the Second International Conference on Autonomous Agents.,,,,Learning what is relevant to the effects of actions for a mobile robot.,,,1998.
+1481,"San Francisco, CA.","Schwartz, A.","Proceedings of the Tenth International Conference on Machine Learning,",,"In Utgoff, P. (Ed.),",1481,,,,,pp. 298-305,Morgan Kaufmann.,,A reinforcement learning method for maximizing undiscounted rewards.,,,(1993).
+1484,Czech Republic.,"Torgo, L.","In Proceedings of the 2nd international workshop on Artificial Intelligence Techniques (AIT95) ,",,"Zizka,J.  and Brazdil,P. (eds.)",1484,,,,,,,,: Data Fitting with Rule-based Regression.,,,(1995)
+1486,"Pittsburgh, PA:","Utgoff, P. E., & Mitchell, T. M.",Proceedings of the Second National Conference on Artificial Intelligence,,,1486,,,,,(pp.  414-417).,Morgan Kaufmann.,,Acquisition of appropriate bias for inductive concept learning.,,,(1982).
+1497,Boston MA.,"Utgoff, P. E.",,,,1497,,,,,,"Kluwer Academic,",,Machine Learning of Inductive Bias.,,12,(1986).
+1500,,P. Utgoff.,Machine Learning of Inductive Bias.,,,1500,,,,,,"Kluwer Academic,",,,,,1986.
+1504,"Boston, MA:","P. E. Utgoff,",Machine Learning of Inductive Bias.,,,1504,,,,,,"Kluwer Academic Publishers,",,,,,1986.
+1513,,"Utgoff, P.",Machine Learning of Inductive Bias.,,,1513,,,,"Kluwer International Series in Engineering and Computer Science,",6,Kluwer Academic.,,,,"Vol.15,",(1986).
+1515,,"Utgoff, P. E.",Machine Learning of Inductive Bias.,,,1515,,,,,,"Kluwer Academic Publishers,",,,,35,1986.
+1516,,"Utgoff, P. E.",Machine Learning of Inductive Bias.,,,1516,,,,,,"Kluwer Academic Publishers,",,,,35,1986.
+1531,"Los Altos, CA:","Utgoff, P.","Machine Learning: An AI Approach,",,"Eds) in Michalski R., Carbonell J. & Mitchell T.(",1531,,,,,pp.107-148.,"Morgan Kaufmann),",,"Shift of Bias For Inductive Concept Learning,",,Vol. II.,(1985).
+1532,,"Utgoff, P.","Machine Learning: An Artificial Intelligence Approach,",,"In Michalski, R. S., Carbonell, J. G., & Mitchell, T. M. (Eds.),",1532,,,,,pp. 107-148.,Morgan Kaufman.,,Shift of bias for inductive concept learning.,,"Vol. II,",(1986).
+1537,"Los Altos, CA.","Utgoff, P.","In Machine Learning,",,,1537,,,,,,"Morgan Kaufmann,",,Shift of bias for inductive concept learning.,,volume 2.,(1986).
+1547,"San Mateo, CA:","Utgoff, P. E.",,,"In Michalski, Carbonell, & Mitchell (Eds.),",1547,,"Machine Learning,",,,pp. 107-148.,Morgan Kaufmann.,,Shift of bias for inductive concept learning.,,"Vol. 2, chap. 5,",(1986).
+1548,"San Mateo, CA:","Utgoff, P. E.",,,"In Michalski, Carbonell, & Mitchell (Eds.),",1548,,"Machine Learning,",,,pp. 107-148.,Morgan Kaufmann.,,Shift of bias for inductive concept learning.,,"Vol.2, chap. 5,",(1986).
+1553,,"Utgoff, P. E.,",In Machine Learning:  An Artificial Intelligence Approach:,,eds R.,1553,,,,,,,,Shift of Bias for Inductive Concept Learning.,,"Volume II,",1986.
+1554,,"Utgoff, P. E.,",In Machine Learning: An Artificial Intelligence Approach:,,eds R.,1554,,,,,,,,Shift of Bias for Inductive Concept Learning.,,"Volume II,",1986.
+1559,,P.E. Utgoff.,"Machine Learning: An Artificial Intelligence Approach,",,"In R.S. Michalski, J.G. Carbonell, and T.M. Mitchell, editors,",1559,,,,,,"Morgan Kaufmann,",,Shift of bias for inductive concept learning.,,Volume II.,1986.
+1560,,P.E. Utgoff.,"Machine Learning: An Artificial Intelligence Approach,",,"In R.S. Michalski, J.G. Carbonell, and T.M. Mitchell, editors,",1560,,,,,,"Morgan Kaufmann,",,Shift of bias for inductive concept learning.,,Volume II.,1986.
+1565,,"Utgoff, P. E.","Machine Learning: An Artificial Intelligence Approach,",,"In Michalski, R.S.; Carbonell, J.G.; and T.M., Mitchell,",1565,,,,,107-148.,Morgan Kaufmann Publishers.,,Shift of bias of inductive concept learning.,,Vol II.,"1986,"
+1566,,"Utgoff, P. E.","Machine Learning: An Artificial Intelligence Approach,",,"In Michalski, R.S.; Carbonell, J.G.; and T.M., Mitchell,",1566,,,,,107-148.,Morgan Kaufmann Publishers.,,Shift of bias of inductive concept learning.,,Vol II.,"1986,"
+1569,"Palo Alto (CA),","P. Utgoff,","Machine Learning: An Artificial Intelligence Approach 2 (Springer-Verlag,",,"in: R.S. Mickalski, J.G Carbonell and T.M. Mitchell, eds.,",1569,,,,,107-149.,,,"Shift of bias for inductive concept learning,.",,,1986)
+1574,"Los Altos, CA,",P. Utgoff.,,,"In R. Michalski, J. Carbonell, and T. Mitchell, editors,",1574,,"Machine Learning,",,,pages 163-190.,"Morgan Kauf-mann,",,Shift of bias for inductive concept learning.,,"volume 2,",1986.
+1577,"Los Altos, CA,",P. Utgoff.,,,"In R. Michalski, J. Carbonell, and T. Mitchell, editors,",1577,,"Machine Learning,",,,pages 163-190.,"Morgan Kaufmann,",,Shift of bias for inductive concept learning.,,"volume 2,",1986.
+1579,,P E Utgoff.,Machine Learning: An Artificial Intelligence Approach,,"In R S Michalski, J G Carbonell, and T M Mitchell, editors,",1579,,,,,,"Morgan Kaufmann,",,Shift of bias for inductive concept learning.,,(Volume 2).,1986.
+1589,"Irvine, CA:","Utgoff, P. E., & Saxena, S.",Proceedings of the Fourth International Workshop on Machine Learning,,,1589,,,,,(pp. 115-121).,Morgan Kauf-mann.,,Learning a preference predicate.,,,(1987).
+1591,,"P. Utgoff and S. Saxena,","Proceedings of the 4th International Conference on Machine Learning,",,,1591,,,,,"pp. 115-121,",,,"Learning a Preference Predicate,",,,1987.
+1594,"Ann Harbour,",Utgoff P.E.,"in Proc. of 5th International Workshop on Machine Learning , J.",,"Laird (ed.),",1594,,,,,,Morgan Kaufmann Inc.,,"ID5: An Incremental ID3,",,,(1988):
+1601,,"Utgoff, P.",In Proceedings of the Fifth International Conference on Machine Learning.,,,1601,,,,,107-120.,,,ID5: An Incremental ID3.,,,1988.
+1606,,P. Utgoff. ID5:,"In Proc. 5th Intl. Conf. Mach. Learning,",,,1606,,,,,pages 107-120.,"Morgan Kaufmann,",,An incremental ID3.,,,1988.
+1608,,P. Utgoff. ID5:,"In Proc. 5th Intl. Conf. Mach. Learning,",,,1608,,,,,pages 107-120.,"Morgan Kaufmann,",,An incremental ID3.,,,1988.
+1613,,"Utgoff, P.E.; ID5:","Proceedings of the Fifth National Conference on Machine Learning,",,,1613,"University of Michigan,",,June,,pp 107-120.,,,An Incremental ID3.,,,"1988,"
+1614,"San Mateo, CA:","P.E. Utgoff, ID5:","Proceedings of the Fifth International Conference on Machine Learning,",,,1614,,,,,107-120.,"Morgan Kaufmann,",,an incremental ID3.,,,
+1620,"St. Paul, MN:","Utgoff, P. E.",In Proceedings of the Seventh National Conference on Artificial Intelligence,,,1620,,,,,(pp. 601-606).,Morgan Kaufmann.,,Perceptron trees: A case study in hybrid concept representations.,,,(1988b).
+1623,,"Utgoff, P. E.","In Proceedings of the Seventh National Conference on Artificial Intelligence,",,,1623,,,,,601-606.,Morgan Kaufmann.,,Perceptron trees: a case study in hybrid concept representation.,,,1988.
+1630,,P. Utgoff,,,,1630,,Machine Learning.,,,161-186.,,,. Incremental induction of decision trees.,,"Vol.4,",(1989)
+1631,,Utgoff P. E.,,,,1631,,"Machine Learning,",,,161-186.,,,"Incremental Induction of Decision Trees,",,4,(1989).
+1647,,"Utgoff, P. E.",,,,1647,,"Machine Learning,",,,161-186.,,,Incremental induction of decision trees.,,"4,",(1989).
+1655,,"Utgoff, P. E.",Machine Learning,,,1655,,,,,161-186.,,,Incremental induction of decision trees.,,4,1989.
+1658,,"Utgoff, P.,","Machine Learning 4,",,,1658,,,,,161-186.,,,Incremental Induction of Decision Trees.,,,1989.
+1667,,P.E. Utgoff.,,1989.,,1667,,"Machine Learning,",,,"161-186,",,,Incremental induction of decision trees.,,(4):,
+1668,,P.E. Utgoff.,,,,1668,,"Machine Learning,",,,"161-186,",,,Incremental induction of decision trees.,,4(2),1989.
+1671,,"Utgoff, P.",,,,1671,,"Machine Learning,",,,"161-186,",,,Incremental induction of decision trees.,,4,1989.
+1674,,Paul E. Utgoff.,,,,1674,,"Machine Learning,",,,"161-186,",,,Incremental induction of decision trees.,,4,1989.
+1682,,Paul E. Utgoff.,,,,1682,,"Machine Learning,",,,"161-186,",,,Incremental induction of decision trees.,,4,1989.
+1684,,P. E. Utgoff.,,,,1684,,"Machine Learning,",,,"161-186,",,,Incremental induction of decision trees.,,4,1989.
+1685,,P. E. Utgoff.,,,,1685,,"Machine Learning,",,,"161-186,",,,Incremental induction of decision trees.,,4,1989.
+1686,,P.E. Utgoff.,,,,1686,,"Machine Learning,",,,"161-186,",,,Incremental induction of decision trees.,,4,1989.
+1687,,Utgoff P.E.:,,,,1687,,Machine Learning,,,"161-186,",,,"Incremental Learning of Decision trees.,",,4,1989
+1688,,"P.E. Utgoff,",,,,1688,,"Machine Learning,",,,161-186.,,,Incremental induction of decision trees.,,"4,",
+1693,"Ithaca, NY:","Utgoff, P. E.",In Proceedings of the Sixth International Workshop on Machine Learning,,,1693,,,,,(pp.  362-365,Morgan Kaufmann.,,Improved training via incremental learning.,,,(1989a).
+1699,,"Utgoff, P. E.",,,,1699,,"Connection Science,",,,377-391.,,,Perceptron trees: A case study in hybrid concept representa-tions.,,"1,",(1989).
+1701,,"Utgoff, P. E.",,,,1701,,"Connection Science,",,,377-391.,,,Perceptron trees: A case study in hybrid concept representations.,,"1 (4),",(1989).
+1709,,"Utgoff, P. E.",,,,1709,,"Connection Science,",,,377-391.,,,Perceptron trees: A case study in hybrid concept representations.,,"1,",(1989).
+1712,,"Utgoff, P.E.",,,,1712,,"Connection Science,",,,pp. 337-391.,,,"Perceptron Trees: A case study in hybrid concept representations,",,"1,","(1989),"
+1717,,Paul E. Utgoff.,,,,1717,,"Connection Science,",,,"377-391,",,,Perceptron trees: A case study in hybrid concept representations.,,1(4),1989.
+1719,,Paul E. Utgoff.,,,,1719,,"Connection Science,",,,"377-391,",,,Perceptron trees: A case study in hybrid concept representations.,,1(4),1989.
+1723,,Paul E. Utgoff.,,,,1723,,"Connection Science,",,,"377-391,",,,Perceptron trees: A case study in hybrid concept representations.,,1(4),1989.
+1735,"Los Altos, CA.","Utgoff, P. E., & Brodley, C. E.","In Proceedings of the Seventh International Conference on Machine Learning,",,,1735,,,,,pp. 58-65.,Morgan Kaufmann.,,An incremental method for finding multivariate splits for decision trees.,,,(1990).
+1739,"Los Altos, CA.","Utgoff, P. E., & Brodley, C. E.","In Proceedings of the Seventh International Conference on Machine Learning,",,,1739,,,,,pp. 58-65.,Morgan Kaufmann.,,An incremental method for finding multivariate splits for decision trees.,,,(1990).
+1740,"Los Altos, CA.","Utgoff, P. E., & Brodley, C. E.","In Proceedings of the Seventh International Conference on Machine Learning,",,,1740,,,,,pp. 58-65.,Morgan Kaufmann.,,An incremental method for finding multivariate splits for decision trees.,,,(1990).
+1743,"Austin, TX:","Utgoff, P. E., & Brodley, C. E.",Proceedings of the Seventh International Conference on Machine Learning,,,1743,,,,,(pp. 58-65).,Morgan Kaufmann.,,An incremental method for finding multivariate splits for decision trees.,,,(1990).
+1746,"Austin, TX:","Utgoff, P. E., & Brodley, C. E.",Proceedings of the Seventh International Conference on Machine Learning,,,1746,,,,,(pp. 58-65).,Morgan Kaufmann.,,An incremental method for finding multivariate splits for decision trees.,,14,(1990).
+1749,"Los Altos, CA.",P. Utgoff and C. Brodley.,"In Proceedings of the Seventh International Conference on Machine Learning,",,,1749,,,,,"pages 56-65,",Morgan Kaufmann.,,An incremental method for find multivariate splits for decision trees.,,,
+1751,"University of Texas, Austin, Texas,",P.E. Utgoff and C.E. Brodley.,"In Machine Learning:Proceedings of the Seventh International Conference,",,,1751,,,,,pages 58-65.,,,An incremental method for finding mul--tivariate splits for decision trees.,,,1990.
+1753,"Los Altos, CA,",P. E. Utgoff and C. E. Brodley.,"In Proceedings of the Seventh International Conference on Machine Learning,",,,1753,,,,,"pages 58-65,",Morgan Kaufmann.,,An incremental method for finding multivariate splits for decision trees.,,16,1990.
+1754,"Los Altos, CA,",Paul E. Utgoff and Carla E. Brodley.,"In Proceedings of the Seventh International Conference on Machine Learning,",,,1754,,,,,"pages 58-65,",Morgan Kauf-mann.,,An incremental method for finding multivariate splits for decision trees.,,,1990.
+1757,"Los Altos, CA,",Paul E. Utgoff and Carla E. Brodley.,"In Proceedings of the Seventh International Conference on Machine Learning,",,,1757,,,,,"pages 58-65,",Morgan Kauf-mann.,,An incremental method for finding multivariate splits for decision trees.,,,1990.
+1759,"Los Altos, CA,",Paul E. Utgoff and Carla E. Brodley.,"In Proceedings of the Seventh International Conference on Machine Learning,",1990.,,1759,,,,,"pages 58-65,",Morgan Kauf-mann.,,An incremental method for finding multivariate splits for decision trees.,,,
+1762,"Los Altos, CA,",Paul E. Utgoff and Carla E. Brodley.,"In Proceedings of the Seventh International Conference on Machine Learning,",1990.,,1762,,,,,"pages 58-65,",Morgan Kauf-mann.,,An incremental method for finding multivariate splits for decision trees.,,,
+1766,"Anaheim, CA.","Utgoff, P. & Clouse, J.","In Proceedings of the Ninth National Conference on Artificial Intelligence,",,,1766,,,,,"(pp. 596-600),",,,Two kinds of training information for evaluation function learning.,,,(1991).
+1773,Anaheim:,"Utgoff, P., and Clouse.","In Proceedings of Ninth National Conference on Artificial Intelligence,",,,1773,,,,,596-600.,AAAI Press/MIT Press.,,Two kinds of training information for evaluation function learning.,,,1991.
+1774,Amherst MA.,"Utgoff, P.E. and Brodley, C.E.",,,,1774,"University of Massachusetts,",,,,,,,Linear machine decision trees.,"Technical Report 10,",,1991.
+1776,,P. E. Utgoff and J. A. Clouse.,"In Proceedings of the Ninth National Conference on Artificial Intelligence,",,,1776,,,,,"pages 596-600,",,,Two kinds of training information for evaluation function learning.,,,1991.
+1777,,P. Utgoff and J. Clouse.,"In Proceedings of AAAI,",,,1777,,,,,,,,Two kinds of training information for evaluation function learning.,,,1991.
+1784,"San Mateo, CA,",P. E. Utgoff and J. A. Clouse.,"In Proceedings of the Ninth Annual Conference on Artificial Intelligence,",1991.,,1784,,,,,"pages 596-600,",Morgan Kaufmann.,,Two kinds of training information for evaluation function learning.,,,
+1792,University of Massachusetts at Amherst.,"Utgoff, P. E., & Brodley, C. E.",,,,1792,,,,,,,,Linear machine decision trees.,"Tech. rep. 10,",,(1991).
+1798,University of Massachusetts at Amherst.,"Utgoff, P. E., & Brodley, C. E.",,,,1798,,,,,,,,Linear machine decision trees.,"Tech. rep. 10,",,(1991).
+1800,"University of Massachusetts, Amherst MA,",Paul E. Utgoff and Carla E. Brodley.,,,,1800,,,,,,,,Linear machine decision trees.,"Technical Report 10,",,1991.
+1808,"University of Massachusetts, Amherst MA,",Paul E. Utgoff and Carla E. Brodley.,,,,1808,,,,,,,,Linear machine decision trees.,"Technical Report 10,",,1991.
+1810,"Rutgers University, New Brunswick, NJ,",P. Utgoff.,"Proceedings of the Eleventh International Conference on Machine Learning,",,"In W. Cohen and H. Hirsh, editors,",1810,,,,,"pages 318-325,",Morgan Kaufmann.,,An Improved Algorithm for Incremental Induction of Decision Trees.,,,1994.
+1816,,"Utgoff, P. E.","in Machine Learning:Proceedings of the Eleventh International Conference,",,,1816,,,,,pp. 318-325.,"Morgan Kaufmann,",,"An improved algorithm for incremental induction of decision trees,",,,"(1994),"
+1819,,"Utgoff, P. E.","in Machine Learning: Proceedings of the Eleventh International Conference,",,,1819,,,,,pp. 318-325.,"Morgan Kaufmann,",,An improved algorithm for incremental induction of decision trees,,,"(1994),"
+1823,,"Utgoff, P. E.","In Machine Learning: Proc. 11th Int. Conf.,",,,1823,,,,,318-325.,Morgan Kaufmann.,,An improved algorithm for incremental induction of decision trees.,,,1994.
+1825,"Rutgers University, New Brunswick, NJ,","Utgoff, P.","Proceedings of the Eleventh International Conference on Machine Learning,",,"In Cohen, W. and Hirsh, H., editors,",1825,,,,,"pages 318-325,",Morgan Kaufmann.,,An Improved Algorithm for Incremental Induction of Decision Trees.,,,1994.
+1828,,Paul E. Utgoff.,"In ML-94 ,",,Editors: William W. Cohen and Haym Hirsh.,1828,,,,,pages 318-325.,,,An improved algorithm for incremental induction of decision trees.,,,
+1829,,Paul E. Utgoff.,"In ML-94 ,",,Editors: William W. Cohen and Haym Hirsh.,1829,,,,,pages 318-325.,,,An improved algorithm for incremental induction of decision trees.,,,
+1831,,Paul E. Utgoff.,"In ML-94 ,",,Editors: William W. Cohen and Haym Hirsh.,1831,,,,,pages 318-325.,,,An improved algorithm for incremental induction of decision trees.,,,
+1837,"San Francisco, CA:","P.E. Utgoff,","Proceedings of the Eleventh International Conference on Machine Learning,",,,1837,,,,,318-325.,"Morgan Kaufmann,",,An improved algorithm for incremental induction of decision trees.,,,
+1838,"University of Mas-sachusetts, Amherst.","Utgoff, P.",,,,1838,"Department of Computer Science,",,,,,,,Decision tree induction based on efficient tree restructuring.,"Technical Report 95-18,",,1995.
+1839,"University of Mas-sachusetts, Amherst.","Utgoff, P.",,,,1839,"Department of Computer Science,",,,,,,,Decision tree induction based on efficient tree restructuring.,"Technical Report 95-18,",,1995.
+1840,"University of Massachusetts, Amherst.","Utgoff, P. E.",,,,1840,,,,,,,,"Decision tree induction based on efficient tree restructuring,","Technical Report 05-18,",,"(1995),"
+1842,"University of Massachusetts, Amherst.","Utgoff, P. E.",,,,1842,,,,,,,,"Decision tree induction based on efficient tree restructuring,","Technical Report 05-18,",,"(1995),"
+1847,"University of Massachusetts,",Paul E. Utgoff.,,,,1847,,,March,,,,,Decision tree induction based on efficient tree restructuring.,"Technical Report 95-18,",,1995.
+1850,"Amherst, MA: University of Massachusetts,","Utgoff, P. E., & Clouse, J. A.",,,,1850,Department of Computer Science.,,,,,,,"A Kolmogorov-Smirnoff metric for decision tree induction,","(Technical Report 96-3),",,(1996).
+1853,"San Mateo, CA:","P.E. Utgoff,",Machine Learning: An Artificial Intelligence Approach,,"Michalski, J.G. Carbonell, and T.M. Mitchell (eds.),",1853,,,,,107-148.,"Morgan Kaufmann,",,Shift of bias of inductive concept learning. In R.S.,,"(Vol. II),",
+1858,,"Paul E. Utgoff, Neil C. Berkman, and Jeffery A. Clouse.",,,,1858,,,,,,,,"Decision tree induction based on efficient tree restructuring. Machine Learning,",,"29:5,",1997.
+1861,,"Utgoff, P. E., Berkman, N. C., & Clouse, J. A.",,,,1861,,Machine Learning.,,,,,,(in press). Decision tree induction based on efficient tree restructuring.,,,
+1863,"Amherst, MA: University of Massachusetts,","Utgoff, P. E., & Precup, D.",,,,1863,Department of Computer Science.,,,,,,,"Constructive function approximation,","(Technical Report 97-04),",,(1997).
+1870,"Palo Alto, CA:","Yee, R. C., Saxena, S., Utgoff, P. E., & Barto, A. G.",Proceedings of the Eighth National Conference on Artificial Intelligence,,Yoshio.,1870,,,,,(pp. 882-888).,AAAI Press.,,Explaining Temporal Differences to Create Useful Concepts for Evaluating States.,,,(1990).
+1873,"Cambridge, MA,","R.C. Yee, S. Saxena, P.E. Utgoff, and A.G. Barto.","In Proceedings of the Eighth National Conference on Artificial Intelligence,",,,1873,,,,,"pages 882-888,",,,Explaining temporal differences to create useful concepts for evaluating states.,,,1990.
+1878,"University of Michigan,","Q. Zheng,",,,,1878,,,,PostScript version of the thesis is available via anonymous FTP from ftp.eecs.umich.edu in directory outgoing/zheng.,,,,"Real-time Fault-tolerant Communication in Computer Networks,","PhD thesis,",,1993.

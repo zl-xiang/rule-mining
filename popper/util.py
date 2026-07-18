@@ -65,7 +65,9 @@ def parse_args():
     parser.add_argument('--functional-test', default=False, action='store_true', help='Run functional test')
     parser.add_argument('--fp-tolerance','-fp', type=float, default=0, help=f'Percentage of negatives allowed to cover')
     parser.add_argument('--delta','-d', type=float, default=0.5, help=f'Purity of an ER rule')
-    parser.add_argument('--deduce-sim',default=False,  action='store_true', help=f'Purity of an ER rule')
+    parser.add_argument('--deduce-sim',default=False,  action='store_true', help=f'Deduce similarity defined attributes')
+    parser.add_argument('--no-combine',default=False,  action='store_true', help=f'Disable optimisation')
+    parser.add_argument('--no-trans',default=False,  action='store_true', help=f'Add transtive clause in optimisation')
     # parser.add_argument('--datalog', default=False, action='store_true', help='EXPERIMENTAL FEATURE: use recall to order literals in rules')
     # parser.add_argument('--no-bias', default=False, action='store_true', help='EXPERIMENTAL FEATURE: do not use language bias')
     # parser.add_argument('--order-space', default=False, action='store_true', help='EXPERIMENTAL FEATURE: search space ordered by size')
@@ -245,7 +247,8 @@ class Settings:
             self.sim_defined = set()
             quiet = args.quiet
             debug = args.debug
-            
+            self.no_combine = args.no_combine
+            self.no_trans = args.no_trans
             self.bkcons = args.bkcons
 
             
@@ -451,8 +454,8 @@ class Settings:
         # TODO: EVENTUALLY
 
         # print(directions)
-        # Leon: tuple of arguments (int) indexed by tuple of numbers of symbol object
-        # Leon: TODO: to add arguments of constant to cached_atom_args
+        # : tuple of arguments (int) indexed by tuple of numbers of symbol object
+        # : TODO: to add arguments of constant to cached_atom_args
         # TODO: Think of do we actually need vars facts with number (variable) as the second argument 
         # for 3-ary predicate, since att/3 is the only rule body predicates we have, and the second pos is a fixed constant
         self.cached_atom_args = {}
@@ -463,7 +466,7 @@ class Settings:
                 self.cached_atom_args[k] = args
         self.schema_attrs = dict()
         cached_atom_copy = self.cached_atom_args.copy()
-        # Leon: added arguments with att_name constants        
+        # : added arguments with att_name constants        
         for x in solver.symbolic_atoms.by_signature('attr', arity=2):
             for k, args in cached_atom_copy.items():
                 if len(k) == 3:
@@ -489,7 +492,7 @@ class Settings:
                 head_outputs = frozenset(arg for i, arg in enumerate(head_args) if directions[head_pred][i] == '-')
                 self.literal_inputs[(head_pred, head_args)] = head_inputs
                 self.literal_outputs[(head_pred, head_args)] = head_outputs
-        # Leon body pred loaded from the bias file
+        #  body pred loaded from the bias file
         for pred, arity in self.body_preds:
             for k, args in self.cached_atom_args.items():
                 if len(args) != arity:
@@ -520,7 +523,7 @@ class Settings:
                 self.max_rules = max_rules
             else:
                 self.max_rules = 1
-        ## Leon: original
+        ## : original
         # self.head_types, self.body_types = load_types(self)
         ## modified to allow multiple types for each predicate
         self.head_types, self.body_types = load_types_er(self)
@@ -709,7 +712,7 @@ def load_types(settings):
     body_types = {}
     for x in solver.symbolic_atoms.by_signature('type', arity=2):
         pred = x.symbol.arguments[0].name
-        # [bug] Leon: for predicate with arity 1, arguments[1] is already the type, hence arguments[1].arguments is empty
+        # [bug] : for predicate with arity 1, arguments[1] is already the type, hence arguments[1].arguments is empty
         # e.g. for print(pred, x.symbol)
         # dblp type(dblp,dtid)
         # acm type(acm,atid)
@@ -723,7 +726,7 @@ def load_types(settings):
             body_types[pred] = xs
     return head_types, body_types
 
-## Leon: added to support multiple types for each predicate
+## : added to support multiple types for each predicate
 def load_types_er(settings):
     enc = """
 #defined clause/1.
@@ -746,21 +749,21 @@ def load_types_er(settings):
             for a in model.symbols(atoms=True):
                 if a.name == 'type' and len(a.arguments) == 2:
                     pred = a.arguments[0].name
-                    # [bug] Leon: for predicate with arity 1, arguments[1] is already the type, hence arguments[1].arguments is empty
+                    # [bug] : for predicate with arity 1, arguments[1] is already the type, hence arguments[1].arguments is empty
                     x_types = a.arguments[1].arguments
                     xs = [y.name for y in x_types] if len(x_types) > 0 else [a.arguments[1].name]
                     if pred == head_pred:
-                        # [bug?] Leon: only allows a single head predicate declaration?
+                        # [bug?] : only allows a single head predicate declaration?
                         head_types.append(xs)
                     else:
                         body_types[pred] = [xs] if pred not in body_types.keys() else body_types[pred] + [xs]
     # for x in solver.symbolic_atoms.by_signature('type', arity=2):
     #     pred = x.symbol.arguments[0].name
-    #     # [bug] Leon: for predicate with arity 1, arguments[1] is already the type, hence arguments[1].arguments is empty
+    #     # [bug] : for predicate with arity 1, arguments[1] is already the type, hence arguments[1].arguments is empty
     #     x_types = x.symbol.arguments[1].arguments
     #     xs = [y.name for y in x_types] if len(x_types) > 0 else [x.symbol.arguments[1].name]
     #     if pred == head_pred:
-    #         # [bug?] Leon: only allows a single head predicate declaration?
+    #         # [bug?] : only allows a single head predicate declaration?
     #         head_types.append(xs)
     #     else:
     #         body_types[pred] = [xs] if pred not in body_types.keys() else body_types[pred] + [xs]
@@ -915,7 +918,7 @@ def remap_variables(rule):
         new_args = []
         for var in args:
             if var not in lookup :
-            ## Leon Original code below comment
+            ##  Original code below comment
             # if var not in lookup:
             #     lookup[var] = next_var
             #     next_var+=1

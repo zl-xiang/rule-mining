@@ -1,0 +1,9 @@
+pos(eqo("id-257","rec-257-dup-0")).
+pos(eqo("id-448","rec-448-dup-0")).
+pos(eqo("id-582","rec-582-dup-0")).
+pos(eqo("rec-375-dup-0","rec-375-dup-1")).
+pos(eqo("rec-375-dup-1","rec-375-dup-0")).
+pos(eqo("rec-431-dup-0","rec-431-dup-1")).
+pos(eqo("rec-431-dup-1","rec-431-dup-0")).
+pos(eqo("rec-738-dup-0","rec-738-dup-1")).
+pos(eqo("rec-738-dup-1","rec-738-dup-0")).

@@ -1,0 +1,1 @@
+sim_defined(A1,A2) :- att(TID,A1,V1), att(TID,A2,V2), sim(V1,V2), compatible_attr(A1,A2).

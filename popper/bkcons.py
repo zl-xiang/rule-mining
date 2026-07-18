@@ -673,7 +673,7 @@ def deduce_bk_cons(settings, tester):
 
     # type_encoding = set()
     if settings.head_types:
-        ### Leon: original code below ###
+        ### : original code below ###
         # types = tuple(settings.head_types)
         # prog.append(f'type({settings.head_literal[0]},{types}).')
 
@@ -908,8 +908,8 @@ def deduce_type_cons(settings):
     for pred, arity in settings.body_preds:
         for atom in solver.symbolic_atoms.by_signature(pred, arity=arity):
             args = []
-    # [Leon] uniary predicates cannot load their types
-            ## Leon: original code below ##
+    # [] uniary predicates cannot load their types
+            ## : original code below ##
             # for i in range(arity):
             #     arg = atom.symbol.arguments[i]
             #     x = str(arg)
@@ -1031,7 +1031,7 @@ def deduce_non_singletons(settings):
 
         if a > 1:
             encoding.append(f'pred({p},{a}).')
-        ## Leon: original code below ## 
+        ## : original code below ## 
         # types = settings.body_types[p]
         # for i, t in enumerate(types):
         #     rule = f'domain({t},X):- holds({p},{i},X).'
