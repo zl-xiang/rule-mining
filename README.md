@@ -2,4 +2,5 @@
 ## Directory
 - `./popper/` source code for implementation
 - `./reproducibility/` includes all experiments data, job scripts and encodings
-- `./ERA` dependency external module for application of learned rule (based on ASPEn system)
+- `./ERA` dependent external module for application of learned rule (based on ASPEn system)
+-  `./LFF-ER-rules-supplementary.pdf` supplementaries include all definitions, proofs, algorithms and ASP encodings.
